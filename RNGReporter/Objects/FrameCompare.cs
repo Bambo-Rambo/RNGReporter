@@ -60,6 +60,7 @@ namespace RNGReporter.Objects
         private readonly CompareType speCompare;
         private readonly uint speValue;
         private readonly bool synchOnly;
+        private readonly int desiredLevel;
 
         // We're making this public
         // So they can be accessed when calculating Entralink PIDs
@@ -233,6 +234,7 @@ namespace RNGReporter.Objects
                             int ability,
                             bool shinyOnly,
                             bool synchOnly,
+                            int desiredLevel,
                             bool dreamWorld,
                             List<int> encounterSlots,
                             GenderFilter genderFilter)
@@ -256,6 +258,7 @@ namespace RNGReporter.Objects
             this.ability = ability;
             this.shinyOnly = shinyOnly;
             this.synchOnly = synchOnly;
+            this.desiredLevel = desiredLevel;
             this.dreamWorld = dreamWorld;
             this.encounterSlots = encounterSlots;
 
@@ -309,6 +312,15 @@ namespace RNGReporter.Objects
                     return false;
                 }
             }
+
+            if (desiredLevel != 0)
+            {
+                if (frame.Level != desiredLevel)
+                {
+                    return false;
+                }
+            }
+            
 
             if (!GenderFilter.Filter(frame.GenderValue))
                 return false;

@@ -19,6 +19,7 @@
 
 
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace RNGReporter.Objects
 {
@@ -32,6 +33,7 @@ namespace RNGReporter.Objects
         protected GenericRng rng;
         protected BWRng rng64 = new BWRng(0);
         protected List<uint> rngList;
+        protected TimeFinder5th t5 = new TimeFinder5th();
 
         public FrameGenerator()
         {
@@ -77,6 +79,9 @@ namespace RNGReporter.Objects
             }
         }
 
+        public int MinLevel { get; set; }
+        public int MaxLevel { get; set; }
+        public byte getLevel(ulong seed) => (byte)((uint)((seed >> 32) * 100 >> 32) % (MaxLevel - MinLevel + 1) + MinLevel);
         public byte MotherAbility { get; set; }
 
         public bool DittoUsed { get; set; }
@@ -1145,7 +1150,7 @@ namespace RNGReporter.Objects
         }
 
         // This generates a single frame, using IVs recalled from a stored hashtable
-        public List<Frame> Generate(FrameCompare frameCompare, uint seed, uint IVHash, uint frameNumber)
+        public List<Frame> Generate(FrameCompare frameCompare, uint seed, uint IVHash, uint frameNumber, int levelHere)
         {
             frames = new List<Frame>();
 
@@ -1159,6 +1164,8 @@ namespace RNGReporter.Objects
                 ((IVHash >> 16) & 0x3E0) >> 5,
                 ((IVHash >> 16) & 0x7C00) >> 10,
                 ((IVHash >> 16) & 0x1F));
+
+            frame.Level = (byte)levelHere;
 
             if (frameCompare.Compare(frame))
             {
@@ -1398,6 +1405,14 @@ namespace RNGReporter.Objects
             }
             else if (frameType == FrameType.Method5Natures)
             {
+                //New code for level
+                ulong LevelSeed = InitialSeed;
+                BWRng rngLevel = new BWRng(LevelSeed);
+                rngLevel.GetNext64BitNumber();
+                rngLevel.GetNext64BitNumber();
+                byte level = 0;
+                //
+
                 rng64.Seed = InitialSeed;
                 int encounterSlot = 0;
                 const uint item = 0;
@@ -1406,8 +1421,11 @@ namespace RNGReporter.Objects
                 uint idLower = (id & 1) ^ (sid & 1);
 
                 for (uint cnt = 1; cnt < InitialFrame; cnt++)
+                {
                     rng64.GetNext64BitNumber();
-
+                    rngLevel.GetNext64BitNumber();
+                }
+                
                 rngList.Clear();
                 for (int cnt = 0; cnt < 7; cnt++)
                     rngList.Add(rng64.GetNext32BitNumber());
@@ -1429,6 +1447,7 @@ namespace RNGReporter.Objects
                     }
                     else
                     {
+                        level = getLevel(rngLevel.GetNext64BitNumber());
                         uint idTest;
                         if (EncounterType == EncounterType.Wild || EncounterType == EncounterType.WildSurfing ||
                             EncounterType == EncounterType.WildWaterSpot)
@@ -1516,6 +1535,7 @@ namespace RNGReporter.Objects
                                             nature,
                                             false,
                                             encounterSlot,
+                                            level,
                                             item);
 
                                         switch (i)
@@ -1666,6 +1686,7 @@ namespace RNGReporter.Objects
                                     nature,
                                     false,
                                     encounterSlot,
+                                    level,
                                     item);
 
                                 if (frameCompare.Compare(frame))
@@ -1710,6 +1731,7 @@ namespace RNGReporter.Objects
                                             nature,
                                             false,
                                             encounterSlot,
+                                            level,
                                             item);
 
                                         switch (i)
@@ -1865,6 +1887,7 @@ namespace RNGReporter.Objects
                                         nature,
                                         false,
                                         encounterSlot,
+                                        level,
                                         item);
 
                                     switch (i)
@@ -2006,6 +2029,7 @@ namespace RNGReporter.Objects
                                             nature,
                                             false,
                                             encounterSlot,
+                                            level,
                                             item);
 
                                         switch (i)
@@ -2277,6 +2301,7 @@ namespace RNGReporter.Objects
                                             nature,
                                             false,
                                             encounterSlot,
+                                            level,
                                             item);
 
                                         if (frameCompare.Compare(frame))
@@ -2320,6 +2345,7 @@ namespace RNGReporter.Objects
                                                 nature,
                                                 false,
                                                 encounterSlot,
+                                                level,
                                                 item);
 
                                             switch (i)
@@ -2420,6 +2446,7 @@ namespace RNGReporter.Objects
                                 nature,
                                 synchable,
                                 encounterSlot,
+                                level,
                                 item);
                     }
 

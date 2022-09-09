@@ -185,6 +185,11 @@ namespace RNGReporter.Objects
             get { return Shiny ? "!!!" : ""; }
         }
 
+        public byte Level
+        {
+            get; set;
+        }
+
         //  The following are cacluated differently based
         //  on the creation method of the pokemon. 
 
@@ -1080,6 +1085,7 @@ namespace RNGReporter.Objects
             uint natureValue,
             bool synch,
             int encounterSlot,
+            byte level,
             uint itemCalc)
         {
             var frame = new Frame(frameType)
@@ -1093,6 +1099,7 @@ namespace RNGReporter.Objects
                     ability = (pid >> 16) & 1,
                     EncounterType = encounterType,
                     EncounterSlot = encounterSlot,
+                    Level = level,
                     ItemCalc = itemCalc,
                     synchable = synch
                 };

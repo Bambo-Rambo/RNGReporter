@@ -143,6 +143,11 @@ namespace RNGReporter.Objects
             get { return Frame.ShinyDisplay; }
         }
 
+        public byte Level 
+        {
+            get { return Frame.Level; }
+        }
+
         public bool DreamAbility
         {
             get { return Frame.DreamAbility; }

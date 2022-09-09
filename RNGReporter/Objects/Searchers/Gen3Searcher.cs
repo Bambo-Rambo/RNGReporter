@@ -108,7 +108,7 @@ namespace RNGReporter.Objects.Searchers
 
             frameCompare = new FrameCompare(ivfilter, natures,
                                             (int) ((ComboBoxItem) searchParams.ability.SelectedItem).Reference, shiny,
-                                            synch, false, encounterSlots,
+                                            synch, 0, false, encounterSlots,
                                             (GenderFilter) (searchParams.gender.SelectedItem));
 
             EncounterMod currentMod = synch ? EncounterMod.Synchronize : EncounterMod.None;
