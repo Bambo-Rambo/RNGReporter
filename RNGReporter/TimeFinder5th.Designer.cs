@@ -38,8 +38,6 @@ namespace RNGReporter
             RNGReporter.Controls.CheckBoxProperties checkBoxProperties2 = new RNGReporter.Controls.CheckBoxProperties();
             RNGReporter.Controls.CheckBoxProperties checkBoxProperties3 = new RNGReporter.Controls.CheckBoxProperties();
             RNGReporter.Controls.CheckBoxProperties checkBoxProperties4 = new RNGReporter.Controls.CheckBoxProperties();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             RNGReporter.Controls.CheckBoxProperties checkBoxProperties5 = new RNGReporter.Controls.CheckBoxProperties();
             RNGReporter.Controls.CheckBoxProperties checkBoxProperties6 = new RNGReporter.Controls.CheckBoxProperties();
             RNGReporter.Controls.CheckBoxProperties checkBoxProperties7 = new RNGReporter.Controls.CheckBoxProperties();
@@ -51,6 +49,8 @@ namespace RNGReporter
             RNGReporter.Controls.CheckBoxProperties checkBoxProperties10 = new RNGReporter.Controls.CheckBoxProperties();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStripCap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copySeedToClipboardToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
@@ -68,8 +68,6 @@ namespace RNGReporter
             this.tabPageShinyEgg = new System.Windows.Forms.TabPage();
             this.cbShinyCharm = new System.Windows.Forms.CheckBox();
             this.cbNidoBeat = new System.Windows.Forms.CheckBox();
-            this.ivFiltersEggs = new RNGReporter.Controls.IVFilters();
-            this.buttonLoadEggSeeds = new RNGReporter.GlassButton();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -90,6 +88,8 @@ namespace RNGReporter
             this.labelShinyAbility = new System.Windows.Forms.Label();
             this.labelShinyMonth = new System.Windows.Forms.Label();
             this.labelShinyYear = new System.Windows.Forms.Label();
+            this.ivFiltersEggs = new RNGReporter.Controls.IVFilters();
+            this.buttonLoadEggSeeds = new RNGReporter.GlassButton();
             this.dataGridViewShinyResults = new RNGReporter.DoubleBufferedDataGridView();
             this.EggSeed = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ShinyOffset = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -135,6 +135,11 @@ namespace RNGReporter
             this.maskedTextBoxShinyHPParentA = new RNGReporter.Controls.MaskedTextBox2();
             this.maskedTextBoxShinyYear = new RNGReporter.Controls.MaskedTextBox2();
             this.tabPageCapture = new System.Windows.Forms.TabPage();
+            this.numericLevelMax = new System.Windows.Forms.NumericUpDown();
+            this.numericLevelMin = new System.Windows.Forms.NumericUpDown();
+            this.numericLevel = new System.Windows.Forms.NumericUpDown();
+            this.LevelLabel = new System.Windows.Forms.Label();
+            this.labelCapMinMaxLevel = new System.Windows.Forms.Label();
             this.ivFiltersCapture = new RNGReporter.Controls.IVFilters();
             this.comboBoxShiny = new RNGReporter.GlassComboBox();
             this.labelWCShiny = new System.Windows.Forms.Label();
@@ -168,31 +173,6 @@ namespace RNGReporter
             this.maskedTextBoxMaxShiny = new RNGReporter.Controls.MaskedTextBox2();
             this.comboBoxNature = new RNGReporter.Controls.CheckBoxComboBox();
             this.dataGridViewCapValues = new RNGReporter.DoubleBufferedDataGridView();
-            this.CapSeed = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapOffset = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EncounterMod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NearestShiny = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EncounterSlot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Shiny = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nature = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ability = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapHP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapAtk = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapDef = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapSpA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapSpD = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapSpe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HiddenPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HiddenPowerPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.f50 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.f125 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.f25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.f75 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapTimer0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapKeypress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Synchable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.maskedTextBoxCapMaxDelay = new RNGReporter.Controls.MaskedTextBox2();
             this.maskedTextBoxCapMinDelay = new RNGReporter.Controls.MaskedTextBox2();
             this.tabControl = new System.Windows.Forms.TabControl();
@@ -201,20 +181,20 @@ namespace RNGReporter
             this.cbHHGender = new RNGReporter.GlassComboBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.cbHHSubSlot = new RNGReporter.Controls.CheckBoxComboBox();
-            this.cbHHSlot = new RNGReporter.Controls.CheckBoxComboBox();
-            this.cbHHHollowNumber = new RNGReporter.Controls.CheckBoxComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.cbHHSubSlot = new RNGReporter.Controls.CheckBoxComboBox();
+            this.cbHHSlot = new RNGReporter.Controls.CheckBoxComboBox();
+            this.cbHHHollowNumber = new RNGReporter.Controls.CheckBoxComboBox();
             this.cbHHMonth = new RNGReporter.Controls.CheckBoxComboBox();
             this.txtHHAdvances = new RNGReporter.Controls.MaskedTextBox2();
             this.txtHHYear = new RNGReporter.Controls.MaskedTextBox2();
             this.txtHHOpenHollows = new RNGReporter.Controls.MaskedTextBox2();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.btnHHGenerate = new RNGReporter.GlassButton();
             this.dgvHiddenGrottos = new RNGReporter.DoubleBufferedDataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -240,21 +220,21 @@ namespace RNGReporter
             this.ivDR = new RNGReporter.Controls.IVFilters();
             this.cbDRShinyness = new RNGReporter.GlassComboBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.cbDRRatio = new RNGReporter.GlassComboBox();
             this.label22 = new System.Windows.Forms.Label();
-            this.cbDRGender = new RNGReporter.GlassComboBox();
             this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.cbDRShiny = new System.Windows.Forms.CheckBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.cbDRRatio = new RNGReporter.GlassComboBox();
+            this.cbDRGender = new RNGReporter.GlassComboBox();
             this.cbDRMonth = new RNGReporter.Controls.CheckBoxComboBox();
             this.txtDRMinFrame = new RNGReporter.Controls.MaskedTextBox2();
             this.txtDRYear = new RNGReporter.Controls.MaskedTextBox2();
             this.txtDRMaxFrame = new RNGReporter.Controls.MaskedTextBox2();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
             this.btnDRGenerate = new RNGReporter.GlassButton();
             this.btnDRAnyNature = new RNGReporter.GlassButton();
-            this.cbDRShiny = new System.Windows.Forms.CheckBox();
-            this.label28 = new System.Windows.Forms.Label();
             this.cbDRNature = new RNGReporter.Controls.CheckBoxComboBox();
             this.gvDreamRadar = new RNGReporter.DoubleBufferedDataGridView();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -278,11 +258,40 @@ namespace RNGReporter
             this.labelProfileInformation = new System.Windows.Forms.Label();
             this.comboBoxProfiles = new RNGReporter.GlassComboBox();
             this.buttonEditProfile = new RNGReporter.GlassButton();
+            this.CapSeed = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapOffset = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EncounterMod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NearestShiny = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EncounterSlot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Lvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Shiny = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nature = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ability = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapHP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapAtk = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapDef = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapSpA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapSpD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapSpe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HiddenPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HiddenPowerPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.f50 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.f125 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.f25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.f75 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapTimer0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapKeypress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Synchable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStripCap.SuspendLayout();
             this.contextMenuStripEggPid.SuspendLayout();
             this.tabPageShinyEgg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewShinyResults)).BeginInit();
             this.tabPageCapture.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericLevelMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericLevelMin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericLevel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCapValues)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPageHiddenGrotto.SuspendLayout();
@@ -393,8 +402,6 @@ namespace RNGReporter
             // 
             this.tabPageShinyEgg.Controls.Add(this.cbShinyCharm);
             this.tabPageShinyEgg.Controls.Add(this.cbNidoBeat);
-            this.tabPageShinyEgg.Controls.Add(this.ivFiltersEggs);
-            this.tabPageShinyEgg.Controls.Add(this.buttonLoadEggSeeds);
             this.tabPageShinyEgg.Controls.Add(this.label8);
             this.tabPageShinyEgg.Controls.Add(this.label7);
             this.tabPageShinyEgg.Controls.Add(this.label5);
@@ -415,6 +422,8 @@ namespace RNGReporter
             this.tabPageShinyEgg.Controls.Add(this.labelShinyAbility);
             this.tabPageShinyEgg.Controls.Add(this.labelShinyMonth);
             this.tabPageShinyEgg.Controls.Add(this.labelShinyYear);
+            this.tabPageShinyEgg.Controls.Add(this.ivFiltersEggs);
+            this.tabPageShinyEgg.Controls.Add(this.buttonLoadEggSeeds);
             this.tabPageShinyEgg.Controls.Add(this.dataGridViewShinyResults);
             this.tabPageShinyEgg.Controls.Add(this.comboBoxShinyGender);
             this.tabPageShinyEgg.Controls.Add(this.comboBoxShinyEverstoneNature);
@@ -464,27 +473,6 @@ namespace RNGReporter
             this.cbNidoBeat.TabIndex = 329;
             this.cbNidoBeat.Text = "Nidoran/Volbeat";
             this.cbNidoBeat.UseVisualStyleBackColor = true;
-            // 
-            // ivFiltersEggs
-            // 
-            this.ivFiltersEggs.Location = new System.Drawing.Point(319, 9);
-            this.ivFiltersEggs.Name = "ivFiltersEggs";
-            this.ivFiltersEggs.Size = new System.Drawing.Size(315, 166);
-            this.ivFiltersEggs.TabIndex = 328;
-            // 
-            // buttonLoadEggSeeds
-            // 
-            this.buttonLoadEggSeeds.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.buttonLoadEggSeeds.ForeColor = System.Drawing.Color.Black;
-            this.buttonLoadEggSeeds.Location = new System.Drawing.Point(700, 148);
-            this.buttonLoadEggSeeds.Name = "buttonLoadEggSeeds";
-            this.buttonLoadEggSeeds.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.buttonLoadEggSeeds.ShineColor = System.Drawing.SystemColors.Window;
-            this.buttonLoadEggSeeds.Size = new System.Drawing.Size(130, 23);
-            this.buttonLoadEggSeeds.TabIndex = 327;
-            this.buttonLoadEggSeeds.Text = "Load eggseeds.dat";
-            this.buttonLoadEggSeeds.Visible = false;
-            this.buttonLoadEggSeeds.Click += new System.EventHandler(this.buttonLoadEggSeeds_Click);
             // 
             // label8
             // 
@@ -677,6 +665,27 @@ namespace RNGReporter
             this.labelShinyYear.Size = new System.Drawing.Size(29, 13);
             this.labelShinyYear.TabIndex = 2;
             this.labelShinyYear.Text = "Year";
+            // 
+            // ivFiltersEggs
+            // 
+            this.ivFiltersEggs.Location = new System.Drawing.Point(319, 9);
+            this.ivFiltersEggs.Name = "ivFiltersEggs";
+            this.ivFiltersEggs.Size = new System.Drawing.Size(315, 166);
+            this.ivFiltersEggs.TabIndex = 328;
+            // 
+            // buttonLoadEggSeeds
+            // 
+            this.buttonLoadEggSeeds.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.buttonLoadEggSeeds.ForeColor = System.Drawing.Color.Black;
+            this.buttonLoadEggSeeds.Location = new System.Drawing.Point(700, 148);
+            this.buttonLoadEggSeeds.Name = "buttonLoadEggSeeds";
+            this.buttonLoadEggSeeds.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.buttonLoadEggSeeds.ShineColor = System.Drawing.SystemColors.Window;
+            this.buttonLoadEggSeeds.Size = new System.Drawing.Size(130, 23);
+            this.buttonLoadEggSeeds.TabIndex = 327;
+            this.buttonLoadEggSeeds.Text = "Load eggseeds.dat";
+            this.buttonLoadEggSeeds.Visible = false;
+            this.buttonLoadEggSeeds.Click += new System.EventHandler(this.buttonLoadEggSeeds_Click);
             // 
             // dataGridViewShinyResults
             // 
@@ -1181,6 +1190,11 @@ namespace RNGReporter
             // 
             // tabPageCapture
             // 
+            this.tabPageCapture.Controls.Add(this.numericLevelMax);
+            this.tabPageCapture.Controls.Add(this.numericLevelMin);
+            this.tabPageCapture.Controls.Add(this.numericLevel);
+            this.tabPageCapture.Controls.Add(this.LevelLabel);
+            this.tabPageCapture.Controls.Add(this.labelCapMinMaxLevel);
             this.tabPageCapture.Controls.Add(this.ivFiltersCapture);
             this.tabPageCapture.Controls.Add(this.comboBoxShiny);
             this.tabPageCapture.Controls.Add(this.labelWCShiny);
@@ -1223,6 +1237,69 @@ namespace RNGReporter
             this.tabPageCapture.TabIndex = 1;
             this.tabPageCapture.Text = "Capture";
             this.tabPageCapture.UseVisualStyleBackColor = true;
+            // 
+            // numericLevelMax
+            // 
+            this.numericLevelMax.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.numericLevelMax.Location = new System.Drawing.Point(254, 68);
+            this.numericLevelMax.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericLevelMax.Name = "numericLevelMax";
+            this.numericLevelMax.Size = new System.Drawing.Size(44, 22);
+            this.numericLevelMax.TabIndex = 340;
+            this.numericLevelMax.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // numericLevelMin
+            // 
+            this.numericLevelMin.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.numericLevelMin.Location = new System.Drawing.Point(204, 68);
+            this.numericLevelMin.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericLevelMin.Name = "numericLevelMin";
+            this.numericLevelMin.Size = new System.Drawing.Size(44, 22);
+            this.numericLevelMin.TabIndex = 339;
+            this.numericLevelMin.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericLevel
+            // 
+            this.numericLevel.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.numericLevel.Location = new System.Drawing.Point(806, 44);
+            this.numericLevel.Name = "numericLevel";
+            this.numericLevel.Size = new System.Drawing.Size(44, 22);
+            this.numericLevel.TabIndex = 338;
+            // 
+            // LevelLabel
+            // 
+            this.LevelLabel.AutoSize = true;
+            this.LevelLabel.Location = new System.Drawing.Point(768, 47);
+            this.LevelLabel.Name = "LevelLabel";
+            this.LevelLabel.Size = new System.Drawing.Size(33, 13);
+            this.LevelLabel.TabIndex = 335;
+            this.LevelLabel.Text = "Level";
+            this.LevelLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // labelCapMinMaxLevel
+            // 
+            this.labelCapMinMaxLevel.AutoSize = true;
+            this.labelCapMinMaxLevel.Location = new System.Drawing.Point(207, 53);
+            this.labelCapMinMaxLevel.Name = "labelCapMinMaxLevel";
+            this.labelCapMinMaxLevel.Size = new System.Drawing.Size(84, 13);
+            this.labelCapMinMaxLevel.TabIndex = 332;
+            this.labelCapMinMaxLevel.Text = "Min / Max Level";
             // 
             // ivFiltersCapture
             // 
@@ -1350,7 +1427,7 @@ namespace RNGReporter
             "12"});
             this.comboBoxCapMonth.Location = new System.Drawing.Point(96, 24);
             this.comboBoxCapMonth.Name = "comboBoxCapMonth";
-            this.comboBoxCapMonth.Size = new System.Drawing.Size(87, 21);
+            this.comboBoxCapMonth.Size = new System.Drawing.Size(96, 21);
             this.comboBoxCapMonth.TabIndex = 1;
             this.comboBoxCapMonth.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FocusControl);
             // 
@@ -1360,7 +1437,7 @@ namespace RNGReporter
             this.buttonAnySlot.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.buttonAnySlot.ForeColor = System.Drawing.Color.Black;
             this.buttonAnySlot.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.buttonAnySlot.Location = new System.Drawing.Point(256, 98);
+            this.buttonAnySlot.Location = new System.Drawing.Point(204, 98);
             this.buttonAnySlot.Margin = new System.Windows.Forms.Padding(0);
             this.buttonAnySlot.Name = "buttonAnySlot";
             this.buttonAnySlot.OuterBorderColor = System.Drawing.Color.Transparent;
@@ -1374,7 +1451,7 @@ namespace RNGReporter
             // maskedTextBoxCapMinOffset
             // 
             this.maskedTextBoxCapMinOffset.Hex = false;
-            this.maskedTextBoxCapMinOffset.Location = new System.Drawing.Point(188, 24);
+            this.maskedTextBoxCapMinOffset.Location = new System.Drawing.Point(204, 24);
             this.maskedTextBoxCapMinOffset.Mask = "00000";
             this.maskedTextBoxCapMinOffset.Name = "maskedTextBoxCapMinOffset";
             this.maskedTextBoxCapMinOffset.Size = new System.Drawing.Size(44, 21);
@@ -1402,7 +1479,7 @@ namespace RNGReporter
             this.comboBoxEncounterType.Location = new System.Drawing.Point(97, 76);
             this.comboBoxEncounterType.Name = "comboBoxEncounterType";
             this.comboBoxEncounterType.ShineColor = System.Drawing.SystemColors.Window;
-            this.comboBoxEncounterType.Size = new System.Drawing.Size(156, 21);
+            this.comboBoxEncounterType.Size = new System.Drawing.Size(95, 21);
             this.comboBoxEncounterType.TabIndex = 7;
             this.comboBoxEncounterType.ValueMember = "Key";
             this.comboBoxEncounterType.SelectedIndexChanged += new System.EventHandler(this.comboBoxEncounterType_SelectedIndexChanged);
@@ -1413,7 +1490,7 @@ namespace RNGReporter
             checkBoxProperties3.ForeColor = System.Drawing.SystemColors.ControlText;
             this.comboBoxEncounterSlot.CheckBoxProperties = checkBoxProperties3;
             this.comboBoxEncounterSlot.DisplayMemberSingleItem = "";
-            this.comboBoxEncounterSlot.DropDownHeight = 310;
+            this.comboBoxEncounterSlot.DropDownHeight = 330;
             this.comboBoxEncounterSlot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxEncounterSlot.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboBoxEncounterSlot.FormattingEnabled = true;
@@ -1433,7 +1510,7 @@ namespace RNGReporter
             "Swarm"});
             this.comboBoxEncounterSlot.Location = new System.Drawing.Point(97, 99);
             this.comboBoxEncounterSlot.Name = "comboBoxEncounterSlot";
-            this.comboBoxEncounterSlot.Size = new System.Drawing.Size(156, 21);
+            this.comboBoxEncounterSlot.Size = new System.Drawing.Size(95, 21);
             this.comboBoxEncounterSlot.TabIndex = 8;
             this.comboBoxEncounterSlot.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FocusControl);
             // 
@@ -1460,7 +1537,7 @@ namespace RNGReporter
             // maskedTextBoxCapMaxOffset
             // 
             this.maskedTextBoxCapMaxOffset.Hex = false;
-            this.maskedTextBoxCapMaxOffset.Location = new System.Drawing.Point(238, 24);
+            this.maskedTextBoxCapMaxOffset.Location = new System.Drawing.Point(254, 24);
             this.maskedTextBoxCapMaxOffset.Mask = "00000";
             this.maskedTextBoxCapMaxOffset.Name = "maskedTextBoxCapMaxOffset";
             this.maskedTextBoxCapMaxOffset.Size = new System.Drawing.Size(44, 21);
@@ -1470,7 +1547,7 @@ namespace RNGReporter
             // labelCapMinMaxFrame
             // 
             this.labelCapMinMaxFrame.AutoSize = true;
-            this.labelCapMinMaxFrame.Location = new System.Drawing.Point(191, 9);
+            this.labelCapMinMaxFrame.Location = new System.Drawing.Point(207, 9);
             this.labelCapMinMaxFrame.Name = "labelCapMinMaxFrame";
             this.labelCapMinMaxFrame.Size = new System.Drawing.Size(87, 13);
             this.labelCapMinMaxFrame.TabIndex = 107;
@@ -1493,7 +1570,7 @@ namespace RNGReporter
             this.comboBoxMethod.Location = new System.Drawing.Point(97, 53);
             this.comboBoxMethod.Name = "comboBoxMethod";
             this.comboBoxMethod.ShineColor = System.Drawing.SystemColors.Window;
-            this.comboBoxMethod.Size = new System.Drawing.Size(156, 21);
+            this.comboBoxMethod.Size = new System.Drawing.Size(95, 21);
             this.comboBoxMethod.TabIndex = 6;
             this.comboBoxMethod.SelectedIndexChanged += new System.EventHandler(this.comboBoxMethod_SelectedIndexChanged);
             // 
@@ -1570,7 +1647,7 @@ namespace RNGReporter
             this.comboBoxAbility.Location = new System.Drawing.Point(700, 43);
             this.comboBoxAbility.Name = "comboBoxAbility";
             this.comboBoxAbility.ShineColor = System.Drawing.SystemColors.Window;
-            this.comboBoxAbility.Size = new System.Drawing.Size(67, 21);
+            this.comboBoxAbility.Size = new System.Drawing.Size(59, 21);
             this.comboBoxAbility.TabIndex = 29;
             // 
             // label23
@@ -1617,7 +1694,7 @@ namespace RNGReporter
             // 
             this.maskedTextBoxMaxShiny.Hex = false;
             this.maskedTextBoxMaxShiny.Location = new System.Drawing.Point(699, 130);
-            this.maskedTextBoxMaxShiny.Mask = "0000";
+            this.maskedTextBoxMaxShiny.Mask = "0000000";
             this.maskedTextBoxMaxShiny.Name = "maskedTextBoxMaxShiny";
             this.maskedTextBoxMaxShiny.Size = new System.Drawing.Size(86, 21);
             this.maskedTextBoxMaxShiny.TabIndex = 35;
@@ -1657,6 +1734,7 @@ namespace RNGReporter
             this.NearestShiny,
             this.PID,
             this.EncounterSlot,
+            this.Lvl,
             this.Shiny,
             this.Nature,
             this.Ability,
@@ -1678,7 +1756,6 @@ namespace RNGReporter
             this.Synchable});
             this.dataGridViewCapValues.ContextMenuStrip = this.contextMenuStripCap;
             this.dataGridViewCapValues.Location = new System.Drawing.Point(6, 189);
-            this.dataGridViewCapValues.MultiSelect = false;
             this.dataGridViewCapValues.Name = "dataGridViewCapValues";
             this.dataGridViewCapValues.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridViewCapValues.RowHeadersVisible = false;
@@ -1696,232 +1773,6 @@ namespace RNGReporter
             this.dataGridViewCapValues.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewCapValues_ColumnHeaderMouseClick);
             this.dataGridViewCapValues.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridViewCapValues_KeyDown);
             this.dataGridViewCapValues.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridViewCapValues_MouseDown);
-            // 
-            // CapSeed
-            // 
-            this.CapSeed.DataPropertyName = "Seed";
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Consolas", 8.75F);
-            this.CapSeed.DefaultCellStyle = dataGridViewCellStyle3;
-            this.CapSeed.FillWeight = 90F;
-            this.CapSeed.HeaderText = "Seed";
-            this.CapSeed.Name = "CapSeed";
-            this.CapSeed.ReadOnly = true;
-            this.CapSeed.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.CapSeed.Width = 70;
-            // 
-            // CapOffset
-            // 
-            this.CapOffset.DataPropertyName = "Offset";
-            this.CapOffset.FillWeight = 80F;
-            this.CapOffset.HeaderText = "Frame";
-            this.CapOffset.Name = "CapOffset";
-            this.CapOffset.ReadOnly = true;
-            this.CapOffset.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.CapOffset.Width = 45;
-            // 
-            // EncounterMod
-            // 
-            this.EncounterMod.DataPropertyName = "EncounterMod";
-            this.EncounterMod.FillWeight = 150F;
-            this.EncounterMod.HeaderText = "Required Lead";
-            this.EncounterMod.Name = "EncounterMod";
-            this.EncounterMod.ReadOnly = true;
-            this.EncounterMod.Width = 130;
-            // 
-            // NearestShiny
-            // 
-            this.NearestShiny.DataPropertyName = "NearestShiny";
-            this.NearestShiny.HeaderText = "Shiny Frame";
-            this.NearestShiny.Name = "NearestShiny";
-            this.NearestShiny.ReadOnly = true;
-            this.NearestShiny.Width = 75;
-            // 
-            // PID
-            // 
-            this.PID.DataPropertyName = "Pid";
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Consolas", 8.75F);
-            this.PID.DefaultCellStyle = dataGridViewCellStyle4;
-            this.PID.HeaderText = "PID";
-            this.PID.Name = "PID";
-            this.PID.ReadOnly = true;
-            this.PID.Width = 80;
-            // 
-            // EncounterSlot
-            // 
-            this.EncounterSlot.DataPropertyName = "EncounterSlot";
-            this.EncounterSlot.FillWeight = 120F;
-            this.EncounterSlot.HeaderText = "Encounter Slot";
-            this.EncounterSlot.Name = "EncounterSlot";
-            this.EncounterSlot.ReadOnly = true;
-            this.EncounterSlot.Width = 85;
-            // 
-            // Shiny
-            // 
-            this.Shiny.DataPropertyName = "ShinyDisplay";
-            this.Shiny.FillWeight = 30F;
-            this.Shiny.HeaderText = "!!!";
-            this.Shiny.Name = "Shiny";
-            this.Shiny.ReadOnly = true;
-            this.Shiny.Width = 31;
-            // 
-            // Nature
-            // 
-            this.Nature.DataPropertyName = "Nature";
-            this.Nature.FillWeight = 80F;
-            this.Nature.HeaderText = "Nature";
-            this.Nature.Name = "Nature";
-            this.Nature.ReadOnly = true;
-            this.Nature.Width = 65;
-            // 
-            // Ability
-            // 
-            this.Ability.DataPropertyName = "Ability";
-            this.Ability.FillWeight = 50F;
-            this.Ability.HeaderText = "Ability";
-            this.Ability.Name = "Ability";
-            this.Ability.ReadOnly = true;
-            this.Ability.Width = 40;
-            // 
-            // CapHP
-            // 
-            this.CapHP.DataPropertyName = "Hp";
-            this.CapHP.FillWeight = 45F;
-            this.CapHP.HeaderText = "HP";
-            this.CapHP.Name = "CapHP";
-            this.CapHP.ReadOnly = true;
-            this.CapHP.Width = 30;
-            // 
-            // CapAtk
-            // 
-            this.CapAtk.DataPropertyName = "Atk";
-            this.CapAtk.FillWeight = 45F;
-            this.CapAtk.HeaderText = "Atk";
-            this.CapAtk.Name = "CapAtk";
-            this.CapAtk.ReadOnly = true;
-            this.CapAtk.Width = 30;
-            // 
-            // CapDef
-            // 
-            this.CapDef.DataPropertyName = "Def";
-            this.CapDef.FillWeight = 45F;
-            this.CapDef.HeaderText = "Def";
-            this.CapDef.Name = "CapDef";
-            this.CapDef.ReadOnly = true;
-            this.CapDef.Width = 30;
-            // 
-            // CapSpA
-            // 
-            this.CapSpA.DataPropertyName = "SpA";
-            this.CapSpA.FillWeight = 45F;
-            this.CapSpA.HeaderText = "SpA";
-            this.CapSpA.Name = "CapSpA";
-            this.CapSpA.ReadOnly = true;
-            this.CapSpA.Width = 30;
-            // 
-            // CapSpD
-            // 
-            this.CapSpD.DataPropertyName = "SpD";
-            this.CapSpD.FillWeight = 45F;
-            this.CapSpD.HeaderText = "SpD";
-            this.CapSpD.Name = "CapSpD";
-            this.CapSpD.ReadOnly = true;
-            this.CapSpD.Width = 30;
-            // 
-            // CapSpe
-            // 
-            this.CapSpe.DataPropertyName = "Spe";
-            this.CapSpe.FillWeight = 45F;
-            this.CapSpe.HeaderText = "Spe";
-            this.CapSpe.Name = "CapSpe";
-            this.CapSpe.ReadOnly = true;
-            this.CapSpe.Width = 30;
-            // 
-            // HiddenPower
-            // 
-            this.HiddenPower.DataPropertyName = "HiddenPowerType";
-            this.HiddenPower.FillWeight = 80F;
-            this.HiddenPower.HeaderText = "Hidden";
-            this.HiddenPower.Name = "HiddenPower";
-            this.HiddenPower.ReadOnly = true;
-            this.HiddenPower.Width = 50;
-            // 
-            // HiddenPowerPower
-            // 
-            this.HiddenPowerPower.DataPropertyName = "HiddenPowerPower";
-            this.HiddenPowerPower.FillWeight = 50F;
-            this.HiddenPowerPower.HeaderText = "Power";
-            this.HiddenPowerPower.Name = "HiddenPowerPower";
-            this.HiddenPowerPower.ReadOnly = true;
-            this.HiddenPowerPower.Width = 50;
-            // 
-            // f50
-            // 
-            this.f50.DataPropertyName = "Female50";
-            this.f50.FillWeight = 50F;
-            this.f50.HeaderText = "50% F";
-            this.f50.Name = "f50";
-            this.f50.ReadOnly = true;
-            this.f50.Width = 50;
-            // 
-            // f125
-            // 
-            this.f125.DataPropertyName = "Female125";
-            this.f125.FillWeight = 50F;
-            this.f125.HeaderText = "12.5%F";
-            this.f125.Name = "f125";
-            this.f125.ReadOnly = true;
-            this.f125.Width = 50;
-            // 
-            // f25
-            // 
-            this.f25.DataPropertyName = "Female25";
-            this.f25.FillWeight = 50F;
-            this.f25.HeaderText = "25% F";
-            this.f25.Name = "f25";
-            this.f25.ReadOnly = true;
-            this.f25.Width = 50;
-            // 
-            // f75
-            // 
-            this.f75.DataPropertyName = "Female75";
-            this.f75.FillWeight = 50F;
-            this.f75.HeaderText = "75% F";
-            this.f75.Name = "f75";
-            this.f75.ReadOnly = true;
-            this.f75.Width = 50;
-            // 
-            // CapDateTime
-            // 
-            this.CapDateTime.DataPropertyName = "TimeDate";
-            this.CapDateTime.HeaderText = "Date\\Time";
-            this.CapDateTime.Name = "CapDateTime";
-            this.CapDateTime.ReadOnly = true;
-            // 
-            // CapTimer0
-            // 
-            this.CapTimer0.DataPropertyName = "Timer0";
-            this.CapTimer0.FillWeight = 60F;
-            this.CapTimer0.HeaderText = "Timer0";
-            this.CapTimer0.Name = "CapTimer0";
-            this.CapTimer0.Visible = false;
-            this.CapTimer0.Width = 45;
-            // 
-            // CapKeypress
-            // 
-            this.CapKeypress.DataPropertyName = "Keypress";
-            this.CapKeypress.HeaderText = "Keypresses";
-            this.CapKeypress.Name = "CapKeypress";
-            this.CapKeypress.Visible = false;
-            this.CapKeypress.Width = 120;
-            // 
-            // Synchable
-            // 
-            this.Synchable.DataPropertyName = "Synchable";
-            this.Synchable.HeaderText = "Synchronized";
-            this.Synchable.Name = "Synchable";
-            this.Synchable.ReadOnly = true;
-            this.Synchable.Visible = false;
-            this.Synchable.Width = 151;
             // 
             // maskedTextBoxCapMaxDelay
             // 
@@ -1964,20 +1815,20 @@ namespace RNGReporter
             this.tabPageHiddenGrotto.Controls.Add(this.cbHHGender);
             this.tabPageHiddenGrotto.Controls.Add(this.label18);
             this.tabPageHiddenGrotto.Controls.Add(this.label17);
-            this.tabPageHiddenGrotto.Controls.Add(this.cbHHSubSlot);
-            this.tabPageHiddenGrotto.Controls.Add(this.cbHHSlot);
-            this.tabPageHiddenGrotto.Controls.Add(this.cbHHHollowNumber);
             this.tabPageHiddenGrotto.Controls.Add(this.label16);
             this.tabPageHiddenGrotto.Controls.Add(this.label14);
             this.tabPageHiddenGrotto.Controls.Add(this.label15);
             this.tabPageHiddenGrotto.Controls.Add(this.label13);
+            this.tabPageHiddenGrotto.Controls.Add(this.label6);
+            this.tabPageHiddenGrotto.Controls.Add(this.label11);
+            this.tabPageHiddenGrotto.Controls.Add(this.label12);
+            this.tabPageHiddenGrotto.Controls.Add(this.cbHHSubSlot);
+            this.tabPageHiddenGrotto.Controls.Add(this.cbHHSlot);
+            this.tabPageHiddenGrotto.Controls.Add(this.cbHHHollowNumber);
             this.tabPageHiddenGrotto.Controls.Add(this.cbHHMonth);
             this.tabPageHiddenGrotto.Controls.Add(this.txtHHAdvances);
             this.tabPageHiddenGrotto.Controls.Add(this.txtHHYear);
             this.tabPageHiddenGrotto.Controls.Add(this.txtHHOpenHollows);
-            this.tabPageHiddenGrotto.Controls.Add(this.label6);
-            this.tabPageHiddenGrotto.Controls.Add(this.label11);
-            this.tabPageHiddenGrotto.Controls.Add(this.label12);
             this.tabPageHiddenGrotto.Controls.Add(this.btnHHGenerate);
             this.tabPageHiddenGrotto.Controls.Add(this.dgvHiddenGrottos);
             this.tabPageHiddenGrotto.Location = new System.Drawing.Point(4, 22);
@@ -2037,6 +1888,73 @@ namespace RNGReporter
             this.label17.Size = new System.Drawing.Size(42, 13);
             this.label17.TabIndex = 137;
             this.label17.Text = "Gender";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(368, 59);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(44, 13);
+            this.label16.TabIndex = 131;
+            this.label16.Text = "SubSlot";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(275, 59);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(25, 13);
+            this.label14.TabIndex = 130;
+            this.label14.Text = "Slot";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(185, 59);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(76, 13);
+            this.label15.TabIndex = 129;
+            this.label15.Text = "Grotto Number";
+            this.label15.Visible = false;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(275, 9);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(73, 13);
+            this.label13.TabIndex = 126;
+            this.label13.Text = "Open Hollows";
+            this.label13.Visible = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(191, 9);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(78, 13);
+            this.label6.TabIndex = 124;
+            this.label6.Text = "Max Advances";
+            this.label6.Visible = false;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(52, 9);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(29, 13);
+            this.label11.TabIndex = 123;
+            this.label11.Text = "Year";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(96, 9);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(37, 13);
+            this.label12.TabIndex = 125;
+            this.label12.Text = "Month";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // cbHHSubSlot
             // 
@@ -2119,44 +2037,6 @@ namespace RNGReporter
             this.cbHHHollowNumber.TabIndex = 132;
             this.cbHHHollowNumber.Visible = false;
             // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(368, 59);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(44, 13);
-            this.label16.TabIndex = 131;
-            this.label16.Text = "SubSlot";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(275, 59);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(25, 13);
-            this.label14.TabIndex = 130;
-            this.label14.Text = "Slot";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(185, 59);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(76, 13);
-            this.label15.TabIndex = 129;
-            this.label15.Text = "Grotto Number";
-            this.label15.Visible = false;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(275, 9);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(73, 13);
-            this.label13.TabIndex = 126;
-            this.label13.Text = "Open Hollows";
-            this.label13.Visible = false;
-            // 
             // cbHHMonth
             // 
             this.cbHHMonth.BlankText = null;
@@ -2215,35 +2095,6 @@ namespace RNGReporter
             this.txtHHOpenHollows.TabIndex = 121;
             this.txtHHOpenHollows.Text = "1";
             this.txtHHOpenHollows.Visible = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(191, 9);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(78, 13);
-            this.label6.TabIndex = 124;
-            this.label6.Text = "Max Advances";
-            this.label6.Visible = false;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(52, 9);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(29, 13);
-            this.label11.TabIndex = 123;
-            this.label11.Text = "Year";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(96, 9);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(37, 13);
-            this.label12.TabIndex = 125;
-            this.label12.Text = "Month";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // btnHHGenerate
             // 
@@ -2472,21 +2323,21 @@ namespace RNGReporter
             this.tabPageDreamRadar.Controls.Add(this.ivDR);
             this.tabPageDreamRadar.Controls.Add(this.cbDRShinyness);
             this.tabPageDreamRadar.Controls.Add(this.label19);
-            this.tabPageDreamRadar.Controls.Add(this.cbDRRatio);
             this.tabPageDreamRadar.Controls.Add(this.label22);
-            this.tabPageDreamRadar.Controls.Add(this.cbDRGender);
             this.tabPageDreamRadar.Controls.Add(this.label24);
+            this.tabPageDreamRadar.Controls.Add(this.label25);
+            this.tabPageDreamRadar.Controls.Add(this.label26);
+            this.tabPageDreamRadar.Controls.Add(this.label27);
+            this.tabPageDreamRadar.Controls.Add(this.cbDRShiny);
+            this.tabPageDreamRadar.Controls.Add(this.label28);
+            this.tabPageDreamRadar.Controls.Add(this.cbDRRatio);
+            this.tabPageDreamRadar.Controls.Add(this.cbDRGender);
             this.tabPageDreamRadar.Controls.Add(this.cbDRMonth);
             this.tabPageDreamRadar.Controls.Add(this.txtDRMinFrame);
             this.tabPageDreamRadar.Controls.Add(this.txtDRYear);
             this.tabPageDreamRadar.Controls.Add(this.txtDRMaxFrame);
-            this.tabPageDreamRadar.Controls.Add(this.label25);
-            this.tabPageDreamRadar.Controls.Add(this.label26);
-            this.tabPageDreamRadar.Controls.Add(this.label27);
             this.tabPageDreamRadar.Controls.Add(this.btnDRGenerate);
             this.tabPageDreamRadar.Controls.Add(this.btnDRAnyNature);
-            this.tabPageDreamRadar.Controls.Add(this.cbDRShiny);
-            this.tabPageDreamRadar.Controls.Add(this.label28);
             this.tabPageDreamRadar.Controls.Add(this.cbDRNature);
             this.tabPageDreamRadar.Controls.Add(this.gvDreamRadar);
             this.tabPageDreamRadar.Location = new System.Drawing.Point(4, 22);
@@ -2530,6 +2381,72 @@ namespace RNGReporter
             this.label19.Text = "Shininess";
             this.label19.Visible = false;
             // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(768, 95);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(32, 13);
+            this.label22.TabIndex = 342;
+            this.label22.Text = "Ratio";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(655, 94);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(42, 13);
+            this.label24.TabIndex = 341;
+            this.label24.Text = "Gender";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(191, 9);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(87, 13);
+            this.label25.TabIndex = 339;
+            this.label25.Text = "Min / Max Frame";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(52, 9);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(29, 13);
+            this.label26.TabIndex = 338;
+            this.label26.Text = "Year";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(96, 9);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(37, 13);
+            this.label27.TabIndex = 340;
+            this.label27.Text = "Month";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // cbDRShiny
+            // 
+            this.cbDRShiny.AutoSize = true;
+            this.cbDRShiny.Location = new System.Drawing.Point(700, 157);
+            this.cbDRShiny.Name = "cbDRShiny";
+            this.cbDRShiny.Size = new System.Drawing.Size(76, 17);
+            this.cbDRShiny.TabIndex = 337;
+            this.cbDRShiny.Text = "Shiny Only";
+            this.cbDRShiny.UseVisualStyleBackColor = true;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(660, 20);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(39, 13);
+            this.label28.TabIndex = 332;
+            this.label28.Text = "Nature";
+            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // cbDRRatio
             // 
             this.cbDRRatio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -2551,15 +2468,6 @@ namespace RNGReporter
             this.toolTipGenderRatio.SetToolTip(this.cbDRRatio, "Right-click to look up the gender\r\nratio of a certain Pokémon.\r\n\r\nUse this box to" +
         " filter out unwanted\r\nCute Charm results.");
             // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(768, 95);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(32, 13);
-            this.label22.TabIndex = 342;
-            this.label22.Text = "Ratio";
-            // 
             // cbDRGender
             // 
             this.cbDRGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -2575,15 +2483,6 @@ namespace RNGReporter
             this.cbDRGender.ShineColor = System.Drawing.SystemColors.Window;
             this.cbDRGender.Size = new System.Drawing.Size(59, 21);
             this.cbDRGender.TabIndex = 335;
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(655, 94);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(42, 13);
-            this.label24.TabIndex = 341;
-            this.label24.Text = "Gender";
             // 
             // cbDRMonth
             // 
@@ -2641,34 +2540,6 @@ namespace RNGReporter
             this.txtDRMaxFrame.Size = new System.Drawing.Size(44, 21);
             this.txtDRMaxFrame.TabIndex = 330;
             // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(191, 9);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(87, 13);
-            this.label25.TabIndex = 339;
-            this.label25.Text = "Min / Max Frame";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(52, 9);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(29, 13);
-            this.label26.TabIndex = 338;
-            this.label26.Text = "Year";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(96, 9);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(37, 13);
-            this.label27.TabIndex = 340;
-            this.label27.Text = "Month";
-            this.label27.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
             // btnDRGenerate
             // 
             this.btnDRGenerate.BackColor = System.Drawing.Color.AntiqueWhite;
@@ -2698,26 +2569,6 @@ namespace RNGReporter
             this.btnDRAnyNature.Text = "Any";
             this.btnDRAnyNature.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnDRAnyNature.Click += new System.EventHandler(this.btnDRAnyNature_Click);
-            // 
-            // cbDRShiny
-            // 
-            this.cbDRShiny.AutoSize = true;
-            this.cbDRShiny.Location = new System.Drawing.Point(700, 157);
-            this.cbDRShiny.Name = "cbDRShiny";
-            this.cbDRShiny.Size = new System.Drawing.Size(76, 17);
-            this.cbDRShiny.TabIndex = 337;
-            this.cbDRShiny.Text = "Shiny Only";
-            this.cbDRShiny.UseVisualStyleBackColor = true;
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(660, 20);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(39, 13);
-            this.label28.TabIndex = 332;
-            this.label28.Text = "Nature";
-            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cbDRNature
             // 
@@ -2960,6 +2811,240 @@ namespace RNGReporter
             this.buttonEditProfile.Text = "Edit";
             this.buttonEditProfile.Click += new System.EventHandler(this.buttonEditProfile_Click);
             // 
+            // CapSeed
+            // 
+            this.CapSeed.DataPropertyName = "Seed";
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Consolas", 8.75F);
+            this.CapSeed.DefaultCellStyle = dataGridViewCellStyle3;
+            this.CapSeed.FillWeight = 90F;
+            this.CapSeed.HeaderText = "Seed";
+            this.CapSeed.Name = "CapSeed";
+            this.CapSeed.ReadOnly = true;
+            this.CapSeed.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.CapSeed.Width = 70;
+            // 
+            // CapOffset
+            // 
+            this.CapOffset.DataPropertyName = "Offset";
+            this.CapOffset.FillWeight = 80F;
+            this.CapOffset.HeaderText = "Frame";
+            this.CapOffset.Name = "CapOffset";
+            this.CapOffset.ReadOnly = true;
+            this.CapOffset.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.CapOffset.Width = 45;
+            // 
+            // EncounterMod
+            // 
+            this.EncounterMod.DataPropertyName = "EncounterMod";
+            this.EncounterMod.FillWeight = 150F;
+            this.EncounterMod.HeaderText = "Required Lead";
+            this.EncounterMod.Name = "EncounterMod";
+            this.EncounterMod.ReadOnly = true;
+            this.EncounterMod.Width = 130;
+            // 
+            // NearestShiny
+            // 
+            this.NearestShiny.DataPropertyName = "NearestShiny";
+            this.NearestShiny.HeaderText = "Shiny Frame";
+            this.NearestShiny.Name = "NearestShiny";
+            this.NearestShiny.ReadOnly = true;
+            this.NearestShiny.Width = 75;
+            // 
+            // PID
+            // 
+            this.PID.DataPropertyName = "Pid";
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Consolas", 8.75F);
+            this.PID.DefaultCellStyle = dataGridViewCellStyle4;
+            this.PID.HeaderText = "PID";
+            this.PID.Name = "PID";
+            this.PID.ReadOnly = true;
+            this.PID.Width = 80;
+            // 
+            // EncounterSlot
+            // 
+            this.EncounterSlot.DataPropertyName = "EncounterSlot";
+            this.EncounterSlot.FillWeight = 120F;
+            this.EncounterSlot.HeaderText = "Encounter Slot";
+            this.EncounterSlot.Name = "EncounterSlot";
+            this.EncounterSlot.ReadOnly = true;
+            this.EncounterSlot.Width = 85;
+            // 
+            // Lvl
+            // 
+            this.Lvl.DataPropertyName = "Level";
+            this.Lvl.HeaderText = "Level";
+            this.Lvl.Name = "Lvl";
+            this.Lvl.ReadOnly = true;
+            this.Lvl.Width = 60;
+            // 
+            // Shiny
+            // 
+            this.Shiny.DataPropertyName = "ShinyDisplay";
+            this.Shiny.FillWeight = 30F;
+            this.Shiny.HeaderText = "!!!";
+            this.Shiny.Name = "Shiny";
+            this.Shiny.ReadOnly = true;
+            this.Shiny.Width = 31;
+            // 
+            // Nature
+            // 
+            this.Nature.DataPropertyName = "Nature";
+            this.Nature.FillWeight = 80F;
+            this.Nature.HeaderText = "Nature";
+            this.Nature.Name = "Nature";
+            this.Nature.ReadOnly = true;
+            this.Nature.Width = 65;
+            // 
+            // Ability
+            // 
+            this.Ability.DataPropertyName = "Ability";
+            this.Ability.FillWeight = 50F;
+            this.Ability.HeaderText = "Ability";
+            this.Ability.Name = "Ability";
+            this.Ability.ReadOnly = true;
+            this.Ability.Width = 40;
+            // 
+            // CapHP
+            // 
+            this.CapHP.DataPropertyName = "Hp";
+            this.CapHP.FillWeight = 45F;
+            this.CapHP.HeaderText = "HP";
+            this.CapHP.Name = "CapHP";
+            this.CapHP.ReadOnly = true;
+            this.CapHP.Width = 30;
+            // 
+            // CapAtk
+            // 
+            this.CapAtk.DataPropertyName = "Atk";
+            this.CapAtk.FillWeight = 45F;
+            this.CapAtk.HeaderText = "Atk";
+            this.CapAtk.Name = "CapAtk";
+            this.CapAtk.ReadOnly = true;
+            this.CapAtk.Width = 30;
+            // 
+            // CapDef
+            // 
+            this.CapDef.DataPropertyName = "Def";
+            this.CapDef.FillWeight = 45F;
+            this.CapDef.HeaderText = "Def";
+            this.CapDef.Name = "CapDef";
+            this.CapDef.ReadOnly = true;
+            this.CapDef.Width = 30;
+            // 
+            // CapSpA
+            // 
+            this.CapSpA.DataPropertyName = "SpA";
+            this.CapSpA.FillWeight = 45F;
+            this.CapSpA.HeaderText = "SpA";
+            this.CapSpA.Name = "CapSpA";
+            this.CapSpA.ReadOnly = true;
+            this.CapSpA.Width = 30;
+            // 
+            // CapSpD
+            // 
+            this.CapSpD.DataPropertyName = "SpD";
+            this.CapSpD.FillWeight = 45F;
+            this.CapSpD.HeaderText = "SpD";
+            this.CapSpD.Name = "CapSpD";
+            this.CapSpD.ReadOnly = true;
+            this.CapSpD.Width = 30;
+            // 
+            // CapSpe
+            // 
+            this.CapSpe.DataPropertyName = "Spe";
+            this.CapSpe.FillWeight = 45F;
+            this.CapSpe.HeaderText = "Spe";
+            this.CapSpe.Name = "CapSpe";
+            this.CapSpe.ReadOnly = true;
+            this.CapSpe.Width = 30;
+            // 
+            // HiddenPower
+            // 
+            this.HiddenPower.DataPropertyName = "HiddenPowerType";
+            this.HiddenPower.FillWeight = 80F;
+            this.HiddenPower.HeaderText = "Hidden";
+            this.HiddenPower.Name = "HiddenPower";
+            this.HiddenPower.ReadOnly = true;
+            this.HiddenPower.Width = 50;
+            // 
+            // HiddenPowerPower
+            // 
+            this.HiddenPowerPower.DataPropertyName = "HiddenPowerPower";
+            this.HiddenPowerPower.FillWeight = 50F;
+            this.HiddenPowerPower.HeaderText = "Power";
+            this.HiddenPowerPower.Name = "HiddenPowerPower";
+            this.HiddenPowerPower.ReadOnly = true;
+            this.HiddenPowerPower.Width = 50;
+            // 
+            // f50
+            // 
+            this.f50.DataPropertyName = "Female50";
+            this.f50.FillWeight = 50F;
+            this.f50.HeaderText = "50% F";
+            this.f50.Name = "f50";
+            this.f50.ReadOnly = true;
+            this.f50.Width = 50;
+            // 
+            // f125
+            // 
+            this.f125.DataPropertyName = "Female125";
+            this.f125.FillWeight = 50F;
+            this.f125.HeaderText = "12.5%F";
+            this.f125.Name = "f125";
+            this.f125.ReadOnly = true;
+            this.f125.Width = 50;
+            // 
+            // f25
+            // 
+            this.f25.DataPropertyName = "Female25";
+            this.f25.FillWeight = 50F;
+            this.f25.HeaderText = "25% F";
+            this.f25.Name = "f25";
+            this.f25.ReadOnly = true;
+            this.f25.Width = 50;
+            // 
+            // f75
+            // 
+            this.f75.DataPropertyName = "Female75";
+            this.f75.FillWeight = 50F;
+            this.f75.HeaderText = "75% F";
+            this.f75.Name = "f75";
+            this.f75.ReadOnly = true;
+            this.f75.Width = 50;
+            // 
+            // CapDateTime
+            // 
+            this.CapDateTime.DataPropertyName = "TimeDate";
+            this.CapDateTime.HeaderText = "Date\\Time";
+            this.CapDateTime.Name = "CapDateTime";
+            this.CapDateTime.ReadOnly = true;
+            // 
+            // CapTimer0
+            // 
+            this.CapTimer0.DataPropertyName = "Timer0";
+            this.CapTimer0.FillWeight = 60F;
+            this.CapTimer0.HeaderText = "Timer0";
+            this.CapTimer0.Name = "CapTimer0";
+            this.CapTimer0.Visible = false;
+            this.CapTimer0.Width = 45;
+            // 
+            // CapKeypress
+            // 
+            this.CapKeypress.DataPropertyName = "Keypress";
+            this.CapKeypress.HeaderText = "Keypresses";
+            this.CapKeypress.Name = "CapKeypress";
+            this.CapKeypress.Visible = false;
+            this.CapKeypress.Width = 120;
+            // 
+            // Synchable
+            // 
+            this.Synchable.DataPropertyName = "Synchable";
+            this.Synchable.HeaderText = "Synchronized";
+            this.Synchable.Name = "Synchable";
+            this.Synchable.ReadOnly = true;
+            this.Synchable.Visible = false;
+            this.Synchable.Width = 151;
+            // 
             // TimeFinder5th
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -2978,6 +3063,9 @@ namespace RNGReporter
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewShinyResults)).EndInit();
             this.tabPageCapture.ResumeLayout(false);
             this.tabPageCapture.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericLevelMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericLevelMin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericLevel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCapValues)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabPageHiddenGrotto.ResumeLayout(false);
@@ -3108,31 +3196,6 @@ namespace RNGReporter
         private System.Windows.Forms.DataGridViewTextBoxColumn ShinyFemale75;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEggDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn shinyKeypress;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CapSeed;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CapOffset;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EncounterMod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NearestShiny;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EncounterSlot;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Shiny;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nature;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ability;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CapHP;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CapAtk;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CapDef;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CapSpA;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CapSpD;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CapSpe;
-        private System.Windows.Forms.DataGridViewTextBoxColumn HiddenPower;
-        private System.Windows.Forms.DataGridViewTextBoxColumn HiddenPowerPower;
-        private System.Windows.Forms.DataGridViewTextBoxColumn f50;
-        private System.Windows.Forms.DataGridViewTextBoxColumn f125;
-        private System.Windows.Forms.DataGridViewTextBoxColumn f25;
-        private System.Windows.Forms.DataGridViewTextBoxColumn f75;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CapDateTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CapTimer0;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CapKeypress;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Synchable;
         private System.Windows.Forms.GroupBox groupBoxConfiguration;
         private GlassComboBox comboBoxProfiles;
         private GlassButton buttonEditProfile;
@@ -3222,5 +3285,36 @@ namespace RNGReporter
         private System.Windows.Forms.CheckBox cbDRShiny;
         private System.Windows.Forms.Label label28;
         private CheckBoxComboBox cbDRNature;
+        private System.Windows.Forms.NumericUpDown numericLevel;
+        private System.Windows.Forms.Label LevelLabel;
+        private System.Windows.Forms.Label labelCapMinMaxLevel;
+        private System.Windows.Forms.NumericUpDown numericLevelMax;
+        private System.Windows.Forms.NumericUpDown numericLevelMin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CapSeed;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CapOffset;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EncounterMod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NearestShiny;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EncounterSlot;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Lvl;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Shiny;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nature;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ability;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CapHP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CapAtk;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CapDef;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CapSpA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CapSpD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CapSpe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HiddenPower;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HiddenPowerPower;
+        private System.Windows.Forms.DataGridViewTextBoxColumn f50;
+        private System.Windows.Forms.DataGridViewTextBoxColumn f125;
+        private System.Windows.Forms.DataGridViewTextBoxColumn f25;
+        private System.Windows.Forms.DataGridViewTextBoxColumn f75;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CapDateTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CapTimer0;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CapKeypress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Synchable;
     }
 }

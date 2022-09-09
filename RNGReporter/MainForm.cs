@@ -482,6 +482,7 @@ namespace RNGReporter
                     -1,
                     false,
                     false,
+                    0,
                     false,
                     null,
                     new NoGenderFilter());
@@ -538,6 +539,7 @@ namespace RNGReporter
                     (int) ((ComboBoxItem) comboBoxAbility.SelectedItem).Reference,
                     checkBoxShinyOnly.Checked,
                     false,
+                    0,
                     false,
                     null,
                     (GenderFilter) (comboBoxGender.SelectedItem));
@@ -550,6 +552,7 @@ namespace RNGReporter
                     (int) ((ComboBoxItem) comboBoxAbility.SelectedItem).Reference,
                     checkBoxShinyOnly.Checked,
                     false,
+                    0,
                     false,
                     null,
                     (GenderFilter)(comboBoxGender.SelectedItem));
@@ -565,6 +568,7 @@ namespace RNGReporter
                         (int) ((ComboBoxItem) comboBoxAbility.SelectedItem).Reference,
                         checkBoxShinyOnly.Checked,
                         checkBoxSynchOnly.Checked,
+                        0,
                         checkBoxDreamWorld.Checked,
                         null,
                         (GenderFilter) (comboBoxGender.SelectedItem));
@@ -595,6 +599,7 @@ namespace RNGReporter
                     (int) ((ComboBoxItem) comboBoxAbility.SelectedItem).Reference,
                     checkBoxShinyOnly.Checked,
                     checkBoxSynchOnly.Checked,
+                    0,
                     false,
                     encounterSlots,
                     (GenderFilter) (comboBoxGender.SelectedItem));

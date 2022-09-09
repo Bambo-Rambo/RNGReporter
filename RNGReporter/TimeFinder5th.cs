@@ -112,21 +112,21 @@ namespace RNGReporter
             comboBoxEncounterType.Items.AddRange(new object[]
                 {
                     new ComboBoxItem("Wild Pokémon", EncounterType.Wild),
-                    new ComboBoxItem("Wild Pokémon (Swarm)",
+                    new ComboBoxItem("Swarm",
                                      EncounterType.WildSwarm),
-                    new ComboBoxItem("Wild Pokémon (Surfing)",
+                    new ComboBoxItem("Surfing",
                                      EncounterType.WildSurfing),
-                    new ComboBoxItem("Wild Pokémon (Fishing)",
+                    new ComboBoxItem("Fishing",
                                      EncounterType.WildSuperRod),
-                    new ComboBoxItem("Wild Pokémon (Shaking Grass)",
+                    new ComboBoxItem("Shaking Grass",
                                      EncounterType.WildShakerGrass),
-                    new ComboBoxItem("Wild Pokémon (Bubble Spot)",
+                    new ComboBoxItem("Bubble Spot",
                                      EncounterType.WildWaterSpot),
-                    new ComboBoxItem("Wild Pokémon (Cave Spot)",
+                    new ComboBoxItem("Cave Spot",
                                      EncounterType.WildCaveSpot),
-                    new ComboBoxItem("Stationary Pokémon", EncounterType.Stationary)
+                    new ComboBoxItem("Stationary", EncounterType.Stationary)
                     ,
-                    new ComboBoxItem("Roaming Pokémon", EncounterType.Roamer),
+                    new ComboBoxItem("Roamer", EncounterType.Roamer),
                     new ComboBoxItem("Gift Pokémon", EncounterType.Gift),
                     new ComboBoxItem("Larvesta Egg", EncounterType.LarvestaEgg),
                     new ComboBoxItem("Hidden Grotto", EncounterType.HiddenGrotto),
@@ -485,6 +485,7 @@ namespace RNGReporter
                 generator.FrameType = FrameType.BW2BredInternational;
             generator.isBW2 = profile.IsBW2();
 
+
             // set up the hashtables containing precomputed MTRNG values
             // this saves time by reducing the search to a hashtable lookup
             // of MTRNG seeds that corresponds to common spreads
@@ -518,6 +519,7 @@ namespace RNGReporter
             if (checkBoxShinyOnly.Checked)
                 uint.TryParse(maskedTextBoxMaxShiny.Text, out shinyOffset);
 
+            Lvl.Visible = false; //LevelConditions();
             if (generator.FrameType == FrameType.Method5CGear || generator.FrameType == FrameType.Method5Standard)
             {
                 EncounterSlot.Visible = false;
@@ -559,7 +561,9 @@ namespace RNGReporter
                                 EncounterMod = Objects.EncounterMod.Search,
                                 InitialFrame = 1,
                                 MaxResults = shinyOffset,
-                                //ShinyCharm = cbCapShinyCharm.Checked
+                                MinLevel = (int)numericLevelMin.Value,
+                                MaxLevel = (int)numericLevelMax.Value,
+                                //ShinyCharm = cbCapShinyCharm.Checked,
                             };
 
                         subFrameCompare = new FrameCompare(
@@ -568,6 +572,7 @@ namespace RNGReporter
                             (int) ((ComboBoxItem) comboBoxAbility.SelectedItem).Reference,
                             true,
                             checkBoxSynchOnly.Checked,
+                            LevelConditions() ? (int)numericLevel.Value : 0,
                             false,
                             encounterSlots,
                             constructGenderFilter());
@@ -613,6 +618,7 @@ namespace RNGReporter
                     -1,
                     false,
                     false,
+                    LevelConditions() ? (int)numericLevel.Value : 0,
                     false,
                     null,
                     new NoGenderFilter());
@@ -653,6 +659,7 @@ namespace RNGReporter
                     -1,
                     checkBoxShinyOnly.Checked,
                     false,
+                    0,
                     false,
                     null,
                     constructGenderFilter());
@@ -700,6 +707,7 @@ namespace RNGReporter
                     (int) ((ComboBoxItem) comboBoxAbility.SelectedItem).Reference,
                     checkBoxShinyOnly.Checked,
                     checkBoxSynchOnly.Checked,
+                    LevelConditions() ? (int)numericLevel.Value : 0,
                     false,
                     encounterSlots,
                     constructGenderFilter());
@@ -1209,7 +1217,7 @@ namespace RNGReporter
                                                             uint IVHash = list[i][testSeed];
                                                             frames.AddRange(generators[listIndex].Generate(
                                                                 frameCompare, testSeed, IVHash,
-                                                                i + 1 + start + entralink));
+                                                                i + 1 + start + entralink, LevelConditions() ? (int)numericLevel.Value : 0));
                                                         }
                                                     }
                                                 }
@@ -1243,6 +1251,8 @@ namespace RNGReporter
                                                     shinygenerators[listIndex].InitialSeed = seed;
                                                     shinygenerators[listIndex].InitialFrame =
                                                         Functions.initialPIDRNG(seed, profile) + minAdvances;
+                                                    shinygenerators[listIndex].MinLevel = (int)numericLevelMin.Value;
+                                                    shinygenerators[listIndex].MaxLevel = (int)numericLevelMax.Value;
 
                                                     List<Frame> shinyFrames =
                                                         shinygenerators[listIndex].Generate(subFrameCompare,
@@ -1579,7 +1589,7 @@ namespace RNGReporter
                                     if (list[i].ContainsKey(seed))
                                     {
                                         uint ivHash = list[i][seed];
-                                        frames = generator.Generate(frameCompare, seed, ivHash, i + 21);
+                                        frames = generator.Generate(frameCompare, seed, ivHash, i + 21, 0);
 
                                         progressFound += (uint) frames.Count;
 
@@ -1891,6 +1901,7 @@ namespace RNGReporter
             controlsShowHide();
 
             IVFilters_Changed(sender, e);
+            labelCapMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible = LevelLabel.Visible = numericLevel.Visible = LevelConditions();
         }
 
         private void buttonAnyNature_Click(object sender, EventArgs e)
@@ -2141,7 +2152,7 @@ namespace RNGReporter
                     MaxResults = maxFrame - minFrame + 1,
                     DittoUsed = checkBoxShinyDittoParent.Checked,
                     MaleOnlySpecies = cbNidoBeat.Checked,
-                    ShinyCharm = cbShinyCharm.Visible && cbShinyCharm.Checked
+                    ShinyCharm = cbShinyCharm.Visible && cbShinyCharm.Checked,
                 };
 
 
@@ -2151,6 +2162,7 @@ namespace RNGReporter
                 -1,
                 false,
                 false,
+                0,
                 false,
                 null,
                 new NoGenderFilter());
@@ -2161,6 +2173,7 @@ namespace RNGReporter
                 (int) ((ComboBoxItem) comboBoxShinyAbility.SelectedItem).Reference,
                 checkBoxShinyShinyOnly.Checked,
                 false,
+                0,
                 checkBoxShinyDreamWorld.Checked,
                 null,
                 (GenderFilter) (comboBoxShinyGender.SelectedItem));
@@ -2372,6 +2385,7 @@ namespace RNGReporter
             }
 
             IVFilters_Changed(sender, e);
+            labelCapMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible = LevelLabel.Visible = numericLevel.Visible = LevelConditions();
         }
 
         private void checkBoxShinyOnly_CheckedChanged(object sender, EventArgs e)
@@ -3093,6 +3107,13 @@ namespace RNGReporter
         #region Nested type: UpdateGridDelegate
 
         private delegate void UpdateGridDelegate(BindingSource bindingSource);
+
+        bool cond = false;
+        private bool LevelConditions()
+        {
+            Invoke(new Action(() => { cond = comboBoxMethod.SelectedIndex == 0 && comboBoxEncounterType.SelectedIndex <= 6; }));
+            return cond;
+        }
 
         #endregion
     }

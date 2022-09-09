@@ -925,6 +925,7 @@ namespace RNGReporter
                     (int) ((ComboBoxItem) comboBoxAbility.SelectedItem).Reference,
                     checkBoxShinyOnly.Checked,
                     false,
+                    0,
                     false,
                     null,
                     constructGenderFilter(comboBoxCapGender));
@@ -960,6 +961,7 @@ namespace RNGReporter
                     (int) ((ComboBoxItem) comboBoxAbility.SelectedItem).Reference,
                     checkBoxShinyOnly.Checked,
                     false,
+                    0,
                     false,
                     encounterSlots,
                     constructGenderFilter(comboBoxCapGender));
@@ -993,6 +995,7 @@ namespace RNGReporter
                     -1,
                     false,
                     false,
+                    0,
                     false,
                     null,
                     new NoGenderFilter());

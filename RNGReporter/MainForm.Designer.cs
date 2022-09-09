@@ -291,126 +291,126 @@ namespace RNGReporter
             this.toolStripMenuItem3,
             this.outputResultsToTXTToolStripMenuItem});
             this.contextMenuStripGrid.Name = "contextMenuStripGrid";
-            this.contextMenuStripGrid.Size = new System.Drawing.Size(335, 380);
+            this.contextMenuStripGrid.Size = new System.Drawing.Size(334, 380);
             this.contextMenuStripGrid.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripGrid_Opening);
             // 
             // lockFrameToolStripMenuItem
             // 
             this.lockFrameToolStripMenuItem.Name = "lockFrameToolStripMenuItem";
-            this.lockFrameToolStripMenuItem.Size = new System.Drawing.Size(334, 22);
+            this.lockFrameToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
             this.lockFrameToolStripMenuItem.Text = "Set as Target Frame";
             this.lockFrameToolStripMenuItem.Click += new System.EventHandler(this.lockFrameToolStripMenuItem_Click);
             // 
             // jumpFrameToolStripMenuItem
             // 
             this.jumpFrameToolStripMenuItem.Name = "jumpFrameToolStripMenuItem";
-            this.jumpFrameToolStripMenuItem.Size = new System.Drawing.Size(334, 22);
+            this.jumpFrameToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
             this.jumpFrameToolStripMenuItem.Text = "Jump to Target Frame";
             this.jumpFrameToolStripMenuItem.Click += new System.EventHandler(this.jumpFrameToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(331, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(330, 6);
             // 
             // centerTo1SecondToolStripMenuItem
             // 
             this.centerTo1SecondToolStripMenuItem.Name = "centerTo1SecondToolStripMenuItem";
-            this.centerTo1SecondToolStripMenuItem.Size = new System.Drawing.Size(334, 22);
+            this.centerTo1SecondToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
             this.centerTo1SecondToolStripMenuItem.Text = "Center to +/- 1 Second and Set as Target Frame";
             this.centerTo1SecondToolStripMenuItem.Click += new System.EventHandler(this.centerTo1SecondToolStripMenuItem_Click);
             // 
             // centerTo2SecondsToolStripMenuItem
             // 
             this.centerTo2SecondsToolStripMenuItem.Name = "centerTo2SecondsToolStripMenuItem";
-            this.centerTo2SecondsToolStripMenuItem.Size = new System.Drawing.Size(334, 22);
+            this.centerTo2SecondsToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
             this.centerTo2SecondsToolStripMenuItem.Text = "Center to +/- 2 Seconds and Set as Target Frame";
             this.centerTo2SecondsToolStripMenuItem.Click += new System.EventHandler(this.centerTo2SecondsToolStripMenuItem_Click);
             // 
             // centerTo3SecondsToolStripMenuItem
             // 
             this.centerTo3SecondsToolStripMenuItem.Name = "centerTo3SecondsToolStripMenuItem";
-            this.centerTo3SecondsToolStripMenuItem.Size = new System.Drawing.Size(334, 22);
+            this.centerTo3SecondsToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
             this.centerTo3SecondsToolStripMenuItem.Text = "Center to +/- 3 Seconds and Set as Target Frame";
             this.centerTo3SecondsToolStripMenuItem.Click += new System.EventHandler(this.centerTo3SecondsToolStripMenuItem_Click);
             // 
             // centerTo5SecondsToolStripMenuItem
             // 
             this.centerTo5SecondsToolStripMenuItem.Name = "centerTo5SecondsToolStripMenuItem";
-            this.centerTo5SecondsToolStripMenuItem.Size = new System.Drawing.Size(334, 22);
+            this.centerTo5SecondsToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
             this.centerTo5SecondsToolStripMenuItem.Text = "Center to +/- 5 Seconds and Set as Target Frame";
             this.centerTo5SecondsToolStripMenuItem.Click += new System.EventHandler(this.centerTo5SecondsToolStripMenuItem_Click);
             // 
             // centerTo10SecondsToolStripMenuItem
             // 
             this.centerTo10SecondsToolStripMenuItem.Name = "centerTo10SecondsToolStripMenuItem";
-            this.centerTo10SecondsToolStripMenuItem.Size = new System.Drawing.Size(334, 22);
+            this.centerTo10SecondsToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
             this.centerTo10SecondsToolStripMenuItem.Text = "Center to +/- 10 Seconds and Set as Target Frame";
             this.centerTo10SecondsToolStripMenuItem.Click += new System.EventHandler(this.centerTo10SecondsToolStripMenuItem_Click);
             // 
             // centerTp1MinuteToolStripMenuItem
             // 
             this.centerTp1MinuteToolStripMenuItem.Name = "centerTp1MinuteToolStripMenuItem";
-            this.centerTp1MinuteToolStripMenuItem.Size = new System.Drawing.Size(334, 22);
+            this.centerTp1MinuteToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
             this.centerTp1MinuteToolStripMenuItem.Text = "Center to +/- 1 Minute and Set as Target Frame";
             this.centerTp1MinuteToolStripMenuItem.Click += new System.EventHandler(this.centerTp1MinuteToolStripMenuItem_Click);
             // 
             // removeCenteringToolStripMenuItem
             // 
             this.removeCenteringToolStripMenuItem.Name = "removeCenteringToolStripMenuItem";
-            this.removeCenteringToolStripMenuItem.Size = new System.Drawing.Size(334, 22);
+            this.removeCenteringToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
             this.removeCenteringToolStripMenuItem.Text = "Remove Centering";
             this.removeCenteringToolStripMenuItem.Click += new System.EventHandler(this.removeCenteringToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(331, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(330, 6);
             // 
             // calculatePoketechTapsToolStripMenuItem
             // 
             this.calculatePoketechTapsToolStripMenuItem.Name = "calculatePoketechTapsToolStripMenuItem";
-            this.calculatePoketechTapsToolStripMenuItem.Size = new System.Drawing.Size(334, 22);
+            this.calculatePoketechTapsToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
             this.calculatePoketechTapsToolStripMenuItem.Text = "Calculate Poketech Taps ...";
             this.calculatePoketechTapsToolStripMenuItem.Click += new System.EventHandler(this.calculatePoketechTapsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(331, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(330, 6);
             // 
             // searchCoinFlipsToolStripMenuItem
             // 
             this.searchCoinFlipsToolStripMenuItem.Name = "searchCoinFlipsToolStripMenuItem";
-            this.searchCoinFlipsToolStripMenuItem.Size = new System.Drawing.Size(334, 22);
+            this.searchCoinFlipsToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
             this.searchCoinFlipsToolStripMenuItem.Text = "Search Coin Flips ...";
             this.searchCoinFlipsToolStripMenuItem.Click += new System.EventHandler(this.searchCoinFlipsToolStripMenuItem_Click);
             // 
             // searchNaturesToolStripMenuItem
             // 
             this.searchNaturesToolStripMenuItem.Name = "searchNaturesToolStripMenuItem";
-            this.searchNaturesToolStripMenuItem.Size = new System.Drawing.Size(334, 22);
+            this.searchNaturesToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
             this.searchNaturesToolStripMenuItem.Text = "Search Natures ...";
             this.searchNaturesToolStripMenuItem.Click += new System.EventHandler(this.searchNaturesToolStripMenuItem_Click);
             // 
             // searchElmToolStripMenuItem
             // 
             this.searchElmToolStripMenuItem.Name = "searchElmToolStripMenuItem";
-            this.searchElmToolStripMenuItem.Size = new System.Drawing.Size(334, 22);
+            this.searchElmToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
             this.searchElmToolStripMenuItem.Text = "Search Elm Responses ...";
             this.searchElmToolStripMenuItem.Click += new System.EventHandler(this.searchElmToolStripMenuItem_Click);
             // 
             // displayParentsInSearchToolStripMenuItem
             // 
             this.displayParentsInSearchToolStripMenuItem.Name = "displayParentsInSearchToolStripMenuItem";
-            this.displayParentsInSearchToolStripMenuItem.Size = new System.Drawing.Size(334, 22);
+            this.displayParentsInSearchToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
             this.displayParentsInSearchToolStripMenuItem.Text = "Display Parents in Search...";
             this.displayParentsInSearchToolStripMenuItem.Click += new System.EventHandler(this.displayParentsInSearchToolStripMenuItem_Click);
             // 
             // resetParentsToolStripMenuItem
             // 
             this.resetParentsToolStripMenuItem.Name = "resetParentsToolStripMenuItem";
-            this.resetParentsToolStripMenuItem.Size = new System.Drawing.Size(334, 22);
+            this.resetParentsToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
             this.resetParentsToolStripMenuItem.Text = "Reset Parents";
             this.resetParentsToolStripMenuItem.Visible = false;
             this.resetParentsToolStripMenuItem.Click += new System.EventHandler(this.resetParentsToolStripMenuItem_Click);
@@ -418,12 +418,12 @@ namespace RNGReporter
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(331, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(330, 6);
             // 
             // outputResultsToTXTToolStripMenuItem
             // 
             this.outputResultsToTXTToolStripMenuItem.Name = "outputResultsToTXTToolStripMenuItem";
-            this.outputResultsToTXTToolStripMenuItem.Size = new System.Drawing.Size(334, 22);
+            this.outputResultsToTXTToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
             this.outputResultsToTXTToolStripMenuItem.Text = "Output Results to TXT ...";
             this.outputResultsToTXTToolStripMenuItem.Click += new System.EventHandler(this.outputResultsToTXTToolStripMenuItem_Click);
             // 
@@ -651,7 +651,7 @@ namespace RNGReporter
             // pokedexIVCheckerToolStripMenuItem
             // 
             this.pokedexIVCheckerToolStripMenuItem.Name = "pokedexIVCheckerToolStripMenuItem";
-            this.pokedexIVCheckerToolStripMenuItem.Size = new System.Drawing.Size(124, 25);
+            this.pokedexIVCheckerToolStripMenuItem.Size = new System.Drawing.Size(125, 25);
             this.pokedexIVCheckerToolStripMenuItem.Text = "Pokédex-IV Checker";
             this.pokedexIVCheckerToolStripMenuItem.Click += new System.EventHandler(this.pokedexIVCheckerToolStripMenuItem_Click);
             // 
@@ -672,7 +672,7 @@ namespace RNGReporter
             this.fireRedEncounterTableToolStripMenuItem,
             this.leafGreenEncounterTableToolStripMenuItem});
             this.rdGenToolsToolStripMenuItem.Name = "rdGenToolsToolStripMenuItem";
-            this.rdGenToolsToolStripMenuItem.Size = new System.Drawing.Size(91, 25);
+            this.rdGenToolsToolStripMenuItem.Size = new System.Drawing.Size(90, 25);
             this.rdGenToolsToolStripMenuItem.Text = "3rd Gen Tools";
             // 
             // tIDSIDManipulationPandorasBoxToolStripMenuItem2
@@ -783,7 +783,7 @@ namespace RNGReporter
             this.heartGoldEncounterTableToolStripMenuItem,
             this.soulSilverEncounterTableToolStripMenuItem});
             this.thGenToolsToolStripMenuItem.Name = "thGenToolsToolStripMenuItem";
-            this.thGenToolsToolStripMenuItem.Size = new System.Drawing.Size(91, 25);
+            this.thGenToolsToolStripMenuItem.Size = new System.Drawing.Size(90, 25);
             this.thGenToolsToolStripMenuItem.Text = "4th Gen Tools";
             // 
             // iVsToPIDToolStripMenuItem
@@ -904,7 +904,7 @@ namespace RNGReporter
             this.white2EncounterTableToolStripMenuItem,
             this.hiddenGrottoEncounterTablesToolStripMenuItem});
             this.thGenToolsToolStripMenuItem1.Name = "thGenToolsToolStripMenuItem1";
-            this.thGenToolsToolStripMenuItem1.Size = new System.Drawing.Size(91, 25);
+            this.thGenToolsToolStripMenuItem1.Size = new System.Drawing.Size(90, 25);
             this.thGenToolsToolStripMenuItem1.Text = "5th Gen Tools";
             // 
             // findDSParametersToolStripMenuItem
@@ -1253,33 +1253,33 @@ namespace RNGReporter
             this.ThirdGenerationTimeFinderToolStripMenuItem,
             this.GameCubeTimeFinderToolStripMenuItem});
             this.contextMenuStripTimeFinder.Name = "contextMenuStripTimeFinder";
-            this.contextMenuStripTimeFinder.Size = new System.Drawing.Size(219, 92);
+            this.contextMenuStripTimeFinder.Size = new System.Drawing.Size(218, 92);
             // 
             // FifthGenerationTimeFinderToolStripMenuItem
             // 
             this.FifthGenerationTimeFinderToolStripMenuItem.Name = "FifthGenerationTimeFinderToolStripMenuItem";
-            this.FifthGenerationTimeFinderToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.FifthGenerationTimeFinderToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.FifthGenerationTimeFinderToolStripMenuItem.Text = "5th Generation Time Finder";
             this.FifthGenerationTimeFinderToolStripMenuItem.Click += new System.EventHandler(this.buttonFindTime5thGen_Click);
             // 
             // FourthGenerationTimeFinderToolStripMenuItem
             // 
             this.FourthGenerationTimeFinderToolStripMenuItem.Name = "FourthGenerationTimeFinderToolStripMenuItem";
-            this.FourthGenerationTimeFinderToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.FourthGenerationTimeFinderToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.FourthGenerationTimeFinderToolStripMenuItem.Text = "4th Generation Time Finder";
             this.FourthGenerationTimeFinderToolStripMenuItem.Click += new System.EventHandler(this.buttonFindTime4thGen_Click);
             // 
             // ThirdGenerationTimeFinderToolStripMenuItem
             // 
             this.ThirdGenerationTimeFinderToolStripMenuItem.Name = "ThirdGenerationTimeFinderToolStripMenuItem";
-            this.ThirdGenerationTimeFinderToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.ThirdGenerationTimeFinderToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.ThirdGenerationTimeFinderToolStripMenuItem.Text = "3rd Generation Time Finder";
             this.ThirdGenerationTimeFinderToolStripMenuItem.Click += new System.EventHandler(this.buttonFindTime3rdGen_Click);
             // 
             // GameCubeTimeFinderToolStripMenuItem
             // 
             this.GameCubeTimeFinderToolStripMenuItem.Name = "GameCubeTimeFinderToolStripMenuItem";
-            this.GameCubeTimeFinderToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.GameCubeTimeFinderToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.GameCubeTimeFinderToolStripMenuItem.Text = "GameCube Time Finder";
             this.GameCubeTimeFinderToolStripMenuItem.Click += new System.EventHandler(this.buttonFindTimeGameCube_Click);
             // 
