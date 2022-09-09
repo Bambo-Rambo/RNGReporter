@@ -1,0 +1,10 @@
+version: 10.3.4.{build}
+image: Visual Studio 2022
+configuration: Release
+build:
+  verbosity: minimal
+after_build:
+- cmd: 7z a RNGReporter.zip .\RNGReporter\bin\Release\RNGReporter.exe
+artifacts:
+- path: RNGReporter.zip
+  name: RNGReporter
