@@ -197,22 +197,23 @@ namespace RNGReporter.Objects
             uint percent = isBW2 ? (uint) (((ulong) result*100) >> 32) : (result >> 16)/656;
             switch (encounterType)
             {
+                //60%       30%         5%          4%          1%
                 case EncounterType.WildSurfing:
+                case EncounterType.WildWaterSpot:
                     {
                         Range[] ranges =
                             {
-                                new Range(0, 59), new Range(60, 89), new Range(90, 94), new Range(95, 98),
-                                new Range(99, 99)
+                                new Range(0, 59), new Range(60, 89), new Range(90, 94), new Range(95, 98), new Range(99, 99)
                             };
                         return CalcSlot(percent, ranges);
                     }
-                case EncounterType.WildWaterSpot:
+                //40%       40%         15%         4%          1%
                 case EncounterType.WildSuperRod:
+                case EncounterType.WildFishingSpot:
                     {
                         Range[] ranges =
                             {
-                                new Range(0, 39), new Range(40, 79), new Range(80, 94), new Range(95, 98),
-                                new Range(99, 99)
+                                new Range(0, 39), new Range(40, 79), new Range(80, 94), new Range(95, 98), new Range(99, 99)
                             };
                         return CalcSlot(percent, ranges);
                     }

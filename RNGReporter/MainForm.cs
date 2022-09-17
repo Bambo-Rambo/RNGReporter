@@ -35,6 +35,7 @@ using RNGReporter.Objects;
 using RNGReporter.Properties;
 using Version = RNGReporter.Objects.Version;
 using System.Threading;
+using System.Security.Cryptography;
 
 namespace RNGReporter
 {
@@ -104,6 +105,8 @@ namespace RNGReporter
                     new ComboBoxItem("Colosseum\\XD", FrameType.ColoXD),
                     new ComboBoxItem("Channel", FrameType.Channel)
                 });
+
+            
 
             cuteCharm = new[]
                 {
@@ -242,6 +245,8 @@ namespace RNGReporter
                 Settings.Default.LastVersion = VersionNumber;
             }
 
+            comboBoxMethod.SelectedIndex = 11;
+
             if (File.Exists(Settings.Default.ProfileLocation))
                 Profiles.LoadProfiles(Settings.Default.ProfileLocation);
 // used for update checks, only do it once a day
@@ -339,6 +344,32 @@ namespace RNGReporter
 
         private void dataGridViewValues_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            if (Convert.ToString(dataGridViewValues.Rows[e.RowIndex].Cells["Shiny"].Value).Equals("!!!"))
+            {
+                uint tid = (Convert.ToUInt32(maskedTextBoxID.Text) & 0xffff) | ((Convert.ToUInt32(maskedTextBoxSID.Text) & 0xffff) << 16);
+                uint a = Convert.ToUInt32(dataGridViewValues.Rows[e.RowIndex].Cells["PID"].Value) ^ tid;
+                uint b = a & 0xffff;
+                uint c = (a >> 16);
+                uint d = b ^ c;
+                if (d == 0)
+                    dataGridViewValues.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Aqua;
+                else
+                    dataGridViewValues.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightCyan;
+            }
+                
+
+            if (Ratio.Visible)
+            {
+                int RatioValue = Convert.ToInt32(dataGridViewValues.Rows[e.RowIndex].Cells["Ratio"].Value);
+                if (dataGridViewValues.Columns[e.ColumnIndex].Name == "Ratio")
+                {
+                    if ((RatioValue < 13 && comboBoxEncounterType.SelectedIndex < 2) || (RatioValue < 6 && comboBoxEncounterType.SelectedIndex == 2))
+                    {
+                        e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+                    }
+                }
+            }
+
             //  Make all of the junk natures show up in a lighter color
             if (dataGridViewValues.Columns[e.ColumnIndex].Name == "Nature")
             {
@@ -390,6 +421,7 @@ namespace RNGReporter
         {
             Generate();
             dataGridViewValues.Focus();
+            dataGridViewValues.CurrentCell = null;
         }
 
         private void Generate()
@@ -401,6 +433,9 @@ namespace RNGReporter
                 frames.Clear();
                 frames = null;
             }
+
+            Ratio.Visible = checkBoxTrigger.Checked && checkBoxTrigger.Visible;
+            Level.Visible = labelMinMaxLevel.Visible;
 
             //  Nuke the target frame when we generate a new list.  This may
             //  end up being controversial need to be revisted, but we can
@@ -433,6 +468,9 @@ namespace RNGReporter
             generator.DittoUsed = checkBoxDittoParent.Checked;
             generator.MaleOnlySpecies = cbNidoBeat.Checked;
             generator.ShinyCharm = cbShinyCharm.Checked;
+            generator.MinLevel = (int)numericLevelMin.Value;
+            generator.MaxLevel = (int)numericLevelMax.Value;
+            generator.SearchForTrigger = checkBoxTrigger.Checked && checkBoxTrigger.Visible;
 
             // this is for PIDRNG encounter slots
             generator.isBW2 = checkBoxBW2.Visible && checkBoxBW2.Checked;
@@ -755,7 +793,6 @@ namespace RNGReporter
             SpD.DataPropertyName = "DisplaySpd";
             Spe.DataPropertyName = "DisplaySpe";
             Characteristic.Visible = false;
-            PossibleShakingSpot.Visible = false;
 
             if (parentA != null && parentB != null && rngIVs != null)
             {
@@ -917,7 +954,6 @@ namespace RNGReporter
                 f25.Visible = false;
                 f75.Visible = false;
 
-                PossibleShakingSpot.Visible = false;
                 MaleOnlySpecies.Visible = false;
             }
 
@@ -954,7 +990,6 @@ namespace RNGReporter
                 f25.Visible = true;
                 f75.Visible = true;
 
-                PossibleShakingSpot.Visible = false;
                 MaleOnlySpecies.Visible = false;
             }
 
@@ -994,7 +1029,6 @@ namespace RNGReporter
                 f25.Visible = false;
                 f75.Visible = false;
 
-                PossibleShakingSpot.Visible = false;
                 MaleOnlySpecies.Visible = false;
             }
 
@@ -1032,7 +1066,6 @@ namespace RNGReporter
                 f25.Visible = false;
                 f75.Visible = false;
 
-                PossibleShakingSpot.Visible = false;
                 MaleOnlySpecies.Visible = false;
             }
             else if (generator.FrameType == FrameType.DPPtBred)
@@ -1067,7 +1100,6 @@ namespace RNGReporter
                 f25.Visible = false;
                 f75.Visible = false;
 
-                PossibleShakingSpot.Visible = false;
                 MaleOnlySpecies.Visible = false;
             }
 
@@ -1086,6 +1118,10 @@ namespace RNGReporter
                 else
                     EncounterSlot.Visible = false;
 
+                //Trigger.Visible = true;
+                    //generator.EncounterType == EncounterType.Wild ||
+                    //generator.EncounterType == EncounterType.WildSwarm ||
+                    //generator.EncounterType == EncounterType.WildSurfing;
 
                 ItemCalc.Visible = false;
                 PID.Visible = true;
@@ -1112,6 +1148,7 @@ namespace RNGReporter
 
                 if (generator.EncounterType == EncounterType.WildCaveSpot ||
                     generator.EncounterType == EncounterType.WildWaterSpot ||
+                    generator.EncounterType == EncounterType.WildFishingSpot ||
                     generator.EncounterType == EncounterType.WildShakerGrass)
                 {
                     CaveSpot.Visible = true;
@@ -1119,6 +1156,8 @@ namespace RNGReporter
                         CaveSpot.HeaderText = "Cave Spot";
                     else if (generator.EncounterType == EncounterType.WildWaterSpot)
                         CaveSpot.HeaderText = "Bubble Spot";
+                    else if (generator.EncounterType == EncounterType.WildFishingSpot)
+                        CaveSpot.HeaderText = "Fishing Spot";
                     else
                         CaveSpot.HeaderText = "Shaking Grass";
                 }
@@ -1141,7 +1180,6 @@ namespace RNGReporter
                 f25.Visible = true;
                 f75.Visible = true;
 
-                PossibleShakingSpot.Visible = false;
                 MaleOnlySpecies.Visible = false;
             }
 
@@ -1178,7 +1216,6 @@ namespace RNGReporter
                 f25.Visible = false;
                 f75.Visible = false;
 
-                PossibleShakingSpot.Visible = false;
                 MaleOnlySpecies.Visible = false;
             }
 
@@ -1225,7 +1262,6 @@ namespace RNGReporter
                 f25.Visible = false;
                 f75.Visible = false;
 
-                PossibleShakingSpot.Visible = false;
                 MaleOnlySpecies.Visible = false;
             }
 
@@ -1262,7 +1298,6 @@ namespace RNGReporter
                 f25.Visible = true;
                 f75.Visible = true;
 
-                PossibleShakingSpot.Visible = false;
                 MaleOnlySpecies.Visible = false;
             }
 
@@ -1300,7 +1335,6 @@ namespace RNGReporter
                 f25.Visible = true;
                 f75.Visible = true;
 
-                PossibleShakingSpot.Visible = false;
                 MaleOnlySpecies.Visible = false;
             }
 
@@ -1351,7 +1385,6 @@ namespace RNGReporter
                 f25.Visible = true;
                 f75.Visible = true;
 
-                PossibleShakingSpot.Visible = false;
                 MaleOnlySpecies.Visible = false;
             }
 
@@ -1392,7 +1425,6 @@ namespace RNGReporter
                 f25.Visible = true;
                 f75.Visible = true;
 
-                PossibleShakingSpot.Visible = false;
                 MaleOnlySpecies.Visible = false;
 
                 if (generator.FrameType == FrameType.ChainedShiny)
@@ -1436,7 +1468,6 @@ namespace RNGReporter
                 f25.Visible = true;
                 f75.Visible = true;
 
-                PossibleShakingSpot.Visible = false;
                 MaleOnlySpecies.Visible = false;
             }
 
@@ -1475,7 +1506,6 @@ namespace RNGReporter
                 f25.Visible = true;
                 f75.Visible = true;
 
-                PossibleShakingSpot.Visible = false;
                 MaleOnlySpecies.Visible = false;
             }
 
@@ -1512,7 +1542,6 @@ namespace RNGReporter
                 f25.Visible = true;
                 f75.Visible = true;
 
-                PossibleShakingSpot.Visible = false;
                 MaleOnlySpecies.Visible = false;
             }
 
@@ -1552,7 +1581,6 @@ namespace RNGReporter
                 f25.Visible = true;
                 f75.Visible = true;
 
-                PossibleShakingSpot.Visible = false;
                 MaleOnlySpecies.Visible = true;
             }
 
@@ -2134,6 +2162,7 @@ namespace RNGReporter
                         "Wild Pokémon (Fishing)",
                         "Wild Pokémon (Shaking Grass)",
                         "Wild Pokémon (Bubble Spot)",
+                        "Wild Pokémon (Fishing Spot)",
                         "Wild Pokémon (Cave Spot)",
                         "Stationary Pokémon",
                         "Roaming Pokémon",
@@ -2217,13 +2246,14 @@ namespace RNGReporter
                 checkBoxDreamWorld.Enabled = false;
                 checkBoxDittoParent.Enabled = false;
                 cbNidoBeat.Enabled = false;
-                cbShinyCharm.Enabled = false;
                 checkBoxDreamWorld.Checked = false;
                 checkBoxDittoParent.Checked = false;
                 cbNidoBeat.Checked = false;
-                cbShinyCharm.Checked = false;
                 comboBoxSynchNatures.Enabled = true;
                 buttonLead.Enabled = true;
+
+                cbShinyCharm.Checked = false;
+                cbShinyCharm.Enabled = ((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Natures);
             }
             else
             {
@@ -2303,6 +2333,24 @@ namespace RNGReporter
             {
                 comboBoxEncounterType.Enabled = false;
             }
+
+            CheckTriggerBox();
+            int method = comboBoxMethod.SelectedIndex;
+            Gen5GroupBox.Visible = (method >= 9 && method <= 11) || (method >= 21 && method <= 25 && method != 23);
+            labelMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible =
+                comboBoxMethod.SelectedIndex == 11 && comboBoxEncounterType.SelectedIndex <= 7;
+        }
+
+        private void comboBoxEncounterType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CheckTriggerBox();
+            labelMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible = 
+                comboBoxMethod.SelectedIndex == 11 && comboBoxEncounterType.SelectedIndex <= 6 && comboBoxEncounterType.SelectedIndex != 4;
+        }
+
+        private void CheckTriggerBox()
+        {
+            checkBoxTrigger.Visible = comboBoxMethod.SelectedItem.ToString().Equals("Gen 5 PIDRNG") && comboBoxEncounterType.SelectedIndex <= 2;
         }
 
         private void buttonRoamerMap_Click(object sender, EventArgs e)
@@ -3160,5 +3208,6 @@ namespace RNGReporter
             var ivsToFrame = new IVstoFrame();
             ivsToFrame.Show();
         }
+        
     }
 }

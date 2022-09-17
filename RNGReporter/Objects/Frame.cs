@@ -48,6 +48,8 @@ namespace RNGReporter.Objects
         private uint seed;
         private uint sid;
         private bool synchable;
+        private ulong ratio;
+        private byte level;
 
         public Frame()
         {
@@ -75,8 +77,9 @@ namespace RNGReporter.Objects
 
         public string CaveSpotting
         {
-            get { return RngResult >> 31 == 1 ? "Possible" : ""; }
+            get { return RngResult >> 28 == 0 ? "Trigger at 20th step" : ""; }
         }
+
 
         // Chatot response for 4th Gen Games
         public string Chatot
@@ -164,6 +167,18 @@ namespace RNGReporter.Objects
             set { synchable = value; }
         }
 
+        public ulong Ratio
+        {
+            get { return ratio; }
+            set { ratio = value; }
+        }
+
+        public byte Level
+        {
+            get { return level; }
+            set { level = value; }
+        }
+
         public FrameType FrameType { get; set; }
 
         public EncounterType EncounterType { get; set; }
@@ -183,11 +198,6 @@ namespace RNGReporter.Objects
         public string ShinyDisplay
         {
             get { return Shiny ? "!!!" : ""; }
-        }
-
-        public byte Level
-        {
-            get; set;
         }
 
         //  The following are cacluated differently based
@@ -520,11 +530,6 @@ namespace RNGReporter.Objects
         public string EncounterString
         {
             get { return Functions.encounterItems(EncounterSlot); }
-        }
-
-        public bool ShakingSpotPossible
-        {
-            get { return (RngResult >> 28) == 0; }
         }
 
         public string Characteristic
@@ -1085,8 +1090,9 @@ namespace RNGReporter.Objects
             uint natureValue,
             bool synch,
             int encounterSlot,
-            byte level,
-            uint itemCalc)
+            byte CurrentLevel,
+            uint itemCalc,
+            ulong CurrentRatio)
         {
             var frame = new Frame(frameType)
                 {
@@ -1099,10 +1105,11 @@ namespace RNGReporter.Objects
                     ability = (pid >> 16) & 1,
                     EncounterType = encounterType,
                     EncounterSlot = encounterSlot,
-                    Level = level,
+                    level = CurrentLevel,
                     ItemCalc = itemCalc,
-                    synchable = synch
-                };
+                    synchable = synch,
+                    ratio = CurrentRatio,
+            };
 
 
             //  Set up the ID and SID before we calculate 
@@ -1144,8 +1151,8 @@ namespace RNGReporter.Objects
                     Def = rngIVs[2],
                     Spa = rngIVs[3],
                     Spd = rngIVs[4],
-                    Spe = rngIVs[5]
-                };
+                    Spe = rngIVs[5],
+            };
 
 
             //  Set up the ID and SID before we calculate 
@@ -1193,8 +1200,8 @@ namespace RNGReporter.Objects
                     inh3 = inh3,
                     par1 = par1,
                     par2 = par2,
-                    par3 = par3
-                };
+                    par3 = par3,
+            };
 
 
             return frame;
@@ -1247,8 +1254,8 @@ namespace RNGReporter.Objects
                     Def = rngIVs[2],
                     Spa = rngIVs[3],
                     Spd = rngIVs[4],
-                    Spe = rngIVs[5]
-                };
+                    Spe = rngIVs[5],
+            };
 
 
             var rngArray = new uint[6];
@@ -1315,8 +1322,8 @@ namespace RNGReporter.Objects
                     Def = def,
                     Spa = spa,
                     Spd = spd,
-                    Spe = spe
-                };
+                    Spe = spe,
+            };
 
 
             return frame;

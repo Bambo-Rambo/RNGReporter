@@ -46,6 +46,7 @@ namespace RNGReporter
         private int CapSpeedIndex;
         private int cpus;
         private List<ulong> eggSeeds;
+        //private MainForm mainForm = new MainForm();
         private FrameCompare frameCompare;
         private FrameGenerator generator;
         private FrameGenerator[] generators;
@@ -88,6 +89,8 @@ namespace RNGReporter
 
         private void PlatinumTime_Load(object sender, EventArgs e)
         {
+            //cbCapShinyCharm.Checked = mainForm.cbShinyCharm.Checked;
+
             // Add smart comboBox items
             // Would be nice if we left these in the Designer file
             // But Visual Studio seems to like deleting them without warning
@@ -112,26 +115,19 @@ namespace RNGReporter
             comboBoxEncounterType.Items.AddRange(new object[]
                 {
                     new ComboBoxItem("Wild Pokémon", EncounterType.Wild),
-                    new ComboBoxItem("Swarm",
-                                     EncounterType.WildSwarm),
-                    new ComboBoxItem("Surfing",
-                                     EncounterType.WildSurfing),
-                    new ComboBoxItem("Fishing",
-                                     EncounterType.WildSuperRod),
-                    new ComboBoxItem("Shaking Grass",
-                                     EncounterType.WildShakerGrass),
-                    new ComboBoxItem("Bubble Spot",
-                                     EncounterType.WildWaterSpot),
-                    new ComboBoxItem("Cave Spot",
-                                     EncounterType.WildCaveSpot),
-                    new ComboBoxItem("Stationary", EncounterType.Stationary)
-                    ,
+                    new ComboBoxItem("Swarm", EncounterType.WildSwarm),
+                    new ComboBoxItem("Surfing", EncounterType.WildSurfing),
+                    new ComboBoxItem("Fishing", EncounterType.WildSuperRod),
+                    new ComboBoxItem("Shaking Grass", EncounterType.WildShakerGrass),
+                    new ComboBoxItem("Bubble Spot", EncounterType.WildWaterSpot),
+                    new ComboBoxItem("Fishing Spot", EncounterType.WildFishingSpot),
+                    new ComboBoxItem("Cave Spot", EncounterType.WildCaveSpot),
+                    new ComboBoxItem("Stationary", EncounterType.Stationary),
                     new ComboBoxItem("Roamer", EncounterType.Roamer),
                     new ComboBoxItem("Gift Pokémon", EncounterType.Gift),
                     new ComboBoxItem("Larvesta Egg", EncounterType.LarvestaEgg),
                     new ComboBoxItem("Hidden Grotto", EncounterType.HiddenGrotto),
-                    new ComboBoxItem("All Encounters Shiny",
-                                     EncounterType.AllEncounterShiny)
+                    new ComboBoxItem("All Encounters Shiny", EncounterType.AllEncounterShiny)
                 });
 
             var shinyNatureList = new BindingSource {DataSource = Objects.Nature.NatureDropDownCollection()};
@@ -493,6 +489,7 @@ namespace RNGReporter
             list = new Dictionary<uint, uint>[6];
 
             bool fastSearch = FastCapFilters() && FastCapFrames();
+            bool ConsiderTrigger = checkBoxTriggerBattle.Checked && checkBoxTriggerBattle.Visible;
 
             //  Build up a FrameComparer
 
@@ -519,7 +516,9 @@ namespace RNGReporter
             if (checkBoxShinyOnly.Checked)
                 uint.TryParse(maskedTextBoxMaxShiny.Text, out shinyOffset);
 
-            Lvl.Visible = false; //LevelConditions();
+            Lvl.Visible = LevelConditions();
+            EncounterRatio.Visible = ConsiderTrigger && checkBoxShinyOnly.Checked;
+
             if (generator.FrameType == FrameType.Method5CGear || generator.FrameType == FrameType.Method5Standard)
             {
                 EncounterSlot.Visible = false;
@@ -563,7 +562,8 @@ namespace RNGReporter
                                 MaxResults = shinyOffset,
                                 MinLevel = (int)numericLevelMin.Value,
                                 MaxLevel = (int)numericLevelMax.Value,
-                                //ShinyCharm = cbCapShinyCharm.Checked,
+                                SearchForTrigger = ConsiderTrigger,
+                                ShinyCharm = cbCapShinyCharm.Checked,
                             };
 
                         subFrameCompare = new FrameCompare(
@@ -699,7 +699,7 @@ namespace RNGReporter
                 CapKeypress.Visible = true;
                 CapTimer0.Visible = true;
 
-                //generator.ShinyCharm = cbCapShinyCharm.Checked;
+                generator.ShinyCharm = cbCapShinyCharm.Checked;
 
                 frameCompare = new FrameCompare(
                     ivFiltersCapture.IVFilter,
@@ -1085,6 +1085,8 @@ namespace RNGReporter
         public void GenerateJob(uint year, List<int> months, int hourMin, int hourMax,
                                 Profile profile, uint shinyOffset, bool fastSearch, int listIndex)
         {
+            bool ConsiderTrigger = checkBoxTriggerBattle.Checked && checkBoxTriggerBattle.Visible;
+
             uint minAdvances;
             if (generators[listIndex].FrameType == FrameType.Method5Standard && shinyOffset > 0)
                 minAdvances = shinygenerators[listIndex].InitialFrame;
@@ -1253,6 +1255,8 @@ namespace RNGReporter
                                                         Functions.initialPIDRNG(seed, profile) + minAdvances;
                                                     shinygenerators[listIndex].MinLevel = (int)numericLevelMin.Value;
                                                     shinygenerators[listIndex].MaxLevel = (int)numericLevelMax.Value;
+                                                    shinygenerators[listIndex].SearchForTrigger = ConsiderTrigger;
+                                                    shinygenerators[listIndex].ShinyCharm = cbCapShinyCharm.Checked;
 
                                                     List<Frame> shinyFrames =
                                                         shinygenerators[listIndex].Generate(subFrameCompare,
@@ -1274,6 +1278,8 @@ namespace RNGReporter
                                                             testFrame.EncounterSlot = shinyFrame.EncounterSlot;
                                                             testFrame.EncounterMod = shinyFrame.EncounterMod;
                                                             testFrame.Synchable = shinyFrame.Synchable;
+                                                            testFrame.Ratio = shinyFrame.Ratio;
+                                                            testFrame.Level = shinyFrame.Level;
 
                                                             iframe.Offset = testFrame.Number - start;
                                                             iframe.Seed = seed;
@@ -1803,7 +1809,7 @@ namespace RNGReporter
 
                 labelWCShiny.Visible = false;
                 comboBoxShiny.Visible = false;
-                //cbCapShinyCharm.Visible = true;
+                cbCapShinyCharm.Visible = true;
 
                 if (((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Standard))
                 {
@@ -1840,7 +1846,7 @@ namespace RNGReporter
                 comboBoxEncounterType.Enabled = true;
                 comboBoxEncounterSlot.Enabled = false;
                 comboBoxCapGenderRatio.Enabled = false;
-                //cbCapShinyCharm.Visible = false;
+                cbCapShinyCharm.Visible = false;
 
                 comboBoxCapMonth.Visible = false;
                 labelCapMonthDelay.Text = "Min \\ Max Delay";
@@ -1872,7 +1878,7 @@ namespace RNGReporter
                 comboBoxEncounterType.Enabled = false;
                 comboBoxEncounterSlot.Enabled = false;
                 comboBoxCapGenderRatio.Enabled = ((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Wondercard5thGenFixed);
-                //cbCapShinyCharm.Visible = false;
+                cbCapShinyCharm.Visible = false;
 
                 comboBoxCapMonth.Visible = true;
                 labelCapMonthDelay.Text = "Month";
@@ -1902,6 +1908,8 @@ namespace RNGReporter
 
             IVFilters_Changed(sender, e);
             labelCapMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible = LevelLabel.Visible = numericLevel.Visible = LevelConditions();
+            
+            checkBoxTriggerBattle.Visible = RatioConditions();
         }
 
         private void buttonAnyNature_Click(object sender, EventArgs e)
@@ -1911,6 +1919,18 @@ namespace RNGReporter
 
         private void dataGridViewCapValues_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            if (EncounterRatio.Visible)
+            {
+                int RatioValue = Convert.ToInt32(dataGridViewCapValues.Rows[e.RowIndex].Cells["EncounterRatio"].Value);
+                if (dataGridViewCapValues.Columns[e.ColumnIndex].Name == "EncounterRatio")
+                {
+                    if ((RatioValue < 13 && comboBoxEncounterType.SelectedIndex < 2) || (RatioValue < 6 && comboBoxEncounterType.SelectedIndex == 2))
+                    {
+                        e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+                    }
+                }
+            }
+
             //  Make all of the junk natures show up in a lighter color
             if (e.ColumnIndex == CapNatureIndex)
             {
@@ -2385,7 +2405,13 @@ namespace RNGReporter
             }
 
             IVFilters_Changed(sender, e);
+
+            label54.Visible = comboBoxEncounterSlot.Visible = buttonAnySlot.Visible = 
+                comboBoxEncounterType.SelectedIndex < 8 || comboBoxEncounterType.SelectedIndex > 11;
+
             labelCapMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible = LevelLabel.Visible = numericLevel.Visible = LevelConditions();
+            
+            checkBoxTriggerBattle.Visible = RatioConditions();
         }
 
         private void checkBoxShinyOnly_CheckedChanged(object sender, EventArgs e)
@@ -3111,10 +3137,17 @@ namespace RNGReporter
         bool cond = false;
         private bool LevelConditions()
         {
-            Invoke(new Action(() => { cond = comboBoxMethod.SelectedIndex == 0 && comboBoxEncounterType.SelectedIndex <= 6; }));
+            Invoke(new Action(() => { cond = comboBoxMethod.SelectedIndex == 0 && comboBoxEncounterType.SelectedIndex <= 7; }));
+            return cond;
+        }
+
+        private bool RatioConditions()
+        {
+            Invoke(new Action(() => { cond = comboBoxMethod.SelectedIndex == 0 && comboBoxEncounterType.SelectedIndex <= 2; }));
             return cond;
         }
 
         #endregion
+
     }
 }

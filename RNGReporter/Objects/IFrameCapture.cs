@@ -142,6 +142,10 @@ namespace RNGReporter.Objects
         {
             get { return Frame.ShinyDisplay; }
         }
+        public ulong Ratio
+        {
+            get { return Frame.Ratio; }
+        }
 
         public byte Level 
         {
@@ -312,6 +316,10 @@ namespace RNGReporter.Objects
                     }
 
                     return result;
+                case "Ratio":
+                    return direction * x.Ratio.CompareTo(y.Ratio);
+                case "Level":
+                    return direction * x.Level.CompareTo(y.Level);
                 case "EncounterSlot":
                     return direction*x.Frame.EncounterSlot.CompareTo(y.Frame.EncounterSlot);
                 case "Hp":

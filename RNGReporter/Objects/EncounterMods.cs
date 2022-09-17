@@ -30,6 +30,7 @@ namespace RNGReporter.Objects
         WildGoodRod,
         WildSuperRod,
         WildWaterSpot,
+        WildFishingSpot,
         WildSwarm,
         WildShakerGrass,
         WildCaveSpot,
@@ -167,6 +168,8 @@ namespace RNGReporter.Objects
                     return EncounterType.WildShakerGrass;
                 case "Wild Pokémon (Bubble Spot)":
                     return EncounterType.WildWaterSpot;
+                case "Wild Pokémon (Fishing Spot)":
+                    return EncounterType.WildFishingSpot;
                 case "Wild Pokémon (Cave Spot)":
                     return EncounterType.WildCaveSpot;
                 case "Stationary Pokémon":
