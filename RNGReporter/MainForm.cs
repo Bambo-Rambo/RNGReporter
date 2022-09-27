@@ -245,16 +245,6 @@ namespace RNGReporter
                 Settings.Default.LastVersion = VersionNumber;
             }
 
-            checkBoxBW2.Checked = true;
-            cbShinyCharm.Checked = true;
-            comboBoxMethod.SelectedIndex = 11;
-            textBoxSeed.Text = "A0F8348886D80B24";
-            maskedTextBoxStartingFrame.Text = "53";
-            maskedTextBoxMaxFrames.Text = "500";
-            //buttonLead.PerformClick();
-            comboBoxEncounterType.SelectedIndex = 1;
-            buttonGenerate.PerformClick();
-
             if (File.Exists(Settings.Default.ProfileLocation))
                 Profiles.LoadProfiles(Settings.Default.ProfileLocation);
 // used for update checks, only do it once a day
