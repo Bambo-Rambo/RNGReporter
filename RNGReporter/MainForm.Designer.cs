@@ -163,6 +163,13 @@ namespace RNGReporter
             this.cbNidoBeat = new System.Windows.Forms.CheckBox();
             this.cbShinyCharm = new System.Windows.Forms.CheckBox();
             this.checkBoxMemoryLink = new System.Windows.Forms.CheckBox();
+            this.checkBoxTrigger = new System.Windows.Forms.CheckBox();
+            this.Gen5GroupBox = new System.Windows.Forms.GroupBox();
+            this.numericLevelMax = new System.Windows.Forms.NumericUpDown();
+            this.numericLevelMin = new System.Windows.Forms.NumericUpDown();
+            this.labelMinMaxLevel = new System.Windows.Forms.Label();
+            this.buttonCalcInitialFrame = new RNGReporter.GlassButton();
+            this.buttonDSParameters = new RNGReporter.GlassButton();
             this.buttonRoamerMap = new RNGReporter.GlassButton();
             this.maskedTextBoxERoute = new RNGReporter.Controls.MaskedTextBox2();
             this.maskedTextBoxRRoute = new RNGReporter.Controls.MaskedTextBox2();
@@ -172,8 +179,6 @@ namespace RNGReporter
             this.ivFilters = new RNGReporter.Controls.IVFilters();
             this.buttonAnySlot = new RNGReporter.GlassButton();
             this.comboBoxGender = new RNGReporter.GlassComboBox();
-            this.buttonCalcInitialFrame = new RNGReporter.GlassButton();
-            this.buttonDSParameters = new RNGReporter.GlassButton();
             this.comboBoxEncounterType = new RNGReporter.GlassComboBox();
             this.comboBoxSynchNatures = new RNGReporter.GlassComboBox();
             this.comboBoxEncounterSlot = new RNGReporter.Controls.CheckBoxComboBox();
@@ -184,17 +189,21 @@ namespace RNGReporter
             this.buttonAnyNature = new RNGReporter.GlassButton();
             this.buttonGenerate = new RNGReporter.GlassButton();
             this.dataGridViewValues = new RNGReporter.DoubleBufferedDataGridView();
+            this.maskedTextBoxStartingFrame = new RNGReporter.Controls.MaskedTextBox2();
+            this.maskedTextBoxMaxFrames = new RNGReporter.Controls.MaskedTextBox2();
+            this.comboBoxMethod = new RNGReporter.GlassComboBox();
             this.Frame = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Elm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Chatot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ratio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EncType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EncounterSlot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Level = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ItemCalc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CaveSpot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Shiny = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nature = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ability = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -215,21 +224,13 @@ namespace RNGReporter
             this.f25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.f75 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Synchable = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.maskedTextBoxStartingFrame = new RNGReporter.Controls.MaskedTextBox2();
-            this.maskedTextBoxMaxFrames = new RNGReporter.Controls.MaskedTextBox2();
-            this.comboBoxMethod = new RNGReporter.GlassComboBox();
-            this.checkBoxTrigger = new System.Windows.Forms.CheckBox();
-            this.Gen5GroupBox = new System.Windows.Forms.GroupBox();
-            this.numericLevelMax = new System.Windows.Forms.NumericUpDown();
-            this.numericLevelMin = new System.Windows.Forms.NumericUpDown();
-            this.labelMinMaxLevel = new System.Windows.Forms.Label();
             this.contextMenuStripGrid.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripTimeFinder.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewValues)).BeginInit();
             this.Gen5GroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericLevelMax)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericLevelMin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewValues)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -1358,6 +1359,115 @@ namespace RNGReporter
             this.checkBoxMemoryLink.UseVisualStyleBackColor = true;
             this.checkBoxMemoryLink.Visible = false;
             // 
+            // checkBoxTrigger
+            // 
+            this.checkBoxTrigger.AutoSize = true;
+            this.checkBoxTrigger.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.checkBoxTrigger.Location = new System.Drawing.Point(9, 71);
+            this.checkBoxTrigger.Name = "checkBoxTrigger";
+            this.checkBoxTrigger.Size = new System.Drawing.Size(141, 17);
+            this.checkBoxTrigger.TabIndex = 333;
+            this.checkBoxTrigger.Text = "Battle Trigger by Moving";
+            this.checkBoxTrigger.UseVisualStyleBackColor = true;
+            this.checkBoxTrigger.Visible = false;
+            // 
+            // Gen5GroupBox
+            // 
+            this.Gen5GroupBox.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Gen5GroupBox.Controls.Add(this.numericLevelMax);
+            this.Gen5GroupBox.Controls.Add(this.numericLevelMin);
+            this.Gen5GroupBox.Controls.Add(this.labelMinMaxLevel);
+            this.Gen5GroupBox.Controls.Add(this.buttonCalcInitialFrame);
+            this.Gen5GroupBox.Controls.Add(this.checkBoxRoamerReleased);
+            this.Gen5GroupBox.Controls.Add(this.checkBoxBW2);
+            this.Gen5GroupBox.Controls.Add(this.checkBoxTrigger);
+            this.Gen5GroupBox.Controls.Add(this.checkBoxMemoryLink);
+            this.Gen5GroupBox.Controls.Add(this.checkBoxDreamWorld);
+            this.Gen5GroupBox.Controls.Add(this.cbShinyCharm);
+            this.Gen5GroupBox.Controls.Add(this.labelCalcWarning);
+            this.Gen5GroupBox.Controls.Add(this.buttonDSParameters);
+            this.Gen5GroupBox.Controls.Add(this.label21);
+            this.Gen5GroupBox.Location = new System.Drawing.Point(584, 144);
+            this.Gen5GroupBox.Name = "Gen5GroupBox";
+            this.Gen5GroupBox.Size = new System.Drawing.Size(366, 172);
+            this.Gen5GroupBox.TabIndex = 334;
+            this.Gen5GroupBox.TabStop = false;
+            this.Gen5GroupBox.Text = "Gen 5 Settings";
+            this.Gen5GroupBox.Visible = false;
+            // 
+            // numericLevelMax
+            // 
+            this.numericLevelMax.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.numericLevelMax.Location = new System.Drawing.Point(253, 134);
+            this.numericLevelMax.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericLevelMax.Name = "numericLevelMax";
+            this.numericLevelMax.Size = new System.Drawing.Size(44, 22);
+            this.numericLevelMax.TabIndex = 343;
+            this.numericLevelMax.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // numericLevelMin
+            // 
+            this.numericLevelMin.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.numericLevelMin.Location = new System.Drawing.Point(203, 134);
+            this.numericLevelMin.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericLevelMin.Name = "numericLevelMin";
+            this.numericLevelMin.Size = new System.Drawing.Size(44, 22);
+            this.numericLevelMin.TabIndex = 342;
+            this.numericLevelMin.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // labelMinMaxLevel
+            // 
+            this.labelMinMaxLevel.AutoSize = true;
+            this.labelMinMaxLevel.Location = new System.Drawing.Point(206, 119);
+            this.labelMinMaxLevel.Name = "labelMinMaxLevel";
+            this.labelMinMaxLevel.Size = new System.Drawing.Size(84, 13);
+            this.labelMinMaxLevel.TabIndex = 341;
+            this.labelMinMaxLevel.Text = "Min / Max Level";
+            // 
+            // buttonCalcInitialFrame
+            // 
+            this.buttonCalcInitialFrame.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.buttonCalcInitialFrame.ForeColor = System.Drawing.Color.Black;
+            this.buttonCalcInitialFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.buttonCalcInitialFrame.Location = new System.Drawing.Point(174, 22);
+            this.buttonCalcInitialFrame.Name = "buttonCalcInitialFrame";
+            this.buttonCalcInitialFrame.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.buttonCalcInitialFrame.ShineColor = System.Drawing.SystemColors.Window;
+            this.buttonCalcInitialFrame.Size = new System.Drawing.Size(169, 23);
+            this.buttonCalcInitialFrame.TabIndex = 34;
+            this.buttonCalcInitialFrame.Text = "Calculate Initial PIDRNG Frame";
+            this.buttonCalcInitialFrame.Click += new System.EventHandler(this.buttonCalcInitialFrame_Click);
+            // 
+            // buttonDSParameters
+            // 
+            this.buttonDSParameters.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.buttonDSParameters.ForeColor = System.Drawing.Color.Black;
+            this.buttonDSParameters.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.buttonDSParameters.Location = new System.Drawing.Point(174, 74);
+            this.buttonDSParameters.Name = "buttonDSParameters";
+            this.buttonDSParameters.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.buttonDSParameters.ShineColor = System.Drawing.SystemColors.Window;
+            this.buttonDSParameters.Size = new System.Drawing.Size(169, 23);
+            this.buttonDSParameters.TabIndex = 36;
+            this.buttonDSParameters.Text = "DS Parameters Search";
+            this.buttonDSParameters.Click += new System.EventHandler(this.findDSParametersToolStripMenuItem_Click);
+            // 
             // buttonRoamerMap
             // 
             this.buttonRoamerMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -1464,34 +1574,6 @@ namespace RNGReporter
             this.comboBoxGender.ShineColor = System.Drawing.SystemColors.Window;
             this.comboBoxGender.Size = new System.Drawing.Size(170, 21);
             this.comboBoxGender.TabIndex = 33;
-            // 
-            // buttonCalcInitialFrame
-            // 
-            this.buttonCalcInitialFrame.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.buttonCalcInitialFrame.ForeColor = System.Drawing.Color.Black;
-            this.buttonCalcInitialFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttonCalcInitialFrame.Location = new System.Drawing.Point(174, 22);
-            this.buttonCalcInitialFrame.Name = "buttonCalcInitialFrame";
-            this.buttonCalcInitialFrame.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.buttonCalcInitialFrame.ShineColor = System.Drawing.SystemColors.Window;
-            this.buttonCalcInitialFrame.Size = new System.Drawing.Size(169, 23);
-            this.buttonCalcInitialFrame.TabIndex = 34;
-            this.buttonCalcInitialFrame.Text = "Calculate Initial PIDRNG Frame";
-            this.buttonCalcInitialFrame.Click += new System.EventHandler(this.buttonCalcInitialFrame_Click);
-            // 
-            // buttonDSParameters
-            // 
-            this.buttonDSParameters.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.buttonDSParameters.ForeColor = System.Drawing.Color.Black;
-            this.buttonDSParameters.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttonDSParameters.Location = new System.Drawing.Point(174, 74);
-            this.buttonDSParameters.Name = "buttonDSParameters";
-            this.buttonDSParameters.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.buttonDSParameters.ShineColor = System.Drawing.SystemColors.Window;
-            this.buttonDSParameters.Size = new System.Drawing.Size(169, 23);
-            this.buttonDSParameters.TabIndex = 36;
-            this.buttonDSParameters.Text = "DS Parameters Search";
-            this.buttonDSParameters.Click += new System.EventHandler(this.findDSParametersToolStripMenuItem_Click);
             // 
             // comboBoxEncounterType
             // 
@@ -1663,11 +1745,12 @@ namespace RNGReporter
             this.Elm,
             this.Chatot,
             this.Ratio,
+            this.EncType,
             this.EncounterSlot,
             this.Level,
             this.ItemCalc,
-            this.PID,
             this.CaveSpot,
+            this.PID,
             this.Shiny,
             this.Nature,
             this.Ability,
@@ -1706,6 +1789,40 @@ namespace RNGReporter
             this.dataGridViewValues.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewValues_CellMouseEnter);
             this.dataGridViewValues.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewValues_CellMouseLeave);
             this.dataGridViewValues.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridViewValues_MouseDown);
+            // 
+            // maskedTextBoxStartingFrame
+            // 
+            this.maskedTextBoxStartingFrame.Hex = false;
+            this.maskedTextBoxStartingFrame.Location = new System.Drawing.Point(101, 170);
+            this.maskedTextBoxStartingFrame.Mask = "0000000000";
+            this.maskedTextBoxStartingFrame.Name = "maskedTextBoxStartingFrame";
+            this.maskedTextBoxStartingFrame.Size = new System.Drawing.Size(153, 20);
+            this.maskedTextBoxStartingFrame.TabIndex = 6;
+            this.maskedTextBoxStartingFrame.Text = "1";
+            this.maskedTextBoxStartingFrame.ValidatingType = typeof(int);
+            // 
+            // maskedTextBoxMaxFrames
+            // 
+            this.maskedTextBoxMaxFrames.Hex = false;
+            this.maskedTextBoxMaxFrames.Location = new System.Drawing.Point(101, 144);
+            this.maskedTextBoxMaxFrames.Mask = "0000000000";
+            this.maskedTextBoxMaxFrames.Name = "maskedTextBoxMaxFrames";
+            this.maskedTextBoxMaxFrames.Size = new System.Drawing.Size(153, 20);
+            this.maskedTextBoxMaxFrames.TabIndex = 5;
+            this.maskedTextBoxMaxFrames.Text = "100000";
+            // 
+            // comboBoxMethod
+            // 
+            this.comboBoxMethod.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.comboBoxMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMethod.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxMethod.FormattingEnabled = true;
+            this.comboBoxMethod.Location = new System.Drawing.Point(101, 48);
+            this.comboBoxMethod.Name = "comboBoxMethod";
+            this.comboBoxMethod.ShineColor = System.Drawing.SystemColors.Window;
+            this.comboBoxMethod.Size = new System.Drawing.Size(153, 21);
+            this.comboBoxMethod.TabIndex = 1;
+            this.comboBoxMethod.SelectedIndexChanged += new System.EventHandler(this.comboBoxMethod_SelectedIndexChanged);
             // 
             // Frame
             // 
@@ -1756,6 +1873,14 @@ namespace RNGReporter
             this.Ratio.Visible = false;
             this.Ratio.Width = 60;
             // 
+            // EncType
+            // 
+            this.EncType.DataPropertyName = "Double";
+            this.EncType.HeaderText = "Encounter Type";
+            this.EncType.Name = "EncType";
+            this.EncType.ReadOnly = true;
+            this.EncType.Width = 90;
+            // 
             // EncounterSlot
             // 
             this.EncounterSlot.DataPropertyName = "EncounterString";
@@ -1781,6 +1906,15 @@ namespace RNGReporter
             this.ItemCalc.Visible = false;
             this.ItemCalc.Width = 105;
             // 
+            // CaveSpot
+            // 
+            this.CaveSpot.DataPropertyName = "CaveSpotting";
+            this.CaveSpot.HeaderText = "Cave Spot";
+            this.CaveSpot.Name = "CaveSpot";
+            this.CaveSpot.ReadOnly = true;
+            this.CaveSpot.Visible = false;
+            this.CaveSpot.Width = 110;
+            // 
             // PID
             // 
             this.PID.DataPropertyName = "Pid";
@@ -1790,15 +1924,6 @@ namespace RNGReporter
             this.PID.Name = "PID";
             this.PID.ReadOnly = true;
             this.PID.Width = 75;
-            // 
-            // CaveSpot
-            // 
-            this.CaveSpot.DataPropertyName = "CaveSpotting";
-            this.CaveSpot.HeaderText = "Cave Spot";
-            this.CaveSpot.Name = "CaveSpot";
-            this.CaveSpot.ReadOnly = true;
-            this.CaveSpot.Visible = false;
-            this.CaveSpot.Width = 110;
             // 
             // Shiny
             // 
@@ -1960,123 +2085,7 @@ namespace RNGReporter
             this.Synchable.HeaderText = "Synchable";
             this.Synchable.Name = "Synchable";
             this.Synchable.ReadOnly = true;
-            this.Synchable.Visible = false;
             this.Synchable.Width = 105;
-            // 
-            // maskedTextBoxStartingFrame
-            // 
-            this.maskedTextBoxStartingFrame.Hex = false;
-            this.maskedTextBoxStartingFrame.Location = new System.Drawing.Point(101, 170);
-            this.maskedTextBoxStartingFrame.Mask = "0000000000";
-            this.maskedTextBoxStartingFrame.Name = "maskedTextBoxStartingFrame";
-            this.maskedTextBoxStartingFrame.Size = new System.Drawing.Size(153, 20);
-            this.maskedTextBoxStartingFrame.TabIndex = 6;
-            this.maskedTextBoxStartingFrame.Text = "1";
-            this.maskedTextBoxStartingFrame.ValidatingType = typeof(int);
-            // 
-            // maskedTextBoxMaxFrames
-            // 
-            this.maskedTextBoxMaxFrames.Hex = false;
-            this.maskedTextBoxMaxFrames.Location = new System.Drawing.Point(101, 144);
-            this.maskedTextBoxMaxFrames.Mask = "0000000000";
-            this.maskedTextBoxMaxFrames.Name = "maskedTextBoxMaxFrames";
-            this.maskedTextBoxMaxFrames.Size = new System.Drawing.Size(153, 20);
-            this.maskedTextBoxMaxFrames.TabIndex = 5;
-            this.maskedTextBoxMaxFrames.Text = "100000";
-            // 
-            // comboBoxMethod
-            // 
-            this.comboBoxMethod.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.comboBoxMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxMethod.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxMethod.FormattingEnabled = true;
-            this.comboBoxMethod.Location = new System.Drawing.Point(101, 48);
-            this.comboBoxMethod.Name = "comboBoxMethod";
-            this.comboBoxMethod.ShineColor = System.Drawing.SystemColors.Window;
-            this.comboBoxMethod.Size = new System.Drawing.Size(153, 21);
-            this.comboBoxMethod.TabIndex = 1;
-            this.comboBoxMethod.SelectedIndexChanged += new System.EventHandler(this.comboBoxMethod_SelectedIndexChanged);
-            // 
-            // checkBoxTrigger
-            // 
-            this.checkBoxTrigger.AutoSize = true;
-            this.checkBoxTrigger.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.checkBoxTrigger.Location = new System.Drawing.Point(9, 71);
-            this.checkBoxTrigger.Name = "checkBoxTrigger";
-            this.checkBoxTrigger.Size = new System.Drawing.Size(141, 17);
-            this.checkBoxTrigger.TabIndex = 333;
-            this.checkBoxTrigger.Text = "Battle Trigger by Moving";
-            this.checkBoxTrigger.UseVisualStyleBackColor = true;
-            this.checkBoxTrigger.Visible = false;
-            // 
-            // Gen5GroupBox
-            // 
-            this.Gen5GroupBox.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Gen5GroupBox.Controls.Add(this.numericLevelMax);
-            this.Gen5GroupBox.Controls.Add(this.numericLevelMin);
-            this.Gen5GroupBox.Controls.Add(this.labelMinMaxLevel);
-            this.Gen5GroupBox.Controls.Add(this.buttonCalcInitialFrame);
-            this.Gen5GroupBox.Controls.Add(this.checkBoxRoamerReleased);
-            this.Gen5GroupBox.Controls.Add(this.checkBoxBW2);
-            this.Gen5GroupBox.Controls.Add(this.checkBoxTrigger);
-            this.Gen5GroupBox.Controls.Add(this.checkBoxMemoryLink);
-            this.Gen5GroupBox.Controls.Add(this.checkBoxDreamWorld);
-            this.Gen5GroupBox.Controls.Add(this.cbShinyCharm);
-            this.Gen5GroupBox.Controls.Add(this.labelCalcWarning);
-            this.Gen5GroupBox.Controls.Add(this.buttonDSParameters);
-            this.Gen5GroupBox.Controls.Add(this.label21);
-            this.Gen5GroupBox.Location = new System.Drawing.Point(584, 144);
-            this.Gen5GroupBox.Name = "Gen5GroupBox";
-            this.Gen5GroupBox.Size = new System.Drawing.Size(366, 172);
-            this.Gen5GroupBox.TabIndex = 334;
-            this.Gen5GroupBox.TabStop = false;
-            this.Gen5GroupBox.Text = "Gen 5 Settings";
-            this.Gen5GroupBox.Visible = false;
-            // 
-            // numericLevelMax
-            // 
-            this.numericLevelMax.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.numericLevelMax.Location = new System.Drawing.Point(253, 134);
-            this.numericLevelMax.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericLevelMax.Name = "numericLevelMax";
-            this.numericLevelMax.Size = new System.Drawing.Size(44, 22);
-            this.numericLevelMax.TabIndex = 343;
-            this.numericLevelMax.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            // 
-            // numericLevelMin
-            // 
-            this.numericLevelMin.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.numericLevelMin.Location = new System.Drawing.Point(203, 134);
-            this.numericLevelMin.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericLevelMin.Name = "numericLevelMin";
-            this.numericLevelMin.Size = new System.Drawing.Size(44, 22);
-            this.numericLevelMin.TabIndex = 342;
-            this.numericLevelMin.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // labelMinMaxLevel
-            // 
-            this.labelMinMaxLevel.AutoSize = true;
-            this.labelMinMaxLevel.Location = new System.Drawing.Point(206, 119);
-            this.labelMinMaxLevel.Name = "labelMinMaxLevel";
-            this.labelMinMaxLevel.Size = new System.Drawing.Size(84, 13);
-            this.labelMinMaxLevel.TabIndex = 341;
-            this.labelMinMaxLevel.Text = "Min / Max Level";
             // 
             // MainForm
             // 
@@ -2145,11 +2154,11 @@ namespace RNGReporter
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.contextMenuStripTimeFinder.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewValues)).EndInit();
             this.Gen5GroupBox.ResumeLayout(false);
             this.Gen5GroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericLevelMax)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericLevelMin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewValues)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2319,11 +2328,12 @@ namespace RNGReporter
         private System.Windows.Forms.DataGridViewTextBoxColumn Elm;
         private System.Windows.Forms.DataGridViewTextBoxColumn Chatot;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ratio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EncType;
         private System.Windows.Forms.DataGridViewTextBoxColumn EncounterSlot;
         private System.Windows.Forms.DataGridViewTextBoxColumn Level;
         private System.Windows.Forms.DataGridViewTextBoxColumn ItemCalc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PID;
         private System.Windows.Forms.DataGridViewTextBoxColumn CaveSpot;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Shiny;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nature;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ability;

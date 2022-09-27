@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Windows.Forms;
 using RNGReporter.Properties;
 
 namespace RNGReporter.Objects
@@ -560,43 +561,43 @@ namespace RNGReporter.Objects
 
             switch (genderRatio)
             {
-                    // Female, 50% F ratio
+                // Female, 50% F ratio      ✔
                 case -1:
-                    genderAdjustment = (uint) (((127)*(ulong) rngResult) >> 32) + 1;
+                    genderAdjustment = (uint) (((126)*(ulong) rngResult) >> 32) + 1;
                     break;
-                    // Female, 75% F ratio
+                // Female, 75% F ratio      ✔
                 case -2:
-                    genderAdjustment = (uint) (((191)*(ulong) rngResult) >> 32) + 1;
+                    genderAdjustment = (uint) (((190)*(ulong) rngResult) >> 32) + 1;
                     break;
-                    // Female, 25% F ratio
+                // Female, 25% F ratio      ✔
                 case -3:
-                    genderAdjustment = (uint) (((63)*(ulong) rngResult) >> 32) + 1;
+                    genderAdjustment = (uint) (((62)*(ulong) rngResult) >> 32) + 1;
                     break;
-                    // Female, 12.5% F ratio
+                // Female, 12.5% F ratio    ✔
                 case -4:
-                    genderAdjustment = (uint) (((31)*(ulong) rngResult) >> 32) + 1;
+                    genderAdjustment = (uint) (((30)*(ulong) rngResult) >> 32) + 1;
                     break;
-                    // Female, 100% F ratio
+                // Female, 100% F ratio     ✔
                 case -5:
                     genderAdjustment = (uint) ((0x8*(ulong) rngResult) >> 32) + 1;
                     break;
-                    // Male, 50% M ratio
+                // Male, 50% M ratio        ✔
                 case 1:
                     genderAdjustment = (uint) (((254 - 127)*(ulong) rngResult) >> 32) + 127;
                     break;
-                    // Male, 75% M ratio
+                // Male, 75% M ratio        ✔
                 case 2:
                     genderAdjustment = (uint) (((254 - 63)*(ulong) rngResult) >> 32) + 63;
                     break;
-                    // Male, 25% M ratio
+                // Male, 25% M ratio        ✔
                 case 3:
                     genderAdjustment = (uint) (((254 - 191)*(ulong) rngResult) >> 32) + 191;
                     break;
-                    // Male, 87.5% M ratio
+                // Male, 87.5% M ratio      ✔
                 case 4:
                     genderAdjustment = (uint) (((254 - 31)*(ulong) rngResult) >> 32) + 31;
                     break;
-                    // Male, 100% M ratio
+                // Male, 100% M ratio       ✔
                 case 5:
                     genderAdjustment = (uint) ((0xF6*(ulong) rngResult) >> 32) + 8;
                     break;

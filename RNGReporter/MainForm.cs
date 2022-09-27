@@ -245,7 +245,15 @@ namespace RNGReporter
                 Settings.Default.LastVersion = VersionNumber;
             }
 
+            checkBoxBW2.Checked = true;
+            cbShinyCharm.Checked = true;
             comboBoxMethod.SelectedIndex = 11;
+            textBoxSeed.Text = "A0F8348886D80B24";
+            maskedTextBoxStartingFrame.Text = "53";
+            maskedTextBoxMaxFrames.Text = "500";
+            //buttonLead.PerformClick();
+            comboBoxEncounterType.SelectedIndex = 1;
+            buttonGenerate.PerformClick();
 
             if (File.Exists(Settings.Default.ProfileLocation))
                 Profiles.LoadProfiles(Settings.Default.ProfileLocation);
@@ -356,7 +364,17 @@ namespace RNGReporter
                 else
                     dataGridViewValues.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightCyan;
             }
-                
+               
+            if (EncType.Visible)
+            {
+                if (!Convert.ToString(dataGridViewValues.Rows[e.RowIndex].Cells["EncType"].Value).Equals(""))
+                {
+                    if (dataGridViewValues.Columns[e.ColumnIndex].Name == "EncType")
+                    {
+                        e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+                    }  
+                }
+            }
 
             if (Ratio.Visible)
             {
@@ -436,6 +454,7 @@ namespace RNGReporter
 
             Ratio.Visible = checkBoxTrigger.Checked && checkBoxTrigger.Visible;
             Level.Visible = labelMinMaxLevel.Visible;
+            
 
             //  Nuke the target frame when we generate a new list.  This may
             //  end up being controversial need to be revisted, but we can
@@ -474,6 +493,7 @@ namespace RNGReporter
 
             // this is for PIDRNG encounter slots
             generator.isBW2 = checkBoxBW2.Visible && checkBoxBW2.Checked;
+            EncType.Visible = generator.EncounterType == EncounterType.WildDarkGrass;
 
             if (generator.EncounterType == EncounterType.SafariZone || generator.EncounterType == EncounterType.BugCatchingContest && !szWarned)
             {
@@ -2157,6 +2177,7 @@ namespace RNGReporter
                 encounterMenu = new[]
                     {
                         "Wild Pokémon",
+                        "Wild Pokémon (Dark Grass)",
                         "Wild Pokémon (Swarm)",
                         "Wild Pokémon (Surfing)",
                         "Wild Pokémon (Fishing)",
@@ -2252,7 +2273,7 @@ namespace RNGReporter
                 comboBoxSynchNatures.Enabled = true;
                 buttonLead.Enabled = true;
 
-                cbShinyCharm.Checked = false;
+                //cbShinyCharm.Checked = false;
                 cbShinyCharm.Enabled = ((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Natures);
             }
             else
@@ -2272,7 +2293,7 @@ namespace RNGReporter
                 checkBoxDreamWorld.Checked = false;
                 checkBoxDittoParent.Checked = false;
                 cbNidoBeat.Checked = false;
-                cbShinyCharm.Checked = false;
+                //cbShinyCharm.Checked = false;
 
                 comboBoxSynchNatures.Enabled = false;
                 buttonLead.Enabled = false;
@@ -2338,19 +2359,24 @@ namespace RNGReporter
             int method = comboBoxMethod.SelectedIndex;
             Gen5GroupBox.Visible = (method >= 9 && method <= 11) || (method >= 21 && method <= 25 && method != 23);
             labelMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible =
-                comboBoxMethod.SelectedIndex == 11 && comboBoxEncounterType.SelectedIndex <= 7;
+                comboBoxMethod.SelectedIndex == 11 &&
+                comboBoxEncounterType.SelectedIndex != 5 &&
+                comboBoxEncounterType.SelectedIndex >= 2 && comboBoxEncounterType.SelectedIndex <= 7;
         }
 
         private void comboBoxEncounterType_SelectedIndexChanged(object sender, EventArgs e)
         {
             CheckTriggerBox();
-            labelMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible = 
-                comboBoxMethod.SelectedIndex == 11 && comboBoxEncounterType.SelectedIndex <= 6 && comboBoxEncounterType.SelectedIndex != 4;
+            labelMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible =
+                comboBoxMethod.SelectedIndex == 11 &&
+                comboBoxEncounterType.SelectedIndex != 5 &&
+                comboBoxEncounterType.SelectedIndex >= 2 && comboBoxEncounterType.SelectedIndex <= 7;
+
         }
 
         private void CheckTriggerBox()
         {
-            checkBoxTrigger.Visible = comboBoxMethod.SelectedItem.ToString().Equals("Gen 5 PIDRNG") && comboBoxEncounterType.SelectedIndex <= 2;
+            checkBoxTrigger.Visible = comboBoxMethod.SelectedItem.ToString().Equals("Gen 5 PIDRNG") && comboBoxEncounterType.SelectedIndex <= 3;
         }
 
         private void buttonRoamerMap_Click(object sender, EventArgs e)

@@ -50,6 +50,7 @@ namespace RNGReporter.Objects
         private bool synchable;
         private ulong ratio;
         private byte level;
+        private bool DoubleBattle;
 
         public Frame()
         {
@@ -79,7 +80,6 @@ namespace RNGReporter.Objects
         {
             get { return RngResult >> 28 == 0 ? "Trigger at 20th step" : ""; }
         }
-
 
         // Chatot response for 4th Gen Games
         public string Chatot
@@ -177,6 +177,12 @@ namespace RNGReporter.Objects
         {
             get { return level; }
             set { level = value; }
+        }
+
+        public string Double
+        { 
+            get { return DoubleBattle ? "Double" : ""; }
+            set { }
         }
 
         public FrameType FrameType { get; set; }
@@ -1092,7 +1098,8 @@ namespace RNGReporter.Objects
             int encounterSlot,
             byte CurrentLevel,
             uint itemCalc,
-            ulong CurrentRatio)
+            ulong CurrentRatio,
+            bool DoubleEnctr)
         {
             var frame = new Frame(frameType)
                 {
@@ -1109,6 +1116,7 @@ namespace RNGReporter.Objects
                     ItemCalc = itemCalc,
                     synchable = synch,
                     ratio = CurrentRatio,
+                    DoubleBattle = DoubleEnctr,
             };
 
 

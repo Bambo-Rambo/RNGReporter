@@ -25,6 +25,7 @@ namespace RNGReporter.Objects
     public enum EncounterType
     {
         Wild,
+        WildDarkGrass,
         WildSurfing,
         WildOldRod,
         WildGoodRod,
@@ -64,7 +65,8 @@ namespace RNGReporter.Objects
         CuteCharm75F,
         CuteCharm25F,
         CuteCharm125F,
-        CuteCharmFemale
+        CuteCharmFemale,
+        CuteCharmAny,
     };
 
     internal class EncounterTypeCalc
@@ -152,6 +154,8 @@ namespace RNGReporter.Objects
             {
                 case "Wild Pokémon":
                     return EncounterType.Wild;
+                case "Wild Pokémon (Dark Grass)":
+                    return EncounterType.WildDarkGrass;
                 case "Wild Pokémon (Surfing)":
                     return EncounterType.WildSurfing;
                 case "Wild Pokémon (Fishing)":
@@ -229,6 +233,8 @@ namespace RNGReporter.Objects
                     return EncounterString(2) + " (12.5% F)";
                 case EncounterMod.CuteCharmFemale:
                     return EncounterString(2) + " (Female)";
+                case EncounterMod.CuteCharmAny:
+                    return EncounterString(2) + " (Any)";
                 case EncounterMod.Everstone:
                     return EncounterString(5);
                 case EncounterMod.None:

@@ -115,6 +115,7 @@ namespace RNGReporter
             comboBoxEncounterType.Items.AddRange(new object[]
                 {
                     new ComboBoxItem("Wild Pokémon", EncounterType.Wild),
+                    new ComboBoxItem("Dark Grass", EncounterType.WildDarkGrass),
                     new ComboBoxItem("Swarm", EncounterType.WildSwarm),
                     new ComboBoxItem("Surfing", EncounterType.WildSurfing),
                     new ComboBoxItem("Fishing", EncounterType.WildSuperRod),
@@ -518,6 +519,7 @@ namespace RNGReporter
 
             Lvl.Visible = LevelConditions();
             EncounterRatio.Visible = ConsiderTrigger && checkBoxShinyOnly.Checked;
+            EncType.Visible = false;// comboBoxMethod.SelectedIndex == 0 && comboBoxEncounterType.SelectedIndex == 1;
 
             if (generator.FrameType == FrameType.Method5CGear || generator.FrameType == FrameType.Method5Standard)
             {
@@ -1280,6 +1282,7 @@ namespace RNGReporter
                                                             testFrame.Synchable = shinyFrame.Synchable;
                                                             testFrame.Ratio = shinyFrame.Ratio;
                                                             testFrame.Level = shinyFrame.Level;
+                                                            testFrame.Double = shinyFrame.Double;
 
                                                             iframe.Offset = testFrame.Number - start;
                                                             iframe.Seed = seed;
@@ -3137,13 +3140,16 @@ namespace RNGReporter
         bool cond = false;
         private bool LevelConditions()
         {
-            Invoke(new Action(() => { cond = comboBoxMethod.SelectedIndex == 0 && comboBoxEncounterType.SelectedIndex <= 7; }));
+            Invoke(new Action(() => { 
+                cond = comboBoxMethod.SelectedIndex == 0 && 
+                comboBoxEncounterType.SelectedIndex >= 2 && comboBoxEncounterType.SelectedIndex <= 7 && 
+                comboBoxEncounterType.SelectedIndex != 5; }));
             return cond;
         }
 
         private bool RatioConditions()
         {
-            Invoke(new Action(() => { cond = comboBoxMethod.SelectedIndex == 0 && comboBoxEncounterType.SelectedIndex <= 2; }));
+            Invoke(new Action(() => { cond = comboBoxMethod.SelectedIndex == 0 && comboBoxEncounterType.SelectedIndex <= 3; }));
             return cond;
         }
 

@@ -19,6 +19,7 @@
 #region 1
 
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Net;
 using System.Reflection;
 using System.Security.Cryptography;
@@ -1409,7 +1410,6 @@ namespace RNGReporter.Objects
 
             else if (frameType == FrameType.Method5Natures)
             {
-                //New code for better control
                 bool G5_Gift = EncounterType == EncounterType.Gift;
                 bool G5_Roamer = EncounterType == EncounterType.Roamer;
                 bool G5_Wild = EncounterType == EncounterType.Wild;
@@ -1425,28 +1425,22 @@ namespace RNGReporter.Objects
                 bool G5_HiddenGrotto = EncounterType == EncounterType.HiddenGrotto;
                 bool G5_WildSuperRod = EncounterType == EncounterType.WildSuperRod;
                 bool G5_WildShakerGrass = EncounterType == EncounterType.WildShakerGrass;
+                bool G5_WildDarkGrass = EncounterType == EncounterType.WildDarkGrass;
 
-                //
-
-
-                //New code for level and Step Trigger
                 ulong TriggerSeed = InitialSeed;
                 BWRng rngTrigger = new BWRng(TriggerSeed);
-
                 int LevelRand = 1, LvlRand;
 
                 //There is only 1 rand call (the above one) when fishing in spot, leading with suction cups
                 if (!(G5_WildFishingSpot && EncounterMod == EncounterMod.SuctionCups))
                     LevelRand++;
 
-                //Organize in the future//////////////
                 //Rand call DOES NOT happen for surf trigger by step, and pure fishing when leading with suction cups
                 if (((SearchForTrigger && !G5_WildSurfing) || G5_WildSuperRod || G5_WildCaveSpot || G5_WildShakerGrass || G5_WildSwarm) &&
                 !(G5_WildSuperRod && EncounterMod == EncounterMod.SuctionCups))
                     LevelRand++;
 
                 ulong CurrentRatio = 65535;
-                //
 
                 rng64.Seed = InitialSeed;
                 int encounterSlot = 0;
@@ -1463,7 +1457,7 @@ namespace RNGReporter.Objects
                 }
 
                 rngList.Clear();
-                for (int cnt = 0; cnt < 12; cnt++)
+                for (int cnt = 0; cnt < 20; cnt++)
                     rngList.Add(rng64.GetNext32BitNumber());
 
 
@@ -1473,11 +1467,11 @@ namespace RNGReporter.Objects
                     uint nature;
                     uint pid;
                     bool synchable;
-                    LvlRand = LevelRand;    //Restore 
+                    LvlRand = LevelRand;    //Restore
 
                     if (G5_Gift || G5_Roamer)
                     {
-                        nature = (uint) (((ulong) rngList[1]*25) >> 32);
+                        nature = (uint) (((ulong) rngList[1] * 25) >> 32);
                         synchable = false;
 
                         pid = rngList[0];
@@ -1486,57 +1480,181 @@ namespace RNGReporter.Objects
                     }
                     else
                     {
-                        CurrentRatio = (((ulong)rngList[0] * 0x1FFF) >> 32) / 82;
-                        //CurrentRatio = ((((ulong)rngList[0]) * 0xFFFF) >> 32) / 0x290; // -> Alternative
-
                         uint idTest;
                         if (G5_Wild || G5_WildSurfing || G5_WildWaterSpot || G5_WildFishingSpot)
                         {
-                            encounterSlot = EncounterSlotCalc.encounterSlot(rngList[1], frameType, EncounterType, isBW2);
+                            CurrentRatio = getRatio(0);
 
-                            if (EncounterMod == EncounterMod.Synchronize)
+                            if (EncounterMod == EncounterMod.Search)
                             {
-                                pid = FindPID(id, sid, idLower, ShinyCharm, 3);
+                                nature = (uint)(((ulong)rngList[5] * 25) >> 32);
 
-                                synchable = FindSync(cnt, TriggerSeed, rngTrigger);
+                                bool CuteCharmSuccess = ((((ulong)rngList[0] * 0xFFFF) >> 32) / 656) < 67;
 
-                                if (synchable)
-                                    nature = (uint) SynchNature;
+                                if (CuteCharmSuccess)
+                                {
+                                    encounterSlot = EncounterSlotCalc.encounterSlot(rngList[1], frameType, EncounterType, isBW2);
+
+                                    pid = FindPID(id, sid, idLower, ShinyCharm, 3);
+
+                                    // Add all the Cute Charm possibilities
+                                    for (int i = -4; i < 5; i++)
+                                    {
+                                        if (i == 0)
+                                            continue;
+
+                                        uint tempPid = Functions.GenderModPID(pid, rngList[4], i);
+
+                                        idTest = (idLower ^ (tempPid & 1) ^ (tempPid >> 31));
+                                        if (idTest == 1)
+                                            tempPid = (tempPid ^ 0x80000000);
+
+                                        frame = Frame.GenerateFrame(
+                                            FrameType.Method5Natures,
+                                            EncounterType,
+                                            cnt + InitialFrame,
+                                            rngList[0],
+                                            tempPid,
+                                            id,
+                                            sid,
+                                            nature,
+                                            false,
+                                            encounterSlot,
+                                            getLevel(rngList[LvlRand]),
+                                            item,
+                                            CurrentRatio,
+                                            false);
+
+                                        switch (i)
+                                        {
+                                            case 1: frame.EncounterMod = EncounterMod.CuteCharm50M; break;
+                                            case 2: frame.EncounterMod = EncounterMod.CuteCharm75M; break;
+                                            case 3: frame.EncounterMod = EncounterMod.CuteCharm25M; break;
+                                            case 4: frame.EncounterMod = EncounterMod.CuteCharm875M; break;
+                                            case -1: frame.EncounterMod = EncounterMod.CuteCharm50F; break;
+                                            case -2: frame.EncounterMod = EncounterMod.CuteCharm75F; break;
+                                            case -3: frame.EncounterMod = EncounterMod.CuteCharm25F; break;
+                                            case -4: frame.EncounterMod = EncounterMod.CuteCharm125F; break;
+                                        }
+
+                                        if (frameCompare.Compare(frame))
+                                            frames.Add(frame);
+                                    }
+                                }
                                 else
-                                    nature = (uint) (((ulong) rngList[TotalRandCalls + 3]*25) >> 32);
+                                {
+                                    encounterSlot = EncounterSlotCalc.encounterSlot(rngList[2], frameType, EncounterType, isBW2);
+                                    pid = rngList[4] ^ 0x10000;
 
+                                    idTest = (idLower ^ (pid & 1) ^ (pid >> 31));
+                                    if (idTest == 1)
+                                        pid = (pid ^ 0x80000000);
+
+                                    frame = Frame.GenerateFrame(
+                                        FrameType.Method5Natures,
+                                        EncounterType,
+                                        cnt + InitialFrame,
+                                        rngList[0],
+                                        pid,
+                                        id,
+                                        sid,
+                                        nature,
+                                        false,
+                                        encounterSlot,
+                                        getLevel(rngList[LvlRand + 1]),
+                                        item,
+                                        CurrentRatio,
+                                        false);
+
+                                    if (frameCompare.Compare(frame))
+                                    {
+                                        frame.EncounterMod = EncounterMod.CuteCharmAny;
+                                        frames.Add(frame);
+                                    }
+
+
+                                }
+
+
+                                encounterSlot = EncounterSlotCalc.encounterSlot(rngList[1], frameType, EncounterType, isBW2);
+                                pid = FindPID(id, sid, idLower, ShinyCharm, 3);
+                                synchable = FindSync(cnt, TriggerSeed, rngTrigger);
+                                nature = (uint)(((ulong)rngList[TotalRandCalls + 3] * 25) >> 32);
+
+                                if (synchable && !frameCompare.CompareNature(nature))
+                                    mod = EncounterMod.Synchronize;
+                                else
+                                    mod = EncounterMod.None;
                             }
                             else if (EncounterMod == EncounterMod.CuteCharm)
                             {
+                                // not a synch, but the Cute Charm check. Finished by Bambo_Rambo
+                                synchable = ((((ulong)rngList[0] * 0xFFFF) >> 32) / 656) < 67;
+
                                 if (ShinyCharm)
                                 {
-                                    pid = FindPIDCuteCharm(id, sid, idLower, 5, 2);
-                                    nature = (uint)(((ulong)rngList[8] * 25) >> 32);
-                                    encounterSlot = EncounterSlotCalc.encounterSlot(rngList[0], frameType, EncounterType, isBW2);
+                                    pid = 0;
+
+                                    encounterSlot = EncounterSlotCalc.encounterSlot(rngList[synchable ? 1 : 2], frameType, EncounterType, isBW2);
+
+                                    TotalRandCalls = 0;
+                                    for (int n = 0; n < 3; n++)
+                                    {
+                                        TotalRandCalls++;
+                                        if (!synchable)     // Cute Charm failed
+                                        {
+                                            pid = rngList[n + 4] ^ 0x10000;
+                                            idTest = (idLower ^ (pid & 1) ^ (pid >> 31));
+                                            if (idTest == 1)
+                                                pid = (pid ^ 0x80000000);
+                                            
+                                        }
+                                        else
+                                        {
+                                            pid = rngList[n + 5] ^ 0x10000;
+
+                                            pid = Functions.GenderModPID(pid, rngList[n + 6], SynchNature);
+
+                                            idTest = (idLower ^ (pid & 1) ^ (pid >> 31));
+                                            if (idTest == 1)
+                                                pid = (pid ^ 0x80000000);
+
+
+                                            if (CheckShiny(id, sid, pid))
+                                                break;
+
+                                        }
+
+                                        if (CheckShiny(id, sid, pid))
+                                            break;
+
+
+
+                                    }
+
+                                    nature = (uint)(((ulong)rngList[TotalRandCalls + (synchable ? 6 : 4)] * 25) >> 32);
+                                    //nature = (uint)(((ulong)rngList[5] * 25) >> 32);
                                 }
+
                                 else
                                 {
-                                    pid = rngList[3];
-                                    pid = pid ^ 0x10000;
-
-                                    // not a synch, but the Cute Charm check -- need to relabel (unfinished)
-                                    synchable = ((((ulong)rngList[0] * 0xFFFF) >> 32) / 656) < 67;
-
-                                    // failed CC check
-                                    if (!synchable)
+                                    if (!synchable)     // Cute Charm failed
                                     {
-                                        // leave it as-is
-                                        nature = (uint)(((ulong)rngList[4] * 25) >> 32);
+                                        LvlRand++;
+                                        encounterSlot = EncounterSlotCalc.encounterSlot(rngList[2], frameType, EncounterType, isBW2);
+                                        pid = rngList[4] ^ 0x10000;
                                     }
                                     else
                                     {
+                                        encounterSlot = EncounterSlotCalc.encounterSlot(rngList[1], frameType, EncounterType, isBW2);
+                                        pid = rngList[3] ^ 0x10000;
                                         pid = Functions.GenderModPID(pid, rngList[4], SynchNature);
-                                        nature = (uint)(((ulong)rngList[5] * 25) >> 32);
                                     }
-                                }
-                                
 
-                                synchable = false;
+                                    nature = (uint)(((ulong)rngList[5] * 25) >> 32);
+                                }
+
+                                //synchable = false;
                             }
                             else if (EncounterMod == EncounterMod.Compoundeyes || EncounterMod == EncounterMod.SuctionCups)
                             {
@@ -1552,153 +1670,33 @@ namespace RNGReporter.Objects
                                     LvlRand--;
 
                             }
-                            else if (EncounterMod == EncounterMod.Search)
-                            {
-                                pid = FindPID(id, sid, idLower, ShinyCharm, 3);
-
-                                if (!ShinyCharm)
-                                {
-                                    // not a synch, but the Cute Charm check -- need to relabel (unfinished)
-                                    synchable = ((((ulong)rngList[0] * 0xFFFF) >> 32) / 656) < 67;
-
-                                    // passed CC check
-                                    if (synchable)
-                                    {
-                                        // Add all the Cute Charm possibilities
-                                        nature = (uint)(((ulong)rngList[5] * 25) >> 32);
-
-                                        for (int i = -4; i < 5; i++)
-                                        {
-                                            if (i == 0)
-                                                continue;
-
-                                            uint tempPid = Functions.GenderModPID(pid, rngList[4], i);
-
-                                            idTest = (idLower ^ (tempPid & 1) ^ (tempPid >> 31));
-                                            if (idTest == 1)
-                                                tempPid = (tempPid ^ 0x80000000);
-
-                                            frame = Frame.GenerateFrame(
-                                                FrameType.Method5Natures,
-                                                EncounterType,
-                                                cnt + InitialFrame,
-                                                rngList[0],
-                                                tempPid,
-                                                id,
-                                                sid,
-                                                nature,
-                                                false,
-                                                encounterSlot,
-                                                getLevel(rngList[LvlRand]),
-                                                item,
-                                                CurrentRatio);
-
-                                            switch (i)
-                                            {
-                                                case 1: frame.EncounterMod = EncounterMod.CuteCharm50M; break;
-                                                case 2: frame.EncounterMod = EncounterMod.CuteCharm75M; break;
-                                                case 3: frame.EncounterMod = EncounterMod.CuteCharm25M; break;
-                                                case 4: frame.EncounterMod = EncounterMod.CuteCharm875M; break;
-                                                case -1: frame.EncounterMod = EncounterMod.CuteCharm50F; break;
-                                                case -2: frame.EncounterMod = EncounterMod.CuteCharm75F; break;
-                                                case -3: frame.EncounterMod = EncounterMod.CuteCharm25F; break;
-                                                case -4: frame.EncounterMod = EncounterMod.CuteCharm125F; break;
-                                            }
-
-                                            if (frameCompare.Compare(frame))
-                                            {
-                                                frames.Add(frame);
-                                            }
-                                        }
-                                    }
-                                }
-
-                                synchable = FindSync(cnt, TriggerSeed, rngTrigger);
-                                nature = (uint) (((ulong) rngList[TotalRandCalls + 3] *25) >> 32);
-
-                                if (synchable && !frameCompare.CompareNature(nature))
-                                    mod = EncounterMod.Synchronize;
-                                else
-                                    mod = EncounterMod.None;
-                            }
+                            // Synhronize / No Lead
                             else
                             {
+                                encounterSlot = EncounterSlotCalc.encounterSlot(rngList[1], frameType, EncounterType, isBW2);
+
                                 pid = FindPID(id, sid, idLower, ShinyCharm, 3);
 
                                 synchable = FindSync(cnt, TriggerSeed, rngTrigger);
 
-                                nature = (uint) (((ulong) rngList[TotalRandCalls + 3] *25) >> 32);
+                                if (EncounterMod == EncounterMod.Synchronize && synchable)
+                                    nature = (uint)SynchNature;
+                                else
+                                    nature = (uint)(((ulong)rngList[TotalRandCalls + 3] * 25) >> 32);
+
                             }
 
                             idTest = (idLower ^ (pid & 1) ^ (pid >> 31));
                             if (idTest == 1)
                                 pid = (pid ^ 0x80000000);
+
                         }
                         else if (G5_WildCaveSpot)
                         {
                             //Check if battle or item
                             bool battle = ((ulong)rngList[0] * 1000 >> 32) < 400;
 
-                            if (EncounterMod == EncounterMod.Synchronize)
-                            {
-                                if (battle)
-                                    encounterSlot = EncounterSlotCalc.encounterSlot(rngList[2], frameType, EncounterType);
-                                else
-                                    encounterSlot = FindItem();
-
-                                pid = FindPID(id, sid, idLower, ShinyCharm, 4);
-
-                                synchable = (rngList[1] >> 31) == 1;
-                                if (synchable)
-                                    nature = (uint) SynchNature;
-                                else
-                                    nature = (uint) (((ulong) rngList[TotalRandCalls + 4] *25) >> 32);
-
-                            }
-                            else if (EncounterMod == EncounterMod.CuteCharm)
-                            {
-                                if (battle)
-                                    encounterSlot = EncounterSlotCalc.encounterSlot(rngList[2], frameType, EncounterType);
-                                else
-                                    encounterSlot = FindItem();
-
-                                pid = rngList[4];
-                                pid = pid ^ 0x10000;
-
-                                // not a synch, but the Cute Charm check -- need to relabel (unfinished)
-                                synchable = ((((ulong) rngList[1]*0xFFFF) >> 32)/656) < 67;
-
-                                // failed CC check
-                                if (!synchable)
-                                {
-                                    // leave it as-is
-                                    nature = (uint) (((ulong) rngList[5]*25) >> 32);
-                                }
-                                else
-                                {
-                                    pid = Functions.GenderModPID(pid, rngList[5], SynchNature);
-                                    nature = (uint) (((ulong) rngList[6]*25) >> 32);
-                                }
-
-                                synchable = false;
-                            }
-                            else if (EncounterMod == EncounterMod.Compoundeyes || EncounterMod == EncounterMod.SuctionCups)
-                            {
-                                synchable = false;
-
-                                if (battle)
-                                    encounterSlot = EncounterSlotCalc.encounterSlot(rngList[1], frameType, EncounterType);
-                                else
-                                    encounterSlot = FindItem();
-
-                                pid = FindPID(id, sid, idLower, ShinyCharm, 3);
-
-                                nature = (uint) (((ulong) rngList[TotalRandCalls + 3] * 25) >> 32);
-
-                                //pid = rngList[3];
-                                //pid = pid ^ 0x10000;
-                            }
-                            else if (EncounterMod == EncounterMod.Search)
+                            if (EncounterMod == EncounterMod.Search)
                             {
                                 // Check if item or battle
                                 if (battle)
@@ -1710,7 +1708,7 @@ namespace RNGReporter.Objects
 
                                 pid = FindPID(id, sid, idLower, ShinyCharm, 3);
 
-                                nature = (uint) (((ulong) rngList[TotalRandCalls + 3] *25) >> 32);
+                                nature = (uint)(((ulong)rngList[TotalRandCalls + 3] * 25) >> 32);
 
                                 if (!ShinyCharm)
                                 {
@@ -1732,7 +1730,8 @@ namespace RNGReporter.Objects
                                     encounterSlot,
                                     getLevel(rngList[LvlRand]),
                                     item,
-                                    0);
+                                    0,
+                                    false);
 
                                 if (frameCompare.Compare(frame))
                                 {
@@ -1780,7 +1779,8 @@ namespace RNGReporter.Objects
                                                 encounterSlot,
                                                 getLevel(rngList[LvlRand]),
                                                 item,
-                                                0);
+                                                0,
+                                                false);
 
                                             switch (i)
                                             {
@@ -1807,13 +1807,55 @@ namespace RNGReporter.Objects
                                 }
 
                                 synchable = (rngList[1] >> 31) == 1;
-                                nature = (uint) (((ulong) rngList[TotalRandCalls + 4] *25) >> 32);
+                                nature = (uint)(((ulong)rngList[TotalRandCalls + 4] * 25) >> 32);
 
                                 if (synchable && !frameCompare.CompareNature(nature))
                                     mod = EncounterMod.Synchronize;
                                 else
                                     mod = EncounterMod.None;
                             }
+                            else if (EncounterMod == EncounterMod.CuteCharm)
+                            {
+                                if (battle)
+                                    encounterSlot = EncounterSlotCalc.encounterSlot(rngList[2], frameType, EncounterType);
+                                else
+                                    encounterSlot = FindItem();
+
+                                pid = rngList[4];
+                                pid = pid ^ 0x10000;
+
+                                // not a synch, but the Cute Charm check -- need to relabel (unfinished)
+                                synchable = ((((ulong) rngList[1]*0xFFFF) >> 32)/656) < 67;
+
+                                // failed CC check
+                                if (!synchable)
+                                {
+                                    // leave it as-is
+                                    nature = (uint) (((ulong) rngList[5]*25) >> 32);
+                                }
+                                else
+                                {
+                                    pid = Functions.GenderModPID(pid, rngList[5], SynchNature);
+                                    nature = (uint) (((ulong) rngList[6]*25) >> 32);
+                                }
+
+                                synchable = false;
+                            }
+                            else if (EncounterMod == EncounterMod.Compoundeyes || EncounterMod == EncounterMod.SuctionCups)
+                            {
+                                synchable = false;
+
+                                if (battle)
+                                    encounterSlot = EncounterSlotCalc.encounterSlot(rngList[1], frameType, EncounterType);
+                                else
+                                    encounterSlot = FindItem();
+
+                                pid = FindPID(id, sid, idLower, ShinyCharm, 3);
+
+                                nature = (uint) (((ulong) rngList[TotalRandCalls + 3] * 25) >> 32);
+
+                            }
+                            // Synchronize / No Lead
                             else
                             {
                                 if (battle)
@@ -1824,7 +1866,11 @@ namespace RNGReporter.Objects
                                 pid = FindPID(id, sid, idLower, ShinyCharm, 4);
 
                                 synchable = (rngList[1] >> 31) == 1;
-                                nature = (uint) (((ulong) rngList[TotalRandCalls + 4] *25) >> 32);
+
+                                if (EncounterMod == EncounterMod.Synchronize && synchable)
+                                    nature = (uint)SynchNature;
+                                else
+                                    nature = (uint)(((ulong)rngList[TotalRandCalls + 4] * 25) >> 32);
                             }
 
                             idTest = (idLower ^ (pid & 1) ^ (pid >> 31));
@@ -1835,22 +1881,87 @@ namespace RNGReporter.Objects
                         {
                             bool swarm = (((ulong) rngList[1]*0xFFFF/0x290) >> 32) < 40;
                             if (swarm)
-                                // we'll use non-existent slot 12 to denote a swarm
-                                encounterSlot = 12;
+                                encounterSlot = 12;     // we'll use non-existent slot 12 to denote a swarm
                             else
-                                encounterSlot = EncounterSlotCalc.encounterSlot(rngList[2], frameType,
-                                                                                EncounterType);
+                                encounterSlot = EncounterSlotCalc.encounterSlot(rngList[2], frameType, EncounterType);
 
-                            if (EncounterMod == EncounterMod.Synchronize)
+                            CurrentRatio = getRatio(0);
+
+                            if (EncounterMod == EncounterMod.Search)
                             {
                                 pid = FindPID(id, sid, idLower, ShinyCharm, 4);
 
-                                synchable = FindSync(cnt, TriggerSeed, rngTrigger);
-                                if (synchable)
-                                    nature = (uint) SynchNature;
-                                else
-                                    nature = (uint) (((ulong) rngList[TotalRandCalls + 4] *25) >> 32);
+                                if (!ShinyCharm)
+                                {
+                                    // not a synch, but the Cute Charm check -- need to relabel (unfinished)
+                                    // also never used
+                                    synchable = ((((ulong)rngList[0] * 0xFFFF) >> 32) / 656) < 67;
 
+                                    // Add all the Cute Charm possibilities
+                                    nature = (uint)(((ulong)rngList[6] * 25) >> 32);
+
+                                    for (int i = -4; i < 5; i++)
+                                    {
+                                        if (i == 0)
+                                            continue;
+
+                                        uint tempPid = Functions.GenderModPID(pid, rngList[5], i);
+
+                                        idTest = (idLower ^ (tempPid & 1) ^ (tempPid >> 31));
+                                        if (idTest == 1)
+                                            tempPid = (tempPid ^ 0x80000000);
+
+                                        frame = Frame.GenerateFrame(
+                                            FrameType.Method5Natures,
+                                            EncounterType,
+                                            cnt + InitialFrame,
+                                            rngList[0],
+                                            tempPid,
+                                            id,
+                                            sid,
+                                            nature,
+                                            false,
+                                            encounterSlot,
+                                            getLevel(rngList[LvlRand]),
+                                            item,
+                                            0,
+                                            false);
+
+                                        switch (i)
+                                        {
+                                            case 1: frame.EncounterMod = EncounterMod.CuteCharm50M; break;
+                                            case 2: frame.EncounterMod = EncounterMod.CuteCharm75M; break;
+                                            case 3: frame.EncounterMod = EncounterMod.CuteCharm25M; break;
+                                            case 4: frame.EncounterMod = EncounterMod.CuteCharm875M; break;
+                                            case -1: frame.EncounterMod = EncounterMod.CuteCharm50F; break;
+                                            case -2: frame.EncounterMod = EncounterMod.CuteCharm75F; break;
+                                            case -3: frame.EncounterMod = EncounterMod.CuteCharm25F; break;
+                                            case -4: frame.EncounterMod = EncounterMod.CuteCharm125F; break;
+                                        }
+
+                                        if (frameCompare.Compare(frame))
+                                        {
+                                            frames.Add(frame);
+                                        }
+                                    }
+                                }
+
+                                //check
+                                if (!ShinyCharm)
+                                {
+                                    idTest = (idLower ^ (pid & 1) ^ (pid >> 31));
+                                    if (idTest == 1)
+                                        pid = (pid ^ 0x80000000);
+                                }
+
+
+                                synchable = FindSync(cnt, TriggerSeed, rngTrigger);
+                                nature = (uint)(((ulong)rngList[TotalRandCalls + 4] * 25) >> 32);
+
+                                if (synchable && !frameCompare.CompareNature(nature))
+                                    mod = EncounterMod.Synchronize;
+                                else
+                                    mod = EncounterMod.None;
                             }
                             else if (EncounterMod == EncounterMod.CuteCharm)
                             {
@@ -1890,136 +2001,53 @@ namespace RNGReporter.Objects
                                 pid = rngList[3];
                                 pid = pid ^ 0x10000;
                             }
-                            else if (EncounterMod == EncounterMod.Search)
-                            {
-                                pid = FindPID(id, sid, idLower, ShinyCharm, 4);
-
-                                if (!ShinyCharm)
-                                {
-                                    // not a synch, but the Cute Charm check -- need to relabel (unfinished)
-                                    // also never used
-                                    synchable = ((((ulong)rngList[0] * 0xFFFF) >> 32) / 656) < 67;
-
-                                    // Add all the Cute Charm possibilities
-                                    nature = (uint)(((ulong)rngList[6] * 25) >> 32);
-
-                                    for (int i = -4; i < 5; i++)
-                                    {
-                                        if (i == 0)
-                                            continue;
-
-                                        uint tempPid = Functions.GenderModPID(pid, rngList[5], i);
-
-                                        idTest = (idLower ^ (tempPid & 1) ^ (tempPid >> 31));
-                                        if (idTest == 1)
-                                            tempPid = (tempPid ^ 0x80000000);
-
-                                        frame = Frame.GenerateFrame(
-                                            FrameType.Method5Natures,
-                                            EncounterType,
-                                            cnt + InitialFrame,
-                                            rngList[0],
-                                            tempPid,
-                                            id,
-                                            sid,
-                                            nature,
-                                            false,
-                                            encounterSlot,
-                                            getLevel(rngList[LvlRand]),
-                                            item,
-                                            0);
-
-                                        switch (i)
-                                        {
-                                            case 1: frame.EncounterMod = EncounterMod.CuteCharm50M; break;
-                                            case 2: frame.EncounterMod = EncounterMod.CuteCharm75M; break;
-                                            case 3: frame.EncounterMod = EncounterMod.CuteCharm25M; break;
-                                            case 4: frame.EncounterMod = EncounterMod.CuteCharm875M; break;
-                                            case -1: frame.EncounterMod = EncounterMod.CuteCharm50F; break;
-                                            case -2: frame.EncounterMod = EncounterMod.CuteCharm75F; break;
-                                            case -3: frame.EncounterMod = EncounterMod.CuteCharm25F; break;
-                                            case -4: frame.EncounterMod = EncounterMod.CuteCharm125F; break;
-                                        }
-
-                                        if (frameCompare.Compare(frame))
-                                        {
-                                            frames.Add(frame);
-                                        }
-                                    }
-                                }
-
-                                //check
-                                if (!ShinyCharm)
-                                {
-                                    idTest = (idLower ^ (pid & 1) ^ (pid >> 31));
-                                    if (idTest == 1)
-                                        pid = (pid ^ 0x80000000);
-                                }
-                                
-
-                                synchable = FindSync(cnt, TriggerSeed, rngTrigger);
-                                nature = (uint) (((ulong) rngList[TotalRandCalls + 4] *25) >> 32);
-
-                                if (synchable && !frameCompare.CompareNature(nature))
-                                    mod = EncounterMod.Synchronize;
-                                else
-                                    mod = EncounterMod.None;
-                            }
+                            // Synchronize / No Lead / Suction Cups??
                             else
                             {
                                 pid = FindPID(id, sid, idLower, ShinyCharm, 4);
                                 synchable = FindSync(cnt, TriggerSeed, rngTrigger);
-                                nature = (uint) (((ulong) rngList[TotalRandCalls + 4] *25) >> 32);
+
+                                if (EncounterMod == EncounterMod.Synchronize && synchable)
+                                    nature = (uint)SynchNature;
+                                else
+                                    nature = (uint)(((ulong)rngList[TotalRandCalls + 4] * 25) >> 32);
                             }
 
                             idTest = (idLower ^ (pid & 1) ^ (pid >> 31));
                             if (idTest == 1)
                                 pid = (pid ^ 0x80000000);
                         }
-                        else if (G5_Stationary)
+                        else if (G5_WildDarkGrass)
                         {
-                            if (EncounterMod == EncounterMod.Synchronize)
-                            {
-                                pid = FindPID(id, sid, idLower, ShinyCharm, 1);
+                            CurrentRatio = getRatio(1);
+                            bool DoubleEncounter = CheckDoubleEnc(SearchForTrigger ? 0 : 1);
 
-                                synchable = (rngList[0] >> 31) == 1;
-                                if (synchable)
-                                    nature = (uint) SynchNature;
+
+                            synchable = FindSync(cnt, TriggerSeed, rngTrigger);
+                            encounterSlot = EncounterSlotCalc.encounterSlot(rngList[2], frameType, EncounterType);
+                            pid = FindPID(id, sid, idLower, ShinyCharm, DoubleEncounter ? 6 : 4);
+                            if (EncounterMod == EncounterMod.Synchronize && synchable)
+                                nature = (uint)SynchNature;
+                            else
+                                nature = (uint)(((ulong)rngList[TotalRandCalls + (DoubleEncounter ? 6 : 4)] * 25) >> 32);
+
+                            if (EncounterMod == EncounterMod.Search)
+                            {
+                                if (synchable && !frameCompare.CompareNature(nature))
+                                    mod = EncounterMod.Synchronize;
                                 else
-                                    nature = (uint) (((ulong) rngList[TotalRandCalls + 1] *25) >> 32);
-                                
+                                    mod = EncounterMod.None;
                             }
                             else if (EncounterMod == EncounterMod.CuteCharm)
                             {
-                                // not a synch, but the Cute Charm check -- need to relabel (unfinished)
-                                synchable = ((((ulong) rngList[0]*0xFFFF) >> 32)/656) < 67;
-
-                                pid = rngList[1];
-                                pid = pid ^ 0x10000;
-
-                                // failed CC check
-                                if (!synchable)
-                                {
-                                    // leave it as-is
-                                    nature = (uint) (((ulong) rngList[2]*25) >> 32);
-                                }
-                                else
-                                {
-                                    pid = Functions.GenderModPID(pid, rngList[2], SynchNature);
-                                    nature = (uint) (((ulong) rngList[3]*25) >> 32);
-                                }
-
-                                synchable = false;
+                                continue;
                             }
-                            else if (EncounterMod == EncounterMod.Compoundeyes)
-                            {
-                                synchable = false;
-                                nature = (uint) (((ulong) rngList[1]*25) >> 32);
 
-                                pid = rngList[0];
-                                pid = pid ^ 0x10000;
-                            }
-                            else if (EncounterMod == EncounterMod.Search)
+
+                        }
+                        else if (G5_Stationary)
+                        {
+                            if (EncounterMod == EncounterMod.Search)
                             {
                                 pid = FindPID(id, sid, idLower, ShinyCharm, 1);
 
@@ -2059,16 +2087,13 @@ namespace RNGReporter.Objects
                                                 encounterSlot,
                                                 getLevel(rngList[LvlRand]),
                                                 item,
-                                                0);
+                                                0,
+                                                false);
 
                                             switch (i)
                                             {
-                                                case 1:
-                                                    frame.EncounterMod = EncounterMod.CuteCharm50M;
-                                                    break;
-                                                case -1:
-                                                    frame.EncounterMod = EncounterMod.CuteCharm50F;
-                                                    break;
+                                                case 1: frame.EncounterMod = EncounterMod.CuteCharm50M; break;
+                                                case -1: frame.EncounterMod = EncounterMod.CuteCharm50F; break;
                                             }
 
                                             if (frameCompare.Compare(frame))
@@ -2080,23 +2105,59 @@ namespace RNGReporter.Objects
                                 }
 
                                 synchable = (rngList[0] >> 31) == 1;
-                                nature = (uint) (((ulong) rngList[TotalRandCalls + 1] *25) >> 32);
+                                nature = (uint)(((ulong)rngList[TotalRandCalls + 1] * 25) >> 32);
 
                                 if (synchable && !frameCompare.CompareNature(nature))
                                     mod = EncounterMod.Synchronize;
                                 else
                                     mod = EncounterMod.None;
                             }
+                            else if (EncounterMod == EncounterMod.CuteCharm)
+                            {
+                                // not a synch, but the Cute Charm check -- need to relabel (unfinished)
+                                synchable = ((((ulong) rngList[0]*0xFFFF) >> 32)/656) < 67;
+
+                                pid = rngList[1];
+                                pid = pid ^ 0x10000;
+
+                                // failed CC check
+                                if (!synchable)
+                                {
+                                    // leave it as-is
+                                    nature = (uint) (((ulong) rngList[2]*25) >> 32);
+                                }
+                                else
+                                {
+                                    pid = Functions.GenderModPID(pid, rngList[2], SynchNature);
+                                    nature = (uint) (((ulong) rngList[3]*25) >> 32);
+                                }
+
+                                synchable = false;
+                            }
+                            else if (EncounterMod == EncounterMod.Compoundeyes)
+                            {
+                                synchable = false;
+                                nature = (uint) (((ulong) rngList[1]*25) >> 32);
+
+                                pid = rngList[0];
+                                pid = pid ^ 0x10000;
+                            }
+                            // Synchronize / No Lead
                             else
                             {
                                 pid = FindPID(id, sid, idLower, ShinyCharm, 1);
                                 synchable = (rngList[0] >> 31) == 1;
-                                nature = (uint) (((ulong) rngList[TotalRandCalls + 1] *25) >> 32);
+
+                                if (EncounterMod == EncounterMod.Synchronize && synchable)
+                                    nature = (uint)SynchNature;
+                                else
+                                    nature = (uint)(((ulong)rngList[TotalRandCalls + 1] * 25) >> 32);
                             }
 
                             idTest = (idLower ^ (pid & 1) ^ (pid >> 31));
                             if (idTest == 1)
                                 pid = (pid ^ 0x80000000);
+
                         }
                         else if (G5_AllEncounterShiny)
                         {
@@ -2235,8 +2296,6 @@ namespace RNGReporter.Objects
                                 synchable = false;
                                 nature = (uint) (((ulong) rngList[TotalRandCalls + 3] *25) >> 32);
 
-                                //pid = rngList[3];
-                                //pid = pid ^ 0x10000;
                             }
                             else
                             {
@@ -2275,7 +2334,8 @@ namespace RNGReporter.Objects
                                                 encounterSlot, 
                                                 getLevel(rngList[LvlRand]), 
                                                 item, 
-                                                0);
+                                                0,
+                                                false);
 
                                             if (frameCompare.Compare(frame))
                                                 frames.Add(frame);
@@ -2303,7 +2363,7 @@ namespace RNGReporter.Objects
                                                             tempPid = (tempPid ^ 0x80000000);
 
                                                         frame = Frame.GenerateFrame(FrameType.Method5Natures, EncounterType, cnt + InitialFrame, rngList[0],
-                                                            tempPid, id, sid, nature, false, encounterSlot, getLevel(rngList[LvlRand]), item, 0);
+                                                            tempPid, id, sid, nature, false, encounterSlot, getLevel(rngList[LvlRand]), item, 0, false);
 
                                                         switch (i)
                                                         {
@@ -2347,7 +2407,8 @@ namespace RNGReporter.Objects
                                             encounterSlot, 
                                             getLevel(rngList[LvlRand - 1]), 
                                             item, 
-                                            0);
+                                            0,
+                                            false);
 
                                         frame.EncounterMod = EncounterMod.SuctionCups;
 
@@ -2384,7 +2445,7 @@ namespace RNGReporter.Objects
                                                         tempPid = (tempPid ^ 0x80000000);
 
                                                     frame = Frame.GenerateFrame(FrameType.Method5Natures, EncounterType, cnt + InitialFrame, rngList[0], 
-                                                        tempPid, id, sid, nature, false, encounterSlot, getLevel(rngList[LvlRand]), item, 0);
+                                                        tempPid, id, sid, nature, false, encounterSlot, getLevel(rngList[LvlRand]), item, 0, false);
 
                                                     switch (i)
                                                     {
@@ -2412,21 +2473,6 @@ namespace RNGReporter.Objects
                                             mod = EncounterMod.None;
                                     }
 
-                                }
-                                else if (EncounterMod == EncounterMod.Synchronize)
-                                {
-                                    if (G5_WildSuperRod && (rngList[1] >> 16) / 656 >= 50)
-                                        continue;
-                                    encounterSlot = EncounterSlotCalc.encounterSlot(rngList[2], frameType, EncounterType);
-
-                                    pid = FindPID(id, sid, idLower, ShinyCharm, 4);
-
-                                    synchable = (rngList[G5_WildShakerGrass ? 1 : 0] >> 31) == 1;
-                                    if (synchable)
-                                        nature = (uint) SynchNature;
-                                    else
-                                        nature = (uint) (((ulong) rngList[TotalRandCalls + 4] *25) >> 32);
-                                    
                                 }
                                 else if (EncounterMod == EncounterMod.CuteCharm)
                                 {
@@ -2487,16 +2533,20 @@ namespace RNGReporter.Objects
                                     encounterSlot = EncounterSlotCalc.encounterSlot(rngList[2], frameType, EncounterType);
                                     pid = FindPID(id, sid, idLower, ShinyCharm, 4);
                                     synchable = (rngList[G5_WildShakerGrass ? 1 : 0] >> 31) == 1;
-                                    nature = (uint) (((ulong) rngList[TotalRandCalls + 4]*25) >> 32);
+
+                                    if (EncounterMod == EncounterMod.Synchronize && synchable)
+                                        nature = (uint)SynchNature;
+                                    else
+                                        nature = (uint)(((ulong)rngList[TotalRandCalls + 4] * 25) >> 32);
 
                                 }
+
                             }
 
                             idTest = idLower ^ (pid & 1) ^ (pid >> 31);
                             if (idTest == 1)
-                            {
                                 pid = (pid ^ 0x80000000);
-                            }
+
                         }
                     }
 
@@ -2536,8 +2586,11 @@ namespace RNGReporter.Objects
                                 encounterSlot,
                                 getLevel(rngList[LvlRand]),
                                 item, 
-                                CurrentRatio);
+                                CurrentRatio, CheckDoubleEnc(SearchForTrigger ? 0 : 1));
                     }
+
+                    //if (G5_WildDarkGrass)
+                        //frame.Double = CheckDoubleEnc(SearchForTrigger ? 0 : 1) ? "Double" : "";
 
                     frame.EncounterMod = mod;
                     frame.CGearTime = entreeTimer.GetTime(rngList[0]);
@@ -4457,6 +4510,17 @@ namespace RNGReporter.Objects
 
         #endregion
 
+        private ulong getRatio(int randCall)
+        {
+            return (((ulong)rngList[randCall] * 0x1FFF) >> 32) / 82;
+            //return ((((ulong)rngList[randCall]) * 0xFFFF) >> 32) / 0x290; // -> Alternative
+        }
+
+        private bool CheckDoubleEnc(int randCall)
+        {
+            return (((ulong)rngList[randCall]) * 100 >> 32) < 40;
+        }
+
         private bool FindSync(uint count, ulong FirstSeed, BWRng rng) //Mess
         {
             if (SearchForTrigger)
@@ -4501,6 +4565,20 @@ namespace RNGReporter.Objects
                 return rngList[randCall] ^ 0x10000;
             }
                 
+        }
+
+        private bool CheckShiny(uint id, uint sid, uint pid)
+        {
+            uint tid = (id & 0xffff) | ((sid & 0xffff) << 16);
+            uint a = pid ^ tid;
+            uint b = a & 0xffff;
+            uint c = (a >> 16) & 0xffff;
+            uint d = b ^ c;
+
+            if (d < 8)
+                return true;
+
+            return false;
         }
 
         private uint FindPIDCuteCharm(uint id, uint sid, uint idLower, int RerollCount, int randCall)
