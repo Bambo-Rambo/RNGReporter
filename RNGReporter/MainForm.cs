@@ -245,6 +245,19 @@ namespace RNGReporter
                 Settings.Default.LastVersion = VersionNumber;
             }
 
+
+            comboBoxMethod.SelectedIndex = 11;
+            Synchable.Visible = false;
+            /*checkBoxTrigger.Checked = true;
+            textBoxSeed.Text = "750813B577DA7007";
+            maskedTextBoxStartingFrame.Text = "497";
+            maskedTextBoxMaxFrames.Text = "500";
+            buttonLead.PerformClick();
+            checkBoxBW2.Checked = true;
+            cbShinyCharm.Checked = true;
+            comboBoxEncounterType.SelectedIndex = 2;
+            //buttonGenerate.PerformClick();*/
+
             if (File.Exists(Settings.Default.ProfileLocation))
                 Profiles.LoadProfiles(Settings.Default.ProfileLocation);
 // used for update checks, only do it once a day
@@ -371,9 +384,16 @@ namespace RNGReporter
                 int RatioValue = Convert.ToInt32(dataGridViewValues.Rows[e.RowIndex].Cells["Ratio"].Value);
                 if (dataGridViewValues.Columns[e.ColumnIndex].Name == "Ratio")
                 {
-                    if ((RatioValue < 13 && comboBoxEncounterType.SelectedIndex < 2) || (RatioValue < 6 && comboBoxEncounterType.SelectedIndex == 2))
+                    if ((RatioValue < 14 && comboBoxEncounterType.SelectedIndex <= 2) || 
+                        (RatioValue < 6 && comboBoxEncounterType.SelectedIndex == 3) ||
+                        (comboBoxEncounterType.SelectedIndex == 4 && RatioValue < 50))
                     {
                         e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+                        e.CellStyle.ForeColor = Color.Green;
+                    }
+                    else
+                    {
+                        e.CellStyle.ForeColor = Color.LightCoral;
                     }
                 }
             }
@@ -442,7 +462,8 @@ namespace RNGReporter
                 frames = null;
             }
 
-            Ratio.Visible = checkBoxTrigger.Checked && checkBoxTrigger.Visible;
+            Ratio.Visible = (checkBoxTrigger.Checked && checkBoxTrigger.Visible) ||                     //Battle Trigger box is visible and checked or
+                (comboBoxEncounterType.SelectedIndex == 4 && currentMod != EncounterMod.SuctionCups);   //fishing without Suction Cups
             Level.Visible = labelMinMaxLevel.Visible;
             
 

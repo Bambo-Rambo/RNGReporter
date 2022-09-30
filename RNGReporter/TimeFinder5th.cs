@@ -29,6 +29,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 using System.Windows.Forms;
 using Microsoft.Win32;
+using RNGReporter.Controls;
 using RNGReporter.Objects;
 using RNGReporter.Objects.Generators;
 using RNGReporter.Objects.Searchers;
@@ -580,7 +581,7 @@ namespace RNGReporter
                             constructGenderFilter());
 
                         NearestShiny.Visible = true;
-                        PID.Visible = false;
+                        PID.Visible = true;
 
                         if (shinygenerator.EncounterType != EncounterType.Gift &&
                             shinygenerator.EncounterType != EncounterType.Roamer &&
@@ -1252,6 +1253,7 @@ namespace RNGReporter
                                             {
                                                 if (shinyOffset > 0)
                                                 {
+                                                    shinygenerators[listIndex].isBW2 = profile.IsBW2(); // this is for PIDRNG encounter slots. Was missing
                                                     shinygenerators[listIndex].InitialSeed = seed;
                                                     shinygenerators[listIndex].InitialFrame =
                                                         Functions.initialPIDRNG(seed, profile) + minAdvances;
@@ -1922,12 +1924,24 @@ namespace RNGReporter
 
         private void dataGridViewCapValues_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            var profile = (Profile)comboBoxProfiles.SelectedItem;
+            uint tid = (uint)((profile.ID & 0xffff) | ((profile.SID & 0xffff) << 16));
+            uint a = Convert.ToUInt32(dataGridViewCapValues.Rows[e.RowIndex].Cells["PID"].Value) ^ tid;
+            uint b = a & 0xffff;
+            uint c = (a >> 16);
+            uint d = b ^ c;
+            if (d == 0)
+                dataGridViewCapValues.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Aqua;
+            else if (d < 8)
+                dataGridViewCapValues.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightCyan;
+
+
             if (EncounterRatio.Visible)
             {
                 int RatioValue = Convert.ToInt32(dataGridViewCapValues.Rows[e.RowIndex].Cells["EncounterRatio"].Value);
                 if (dataGridViewCapValues.Columns[e.ColumnIndex].Name == "EncounterRatio")
                 {
-                    if ((RatioValue < 13 && comboBoxEncounterType.SelectedIndex < 2) || (RatioValue < 6 && comboBoxEncounterType.SelectedIndex == 2))
+                    if ((RatioValue < 14 && comboBoxEncounterType.SelectedIndex < 2) || (RatioValue < 6 && comboBoxEncounterType.SelectedIndex == 2))
                     {
                         e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
                     }
@@ -2410,7 +2424,7 @@ namespace RNGReporter
             IVFilters_Changed(sender, e);
 
             label54.Visible = comboBoxEncounterSlot.Visible = buttonAnySlot.Visible = 
-                comboBoxEncounterType.SelectedIndex < 8 || comboBoxEncounterType.SelectedIndex > 11;
+                comboBoxEncounterType.SelectedIndex < 9 || comboBoxEncounterType.SelectedIndex > 12;
 
             labelCapMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible = LevelLabel.Visible = numericLevel.Visible = LevelConditions();
             
