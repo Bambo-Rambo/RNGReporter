@@ -1,4 +1,4 @@
-﻿/*
+/*
  * This file is part of RNG Reporter
  * Copyright (C) 2012 by Bill Young, Mike Suleski, and Andrew Ringer
  *
@@ -1260,7 +1260,7 @@ namespace RNGReporter.Objects
             {
                 mt.Reseed((uint) InitialSeed);
 
-                for (uint cnt = 1; cnt < InitialFrame; cnt++)
+                for (uint cnt = 0; cnt < InitialFrame; cnt++)
                     mt.Nextuint();
 
                 rngList.Clear();
