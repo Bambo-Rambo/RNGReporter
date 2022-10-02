@@ -189,9 +189,6 @@ namespace RNGReporter
             this.buttonAnyNature = new RNGReporter.GlassButton();
             this.buttonGenerate = new RNGReporter.GlassButton();
             this.dataGridViewValues = new RNGReporter.DoubleBufferedDataGridView();
-            this.maskedTextBoxStartingFrame = new RNGReporter.Controls.MaskedTextBox2();
-            this.maskedTextBoxMaxFrames = new RNGReporter.Controls.MaskedTextBox2();
-            this.comboBoxMethod = new RNGReporter.GlassComboBox();
             this.Frame = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -224,6 +221,9 @@ namespace RNGReporter
             this.f25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.f75 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Synchable = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.maskedTextBoxStartingFrame = new RNGReporter.Controls.MaskedTextBox2();
+            this.maskedTextBoxMaxFrames = new RNGReporter.Controls.MaskedTextBox2();
+            this.comboBoxMethod = new RNGReporter.GlassComboBox();
             this.contextMenuStripGrid.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripTimeFinder.SuspendLayout();
@@ -1790,40 +1790,6 @@ namespace RNGReporter
             this.dataGridViewValues.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewValues_CellMouseLeave);
             this.dataGridViewValues.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridViewValues_MouseDown);
             // 
-            // maskedTextBoxStartingFrame
-            // 
-            this.maskedTextBoxStartingFrame.Hex = false;
-            this.maskedTextBoxStartingFrame.Location = new System.Drawing.Point(101, 170);
-            this.maskedTextBoxStartingFrame.Mask = "0000000000";
-            this.maskedTextBoxStartingFrame.Name = "maskedTextBoxStartingFrame";
-            this.maskedTextBoxStartingFrame.Size = new System.Drawing.Size(153, 20);
-            this.maskedTextBoxStartingFrame.TabIndex = 6;
-            this.maskedTextBoxStartingFrame.Text = "2";
-            this.maskedTextBoxStartingFrame.ValidatingType = typeof(int);
-            // 
-            // maskedTextBoxMaxFrames
-            // 
-            this.maskedTextBoxMaxFrames.Hex = false;
-            this.maskedTextBoxMaxFrames.Location = new System.Drawing.Point(101, 144);
-            this.maskedTextBoxMaxFrames.Mask = "0000000000";
-            this.maskedTextBoxMaxFrames.Name = "maskedTextBoxMaxFrames";
-            this.maskedTextBoxMaxFrames.Size = new System.Drawing.Size(153, 20);
-            this.maskedTextBoxMaxFrames.TabIndex = 5;
-            this.maskedTextBoxMaxFrames.Text = "100000";
-            // 
-            // comboBoxMethod
-            // 
-            this.comboBoxMethod.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.comboBoxMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxMethod.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxMethod.FormattingEnabled = true;
-            this.comboBoxMethod.Location = new System.Drawing.Point(101, 48);
-            this.comboBoxMethod.Name = "comboBoxMethod";
-            this.comboBoxMethod.ShineColor = System.Drawing.SystemColors.Window;
-            this.comboBoxMethod.Size = new System.Drawing.Size(153, 21);
-            this.comboBoxMethod.TabIndex = 1;
-            this.comboBoxMethod.SelectedIndexChanged += new System.EventHandler(this.comboBoxMethod_SelectedIndexChanged);
-            // 
             // Frame
             // 
             this.Frame.DataPropertyName = "Number";
@@ -2087,6 +2053,40 @@ namespace RNGReporter
             this.Synchable.ReadOnly = true;
             this.Synchable.Visible = false;
             this.Synchable.Width = 105;
+            // 
+            // maskedTextBoxStartingFrame
+            // 
+            this.maskedTextBoxStartingFrame.Hex = false;
+            this.maskedTextBoxStartingFrame.Location = new System.Drawing.Point(101, 170);
+            this.maskedTextBoxStartingFrame.Mask = "0000000000";
+            this.maskedTextBoxStartingFrame.Name = "maskedTextBoxStartingFrame";
+            this.maskedTextBoxStartingFrame.Size = new System.Drawing.Size(153, 20);
+            this.maskedTextBoxStartingFrame.TabIndex = 6;
+            this.maskedTextBoxStartingFrame.Text = "0";
+            this.maskedTextBoxStartingFrame.ValidatingType = typeof(int);
+            // 
+            // maskedTextBoxMaxFrames
+            // 
+            this.maskedTextBoxMaxFrames.Hex = false;
+            this.maskedTextBoxMaxFrames.Location = new System.Drawing.Point(101, 144);
+            this.maskedTextBoxMaxFrames.Mask = "0000000000";
+            this.maskedTextBoxMaxFrames.Name = "maskedTextBoxMaxFrames";
+            this.maskedTextBoxMaxFrames.Size = new System.Drawing.Size(153, 20);
+            this.maskedTextBoxMaxFrames.TabIndex = 5;
+            this.maskedTextBoxMaxFrames.Text = "100000";
+            // 
+            // comboBoxMethod
+            // 
+            this.comboBoxMethod.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.comboBoxMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMethod.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxMethod.FormattingEnabled = true;
+            this.comboBoxMethod.Location = new System.Drawing.Point(101, 48);
+            this.comboBoxMethod.Name = "comboBoxMethod";
+            this.comboBoxMethod.ShineColor = System.Drawing.SystemColors.Window;
+            this.comboBoxMethod.Size = new System.Drawing.Size(153, 21);
+            this.comboBoxMethod.TabIndex = 1;
+            this.comboBoxMethod.SelectedIndexChanged += new System.EventHandler(this.comboBoxMethod_SelectedIndexChanged);
             // 
             // MainForm
             // 

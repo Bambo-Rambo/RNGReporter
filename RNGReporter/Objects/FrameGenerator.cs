@@ -1,4 +1,4 @@
-/*
+﻿/*
  * This file is part of RNG Reporter
  * Copyright (C) 2012 by Bill Young, Mike Suleski, and Andrew Ringer
  *

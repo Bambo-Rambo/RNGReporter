@@ -14,7 +14,6 @@ namespace RNGReporter.Objects
         public bool isBW2 { get; set; }
 
         public int GenderCase;
-        public byte getLevel(ulong seed) => (byte)((uint)(seed * 100 >> 32) % (MaxLevel - MinLevel + 1) + MinLevel);
 
         public int pointer;
 
@@ -842,6 +841,8 @@ namespace RNGReporter.Objects
         {
             return EncounterSlotCalc.encounterSlot(NextRand(), frameType, EncounterType, isBW2);
         }
+
+        public byte getLevel(ulong seed) => (byte)((uint)(seed * 100 >> 32) % (MaxLevel - MinLevel + 1) + MinLevel);
 
         private bool CheckBattle() => ((ulong)NextRand() * 1000 >> 32) < 400;
 

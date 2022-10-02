@@ -467,6 +467,14 @@ namespace RNGReporter
                 return;
             }
 
+            bool fastSearch = FastCapFilters() && FastCapFrames();
+            if (fastSearch)
+            {
+                minOffset++;
+                maxOffset++;
+            }
+            bool ConsiderTrigger = checkBoxTriggerBattle.Checked && checkBoxTriggerBattle.Visible;
+
             generator = new FrameGenerator
                 {
                     // Now that each combo box item is a custom object containing the FrameType reference
@@ -490,8 +498,7 @@ namespace RNGReporter
             //list = new Hashtable[6];
             list = new Dictionary<uint, uint>[6];
 
-            bool fastSearch = FastCapFilters() && FastCapFrames();
-            bool ConsiderTrigger = checkBoxTriggerBattle.Checked && checkBoxTriggerBattle.Visible;
+            
 
             //  Build up a FrameComparer
 
@@ -1222,7 +1229,7 @@ namespace RNGReporter
                                                             uint IVHash = list[i][testSeed];
                                                             frames.AddRange(generators[listIndex].Generate(
                                                                 frameCompare, testSeed, IVHash,
-                                                                i + 1 + start + entralink, LevelConditions() ? (int)numericLevel.Value : 0));
+                                                                i + start + entralink, LevelConditions() ? (int)numericLevel.Value : 0));   //Changed
                                                         }
                                                     }
                                                 }
