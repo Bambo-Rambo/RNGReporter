@@ -89,7 +89,6 @@ namespace RNGReporter
 
         private void PlatinumTime_Load(object sender, EventArgs e)
         {
-            //cbCapShinyCharm.Checked = mainForm.cbShinyCharm.Checked;
 
             // Add smart comboBox items
             // Would be nice if we left these in the Designer file
@@ -265,6 +264,8 @@ namespace RNGReporter
 
             cbDRMonth.CheckBoxItems[DateTime.Now.Month].Checked = true;
             txtDRYear.Text = DateTime.Now.Year.ToString();
+
+            cbCapShinyCharm.Visible = ((Profile)comboBoxProfiles.SelectedItem).IsBW2();
 
             RefreshParameters();
         }
@@ -3009,6 +3010,8 @@ namespace RNGReporter
                 txtCallerID.Text = Settings.Default.ID;
                 txtCallerSID.Text = Settings.Default.SID;
             }
+
+            cbCapShinyCharm.Visible = ((Profile)comboBoxProfiles.SelectedItem).IsBW2();
         }
 
         private void buttonLoadEggSeeds_Click(object sender, EventArgs e)
