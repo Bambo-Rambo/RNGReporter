@@ -68,6 +68,7 @@ namespace RNGReporter.Objects
         }
 
         public uint RngResult { get; set; }
+        public uint RngResultNext { get; set; }     // This is needed for the phenomenon spot trigger
 
         public uint MaxSkips { get; set; }
 
@@ -78,7 +79,7 @@ namespace RNGReporter.Objects
 
         public string CaveSpotting
         {
-            get { return RngResult >> 28 == 0 ? "Trigger at 20th step" : ""; }
+            get { return RngResultNext >> 28 == 0 ? "Trigger at 20th step" : ""; }
         }
 
         // Chatot response for 4th Gen Games
@@ -1084,12 +1085,13 @@ namespace RNGReporter.Objects
             return frame;
         }
 
-        // used for 5th Gen nature generation
-        public static Frame GenerateFrame(
+
+        public static Frame GenerateFrame5(
             FrameType frameType,
             EncounterType encounterType,
             uint number,
             uint rngResult,
+            uint rngResultNext,
             uint pid,
             uint id,
             uint sid,
@@ -1105,6 +1107,7 @@ namespace RNGReporter.Objects
                 {
                     Number = number,
                     RngResult = rngResult,
+                    RngResultNext = rngResultNext,
                     id = id,
                     sid = sid,
                     Pid = pid,

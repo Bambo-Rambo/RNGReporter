@@ -255,6 +255,7 @@
     <Compile Include="GameCube.Designer.cs">
       <DependentUpon>GameCube.cs</DependentUpon>
     </Compile>
+    <Compile Include="Objects\FrameGeneratorG5PID.cs" />
     <Compile Include="Objects\Generators\DreamRadarGenerator.cs" />
     <Compile Include="Objects\Generators\HiddenGrottoGenerator.cs" />
     <Compile Include="Objects\IVFilter.cs" />

@@ -247,16 +247,7 @@ namespace RNGReporter
 
 
             comboBoxMethod.SelectedIndex = 11;
-            Synchable.Visible = false;
-            /*checkBoxTrigger.Checked = true;
-            textBoxSeed.Text = "750813B577DA7007";
-            maskedTextBoxStartingFrame.Text = "497";
-            maskedTextBoxMaxFrames.Text = "500";
-            buttonLead.PerformClick();
-            checkBoxBW2.Checked = true;
-            cbShinyCharm.Checked = true;
-            comboBoxEncounterType.SelectedIndex = 2;
-            //buttonGenerate.PerformClick();*/
+
 
             if (File.Exists(Settings.Default.ProfileLocation))
                 Profiles.LoadProfiles(Settings.Default.ProfileLocation);
@@ -497,7 +488,7 @@ namespace RNGReporter
             generator.EncounterType = EncounterTypeCalc.EncounterString(comboBoxEncounterType.Text);
             generator.DittoUsed = checkBoxDittoParent.Checked;
             generator.MaleOnlySpecies = cbNidoBeat.Checked;
-            generator.ShinyCharm = cbShinyCharm.Checked;
+            generator.RerollCount = cbShinyCharm.Checked ? 3 : 1;
             generator.MinLevel = (int)numericLevelMin.Value;
             generator.MaxLevel = (int)numericLevelMax.Value;
             generator.SearchForTrigger = checkBoxTrigger.Checked && checkBoxTrigger.Visible;
@@ -806,7 +797,12 @@ namespace RNGReporter
             if(generator.FrameType == FrameType.Channel)
                 id = 40122;
 
-            frames = generator.Generate(frameCompare, id, sid);
+
+            if (generator.FrameType == FrameType.Method5Natures)
+                frames = generator.GenerateG5PID(frameCompare, id, sid);
+            else
+                frames = generator.Generate(frameCompare, id, sid);
+
 
             foreach (Frame frame in frames)
             {
@@ -2685,7 +2681,7 @@ namespace RNGReporter
             bool memorylink = checkBoxMemoryLink.Visible && checkBoxMemoryLink.Checked;
 
             maskedTextBoxStartingFrame.Text =
-                (Functions.initialPIDRNG(seed, version, memorylink) + roamerAdvances).ToString();
+                (Functions.initialPIDRNG(seed, version, memorylink) + roamerAdvances - 1).ToString();
         }
 
         private void displayParentsInSearchToolStripMenuItem_Click(object sender, EventArgs e)

@@ -47,7 +47,6 @@ namespace RNGReporter
         private int CapSpeedIndex;
         private int cpus;
         private List<ulong> eggSeeds;
-        //private MainForm mainForm = new MainForm();
         private FrameCompare frameCompare;
         private FrameGenerator generator;
         private FrameGenerator[] generators;
@@ -566,7 +565,7 @@ namespace RNGReporter
                                 MinLevel = (int)numericLevelMin.Value,
                                 MaxLevel = (int)numericLevelMax.Value,
                                 SearchForTrigger = ConsiderTrigger,
-                                ShinyCharm = cbCapShinyCharm.Checked,
+                                RerollCount = (cbCapShinyCharm.Visible && cbCapShinyCharm.Checked) ? 3 : 1,
                             };
 
                         subFrameCompare = new FrameCompare(
@@ -702,7 +701,7 @@ namespace RNGReporter
                 CapKeypress.Visible = true;
                 CapTimer0.Visible = true;
 
-                generator.ShinyCharm = cbCapShinyCharm.Checked;
+                generator.RerollCount = (cbCapShinyCharm.Visible && cbCapShinyCharm.Checked) ? 3 : 1;
 
                 frameCompare = new FrameCompare(
                     ivFiltersCapture.IVFilter,
@@ -1233,8 +1232,7 @@ namespace RNGReporter
                                             }
                                             else
                                             {
-                                                frames = generators[listIndex].Generate(frameCompare, profile.ID,
-                                                                                        profile.SID);
+                                                frames = generators[listIndex].Generate(frameCompare, profile.ID, profile.SID);
                                                 progressSearched += searchRange;
                                             }
 
@@ -1260,11 +1258,10 @@ namespace RNGReporter
                                                     shinygenerators[listIndex].MinLevel = (int)numericLevelMin.Value;
                                                     shinygenerators[listIndex].MaxLevel = (int)numericLevelMax.Value;
                                                     shinygenerators[listIndex].SearchForTrigger = ConsiderTrigger;
-                                                    shinygenerators[listIndex].ShinyCharm = cbCapShinyCharm.Checked;
+                                                    shinygenerators[listIndex].RerollCount = (cbCapShinyCharm.Visible && cbCapShinyCharm.Checked) ? 3 : 1;
 
                                                     List<Frame> shinyFrames =
-                                                        shinygenerators[listIndex].Generate(subFrameCompare,
-                                                                                            profile.ID, profile.SID);
+                                                        shinygenerators[listIndex].GenerateG5PID(subFrameCompare, profile.ID, profile.SID);
 
                                                     foreach (Frame shinyFrame in shinyFrames)
                                                     {
@@ -1941,10 +1938,13 @@ namespace RNGReporter
                 int RatioValue = Convert.ToInt32(dataGridViewCapValues.Rows[e.RowIndex].Cells["EncounterRatio"].Value);
                 if (dataGridViewCapValues.Columns[e.ColumnIndex].Name == "EncounterRatio")
                 {
-                    if ((RatioValue < 14 && comboBoxEncounterType.SelectedIndex < 2) || (RatioValue < 6 && comboBoxEncounterType.SelectedIndex == 2))
+                    if ((RatioValue < 14 && comboBoxEncounterType.SelectedIndex <= 2) || (RatioValue < 6 && comboBoxEncounterType.SelectedIndex == 3))
                     {
                         e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+                        e.CellStyle.ForeColor = Color.Green;
                     }
+                    else
+                        e.CellStyle.ForeColor = Color.LightCoral;
                 }
             }
 
@@ -2189,7 +2189,7 @@ namespace RNGReporter
                     MaxResults = maxFrame - minFrame + 1,
                     DittoUsed = checkBoxShinyDittoParent.Checked,
                     MaleOnlySpecies = cbNidoBeat.Checked,
-                    ShinyCharm = cbShinyCharm.Visible && cbShinyCharm.Checked,
+                    RerollCount = (cbCapShinyCharm.Visible && cbCapShinyCharm.Checked) ? 3 : 1,
                 };
 
 

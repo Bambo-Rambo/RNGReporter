@@ -1798,7 +1798,7 @@ namespace RNGReporter
             this.maskedTextBoxStartingFrame.Name = "maskedTextBoxStartingFrame";
             this.maskedTextBoxStartingFrame.Size = new System.Drawing.Size(153, 20);
             this.maskedTextBoxStartingFrame.TabIndex = 6;
-            this.maskedTextBoxStartingFrame.Text = "1";
+            this.maskedTextBoxStartingFrame.Text = "2";
             this.maskedTextBoxStartingFrame.ValidatingType = typeof(int);
             // 
             // maskedTextBoxMaxFrames
@@ -2085,6 +2085,7 @@ namespace RNGReporter
             this.Synchable.HeaderText = "Synchable";
             this.Synchable.Name = "Synchable";
             this.Synchable.ReadOnly = true;
+            this.Synchable.Visible = false;
             this.Synchable.Width = 105;
             // 
             // MainForm
