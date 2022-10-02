@@ -49,8 +49,8 @@ namespace RNGReporter
             RNGReporter.Controls.CheckBoxProperties checkBoxProperties10 = new RNGReporter.Controls.CheckBoxProperties();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStripCap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copySeedToClipboardToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
@@ -260,34 +260,34 @@ namespace RNGReporter
             this.labelProfileInformation = new System.Windows.Forms.Label();
             this.comboBoxProfiles = new RNGReporter.GlassComboBox();
             this.buttonEditProfile = new RNGReporter.GlassButton();
-            this.Synchable = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapKeypress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapTimer0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.f75 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.f25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.f125 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.f50 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HiddenPowerPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HiddenPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapSpe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapSpD = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapSpA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapDef = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapAtk = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapHP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ability = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nature = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Shiny = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Lvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EncounterSlot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EncType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EncounterRatio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NearestShiny = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EncounterMod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CapOffset = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CapSeed = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapOffset = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EncounterMod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NearestShiny = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EncounterRatio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EncType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EncounterSlot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Lvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Shiny = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nature = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ability = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapHP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapAtk = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapDef = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapSpA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapSpD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapSpe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HiddenPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HiddenPowerPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.f50 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.f125 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.f25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.f75 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapTimer0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CapKeypress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Synchable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStripCap.SuspendLayout();
             this.contextMenuStripEggPid.SuspendLayout();
             this.tabPageShinyEgg.SuspendLayout();
@@ -1482,7 +1482,7 @@ namespace RNGReporter
             this.maskedTextBoxCapMinOffset.Name = "maskedTextBoxCapMinOffset";
             this.maskedTextBoxCapMinOffset.Size = new System.Drawing.Size(44, 21);
             this.maskedTextBoxCapMinOffset.TabIndex = 4;
-            this.maskedTextBoxCapMinOffset.Text = "1";
+            this.maskedTextBoxCapMinOffset.Text = "0";
             this.maskedTextBoxCapMinOffset.TextChanged += new System.EventHandler(this.IVFilters_Changed);
             // 
             // label54
@@ -1573,11 +1573,11 @@ namespace RNGReporter
             // labelCapMinMaxFrame
             // 
             this.labelCapMinMaxFrame.AutoSize = true;
-            this.labelCapMinMaxFrame.Location = new System.Drawing.Point(207, 9);
+            this.labelCapMinMaxFrame.Location = new System.Drawing.Point(202, 7);
             this.labelCapMinMaxFrame.Name = "labelCapMinMaxFrame";
-            this.labelCapMinMaxFrame.Size = new System.Drawing.Size(87, 13);
+            this.labelCapMinMaxFrame.Size = new System.Drawing.Size(100, 13);
             this.labelCapMinMaxFrame.TabIndex = 107;
-            this.labelCapMinMaxFrame.Text = "Min / Max Frame";
+            this.labelCapMinMaxFrame.Text = "Min / Max IV Frame";
             // 
             // label20
             // 
@@ -2839,243 +2839,6 @@ namespace RNGReporter
             this.buttonEditProfile.Text = "Edit";
             this.buttonEditProfile.Click += new System.EventHandler(this.buttonEditProfile_Click);
             // 
-            // Synchable
-            // 
-            this.Synchable.DataPropertyName = "Synchable";
-            this.Synchable.HeaderText = "Synchronized";
-            this.Synchable.Name = "Synchable";
-            this.Synchable.ReadOnly = true;
-            this.Synchable.Visible = false;
-            this.Synchable.Width = 151;
-            // 
-            // CapKeypress
-            // 
-            this.CapKeypress.DataPropertyName = "Keypress";
-            this.CapKeypress.HeaderText = "Keypresses";
-            this.CapKeypress.Name = "CapKeypress";
-            this.CapKeypress.Visible = false;
-            this.CapKeypress.Width = 120;
-            // 
-            // CapTimer0
-            // 
-            this.CapTimer0.DataPropertyName = "Timer0";
-            this.CapTimer0.FillWeight = 60F;
-            this.CapTimer0.HeaderText = "Timer0";
-            this.CapTimer0.Name = "CapTimer0";
-            this.CapTimer0.Visible = false;
-            this.CapTimer0.Width = 45;
-            // 
-            // CapDateTime
-            // 
-            this.CapDateTime.DataPropertyName = "TimeDate";
-            this.CapDateTime.HeaderText = "Date\\Time";
-            this.CapDateTime.Name = "CapDateTime";
-            this.CapDateTime.ReadOnly = true;
-            // 
-            // f75
-            // 
-            this.f75.DataPropertyName = "Female75";
-            this.f75.FillWeight = 50F;
-            this.f75.HeaderText = "75% F";
-            this.f75.Name = "f75";
-            this.f75.ReadOnly = true;
-            this.f75.Width = 50;
-            // 
-            // f25
-            // 
-            this.f25.DataPropertyName = "Female25";
-            this.f25.FillWeight = 50F;
-            this.f25.HeaderText = "25% F";
-            this.f25.Name = "f25";
-            this.f25.ReadOnly = true;
-            this.f25.Width = 50;
-            // 
-            // f125
-            // 
-            this.f125.DataPropertyName = "Female125";
-            this.f125.FillWeight = 50F;
-            this.f125.HeaderText = "12.5%F";
-            this.f125.Name = "f125";
-            this.f125.ReadOnly = true;
-            this.f125.Width = 50;
-            // 
-            // f50
-            // 
-            this.f50.DataPropertyName = "Female50";
-            this.f50.FillWeight = 50F;
-            this.f50.HeaderText = "50% F";
-            this.f50.Name = "f50";
-            this.f50.ReadOnly = true;
-            this.f50.Width = 50;
-            // 
-            // HiddenPowerPower
-            // 
-            this.HiddenPowerPower.DataPropertyName = "HiddenPowerPower";
-            this.HiddenPowerPower.FillWeight = 50F;
-            this.HiddenPowerPower.HeaderText = "Power";
-            this.HiddenPowerPower.Name = "HiddenPowerPower";
-            this.HiddenPowerPower.ReadOnly = true;
-            this.HiddenPowerPower.Width = 50;
-            // 
-            // HiddenPower
-            // 
-            this.HiddenPower.DataPropertyName = "HiddenPowerType";
-            this.HiddenPower.FillWeight = 80F;
-            this.HiddenPower.HeaderText = "Hidden";
-            this.HiddenPower.Name = "HiddenPower";
-            this.HiddenPower.ReadOnly = true;
-            this.HiddenPower.Width = 50;
-            // 
-            // CapSpe
-            // 
-            this.CapSpe.DataPropertyName = "Spe";
-            this.CapSpe.FillWeight = 45F;
-            this.CapSpe.HeaderText = "Spe";
-            this.CapSpe.Name = "CapSpe";
-            this.CapSpe.ReadOnly = true;
-            this.CapSpe.Width = 30;
-            // 
-            // CapSpD
-            // 
-            this.CapSpD.DataPropertyName = "SpD";
-            this.CapSpD.FillWeight = 45F;
-            this.CapSpD.HeaderText = "SpD";
-            this.CapSpD.Name = "CapSpD";
-            this.CapSpD.ReadOnly = true;
-            this.CapSpD.Width = 30;
-            // 
-            // CapSpA
-            // 
-            this.CapSpA.DataPropertyName = "SpA";
-            this.CapSpA.FillWeight = 45F;
-            this.CapSpA.HeaderText = "SpA";
-            this.CapSpA.Name = "CapSpA";
-            this.CapSpA.ReadOnly = true;
-            this.CapSpA.Width = 30;
-            // 
-            // CapDef
-            // 
-            this.CapDef.DataPropertyName = "Def";
-            this.CapDef.FillWeight = 45F;
-            this.CapDef.HeaderText = "Def";
-            this.CapDef.Name = "CapDef";
-            this.CapDef.ReadOnly = true;
-            this.CapDef.Width = 30;
-            // 
-            // CapAtk
-            // 
-            this.CapAtk.DataPropertyName = "Atk";
-            this.CapAtk.FillWeight = 45F;
-            this.CapAtk.HeaderText = "Atk";
-            this.CapAtk.Name = "CapAtk";
-            this.CapAtk.ReadOnly = true;
-            this.CapAtk.Width = 30;
-            // 
-            // CapHP
-            // 
-            this.CapHP.DataPropertyName = "Hp";
-            this.CapHP.FillWeight = 45F;
-            this.CapHP.HeaderText = "HP";
-            this.CapHP.Name = "CapHP";
-            this.CapHP.ReadOnly = true;
-            this.CapHP.Width = 30;
-            // 
-            // Ability
-            // 
-            this.Ability.DataPropertyName = "Ability";
-            this.Ability.FillWeight = 50F;
-            this.Ability.HeaderText = "Ability";
-            this.Ability.Name = "Ability";
-            this.Ability.ReadOnly = true;
-            this.Ability.Width = 40;
-            // 
-            // Nature
-            // 
-            this.Nature.DataPropertyName = "Nature";
-            this.Nature.FillWeight = 80F;
-            this.Nature.HeaderText = "Nature";
-            this.Nature.Name = "Nature";
-            this.Nature.ReadOnly = true;
-            this.Nature.Width = 65;
-            // 
-            // Shiny
-            // 
-            this.Shiny.DataPropertyName = "ShinyDisplay";
-            this.Shiny.FillWeight = 30F;
-            this.Shiny.HeaderText = "!!!";
-            this.Shiny.Name = "Shiny";
-            this.Shiny.ReadOnly = true;
-            this.Shiny.Width = 31;
-            // 
-            // Lvl
-            // 
-            this.Lvl.DataPropertyName = "Level";
-            this.Lvl.HeaderText = "Level";
-            this.Lvl.Name = "Lvl";
-            this.Lvl.ReadOnly = true;
-            this.Lvl.Width = 60;
-            // 
-            // EncounterSlot
-            // 
-            this.EncounterSlot.DataPropertyName = "EncounterSlot";
-            this.EncounterSlot.FillWeight = 120F;
-            this.EncounterSlot.HeaderText = "Encounter Slot";
-            this.EncounterSlot.Name = "EncounterSlot";
-            this.EncounterSlot.ReadOnly = true;
-            this.EncounterSlot.Width = 85;
-            // 
-            // EncType
-            // 
-            this.EncType.DataPropertyName = "Double";
-            this.EncType.HeaderText = "Encounter Type";
-            this.EncType.Name = "EncType";
-            this.EncType.ReadOnly = true;
-            this.EncType.Width = 90;
-            // 
-            // EncounterRatio
-            // 
-            this.EncounterRatio.DataPropertyName = "Ratio";
-            this.EncounterRatio.HeaderText = "Encounter Ratio";
-            this.EncounterRatio.Name = "EncounterRatio";
-            this.EncounterRatio.ReadOnly = true;
-            // 
-            // PID
-            // 
-            this.PID.DataPropertyName = "Pid";
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Consolas", 8.75F);
-            this.PID.DefaultCellStyle = dataGridViewCellStyle4;
-            this.PID.HeaderText = "PID";
-            this.PID.Name = "PID";
-            this.PID.ReadOnly = true;
-            this.PID.Width = 80;
-            // 
-            // NearestShiny
-            // 
-            this.NearestShiny.DataPropertyName = "NearestShiny";
-            this.NearestShiny.HeaderText = "Shiny Frame";
-            this.NearestShiny.Name = "NearestShiny";
-            this.NearestShiny.ReadOnly = true;
-            this.NearestShiny.Width = 75;
-            // 
-            // EncounterMod
-            // 
-            this.EncounterMod.DataPropertyName = "EncounterMod";
-            this.EncounterMod.FillWeight = 150F;
-            this.EncounterMod.HeaderText = "Required Lead";
-            this.EncounterMod.Name = "EncounterMod";
-            this.EncounterMod.ReadOnly = true;
-            this.EncounterMod.Width = 130;
-            // 
-            // CapOffset
-            // 
-            this.CapOffset.DataPropertyName = "Offset";
-            this.CapOffset.FillWeight = 80F;
-            this.CapOffset.HeaderText = "Frame";
-            this.CapOffset.Name = "CapOffset";
-            this.CapOffset.ReadOnly = true;
-            this.CapOffset.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.CapOffset.Width = 45;
-            // 
             // CapSeed
             // 
             this.CapSeed.DataPropertyName = "Seed";
@@ -3087,6 +2850,243 @@ namespace RNGReporter
             this.CapSeed.ReadOnly = true;
             this.CapSeed.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.CapSeed.Width = 70;
+            // 
+            // CapOffset
+            // 
+            this.CapOffset.DataPropertyName = "Offset";
+            this.CapOffset.FillWeight = 80F;
+            this.CapOffset.HeaderText = "IV Frame";
+            this.CapOffset.Name = "CapOffset";
+            this.CapOffset.ReadOnly = true;
+            this.CapOffset.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.CapOffset.Width = 55;
+            // 
+            // EncounterMod
+            // 
+            this.EncounterMod.DataPropertyName = "EncounterMod";
+            this.EncounterMod.FillWeight = 150F;
+            this.EncounterMod.HeaderText = "Required Lead";
+            this.EncounterMod.Name = "EncounterMod";
+            this.EncounterMod.ReadOnly = true;
+            this.EncounterMod.Width = 130;
+            // 
+            // NearestShiny
+            // 
+            this.NearestShiny.DataPropertyName = "NearestShiny";
+            this.NearestShiny.HeaderText = "Shiny Frame";
+            this.NearestShiny.Name = "NearestShiny";
+            this.NearestShiny.ReadOnly = true;
+            this.NearestShiny.Width = 75;
+            // 
+            // PID
+            // 
+            this.PID.DataPropertyName = "Pid";
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Consolas", 8.75F);
+            this.PID.DefaultCellStyle = dataGridViewCellStyle4;
+            this.PID.HeaderText = "PID";
+            this.PID.Name = "PID";
+            this.PID.ReadOnly = true;
+            this.PID.Width = 80;
+            // 
+            // EncounterRatio
+            // 
+            this.EncounterRatio.DataPropertyName = "Ratio";
+            this.EncounterRatio.HeaderText = "Encounter Ratio";
+            this.EncounterRatio.Name = "EncounterRatio";
+            this.EncounterRatio.ReadOnly = true;
+            // 
+            // EncType
+            // 
+            this.EncType.DataPropertyName = "Double";
+            this.EncType.HeaderText = "Encounter Type";
+            this.EncType.Name = "EncType";
+            this.EncType.ReadOnly = true;
+            this.EncType.Width = 90;
+            // 
+            // EncounterSlot
+            // 
+            this.EncounterSlot.DataPropertyName = "EncounterSlot";
+            this.EncounterSlot.FillWeight = 120F;
+            this.EncounterSlot.HeaderText = "Encounter Slot";
+            this.EncounterSlot.Name = "EncounterSlot";
+            this.EncounterSlot.ReadOnly = true;
+            this.EncounterSlot.Width = 85;
+            // 
+            // Lvl
+            // 
+            this.Lvl.DataPropertyName = "Level";
+            this.Lvl.HeaderText = "Level";
+            this.Lvl.Name = "Lvl";
+            this.Lvl.ReadOnly = true;
+            this.Lvl.Width = 60;
+            // 
+            // Shiny
+            // 
+            this.Shiny.DataPropertyName = "ShinyDisplay";
+            this.Shiny.FillWeight = 30F;
+            this.Shiny.HeaderText = "!!!";
+            this.Shiny.Name = "Shiny";
+            this.Shiny.ReadOnly = true;
+            this.Shiny.Width = 31;
+            // 
+            // Nature
+            // 
+            this.Nature.DataPropertyName = "Nature";
+            this.Nature.FillWeight = 80F;
+            this.Nature.HeaderText = "Nature";
+            this.Nature.Name = "Nature";
+            this.Nature.ReadOnly = true;
+            this.Nature.Width = 65;
+            // 
+            // Ability
+            // 
+            this.Ability.DataPropertyName = "Ability";
+            this.Ability.FillWeight = 50F;
+            this.Ability.HeaderText = "Ability";
+            this.Ability.Name = "Ability";
+            this.Ability.ReadOnly = true;
+            this.Ability.Width = 40;
+            // 
+            // CapHP
+            // 
+            this.CapHP.DataPropertyName = "Hp";
+            this.CapHP.FillWeight = 45F;
+            this.CapHP.HeaderText = "HP";
+            this.CapHP.Name = "CapHP";
+            this.CapHP.ReadOnly = true;
+            this.CapHP.Width = 30;
+            // 
+            // CapAtk
+            // 
+            this.CapAtk.DataPropertyName = "Atk";
+            this.CapAtk.FillWeight = 45F;
+            this.CapAtk.HeaderText = "Atk";
+            this.CapAtk.Name = "CapAtk";
+            this.CapAtk.ReadOnly = true;
+            this.CapAtk.Width = 30;
+            // 
+            // CapDef
+            // 
+            this.CapDef.DataPropertyName = "Def";
+            this.CapDef.FillWeight = 45F;
+            this.CapDef.HeaderText = "Def";
+            this.CapDef.Name = "CapDef";
+            this.CapDef.ReadOnly = true;
+            this.CapDef.Width = 30;
+            // 
+            // CapSpA
+            // 
+            this.CapSpA.DataPropertyName = "SpA";
+            this.CapSpA.FillWeight = 45F;
+            this.CapSpA.HeaderText = "SpA";
+            this.CapSpA.Name = "CapSpA";
+            this.CapSpA.ReadOnly = true;
+            this.CapSpA.Width = 30;
+            // 
+            // CapSpD
+            // 
+            this.CapSpD.DataPropertyName = "SpD";
+            this.CapSpD.FillWeight = 45F;
+            this.CapSpD.HeaderText = "SpD";
+            this.CapSpD.Name = "CapSpD";
+            this.CapSpD.ReadOnly = true;
+            this.CapSpD.Width = 30;
+            // 
+            // CapSpe
+            // 
+            this.CapSpe.DataPropertyName = "Spe";
+            this.CapSpe.FillWeight = 45F;
+            this.CapSpe.HeaderText = "Spe";
+            this.CapSpe.Name = "CapSpe";
+            this.CapSpe.ReadOnly = true;
+            this.CapSpe.Width = 30;
+            // 
+            // HiddenPower
+            // 
+            this.HiddenPower.DataPropertyName = "HiddenPowerType";
+            this.HiddenPower.FillWeight = 80F;
+            this.HiddenPower.HeaderText = "Hidden";
+            this.HiddenPower.Name = "HiddenPower";
+            this.HiddenPower.ReadOnly = true;
+            this.HiddenPower.Width = 50;
+            // 
+            // HiddenPowerPower
+            // 
+            this.HiddenPowerPower.DataPropertyName = "HiddenPowerPower";
+            this.HiddenPowerPower.FillWeight = 50F;
+            this.HiddenPowerPower.HeaderText = "Power";
+            this.HiddenPowerPower.Name = "HiddenPowerPower";
+            this.HiddenPowerPower.ReadOnly = true;
+            this.HiddenPowerPower.Width = 50;
+            // 
+            // f50
+            // 
+            this.f50.DataPropertyName = "Female50";
+            this.f50.FillWeight = 50F;
+            this.f50.HeaderText = "50% F";
+            this.f50.Name = "f50";
+            this.f50.ReadOnly = true;
+            this.f50.Width = 50;
+            // 
+            // f125
+            // 
+            this.f125.DataPropertyName = "Female125";
+            this.f125.FillWeight = 50F;
+            this.f125.HeaderText = "12.5%F";
+            this.f125.Name = "f125";
+            this.f125.ReadOnly = true;
+            this.f125.Width = 50;
+            // 
+            // f25
+            // 
+            this.f25.DataPropertyName = "Female25";
+            this.f25.FillWeight = 50F;
+            this.f25.HeaderText = "25% F";
+            this.f25.Name = "f25";
+            this.f25.ReadOnly = true;
+            this.f25.Width = 50;
+            // 
+            // f75
+            // 
+            this.f75.DataPropertyName = "Female75";
+            this.f75.FillWeight = 50F;
+            this.f75.HeaderText = "75% F";
+            this.f75.Name = "f75";
+            this.f75.ReadOnly = true;
+            this.f75.Width = 50;
+            // 
+            // CapDateTime
+            // 
+            this.CapDateTime.DataPropertyName = "TimeDate";
+            this.CapDateTime.HeaderText = "Date\\Time";
+            this.CapDateTime.Name = "CapDateTime";
+            this.CapDateTime.ReadOnly = true;
+            // 
+            // CapTimer0
+            // 
+            this.CapTimer0.DataPropertyName = "Timer0";
+            this.CapTimer0.FillWeight = 60F;
+            this.CapTimer0.HeaderText = "Timer0";
+            this.CapTimer0.Name = "CapTimer0";
+            this.CapTimer0.Visible = false;
+            this.CapTimer0.Width = 45;
+            // 
+            // CapKeypress
+            // 
+            this.CapKeypress.DataPropertyName = "Keypress";
+            this.CapKeypress.HeaderText = "Keypresses";
+            this.CapKeypress.Name = "CapKeypress";
+            this.CapKeypress.Visible = false;
+            this.CapKeypress.Width = 120;
+            // 
+            // Synchable
+            // 
+            this.Synchable.DataPropertyName = "Synchable";
+            this.Synchable.HeaderText = "Synchronized";
+            this.Synchable.Name = "Synchable";
+            this.Synchable.ReadOnly = true;
+            this.Synchable.Visible = false;
+            this.Synchable.Width = 151;
             // 
             // TimeFinder5th
             // 

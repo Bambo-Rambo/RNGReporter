@@ -233,8 +233,8 @@ namespace RNGReporter
                     comboBoxCapMonth.CheckBoxItems[DateTime.Now.Month].Checked = true;
                     maskedTextBoxCapMaxOffset.Text = Settings.Default.CapOffset;
 
-                    if (maskedTextBoxCapMaxOffset.Text == "0")
-                        maskedTextBoxCapMaxOffset.Text = "1";
+                    //if (maskedTextBoxCapMaxOffset.Text == "0")
+                        //maskedTextBoxCapMaxOffset.Text = "1";
 
                     maskedTextBoxCapMinDelay.Text = Settings.Default.CapDelayMin;
                     maskedTextBoxCapMaxDelay.Text = Settings.Default.CapDelayMax;
@@ -457,7 +457,7 @@ namespace RNGReporter
             if (maskedTextBoxCapMinOffset.Text != "")
                 minOffset = uint.Parse(maskedTextBoxCapMinOffset.Text);
             else
-                maskedTextBoxCapMinOffset.Text = "1";
+                maskedTextBoxCapMinOffset.Text = "0";
 
             if (minOffset > maxOffset)
             {
@@ -1815,14 +1815,14 @@ namespace RNGReporter
 
                 if (((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Standard))
                 {
-                    labelCapMinMaxFrame.Text = "Min / Max Frame";
+                    labelCapMinMaxFrame.Text = "Min / Max IV Frame";
                     labelCapMinMaxFrame.Location = oldLocation;
 
-                    if (maskedTextBoxCapMinOffset.Text == "0")
+                    /*if (maskedTextBoxCapMinOffset.Text == "0")
                         maskedTextBoxCapMinOffset.Text = "1";
 
                     if (maskedTextBoxCapMaxOffset.Text == "0")
-                        maskedTextBoxCapMaxOffset.Text = "1";
+                        maskedTextBoxCapMaxOffset.Text = "1";*/
 
                     label9.Visible = true;
                 }
@@ -1831,11 +1831,11 @@ namespace RNGReporter
                     labelCapMinMaxFrame.Text = "Min / Max Advances";
                     labelCapMinMaxFrame.Location = labelShinyMinMaxFrame.Location;
 
-                    if (maskedTextBoxCapMinOffset.Text == "1")
+                    /*if (maskedTextBoxCapMinOffset.Text == "1")
                         maskedTextBoxCapMinOffset.Text = "0";
 
                     if (maskedTextBoxCapMaxOffset.Text == "1")
-                        maskedTextBoxCapMaxOffset.Text = "0";
+                        maskedTextBoxCapMaxOffset.Text = "0";*/
 
                     label9.Visible = false;
                 }
@@ -1860,11 +1860,11 @@ namespace RNGReporter
                 labelCapMinMaxFrame.Text = "Min / Max Frame";
                 labelCapMinMaxFrame.Location = oldLocation;
 
-                if (maskedTextBoxCapMinOffset.Text == "0")
+                /*if (maskedTextBoxCapMinOffset.Text == "0")
                     maskedTextBoxCapMinOffset.Text = "1";
 
                 if (maskedTextBoxCapMaxOffset.Text == "0")
-                    maskedTextBoxCapMaxOffset.Text = "1";
+                    maskedTextBoxCapMaxOffset.Text = "1";*/
 
                 label9.Visible = true;
 
@@ -1890,11 +1890,11 @@ namespace RNGReporter
                 labelCapMinMaxFrame.Text = "Min / Max Advances";
                 labelCapMinMaxFrame.Location = labelShinyMinMaxFrame.Location;
 
-                if (maskedTextBoxCapMinOffset.Text == "1")
+                /*if (maskedTextBoxCapMinOffset.Text == "1")
                     maskedTextBoxCapMinOffset.Text = "0";
 
                 if (maskedTextBoxCapMaxOffset.Text == "1")
-                    maskedTextBoxCapMaxOffset.Text = "0";
+                    maskedTextBoxCapMaxOffset.Text = "0";*/
 
                 label9.Visible = false;
                 labelWCShiny.Visible = true;
@@ -2673,7 +2673,9 @@ namespace RNGReporter
                 label9.Text = "IV filters are set for fast searching.";
             else if (FastCapFilters())
             {
-                if (((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5CGear))
+                label9.Text = "IV filters are set for fast searching.";
+
+                /*if (((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5CGear))
                     label9.Text = "IV filters are set for Entralink fast searching, but\r\n" +
                                   "Min and Max Frames need to be between\r\n" +
                                   "21 and 26.  (Setting both to 21 is recommended.)";
@@ -2686,7 +2688,7 @@ namespace RNGReporter
                     {
                         label9.Text += "\r\nOr 25 and 30 for Entralink abuse";
                     }
-                }
+                }*/
             }
             else
                 label9.Text = "IV filters are not set to allow fast searching.\r\nTry searching for a common spread" +
