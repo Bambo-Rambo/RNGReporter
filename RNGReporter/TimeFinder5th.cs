@@ -2644,7 +2644,7 @@ namespace RNGReporter
                 if (((ComboBoxItem) comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.Roamer))
                     return false;
 
-                return (minFrame > 20 && minFrame <= 26) && (maxFrame > 20 && maxFrame <= 26);
+                return (minFrame >= 20 && minFrame < 26) && (maxFrame >= 20 && maxFrame <= 25);
             }
             // BW2 Entralink
             if (((Profile) comboBoxProfiles.SelectedItem).IsBW2())
@@ -2652,7 +2652,7 @@ namespace RNGReporter
                 if (minFrame > 24 && minFrame < 31 && maxFrame > 24 && maxFrame < 31) return true;
             }
 
-            return (minFrame > 0 && minFrame <= 6) && (maxFrame > 0 && maxFrame <= 6);
+            return (minFrame >= 0 && minFrame < 6) && (maxFrame >= 0 && maxFrame < 6);
         }
 
         private bool FastEggFilters()
@@ -2673,22 +2673,21 @@ namespace RNGReporter
                 label9.Text = "IV filters are set for fast searching.";
             else if (FastCapFilters())
             {
-                label9.Text = "IV filters are set for fast searching.";
 
-                /*if (((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5CGear))
+                if (((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5CGear))
                     label9.Text = "IV filters are set for Entralink fast searching, but\r\n" +
                                   "Min and Max Frames need to be between\r\n" +
-                                  "21 and 26.  (Setting both to 21 is recommended.)";
+                                  "20 and 25.  (Setting both to 20 is recommended.)";
                 else
                 {
                     label9.Text = "IV filters are set for fast searching, but\r\n" +
                                   "Min and Max Frames need to be between\r\n" +
-                                  "1 and 6.  (Setting both to 1 is recommended.)";
+                                  "0 and 5.  (Setting both to 0 is recommended.)";
                     if (((Profile) comboBoxProfiles.SelectedItem).IsBW2())
                     {
                         label9.Text += "\r\nOr 25 and 30 for Entralink abuse";
                     }
-                }*/
+                }
             }
             else
                 label9.Text = "IV filters are not set to allow fast searching.\r\nTry searching for a common spread" +
