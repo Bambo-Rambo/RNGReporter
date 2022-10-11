@@ -239,7 +239,7 @@ namespace RNGReporter
                     maskedTextBoxCapMaxDelay.Text = Settings.Default.CapDelayMax;
 
                     if (Settings.Default.ShinyYear < 2000) Settings.Default.ShinyYear = DateTime.Now.Year;
-                    maskedTextBoxShinyYear.Text = Settings.Default.ShinyYear.ToString();
+                    maskedTextBoxShinyYear.Text = Settings.Default.ShinyYear.ToString();cbCapShinyCharm.Visible =
                     comboBoxShinyMonth.CheckBoxItems[DateTime.Now.Month].Checked = true;
                 }
 
@@ -522,11 +522,11 @@ namespace RNGReporter
                 natures = (from t in comboBoxNature.CheckBoxItems where t.Checked select (uint)((Nature)t.ComboBoxItem).Number).ToList();
 
             uint shinyOffset = 0;
-            if (checkBoxShinyOnly.Checked)
+            if (ShinyOnly())
                 uint.TryParse(maskedTextBoxMaxShiny.Text, out shinyOffset);
 
             Lvl.Visible = LevelConditions();
-            EncounterRatio.Visible = ConsiderTrigger && checkBoxShinyOnly.Checked;
+            EncounterRatio.Visible = ConsiderTrigger && ShinyOnly();
             EncType.Visible = false;// comboBoxMethod.SelectedIndex == 0 && comboBoxEncounterType.SelectedIndex == 1;
 
             if (generator.FrameType == FrameType.Method5CGear || generator.FrameType == FrameType.Method5Standard)
@@ -667,7 +667,7 @@ namespace RNGReporter
                     ivFiltersCapture.IVFilter,
                     natures,
                     -1,
-                    checkBoxShinyOnly.Checked,
+                    ShinyOnly(),
                     false,
                     0,
                     false,
@@ -715,7 +715,7 @@ namespace RNGReporter
                     ivFiltersCapture.IVFilter,
                     natures,
                     (int) ((ComboBoxItem) comboBoxAbility.SelectedItem).Reference,
-                    checkBoxShinyOnly.Checked,
+                    ShinyOnly(),
                     checkBoxSynchOnly.Checked,
                     LevelConditions() ? (int)numericLevel.Value : 0,
                     false,
@@ -1819,7 +1819,7 @@ namespace RNGReporter
 
                 labelWCShiny.Visible = false;
                 comboBoxShiny.Visible = false;
-                cbCapShinyCharm.Visible = true;
+                cbCapShinyCharm.Visible = ((Profile)comboBoxProfiles.SelectedItem).IsBW2();
 
                 if (((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Standard))
                 {
@@ -2408,7 +2408,7 @@ namespace RNGReporter
 
         private void controlsShowHide()
         {
-            if (checkBoxShinyOnly.Checked &&
+            if (ShinyOnly() &&
                 ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Standard))
             {
                 labelMaxShiny.Visible = true;
@@ -2426,17 +2426,19 @@ namespace RNGReporter
             if (((ComboBoxItem) comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.AllEncounterShiny) &&
                 comboBoxEncounterType.Enabled)
             {
-                checkBoxShinyOnly.Checked = true;
+                checkBoxShinyOnly.Visible = checkBoxShinyOnly.Checked = true;
             }
 
             IVFilters_Changed(sender, e);
 
             label54.Visible = comboBoxEncounterSlot.Visible = buttonAnySlot.Visible = 
-                comboBoxEncounterType.SelectedIndex < 9 || comboBoxEncounterType.SelectedIndex > 12;
+                comboBoxEncounterType.SelectedIndex < 9 || comboBoxEncounterType.SelectedIndex > 13;
 
             labelCapMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible = LevelLabel.Visible = numericLevel.Visible = LevelConditions();
             
             checkBoxTriggerBattle.Visible = RatioConditions();
+
+            checkBoxShinyOnly.Visible = maskedTextBoxMaxShiny.Visible = labelMaxShiny.Visible = comboBoxEncounterType.SelectedIndex != 13;
         }
 
         private void checkBoxShinyOnly_CheckedChanged(object sender, EventArgs e)
@@ -2446,7 +2448,7 @@ namespace RNGReporter
             if (((ComboBoxItem) comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.AllEncounterShiny) &&
                 comboBoxEncounterType.Enabled)
             {
-                checkBoxShinyOnly.Checked = true;
+                checkBoxShinyOnly.Visible = checkBoxShinyOnly.Checked = true;
             }
         }
 
@@ -3177,6 +3179,8 @@ namespace RNGReporter
             Invoke(new Action(() => { cond = comboBoxMethod.SelectedIndex == 0 && comboBoxEncounterType.SelectedIndex <= 3; }));
             return cond;
         }
+
+        private bool ShinyOnly() => checkBoxShinyOnly.Visible && checkBoxShinyOnly.Checked;
 
         #endregion
 

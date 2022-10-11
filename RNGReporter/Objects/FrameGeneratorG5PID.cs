@@ -501,58 +501,31 @@ namespace RNGReporter.Objects
                         if ((pid & 0x10000) == 0x10000)
                             pid = pid ^ 0x10000;
                     }
-                    else if (G5_HiddenGrotto)
-                    {
-                        // unknown call at 0
-                        synchable = (rngList[1] >> 31) == 1;
-                        pid = rngList[2];
-
-                        // genderless
-                        if (frameCompare.GenderFilter.GenderValue == 0xFF)
-                        {
-                            // leave it as-is
-                            nature = (uint)(((ulong)rngList[3] * 25) >> 32);
-                        }
-                        // always female
-                        else if (frameCompare.GenderFilter.GenderValue == 0xFE)
-                        {
-                            var genderAdjustment = (uint)((0x8 * (ulong)rngList[3]) >> 32);
-                            pid = (pid & 0xFFFFFF00) | (genderAdjustment + 1);
-                            nature = (uint)(((ulong)rngList[4] * 25) >> 32);
-                        }
-                        // always male
-                        else if (frameCompare.GenderFilter.GenderValue == 0x0)
-                        {
-                            var genderAdjustment = (uint)((0xF6 * (ulong)rngList[3]) >> 32);
-                            pid = (pid & 0xFFFFFF00) | (genderAdjustment + 8);
-                            nature = (uint)(((ulong)rngList[4] * 25) >> 32);
-                        }
-                        else
-                        {
-                            if (frameCompare.GenderFilter.GenderCriteria == GenderCriteria.Male)
-                            {
-                                var genderAdjustment =
-                                    (uint)
-                                    (((0xFE - frameCompare.GenderFilter.GenderValue) * (ulong)rngList[3]) >>
-                                     32);
-                                pid = (pid & 0xFFFFFF00) |
-                                      (genderAdjustment + frameCompare.GenderFilter.GenderValue);
-                            }
-                            else if (frameCompare.GenderFilter.GenderCriteria == GenderCriteria.Female)
-                            {
-                                var genderAdjustment =
-                                    (uint)
-                                    (((frameCompare.GenderFilter.GenderValue - 1) * (ulong)rngList[3]) >> 32);
-                                pid = (pid & 0xFFFFFF00) | (genderAdjustment + 1);
-                            }
-                            nature = (uint)(((ulong)rngList[4] * 25) >> 32);
-                        }
-                        if (synchable && IsSync)
-                            nature = (uint)SynchNature;
-                        pid = pid ^ 0x10000;
-                    }
 
                     #endregion
+
+                    else if (G5_HiddenGrotto)
+                    {
+                        Advance(1);
+
+                        if (!(IsCompEyes || IsSuctionCups))
+                            synchable = CheckLead(IsCuteCharm);
+                        else
+                            synchable = false;
+
+                        if (IsCuteCharm && !synchable)
+                            Advance(1);
+
+                        pid = GrottoPID(id, sid, idLower, frameCompare);
+
+                        nature = (uint)(((ulong)NextRand() * 25) >> 32);
+
+                        if (synchable && IsSync)
+                            nature = (uint)SynchNature;
+
+                        if (IsCuteCharm)
+                            synchable = false;
+                    }
 
                     else
                     {
@@ -743,7 +716,47 @@ namespace RNGReporter.Objects
 
         }
 
+        private uint GrottoPID(uint id, uint sid, uint idLower, FrameCompare frameCompare)
+        {
+            uint pid = 0;
+            for (int i = 0; i < RerollCount; i++)
+            {
+                pid = NextRand() ^ 0x10000;
 
+                // always female
+                if (frameCompare.GenderFilter.GenderValue == 0xFE)
+                {
+                    var genderAdjustment = (uint)((0x8 * (ulong)NextRand()) >> 32);
+                    pid = (pid & 0xFFFFFF00) | (genderAdjustment + 1);
+                }
+                // always male
+                else if (frameCompare.GenderFilter.GenderValue == 0x0)
+                {
+                    var genderAdjustment = (uint)((0xF6 * (ulong)NextRand()) >> 32);
+                    pid = (pid & 0xFFFFFF00) | (genderAdjustment + 8);
+                }
+                else
+                {
+                    if (frameCompare.GenderFilter.GenderCriteria == GenderCriteria.Male)
+                    {
+                        var genderAdjustment = (uint)(((0xFE - frameCompare.GenderFilter.GenderValue) * (ulong)NextRand()) >> 32);
+                        pid = (pid & 0xFFFFFF00) | (genderAdjustment + frameCompare.GenderFilter.GenderValue);
+                    }
+                    else if (frameCompare.GenderFilter.GenderCriteria == GenderCriteria.Female)
+                    {
+                        var genderAdjustment = (uint)(((frameCompare.GenderFilter.GenderValue - 1) * (ulong)NextRand()) >> 32);
+                        pid = (pid & 0xFFFFFF00) | (genderAdjustment + 1);
+                    }
+                }
+
+                if (CheckShiny(id, sid, pid))
+                {
+                    // Force non shiny but keep rerolling LOL
+                    pid ^= 0x10000000;
+                }
+            }
+            return pid;
+        }
 
         private uint FindPID(uint id, uint sid, uint idLower, bool CC_Success)
         {

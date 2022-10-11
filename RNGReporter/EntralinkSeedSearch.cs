@@ -493,7 +493,7 @@ namespace RNGReporter
                         generator.InitialFrame = Functions.initialPIDRNG(seed, profile) + minFrame;
                         generator.MaxResults = maxFrame - minFrame + 1;
 
-                        List<Frame> frames = generator.Generate(frameCompare, 0, 0);
+                        List<Frame> frames = generator.GenerateG5PID(frameCompare, 0, 0);
 
                         IFrameCapture previous = null;
                         bool previouslyAdded = false;

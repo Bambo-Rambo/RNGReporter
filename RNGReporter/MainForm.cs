@@ -1166,7 +1166,6 @@ namespace RNGReporter
 
                 Shiny.Visible = true;
                 Nature.Visible = true;
-                Ability.Visible = true;
                 Dream.Visible = false;
                 Coin.Visible = false;
                 Elm.Visible = false;
@@ -1202,10 +1201,8 @@ namespace RNGReporter
                 HiddenPower.Visible = false;
                 HiddenPowerPower.Visible = false;
 
-                f50.Visible = true;
-                f125.Visible = true;
-                f25.Visible = true;
-                f75.Visible = true;
+                Shiny.Visible = Ability.Visible = f50.Visible = f75.Visible = f25.Visible = f125.Visible = 
+                    generator.EncounterType != EncounterType.HiddenGrotto;
 
                 MaleOnlySpecies.Visible = false;
             }
