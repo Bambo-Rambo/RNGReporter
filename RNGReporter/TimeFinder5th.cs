@@ -601,6 +601,7 @@ namespace RNGReporter
                             shinygenerator.EncounterType != EncounterType.Gift &&
                             shinygenerator.EncounterType != EncounterType.Roamer &&
                             shinygenerator.EncounterType != EncounterType.LarvestaEgg &&
+                            generator.EncounterType != EncounterType.HiddenGrotto &&
                             shinygenerator.EncounterType != EncounterType.AllEncounterShiny)
                             EncounterSlot.Visible = true;
                         else
@@ -687,7 +688,8 @@ namespace RNGReporter
                     EncounterMod.Visible = false;
                 if (generator.EncounterType != EncounterType.Stationary && generator.EncounterType != EncounterType.Gift &&
                     generator.EncounterType != EncounterType.Roamer &&
-                    generator.EncounterType != EncounterType.LarvestaEgg)
+                    generator.EncounterType != EncounterType.LarvestaEgg &&
+                    generator.EncounterType != EncounterType.HiddenGrotto)
                     EncounterSlot.Visible = true;
                 else
                     EncounterSlot.Visible = false;
@@ -2438,7 +2440,8 @@ namespace RNGReporter
             
             checkBoxTriggerBattle.Visible = RatioConditions();
 
-            checkBoxShinyOnly.Visible = maskedTextBoxMaxShiny.Visible = labelMaxShiny.Visible = comboBoxEncounterType.SelectedIndex != 13;
+            // Allow shiny only for Hidden Grotto
+            //checkBoxShinyOnly.Visible = maskedTextBoxMaxShiny.Visible = labelMaxShiny.Visible = comboBoxEncounterType.SelectedIndex != 13;
         }
 
         private void checkBoxShinyOnly_CheckedChanged(object sender, EventArgs e)

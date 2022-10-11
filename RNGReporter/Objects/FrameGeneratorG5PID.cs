@@ -523,6 +523,14 @@ namespace RNGReporter.Objects
                         if (synchable && IsSync)
                             nature = (uint)SynchNature;
 
+                        if (TimeFinder5)
+                        {
+                            if (synchable && !frameCompare.CompareNature(nature))
+                                mod = EncounterMod.Synchronize;
+                            else
+                                mod = EncounterMod.None;
+                        }
+
                         if (IsCuteCharm)
                             synchable = false;
                     }
@@ -751,8 +759,7 @@ namespace RNGReporter.Objects
 
                 if (CheckShiny(id, sid, pid))
                 {
-                    // Force non shiny but keep rerolling LOL
-                    pid ^= 0x10000000;
+                    return pid;
                 }
             }
             return pid;
