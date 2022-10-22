@@ -126,6 +126,7 @@ namespace RNGReporter
                     new ComboBoxItem("Roamer", EncounterType.Roamer),
                     new ComboBoxItem("Gift Pokémon", EncounterType.Gift),
                     new ComboBoxItem("Larvesta Egg", EncounterType.LarvestaEgg),
+                    new ComboBoxItem("Jellicent Stationary", EncounterType.JellicentHA),
                     new ComboBoxItem("Hidden Grotto", EncounterType.HiddenGrotto),
                     new ComboBoxItem("All Encounters Shiny", EncounterType.AllEncounterShiny)
                 });
@@ -601,13 +602,14 @@ namespace RNGReporter
                             shinygenerator.EncounterType != EncounterType.Gift &&
                             shinygenerator.EncounterType != EncounterType.Roamer &&
                             shinygenerator.EncounterType != EncounterType.LarvestaEgg &&
+                            shinygenerator.EncounterType != EncounterType.JellicentHA &&
                             shinygenerator.EncounterType != EncounterType.AllEncounterShiny)
                             EncounterSlot.Visible = true;
                         else
                             EncounterSlot.Visible = false;
 
                         Nature.Visible = true;
-                        Ability.Visible = true;
+                        Ability.Visible = shinygenerator.EncounterType != EncounterType.JellicentHA;
                         DisplayGenderColumns();
                     }
                     if (profile.IsBW2())
@@ -2428,17 +2430,18 @@ namespace RNGReporter
             {
                 checkBoxShinyOnly.Visible = checkBoxShinyOnly.Checked = true;
             }
+            CheckJellicentCase();
 
             IVFilters_Changed(sender, e);
 
             label54.Visible = comboBoxEncounterSlot.Visible = buttonAnySlot.Visible = 
-                comboBoxEncounterType.SelectedIndex < 9 || comboBoxEncounterType.SelectedIndex > 13;
+                comboBoxEncounterType.SelectedIndex < 9 || comboBoxEncounterType.SelectedIndex > 14;
 
             labelCapMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible = LevelLabel.Visible = numericLevel.Visible = LevelConditions();
             
             checkBoxTriggerBattle.Visible = RatioConditions();
 
-            checkBoxShinyOnly.Visible = maskedTextBoxMaxShiny.Visible = labelMaxShiny.Visible = comboBoxEncounterType.SelectedIndex != 13;
+            checkBoxShinyOnly.Visible = maskedTextBoxMaxShiny.Visible = labelMaxShiny.Visible = comboBoxEncounterType.SelectedIndex != 14;
         }
 
         private void checkBoxShinyOnly_CheckedChanged(object sender, EventArgs e)
@@ -3180,7 +3183,21 @@ namespace RNGReporter
             return cond;
         }
 
+        private void CheckJellicentCase()
+        {
+            if (((ComboBoxItem)comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.JellicentHA))
+            {
+                comboBoxCapGenderRatio.SelectedIndex = 1;
+                if (((Profile)comboBoxProfiles.SelectedItem).VersionStr.Equals("Black2"))
+                    comboBoxCapGender.SelectedIndex = 1;
+                else if (((Profile)comboBoxProfiles.SelectedItem).VersionStr.Equals("White2"))
+                    comboBoxCapGender.SelectedIndex = 2;
+            }
+        }
+
         private bool ShinyOnly() => checkBoxShinyOnly.Visible && checkBoxShinyOnly.Checked;
+
+        public Profile getProfile() => (Profile)comboBoxProfiles.SelectedItem;
 
         #endregion
 

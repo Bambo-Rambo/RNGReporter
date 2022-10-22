@@ -19,6 +19,7 @@
 
 
 using RNGReporter.Properties;
+using System.Security.Cryptography;
 
 namespace RNGReporter.Objects
 {
@@ -40,6 +41,7 @@ namespace RNGReporter.Objects
         Gift,
         Entralink,
         LarvestaEgg,
+        JellicentHA,
         AllEncounterShiny,
         BugCatchingContest,
         SafariZone,
@@ -186,6 +188,8 @@ namespace RNGReporter.Objects
                     return EncounterType.Entralink;
                 case "Larvesta Egg":
                     return EncounterType.LarvestaEgg;
+                case "Jellicent Stationary":
+                    return EncounterType.JellicentHA;
                 case "Hidden Grotto":
                     return EncounterType.HiddenGrotto;
                 case "All Encounters Shiny":

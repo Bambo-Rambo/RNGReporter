@@ -41,6 +41,7 @@ namespace RNGReporter.Objects
             bool G5_Stationary = EncounterType == EncounterType.Stationary;
             bool G5_AllEncounterShiny = EncounterType == EncounterType.AllEncounterShiny;
             bool G5_LarvestaEgg = EncounterType == EncounterType.LarvestaEgg;
+            bool G5_Jellicent = EncounterType == EncounterType.JellicentHA;
             bool G5_Entralink = EncounterType == EncounterType.Entralink;
             bool G5_HiddenGrotto = EncounterType == EncounterType.HiddenGrotto;
             bool G5_WildSuperRod = EncounterType == EncounterType.WildSuperRod;
@@ -504,6 +505,35 @@ namespace RNGReporter.Objects
 
                     #endregion
 
+                    else if (G5_Jellicent)
+                    {
+                        if (!(IsCompEyes || IsSuctionCups))
+                            synchable = CheckLead(IsCuteCharm);
+                        else
+                            synchable = false;
+
+                        if (IsCuteCharm && !synchable)
+                            Advance(1);
+
+                        pid = GenderLockPID(id, sid, idLower, frameCompare, false);
+
+                        nature = (uint)(((ulong)NextRand() * 25) >> 32);
+
+                        if (synchable && IsSync)
+                            nature = (uint)SynchNature;
+
+                        if (TimeFinder5)
+                        {
+                            if (synchable && !frameCompare.CompareNature(nature))
+                                mod = EncounterMod.Synchronize;
+                            else
+                                mod = EncounterMod.None;
+                        }
+
+                        if (IsCuteCharm)
+                            synchable = false;
+                    }
+
                     else if (G5_HiddenGrotto)
                     {
                         Advance(1);
@@ -516,7 +546,7 @@ namespace RNGReporter.Objects
                         if (IsCuteCharm && !synchable)
                             Advance(1);
 
-                        pid = GrottoPID(id, sid, idLower, frameCompare);
+                        pid = GenderLockPID(id, sid, idLower, frameCompare, true);
 
                         nature = (uint)(((ulong)NextRand() * 25) >> 32);
 
@@ -716,7 +746,7 @@ namespace RNGReporter.Objects
 
         }
 
-        private uint GrottoPID(uint id, uint sid, uint idLower, FrameCompare frameCompare)
+        private uint GenderLockPID(uint id, uint sid, uint idLower, FrameCompare frameCompare, bool shinyLocked)
         {
             uint pid = 0;
             for (int i = 0; i < RerollCount; i++)
@@ -749,10 +779,18 @@ namespace RNGReporter.Objects
                     }
                 }
 
+                if (!shinyLocked)
+                    pid = TIDBitTwiddle(idLower, pid);
+
                 if (CheckShiny(id, sid, pid))
                 {
-                    // Force non shiny but keep rerolling LOL
-                    pid ^= 0x10000000;
+                    if (shinyLocked)
+                    {
+                        // Force non shiny but keep rerolling LOL
+                        pid ^= 0x10000000;
+                    }
+                    else
+                        return pid;
                 }
             }
             return pid;
@@ -766,7 +804,7 @@ namespace RNGReporter.Objects
                 pid = NextRand() ^ 0x10000;
 
                 if (CC_Success)
-                    pid = Functions.GenderModPID(pid, NextRand(), GenderCase);
+                    pid = Functions.CuteCharmModPID(pid, NextRand(), GenderCase);
 
                 pid = TIDBitTwiddle(idLower, pid);
 

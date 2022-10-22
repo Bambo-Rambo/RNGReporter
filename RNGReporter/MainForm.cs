@@ -1140,6 +1140,7 @@ namespace RNGReporter
                     generator.EncounterType != EncounterType.Roamer &&
                     generator.EncounterType != EncounterType.LarvestaEgg &&
                     generator.EncounterType != EncounterType.Entralink &&
+                    generator.EncounterType != EncounterType.JellicentHA &&
                     generator.EncounterType != EncounterType.HiddenGrotto)
                     EncounterSlot.Visible = true;
                 else
@@ -1201,8 +1202,9 @@ namespace RNGReporter
                 HiddenPower.Visible = false;
                 HiddenPowerPower.Visible = false;
 
-                Shiny.Visible = Ability.Visible = f50.Visible = f75.Visible = f25.Visible = f125.Visible = 
-                    generator.EncounterType != EncounterType.HiddenGrotto;
+                Shiny.Visible = generator.EncounterType != EncounterType.HiddenGrotto;
+                Ability.Visible = f50.Visible = f75.Visible = f25.Visible = f125.Visible = 
+                    generator.EncounterType != EncounterType.HiddenGrotto && generator.EncounterType != EncounterType.JellicentHA;
 
                 MaleOnlySpecies.Visible = false;
             }
@@ -2194,6 +2196,7 @@ namespace RNGReporter
                         "Gift Pokémon",
                         "Entralink Pokémon",
                         "Larvesta Egg",
+                        "Jellicent Stationary",
                         "Hidden Grotto"
                     };
 
@@ -2376,6 +2379,17 @@ namespace RNGReporter
                 comboBoxEncounterType.SelectedIndex != 5 &&
                 comboBoxEncounterType.SelectedIndex >= 2 && comboBoxEncounterType.SelectedIndex <= 7;
 
+            /*try
+            {
+                if (((ComboBoxItem)comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.JellicentHA))
+                {
+                    if (timeFinder5th.getProfile().VersionStr.Equals("Black2"))
+                        comboBoxGender.SelectedIndex = 1;
+                    else if (timeFinder5th.getProfile().VersionStr.Equals("White2"))
+                        comboBoxGender.SelectedIndex = 2;
+                }
+            }
+            catch { }*/
         }
 
         private void CheckTriggerBox()

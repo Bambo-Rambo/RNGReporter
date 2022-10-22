@@ -1435,7 +1435,7 @@ namespace RNGReporter
             checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.comboBoxCapMonth.CheckBoxProperties = checkBoxProperties2;
             this.comboBoxCapMonth.DisplayMemberSingleItem = "";
-            this.comboBoxCapMonth.DropDownHeight = 300;
+            this.comboBoxCapMonth.DropDownHeight = 310;
             this.comboBoxCapMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCapMonth.FormattingEnabled = true;
             this.comboBoxCapMonth.Items.AddRange(new object[] {

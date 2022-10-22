@@ -2006,7 +2006,7 @@ namespace RNGReporter.Objects
                 for (uint cnt = 0; cnt < maxResults; cnt++, rngList.RemoveAt(0), rngList.Add(rng64.GetNext32BitNumber()))
                 {
                     //note: pid field is unused look into later
-                    uint pid = Functions.GenderModPID(rngList[32], rngList[33], gender);
+                    uint pid = Functions.CuteCharmModPID(rngList[32], rngList[33], gender);
                     Frame frame =
                         Frame.GenerateFrame(
                             FrameType.Wondercard5thGenFixed,
@@ -3256,7 +3256,7 @@ namespace RNGReporter.Objects
 
                 for (uint cnt = InitialFrame; cnt < InitialFrame + maxResults; cnt++, rngList.RemoveAt(0), rngList.Add(rng64.GetNext32BitNumber()))
                 {
-                    uint pid = Functions.GenderModPID(rngList[32], rngList[33], gender);
+                    uint pid = Functions.CuteCharmModPID(rngList[32], rngList[33], gender);
                     switch (shiny)
                     {
                         case 0:

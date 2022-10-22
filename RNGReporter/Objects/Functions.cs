@@ -555,7 +555,7 @@ namespace RNGReporter.Objects
 
         //----------------------------------------------------------------------------------------------------------------------        
 
-        public static uint GenderModPID(uint pid, uint rngResult, int genderRatio)
+        public static uint CuteCharmModPID(uint pid, uint rngResult, int genderRatio)
         {
             uint genderAdjustment;
 
