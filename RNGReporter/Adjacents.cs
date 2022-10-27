@@ -121,7 +121,7 @@ namespace RNGReporter
                     ,
                     new ComboBoxItem("Roaming Pokémon", EncounterType.Roamer),
                     new ComboBoxItem("Gift Pokémon", EncounterType.Gift),
-                    new ComboBoxItem("Larvesta Egg", EncounterType.LarvestaEgg)
+                    new ComboBoxItem("Larvesta Egg", EncounterType.LarvestaHappiny)
                 });
 
             comboBoxLead.Items.AddRange(new object[]
@@ -205,7 +205,7 @@ namespace RNGReporter
                     case EncounterType.Gift:
                         comboBoxEncounterType.SelectedIndex = 9;
                         break;
-                    case EncounterType.LarvestaEgg:
+                    case EncounterType.LarvestaHappiny:
                         comboBoxEncounterType.SelectedIndex = 10;
                         break;
                 }
@@ -377,7 +377,7 @@ namespace RNGReporter
                     if (generator.EncounterType != EncounterType.Stationary &&
                         generator.EncounterType != EncounterType.Gift &&
                         generator.EncounterType != EncounterType.Roamer &&
-                        generator.EncounterType != EncounterType.LarvestaEgg)
+                        generator.EncounterType != EncounterType.LarvestaHappiny)
                         EncounterSlot.Visible = true;
                     else
                         EncounterSlot.Visible = false;

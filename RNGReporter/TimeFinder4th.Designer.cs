@@ -32,21 +32,21 @@ namespace RNGReporter
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties1 = new RNGReporter.Controls.CheckBoxProperties();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties2 = new RNGReporter.Controls.CheckBoxProperties();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            RNGReporter.Controls.CheckBoxProperties checkBoxProperties1 = new RNGReporter.Controls.CheckBoxProperties();
-            RNGReporter.Controls.CheckBoxProperties checkBoxProperties2 = new RNGReporter.Controls.CheckBoxProperties();
             this.contextMenuStripEggPid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copySeedToClipboardToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
@@ -65,7 +65,6 @@ namespace RNGReporter
             this.outputResultsToTXTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialogTxt = new System.Windows.Forms.SaveFileDialog();
             this.tabPageEggIVs = new System.Windows.Forms.TabPage();
-            this.ivFiltersEgg = new RNGReporter.Controls.IVFilters();
             this.radioButtonEggHGSS = new System.Windows.Forms.RadioButton();
             this.radioButtonEggDPPt = new System.Windows.Forms.RadioButton();
             this.checkBoxShowInheritance = new System.Windows.Forms.CheckBox();
@@ -77,6 +76,94 @@ namespace RNGReporter
             this.label11 = new System.Windows.Forms.Label();
             this.lblIVB = new System.Windows.Forms.Label();
             this.lblIVA = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tabPageShinyEgg = new System.Windows.Forms.TabPage();
+            this.labelHappinessWarning = new System.Windows.Forms.Label();
+            this.checkBoxNoHappiness = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.checkBoxIntlParents = new System.Windows.Forms.CheckBox();
+            this.radioButtonHGSS = new System.Windows.Forms.RadioButton();
+            this.radioButtonDPPt = new System.Windows.Forms.RadioButton();
+            this.label92 = new System.Windows.Forms.Label();
+            this.checkBoxShinyShinyOnly = new System.Windows.Forms.CheckBox();
+            this.labelDPPtWarning = new System.Windows.Forms.Label();
+            this.labelShinySecretID = new System.Windows.Forms.Label();
+            this.labelShinyNature = new System.Windows.Forms.Label();
+            this.labelShinyTrainerID = new System.Windows.Forms.Label();
+            this.labelShinyAbility = new System.Windows.Forms.Label();
+            this.labelShinyDelay = new System.Windows.Forms.Label();
+            this.labelShinyYear = new System.Windows.Forms.Label();
+            this.tabPageCapture = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.contextMenuStripCap = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copySeedToClipboardToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
+            this.generateTimesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.outputCapResultsToTXTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label54 = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
+            this.labelCapMinMaxFrame = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.lblID = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.checkBoxShinyOnly = new System.Windows.Forms.CheckBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.toolTipDataGrid = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipGenderRatio = new System.Windows.Forms.ToolTip(this.components);
+            this.ivFiltersCapture = new RNGReporter.Controls.IVFilters();
+            this.comboBoxCapGenderRatio = new RNGReporter.GlassComboBox();
+            this.comboBoxCapGender = new RNGReporter.GlassComboBox();
+            this.dataGridViewCapValues = new RNGReporter.DoubleBufferedDataGridView();
+            this.buttonAnySlot = new RNGReporter.GlassButton();
+            this.maskedTextBoxCapMinOffset = new RNGReporter.Controls.MaskedTextBox2();
+            this.comboBoxEncounterType = new RNGReporter.GlassComboBox();
+            this.comboBoxEncounterSlot = new RNGReporter.Controls.CheckBoxComboBox();
+            this.maskedTextBoxCapMaxDelay = new RNGReporter.Controls.MaskedTextBox2();
+            this.maskedTextBoxCapMinDelay = new RNGReporter.Controls.MaskedTextBox2();
+            this.maskedTextBoxCapYear = new RNGReporter.Controls.MaskedTextBox2();
+            this.maskedTextBoxCapMaxOffset = new RNGReporter.Controls.MaskedTextBox2();
+            this.comboBoxMethod = new RNGReporter.GlassComboBox();
+            this.buttonCapGenerate = new RNGReporter.GlassButton();
+            this.buttonAnyNature = new RNGReporter.GlassButton();
+            this.comboBoxAbility = new RNGReporter.GlassComboBox();
+            this.maskedTextBoxID = new RNGReporter.Controls.MaskedTextBox2();
+            this.maskedTextBoxSID = new RNGReporter.Controls.MaskedTextBox2();
+            this.comboBoxNature = new RNGReporter.Controls.CheckBoxComboBox();
+            this.dataGridViewShinyResults = new RNGReporter.DoubleBufferedDataGridView();
+            this.EggSeed = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ShinyOffset = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EggPID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.shinyShinyDisplay = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ShinyNature = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ShinyFemale50 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ShinyFemale25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ShinyFemale125 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ShinyFemale75 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ShinyFlipSequence = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ShinyTaps = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ShinyFlips = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comboBoxShinyGender = new RNGReporter.GlassComboBox();
+            this.buttonShinyClearAbility = new RNGReporter.GlassButton();
+            this.comboBoxShinyAbility = new RNGReporter.GlassComboBox();
+            this.buttonShinyGenerate = new RNGReporter.GlassButton();
+            this.buttonShinyClearNature = new RNGReporter.GlassButton();
+            this.comboBoxShinyNature = new RNGReporter.GlassComboBox();
+            this.maskedTextBoxMaxTaps = new RNGReporter.Controls.MaskedTextBox2();
+            this.maskedTextBoxShinySecretID = new RNGReporter.Controls.MaskedTextBox2();
+            this.maskedTextBoxShinyID = new RNGReporter.Controls.MaskedTextBox2();
+            this.maskedTextBoxShinyMaxDelay = new RNGReporter.Controls.MaskedTextBox2();
+            this.maskedTextBoxShinyMinDelay = new RNGReporter.Controls.MaskedTextBox2();
+            this.maskedTextBoxShinyYear = new RNGReporter.Controls.MaskedTextBox2();
+            this.ivFiltersEgg = new RNGReporter.Controls.IVFilters();
             this.dataGridViewEggIVValues = new RNGReporter.DoubleBufferedDataGridView();
             this.Seed = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -89,9 +176,6 @@ namespace RNGReporter
             this.SpD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Spe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Flips = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.button1 = new RNGReporter.GlassButton();
             this.buttonEggGenerate = new RNGReporter.GlassButton();
             this.maskedTextBoxDefB = new RNGReporter.Controls.MaskedTextBox2();
@@ -111,56 +195,8 @@ namespace RNGReporter
             this.maskedTextBoxYear = new RNGReporter.Controls.MaskedTextBox2();
             this.maskedTextBoxMinDelay = new RNGReporter.Controls.MaskedTextBox2();
             this.maskedTextBoxMaxDelay = new RNGReporter.Controls.MaskedTextBox2();
-            this.tabPageShinyEgg = new System.Windows.Forms.TabPage();
-            this.labelHappinessWarning = new System.Windows.Forms.Label();
-            this.checkBoxNoHappiness = new System.Windows.Forms.CheckBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.checkBoxIntlParents = new System.Windows.Forms.CheckBox();
-            this.radioButtonHGSS = new System.Windows.Forms.RadioButton();
-            this.radioButtonDPPt = new System.Windows.Forms.RadioButton();
-            this.label92 = new System.Windows.Forms.Label();
-            this.checkBoxShinyShinyOnly = new System.Windows.Forms.CheckBox();
-            this.labelDPPtWarning = new System.Windows.Forms.Label();
-            this.dataGridViewShinyResults = new RNGReporter.DoubleBufferedDataGridView();
-            this.EggSeed = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ShinyOffset = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EggPID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.shinyShinyDisplay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ShinyNature = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ShinyFemale50 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ShinyFemale25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ShinyFemale125 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ShinyFemale75 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ShinyFlipSequence = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ShinyTaps = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ShinyFlips = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.labelShinySecretID = new System.Windows.Forms.Label();
-            this.labelShinyNature = new System.Windows.Forms.Label();
-            this.labelShinyTrainerID = new System.Windows.Forms.Label();
-            this.labelShinyAbility = new System.Windows.Forms.Label();
-            this.labelShinyDelay = new System.Windows.Forms.Label();
-            this.labelShinyYear = new System.Windows.Forms.Label();
-            this.comboBoxShinyGender = new RNGReporter.GlassComboBox();
-            this.buttonShinyClearAbility = new RNGReporter.GlassButton();
-            this.comboBoxShinyAbility = new RNGReporter.GlassComboBox();
-            this.buttonShinyGenerate = new RNGReporter.GlassButton();
-            this.buttonShinyClearNature = new RNGReporter.GlassButton();
-            this.comboBoxShinyNature = new RNGReporter.GlassComboBox();
-            this.maskedTextBoxMaxTaps = new RNGReporter.Controls.MaskedTextBox2();
-            this.maskedTextBoxShinySecretID = new RNGReporter.Controls.MaskedTextBox2();
-            this.maskedTextBoxShinyID = new RNGReporter.Controls.MaskedTextBox2();
-            this.maskedTextBoxShinyMaxDelay = new RNGReporter.Controls.MaskedTextBox2();
-            this.maskedTextBoxShinyMinDelay = new RNGReporter.Controls.MaskedTextBox2();
-            this.maskedTextBoxShinyYear = new RNGReporter.Controls.MaskedTextBox2();
-            this.tabPageCapture = new System.Windows.Forms.TabPage();
-            this.ivFiltersCapture = new RNGReporter.Controls.IVFilters();
-            this.comboBoxCapGenderRatio = new RNGReporter.GlassComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBoxCapGender = new RNGReporter.GlassComboBox();
-            this.label31 = new System.Windows.Forms.Label();
-            this.dataGridViewCapValues = new RNGReporter.DoubleBufferedDataGridView();
             this.CapSeed = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ShinyPatchFrame = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CapOffset = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hour = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EncounterMod = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -181,51 +217,16 @@ namespace RNGReporter
             this.f125 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.f25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.f75 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStripCap = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.copySeedToClipboardToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
-            this.generateTimesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-            this.outputCapResultsToTXTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buttonAnySlot = new RNGReporter.GlassButton();
-            this.maskedTextBoxCapMinOffset = new RNGReporter.Controls.MaskedTextBox2();
-            this.label54 = new System.Windows.Forms.Label();
-            this.comboBoxEncounterType = new RNGReporter.GlassComboBox();
-            this.comboBoxEncounterSlot = new RNGReporter.Controls.CheckBoxComboBox();
-            this.maskedTextBoxCapMaxDelay = new RNGReporter.Controls.MaskedTextBox2();
-            this.label52 = new System.Windows.Forms.Label();
-            this.maskedTextBoxCapMinDelay = new RNGReporter.Controls.MaskedTextBox2();
-            this.maskedTextBoxCapYear = new RNGReporter.Controls.MaskedTextBox2();
-            this.maskedTextBoxCapMaxOffset = new RNGReporter.Controls.MaskedTextBox2();
-            this.labelCapMinMaxFrame = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.comboBoxMethod = new RNGReporter.GlassComboBox();
-            this.label30 = new System.Windows.Forms.Label();
-            this.buttonCapGenerate = new RNGReporter.GlassButton();
-            this.buttonAnyNature = new RNGReporter.GlassButton();
-            this.lblID = new System.Windows.Forms.Label();
-            this.comboBoxAbility = new RNGReporter.GlassComboBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.checkBoxShinyOnly = new System.Windows.Forms.CheckBox();
-            this.maskedTextBoxID = new RNGReporter.Controls.MaskedTextBox2();
-            this.maskedTextBoxSID = new RNGReporter.Controls.MaskedTextBox2();
-            this.label21 = new System.Windows.Forms.Label();
-            this.comboBoxNature = new RNGReporter.Controls.CheckBoxComboBox();
-            this.tabControl = new System.Windows.Forms.TabControl();
-            this.toolTipDataGrid = new System.Windows.Forms.ToolTip(this.components);
-            this.toolTipGenderRatio = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStripEggPid.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.tabPageEggIVs.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEggIVValues)).BeginInit();
             this.tabPageShinyEgg.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewShinyResults)).BeginInit();
             this.tabPageCapture.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCapValues)).BeginInit();
             this.contextMenuStripCap.SuspendLayout();
             this.tabControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCapValues)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewShinyResults)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEggIVValues)).BeginInit();
             this.SuspendLayout();
             // 
             // contextMenuStripEggPid
@@ -237,37 +238,37 @@ namespace RNGReporter
             this.toolStripMenuItem4,
             this.outputResultsToTXTToolStripMenuItem1});
             this.contextMenuStripEggPid.Name = "contextMenuStripEggPid";
-            this.contextMenuStripEggPid.Size = new System.Drawing.Size(203, 82);
+            this.contextMenuStripEggPid.Size = new System.Drawing.Size(201, 82);
             this.contextMenuStripEggPid.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripEggPid_Opening);
             // 
             // copySeedToClipboardToolStripMenuItem2
             // 
             this.copySeedToClipboardToolStripMenuItem2.Name = "copySeedToClipboardToolStripMenuItem2";
-            this.copySeedToClipboardToolStripMenuItem2.Size = new System.Drawing.Size(202, 22);
+            this.copySeedToClipboardToolStripMenuItem2.Size = new System.Drawing.Size(200, 22);
             this.copySeedToClipboardToolStripMenuItem2.Text = "Copy Seed to Clipboard";
             this.copySeedToClipboardToolStripMenuItem2.Click += new System.EventHandler(this.copySeedToClipboardToolStripMenuItem2_Click);
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(199, 6);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(197, 6);
             // 
             // generateTimeToolStripMenuItem
             // 
             this.generateTimeToolStripMenuItem.Name = "generateTimeToolStripMenuItem";
-            this.generateTimeToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.generateTimeToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.generateTimeToolStripMenuItem.Text = "Generate More Times ...";
             this.generateTimeToolStripMenuItem.Click += new System.EventHandler(this.generateTimeToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(199, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(197, 6);
             // 
             // outputResultsToTXTToolStripMenuItem1
             // 
             this.outputResultsToTXTToolStripMenuItem1.Name = "outputResultsToTXTToolStripMenuItem1";
-            this.outputResultsToTXTToolStripMenuItem1.Size = new System.Drawing.Size(202, 22);
+            this.outputResultsToTXTToolStripMenuItem1.Size = new System.Drawing.Size(200, 22);
             this.outputResultsToTXTToolStripMenuItem1.Text = "Output Results to TXT ...";
             this.outputResultsToTXTToolStripMenuItem1.Click += new System.EventHandler(this.outputResultsToTXTToolStripMenuItem1_Click);
             // 
@@ -390,13 +391,6 @@ namespace RNGReporter
             this.tabPageEggIVs.Text = "Egg IVs";
             this.tabPageEggIVs.UseVisualStyleBackColor = true;
             // 
-            // ivFiltersEgg
-            // 
-            this.ivFiltersEgg.Location = new System.Drawing.Point(315, 6);
-            this.ivFiltersEgg.Name = "ivFiltersEgg";
-            this.ivFiltersEgg.Size = new System.Drawing.Size(315, 166);
-            this.ivFiltersEgg.TabIndex = 101;
-            // 
             // radioButtonEggHGSS
             // 
             this.radioButtonEggHGSS.AutoSize = true;
@@ -507,6 +501,1119 @@ namespace RNGReporter
             this.lblIVA.Size = new System.Drawing.Size(48, 13);
             this.lblIVA.TabIndex = 86;
             this.lblIVA.Text = "Parent A";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(52, 9);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(29, 13);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "Year";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(97, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(85, 13);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Min / Max Delay";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(191, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(87, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Min / Max Frame";
+            // 
+            // tabPageShinyEgg
+            // 
+            this.tabPageShinyEgg.Controls.Add(this.labelHappinessWarning);
+            this.tabPageShinyEgg.Controls.Add(this.checkBoxNoHappiness);
+            this.tabPageShinyEgg.Controls.Add(this.label8);
+            this.tabPageShinyEgg.Controls.Add(this.checkBoxIntlParents);
+            this.tabPageShinyEgg.Controls.Add(this.radioButtonHGSS);
+            this.tabPageShinyEgg.Controls.Add(this.radioButtonDPPt);
+            this.tabPageShinyEgg.Controls.Add(this.label92);
+            this.tabPageShinyEgg.Controls.Add(this.checkBoxShinyShinyOnly);
+            this.tabPageShinyEgg.Controls.Add(this.labelDPPtWarning);
+            this.tabPageShinyEgg.Controls.Add(this.dataGridViewShinyResults);
+            this.tabPageShinyEgg.Controls.Add(this.labelShinySecretID);
+            this.tabPageShinyEgg.Controls.Add(this.labelShinyNature);
+            this.tabPageShinyEgg.Controls.Add(this.labelShinyTrainerID);
+            this.tabPageShinyEgg.Controls.Add(this.labelShinyAbility);
+            this.tabPageShinyEgg.Controls.Add(this.labelShinyDelay);
+            this.tabPageShinyEgg.Controls.Add(this.labelShinyYear);
+            this.tabPageShinyEgg.Controls.Add(this.comboBoxShinyGender);
+            this.tabPageShinyEgg.Controls.Add(this.buttonShinyClearAbility);
+            this.tabPageShinyEgg.Controls.Add(this.comboBoxShinyAbility);
+            this.tabPageShinyEgg.Controls.Add(this.buttonShinyGenerate);
+            this.tabPageShinyEgg.Controls.Add(this.buttonShinyClearNature);
+            this.tabPageShinyEgg.Controls.Add(this.comboBoxShinyNature);
+            this.tabPageShinyEgg.Controls.Add(this.maskedTextBoxMaxTaps);
+            this.tabPageShinyEgg.Controls.Add(this.maskedTextBoxShinySecretID);
+            this.tabPageShinyEgg.Controls.Add(this.maskedTextBoxShinyID);
+            this.tabPageShinyEgg.Controls.Add(this.maskedTextBoxShinyMaxDelay);
+            this.tabPageShinyEgg.Controls.Add(this.maskedTextBoxShinyMinDelay);
+            this.tabPageShinyEgg.Controls.Add(this.maskedTextBoxShinyYear);
+            this.tabPageShinyEgg.Location = new System.Drawing.Point(4, 22);
+            this.tabPageShinyEgg.Name = "tabPageShinyEgg";
+            this.tabPageShinyEgg.Size = new System.Drawing.Size(991, 498);
+            this.tabPageShinyEgg.TabIndex = 2;
+            this.tabPageShinyEgg.Text = "Shiny Egg";
+            this.tabPageShinyEgg.UseVisualStyleBackColor = true;
+            // 
+            // labelHappinessWarning
+            // 
+            this.labelHappinessWarning.Location = new System.Drawing.Point(221, 84);
+            this.labelHappinessWarning.Name = "labelHappinessWarning";
+            this.labelHappinessWarning.Size = new System.Drawing.Size(269, 81);
+            this.labelHappinessWarning.TabIndex = 325;
+            this.labelHappinessWarning.Text = "It also assumes that you start the game from the coin flip application, and then " +
+    "switch to the happiness checker application.\r\n";
+            // 
+            // checkBoxNoHappiness
+            // 
+            this.checkBoxNoHappiness.AutoSize = true;
+            this.checkBoxNoHappiness.Location = new System.Drawing.Point(499, 50);
+            this.checkBoxNoHappiness.Name = "checkBoxNoHappiness";
+            this.checkBoxNoHappiness.Size = new System.Drawing.Size(149, 17);
+            this.checkBoxNoHappiness.TabIndex = 8;
+            this.checkBoxNoHappiness.Text = "Avoid Happiness Checker";
+            this.checkBoxNoHappiness.UseVisualStyleBackColor = true;
+            this.checkBoxNoHappiness.CheckedChanged += new System.EventHandler(this.checkBoxNoHappiness_CheckedChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(496, 8);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(54, 13);
+            this.label8.TabIndex = 322;
+            this.label8.Text = "Max Taps";
+            // 
+            // checkBoxIntlParents
+            // 
+            this.checkBoxIntlParents.AutoSize = true;
+            this.checkBoxIntlParents.Location = new System.Drawing.Point(55, 86);
+            this.checkBoxIntlParents.Name = "checkBoxIntlParents";
+            this.checkBoxIntlParents.Size = new System.Drawing.Size(123, 17);
+            this.checkBoxIntlParents.TabIndex = 5;
+            this.checkBoxIntlParents.Text = "International Parents";
+            this.checkBoxIntlParents.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonHGSS
+            // 
+            this.radioButtonHGSS.AutoSize = true;
+            this.radioButtonHGSS.Location = new System.Drawing.Point(55, 67);
+            this.radioButtonHGSS.Name = "radioButtonHGSS";
+            this.radioButtonHGSS.Size = new System.Drawing.Size(131, 17);
+            this.radioButtonHGSS.TabIndex = 4;
+            this.radioButtonHGSS.Text = "Heart Gold\\Soul Silver";
+            this.radioButtonHGSS.UseVisualStyleBackColor = true;
+            this.radioButtonHGSS.CheckedChanged += new System.EventHandler(this.comboBoxShinyVersion_SelectedIndexChanged);
+            // 
+            // radioButtonDPPt
+            // 
+            this.radioButtonDPPt.AutoSize = true;
+            this.radioButtonDPPt.Checked = true;
+            this.radioButtonDPPt.Location = new System.Drawing.Point(55, 49);
+            this.radioButtonDPPt.Name = "radioButtonDPPt";
+            this.radioButtonDPPt.Size = new System.Drawing.Size(141, 17);
+            this.radioButtonDPPt.TabIndex = 3;
+            this.radioButtonDPPt.TabStop = true;
+            this.radioButtonDPPt.Text = "Diamond\\Pearl\\Platinum";
+            this.radioButtonDPPt.UseVisualStyleBackColor = true;
+            this.radioButtonDPPt.CheckedChanged += new System.EventHandler(this.comboBoxShinyVersion_SelectedIndexChanged);
+            // 
+            // label92
+            // 
+            this.label92.AutoSize = true;
+            this.label92.Location = new System.Drawing.Point(655, 94);
+            this.label92.Name = "label92";
+            this.label92.Size = new System.Drawing.Size(42, 13);
+            this.label92.TabIndex = 317;
+            this.label92.Text = "Gender";
+            // 
+            // checkBoxShinyShinyOnly
+            // 
+            this.checkBoxShinyShinyOnly.AutoSize = true;
+            this.checkBoxShinyShinyOnly.Location = new System.Drawing.Point(700, 157);
+            this.checkBoxShinyShinyOnly.Name = "checkBoxShinyShinyOnly";
+            this.checkBoxShinyShinyOnly.Size = new System.Drawing.Size(76, 17);
+            this.checkBoxShinyShinyOnly.TabIndex = 16;
+            this.checkBoxShinyShinyOnly.Text = "Shiny Only";
+            this.checkBoxShinyShinyOnly.UseVisualStyleBackColor = true;
+            // 
+            // labelDPPtWarning
+            // 
+            this.labelDPPtWarning.Location = new System.Drawing.Point(221, 11);
+            this.labelDPPtWarning.Name = "labelDPPtWarning";
+            this.labelDPPtWarning.Size = new System.Drawing.Size(269, 71);
+            this.labelDPPtWarning.TabIndex = 117;
+            this.labelDPPtWarning.Text = "Please note that number of flips and taps that are listed assume that you will al" +
+    "so be doing 10 coin flips to verify your initial seed. ";
+            // 
+            // labelShinySecretID
+            // 
+            this.labelShinySecretID.AutoSize = true;
+            this.labelShinySecretID.Location = new System.Drawing.Point(753, 117);
+            this.labelShinySecretID.Name = "labelShinySecretID";
+            this.labelShinySecretID.Size = new System.Drawing.Size(25, 13);
+            this.labelShinySecretID.TabIndex = 23;
+            this.labelShinySecretID.Text = "SID";
+            // 
+            // labelShinyNature
+            // 
+            this.labelShinyNature.AutoSize = true;
+            this.labelShinyNature.Location = new System.Drawing.Point(660, 20);
+            this.labelShinyNature.Name = "labelShinyNature";
+            this.labelShinyNature.Size = new System.Drawing.Size(39, 13);
+            this.labelShinyNature.TabIndex = 14;
+            this.labelShinyNature.Text = "Nature";
+            // 
+            // labelShinyTrainerID
+            // 
+            this.labelShinyTrainerID.AutoSize = true;
+            this.labelShinyTrainerID.Location = new System.Drawing.Point(699, 117);
+            this.labelShinyTrainerID.Name = "labelShinyTrainerID";
+            this.labelShinyTrainerID.Size = new System.Drawing.Size(18, 13);
+            this.labelShinyTrainerID.TabIndex = 21;
+            this.labelShinyTrainerID.Text = "ID";
+            // 
+            // labelShinyAbility
+            // 
+            this.labelShinyAbility.AutoSize = true;
+            this.labelShinyAbility.Location = new System.Drawing.Point(663, 47);
+            this.labelShinyAbility.Name = "labelShinyAbility";
+            this.labelShinyAbility.Size = new System.Drawing.Size(34, 13);
+            this.labelShinyAbility.TabIndex = 20;
+            this.labelShinyAbility.Text = "Ability";
+            // 
+            // labelShinyDelay
+            // 
+            this.labelShinyDelay.AutoSize = true;
+            this.labelShinyDelay.Location = new System.Drawing.Point(97, 9);
+            this.labelShinyDelay.Name = "labelShinyDelay";
+            this.labelShinyDelay.Size = new System.Drawing.Size(85, 13);
+            this.labelShinyDelay.TabIndex = 12;
+            this.labelShinyDelay.Text = "Min / Max Delay";
+            // 
+            // labelShinyYear
+            // 
+            this.labelShinyYear.AutoSize = true;
+            this.labelShinyYear.Location = new System.Drawing.Point(52, 9);
+            this.labelShinyYear.Name = "labelShinyYear";
+            this.labelShinyYear.Size = new System.Drawing.Size(29, 13);
+            this.labelShinyYear.TabIndex = 2;
+            this.labelShinyYear.Text = "Year";
+            // 
+            // tabPageCapture
+            // 
+            this.tabPageCapture.Controls.Add(this.ivFiltersCapture);
+            this.tabPageCapture.Controls.Add(this.comboBoxCapGenderRatio);
+            this.tabPageCapture.Controls.Add(this.label2);
+            this.tabPageCapture.Controls.Add(this.comboBoxCapGender);
+            this.tabPageCapture.Controls.Add(this.label31);
+            this.tabPageCapture.Controls.Add(this.dataGridViewCapValues);
+            this.tabPageCapture.Controls.Add(this.buttonAnySlot);
+            this.tabPageCapture.Controls.Add(this.maskedTextBoxCapMinOffset);
+            this.tabPageCapture.Controls.Add(this.label54);
+            this.tabPageCapture.Controls.Add(this.comboBoxEncounterType);
+            this.tabPageCapture.Controls.Add(this.comboBoxEncounterSlot);
+            this.tabPageCapture.Controls.Add(this.maskedTextBoxCapMaxDelay);
+            this.tabPageCapture.Controls.Add(this.label52);
+            this.tabPageCapture.Controls.Add(this.maskedTextBoxCapMinDelay);
+            this.tabPageCapture.Controls.Add(this.maskedTextBoxCapYear);
+            this.tabPageCapture.Controls.Add(this.maskedTextBoxCapMaxOffset);
+            this.tabPageCapture.Controls.Add(this.labelCapMinMaxFrame);
+            this.tabPageCapture.Controls.Add(this.label22);
+            this.tabPageCapture.Controls.Add(this.label20);
+            this.tabPageCapture.Controls.Add(this.comboBoxMethod);
+            this.tabPageCapture.Controls.Add(this.label30);
+            this.tabPageCapture.Controls.Add(this.buttonCapGenerate);
+            this.tabPageCapture.Controls.Add(this.buttonAnyNature);
+            this.tabPageCapture.Controls.Add(this.lblID);
+            this.tabPageCapture.Controls.Add(this.comboBoxAbility);
+            this.tabPageCapture.Controls.Add(this.label26);
+            this.tabPageCapture.Controls.Add(this.label23);
+            this.tabPageCapture.Controls.Add(this.checkBoxShinyOnly);
+            this.tabPageCapture.Controls.Add(this.maskedTextBoxID);
+            this.tabPageCapture.Controls.Add(this.maskedTextBoxSID);
+            this.tabPageCapture.Controls.Add(this.label21);
+            this.tabPageCapture.Controls.Add(this.comboBoxNature);
+            this.tabPageCapture.Location = new System.Drawing.Point(4, 22);
+            this.tabPageCapture.Name = "tabPageCapture";
+            this.tabPageCapture.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageCapture.Size = new System.Drawing.Size(991, 498);
+            this.tabPageCapture.TabIndex = 1;
+            this.tabPageCapture.Text = "Capture";
+            this.tabPageCapture.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(811, 95);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(32, 13);
+            this.label2.TabIndex = 324;
+            this.label2.Text = "Ratio";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(698, 94);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(42, 13);
+            this.label31.TabIndex = 321;
+            this.label31.Text = "Gender";
+            // 
+            // contextMenuStripCap
+            // 
+            this.contextMenuStripCap.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copySeedToClipboardToolStripMenuItem1,
+            this.toolStripMenuItem6,
+            this.generateTimesToolStripMenuItem,
+            this.toolStripMenuItem3,
+            this.outputCapResultsToTXTToolStripMenuItem});
+            this.contextMenuStripCap.Name = "contextMenuStripCap";
+            this.contextMenuStripCap.Size = new System.Drawing.Size(201, 82);
+            this.contextMenuStripCap.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripCap_Opening);
+            // 
+            // copySeedToClipboardToolStripMenuItem1
+            // 
+            this.copySeedToClipboardToolStripMenuItem1.Name = "copySeedToClipboardToolStripMenuItem1";
+            this.copySeedToClipboardToolStripMenuItem1.Size = new System.Drawing.Size(200, 22);
+            this.copySeedToClipboardToolStripMenuItem1.Text = "Copy Seed to Clipboard";
+            this.copySeedToClipboardToolStripMenuItem1.Click += new System.EventHandler(this.copySeedToClipboardToolStripMenuItem1_Click);
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(197, 6);
+            // 
+            // generateTimesToolStripMenuItem
+            // 
+            this.generateTimesToolStripMenuItem.Name = "generateTimesToolStripMenuItem";
+            this.generateTimesToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.generateTimesToolStripMenuItem.Text = "Generate More Times ...";
+            this.generateTimesToolStripMenuItem.Click += new System.EventHandler(this.generateTimesToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(197, 6);
+            // 
+            // outputCapResultsToTXTToolStripMenuItem
+            // 
+            this.outputCapResultsToTXTToolStripMenuItem.Name = "outputCapResultsToTXTToolStripMenuItem";
+            this.outputCapResultsToTXTToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.outputCapResultsToTXTToolStripMenuItem.Text = "Output Results to TXT ...";
+            this.outputCapResultsToTXTToolStripMenuItem.Click += new System.EventHandler(this.outputCapResultsToTXTToolStripMenuItem_Click);
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(17, 104);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(77, 13);
+            this.label54.TabIndex = 120;
+            this.label54.Text = "Encounter Slot";
+            this.label54.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(12, 81);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(83, 13);
+            this.label52.TabIndex = 121;
+            this.label52.Text = "Encounter Type";
+            this.label52.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // labelCapMinMaxFrame
+            // 
+            this.labelCapMinMaxFrame.AutoSize = true;
+            this.labelCapMinMaxFrame.Location = new System.Drawing.Point(191, 9);
+            this.labelCapMinMaxFrame.Name = "labelCapMinMaxFrame";
+            this.labelCapMinMaxFrame.Size = new System.Drawing.Size(87, 13);
+            this.labelCapMinMaxFrame.TabIndex = 107;
+            this.labelCapMinMaxFrame.Text = "Min / Max Frame";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(97, 9);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(85, 13);
+            this.label22.TabIndex = 108;
+            this.label22.Text = "Min / Max Delay";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(52, 9);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(29, 13);
+            this.label20.TabIndex = 106;
+            this.label20.Text = "Year";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(51, 57);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(43, 13);
+            this.label30.TabIndex = 113;
+            this.label30.Text = "Method";
+            this.label30.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // lblID
+            // 
+            this.lblID.AutoSize = true;
+            this.lblID.Location = new System.Drawing.Point(742, 117);
+            this.lblID.Name = "lblID";
+            this.lblID.Size = new System.Drawing.Size(18, 13);
+            this.lblID.TabIndex = 69;
+            this.lblID.Text = "ID";
+            this.lblID.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(796, 117);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(25, 13);
+            this.label26.TabIndex = 71;
+            this.label26.Text = "SID";
+            this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(706, 47);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(34, 13);
+            this.label23.TabIndex = 68;
+            this.label23.Text = "Ability";
+            // 
+            // checkBoxShinyOnly
+            // 
+            this.checkBoxShinyOnly.AutoSize = true;
+            this.checkBoxShinyOnly.Location = new System.Drawing.Point(743, 157);
+            this.checkBoxShinyOnly.Name = "checkBoxShinyOnly";
+            this.checkBoxShinyOnly.Size = new System.Drawing.Size(76, 17);
+            this.checkBoxShinyOnly.TabIndex = 30;
+            this.checkBoxShinyOnly.Text = "Shiny Only";
+            this.checkBoxShinyOnly.UseVisualStyleBackColor = true;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(703, 20);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(39, 13);
+            this.label21.TabIndex = 11;
+            this.label21.Text = "Nature";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // tabControl
+            // 
+            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl.Controls.Add(this.tabPageCapture);
+            this.tabControl.Controls.Add(this.tabPageShinyEgg);
+            this.tabControl.Controls.Add(this.tabPageEggIVs);
+            this.tabControl.Location = new System.Drawing.Point(12, 12);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(999, 524);
+            this.tabControl.TabIndex = 0;
+            // 
+            // toolTipDataGrid
+            // 
+            this.toolTipDataGrid.AutoPopDelay = 6000;
+            this.toolTipDataGrid.InitialDelay = 300;
+            this.toolTipDataGrid.ReshowDelay = 100;
+            this.toolTipDataGrid.ToolTipTitle = "Gender Ratio";
+            // 
+            // toolTipGenderRatio
+            // 
+            this.toolTipGenderRatio.AutoPopDelay = 6000;
+            this.toolTipGenderRatio.InitialDelay = 300;
+            this.toolTipGenderRatio.ReshowDelay = 100;
+            this.toolTipGenderRatio.ToolTipTitle = "Gender Ratio";
+            // 
+            // ivFiltersCapture
+            // 
+            this.ivFiltersCapture.Location = new System.Drawing.Point(367, 6);
+            this.ivFiltersCapture.Name = "ivFiltersCapture";
+            this.ivFiltersCapture.Size = new System.Drawing.Size(315, 166);
+            this.ivFiltersCapture.TabIndex = 325;
+            // 
+            // comboBoxCapGenderRatio
+            // 
+            this.comboBoxCapGenderRatio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCapGenderRatio.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxCapGenderRatio.FormattingEnabled = true;
+            this.comboBoxCapGenderRatio.Items.AddRange(new object[] {
+            "All Ratios",
+            "50% M / 50% F",
+            "25% M / 75% F",
+            "75% M / 25% F",
+            "87.5% M / 12.5% F",
+            "Fixed Gender"});
+            this.comboBoxCapGenderRatio.Location = new System.Drawing.Point(844, 90);
+            this.comboBoxCapGenderRatio.MaxDropDownItems = 3;
+            this.comboBoxCapGenderRatio.Name = "comboBoxCapGenderRatio";
+            this.comboBoxCapGenderRatio.ShineColor = System.Drawing.SystemColors.Window;
+            this.comboBoxCapGenderRatio.Size = new System.Drawing.Size(119, 21);
+            this.comboBoxCapGenderRatio.TabIndex = 27;
+            this.toolTipGenderRatio.SetToolTip(this.comboBoxCapGenderRatio, "Right-click to look up the gender\r\nratio of a certain Pokémon.\r\n\r\nUse this box to" +
+        " filter out unwanted\r\nCute Charm results.\r\n");
+            this.comboBoxCapGenderRatio.SelectedIndexChanged += new System.EventHandler(this.comboBoxCapGenderRatio_SelectedIndexChanged);
+            this.comboBoxCapGenderRatio.MouseDown += new System.Windows.Forms.MouseEventHandler(this.comboBoxCapGenderRatio_MouseDown);
+            // 
+            // comboBoxCapGender
+            // 
+            this.comboBoxCapGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCapGender.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxCapGender.FormattingEnabled = true;
+            this.comboBoxCapGender.Items.AddRange(new object[] {
+            "Any",
+            "Male",
+            "Female"});
+            this.comboBoxCapGender.Location = new System.Drawing.Point(743, 91);
+            this.comboBoxCapGender.MaxDropDownItems = 3;
+            this.comboBoxCapGender.Name = "comboBoxCapGender";
+            this.comboBoxCapGender.ShineColor = System.Drawing.SystemColors.Window;
+            this.comboBoxCapGender.Size = new System.Drawing.Size(59, 21);
+            this.comboBoxCapGender.TabIndex = 26;
+            // 
+            // dataGridViewCapValues
+            // 
+            this.dataGridViewCapValues.AllowUserToAddRows = false;
+            this.dataGridViewCapValues.AllowUserToDeleteRows = false;
+            this.dataGridViewCapValues.AllowUserToResizeRows = false;
+            this.dataGridViewCapValues.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewCapValues.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewCapValues.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.dataGridViewCapValues.ColumnHeadersHeight = 20;
+            this.dataGridViewCapValues.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridViewCapValues.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CapSeed,
+            this.ShinyPatchFrame,
+            this.CapOffset,
+            this.Hour,
+            this.EncounterMod,
+            this.PID,
+            this.EncounterSlot,
+            this.Shiny,
+            this.Nature,
+            this.Ability,
+            this.CapHP,
+            this.CapAtk,
+            this.CapDef,
+            this.CapSpA,
+            this.CapSpD,
+            this.CapSpe,
+            this.HiddenPower,
+            this.HiddenPowerPower,
+            this.f50,
+            this.f125,
+            this.f25,
+            this.f75});
+            this.dataGridViewCapValues.ContextMenuStrip = this.contextMenuStripCap;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewCapValues.DefaultCellStyle = dataGridViewCellStyle12;
+            this.dataGridViewCapValues.Location = new System.Drawing.Point(6, 189);
+            this.dataGridViewCapValues.MultiSelect = false;
+            this.dataGridViewCapValues.Name = "dataGridViewCapValues";
+            this.dataGridViewCapValues.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewCapValues.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            this.dataGridViewCapValues.RowHeadersVisible = false;
+            this.dataGridViewCapValues.RowTemplate.Height = 20;
+            this.dataGridViewCapValues.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewCapValues.ShowCellErrors = false;
+            this.dataGridViewCapValues.ShowCellToolTips = false;
+            this.dataGridViewCapValues.ShowEditingIcon = false;
+            this.dataGridViewCapValues.ShowRowErrors = false;
+            this.dataGridViewCapValues.Size = new System.Drawing.Size(957, 303);
+            this.dataGridViewCapValues.TabIndex = 10;
+            this.toolTipDataGrid.SetToolTip(this.dataGridViewCapValues, "test");
+            this.dataGridViewCapValues.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewCapValues_CellFormatting);
+            this.dataGridViewCapValues.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCapValues_CellMouseEnter);
+            this.dataGridViewCapValues.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCapValues_CellMouseLeave);
+            this.dataGridViewCapValues.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewCapValues_ColumnHeaderMouseClick);
+            this.dataGridViewCapValues.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridViewCapValues_KeyDown);
+            this.dataGridViewCapValues.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridViewCapValues_MouseDown);
+            // 
+            // buttonAnySlot
+            // 
+            this.buttonAnySlot.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.buttonAnySlot.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.buttonAnySlot.ForeColor = System.Drawing.Color.Black;
+            this.buttonAnySlot.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.buttonAnySlot.Location = new System.Drawing.Point(256, 98);
+            this.buttonAnySlot.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonAnySlot.Name = "buttonAnySlot";
+            this.buttonAnySlot.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.buttonAnySlot.ShineColor = System.Drawing.SystemColors.Window;
+            this.buttonAnySlot.Size = new System.Drawing.Size(41, 22);
+            this.buttonAnySlot.TabIndex = 8;
+            this.buttonAnySlot.Text = "Any";
+            this.buttonAnySlot.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.buttonAnySlot.Click += new System.EventHandler(this.buttonAnySlot_Click);
+            // 
+            // maskedTextBoxCapMinOffset
+            // 
+            this.maskedTextBoxCapMinOffset.Hex = false;
+            this.maskedTextBoxCapMinOffset.Location = new System.Drawing.Point(188, 24);
+            this.maskedTextBoxCapMinOffset.Mask = "00000";
+            this.maskedTextBoxCapMinOffset.Name = "maskedTextBoxCapMinOffset";
+            this.maskedTextBoxCapMinOffset.Size = new System.Drawing.Size(44, 20);
+            this.maskedTextBoxCapMinOffset.TabIndex = 3;
+            this.maskedTextBoxCapMinOffset.Text = "1";
+            // 
+            // comboBoxEncounterType
+            // 
+            this.comboBoxEncounterType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxEncounterType.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxEncounterType.FormattingEnabled = true;
+            this.comboBoxEncounterType.Items.AddRange(new object[] {
+            "Stationary\\Gift Pokémon"});
+            this.comboBoxEncounterType.Location = new System.Drawing.Point(97, 76);
+            this.comboBoxEncounterType.Name = "comboBoxEncounterType";
+            this.comboBoxEncounterType.ShineColor = System.Drawing.SystemColors.Window;
+            this.comboBoxEncounterType.Size = new System.Drawing.Size(156, 21);
+            this.comboBoxEncounterType.TabIndex = 6;
+            // 
+            // comboBoxEncounterSlot
+            // 
+            this.comboBoxEncounterSlot.BlankText = "Any";
+            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.comboBoxEncounterSlot.CheckBoxProperties = checkBoxProperties1;
+            this.comboBoxEncounterSlot.DisplayMemberSingleItem = "";
+            this.comboBoxEncounterSlot.DropDownHeight = 310;
+            this.comboBoxEncounterSlot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxEncounterSlot.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.comboBoxEncounterSlot.FormattingEnabled = true;
+            this.comboBoxEncounterSlot.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11"});
+            this.comboBoxEncounterSlot.Location = new System.Drawing.Point(97, 99);
+            this.comboBoxEncounterSlot.Name = "comboBoxEncounterSlot";
+            this.comboBoxEncounterSlot.Size = new System.Drawing.Size(156, 21);
+            this.comboBoxEncounterSlot.TabIndex = 7;
+            this.comboBoxEncounterSlot.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FocusControl);
+            // 
+            // maskedTextBoxCapMaxDelay
+            // 
+            this.maskedTextBoxCapMaxDelay.Hex = false;
+            this.maskedTextBoxCapMaxDelay.Location = new System.Drawing.Point(142, 24);
+            this.maskedTextBoxCapMaxDelay.Mask = "00000";
+            this.maskedTextBoxCapMaxDelay.Name = "maskedTextBoxCapMaxDelay";
+            this.maskedTextBoxCapMaxDelay.Size = new System.Drawing.Size(41, 20);
+            this.maskedTextBoxCapMaxDelay.TabIndex = 2;
+            // 
+            // maskedTextBoxCapMinDelay
+            // 
+            this.maskedTextBoxCapMinDelay.Hex = false;
+            this.maskedTextBoxCapMinDelay.Location = new System.Drawing.Point(96, 24);
+            this.maskedTextBoxCapMinDelay.Mask = "00000";
+            this.maskedTextBoxCapMinDelay.Name = "maskedTextBoxCapMinDelay";
+            this.maskedTextBoxCapMinDelay.Size = new System.Drawing.Size(41, 20);
+            this.maskedTextBoxCapMinDelay.TabIndex = 1;
+            this.maskedTextBoxCapMinDelay.ValidatingType = typeof(int);
+            // 
+            // maskedTextBoxCapYear
+            // 
+            this.maskedTextBoxCapYear.Hex = false;
+            this.maskedTextBoxCapYear.Location = new System.Drawing.Point(55, 24);
+            this.maskedTextBoxCapYear.Mask = "0000";
+            this.maskedTextBoxCapYear.Name = "maskedTextBoxCapYear";
+            this.maskedTextBoxCapYear.Size = new System.Drawing.Size(35, 20);
+            this.maskedTextBoxCapYear.TabIndex = 0;
+            this.maskedTextBoxCapYear.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            // 
+            // maskedTextBoxCapMaxOffset
+            // 
+            this.maskedTextBoxCapMaxOffset.Hex = false;
+            this.maskedTextBoxCapMaxOffset.Location = new System.Drawing.Point(238, 24);
+            this.maskedTextBoxCapMaxOffset.Mask = "00000";
+            this.maskedTextBoxCapMaxOffset.Name = "maskedTextBoxCapMaxOffset";
+            this.maskedTextBoxCapMaxOffset.Size = new System.Drawing.Size(44, 20);
+            this.maskedTextBoxCapMaxOffset.TabIndex = 4;
+            // 
+            // comboBoxMethod
+            // 
+            this.comboBoxMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMethod.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxMethod.FormattingEnabled = true;
+            this.comboBoxMethod.Location = new System.Drawing.Point(97, 53);
+            this.comboBoxMethod.Name = "comboBoxMethod";
+            this.comboBoxMethod.ShineColor = System.Drawing.SystemColors.Window;
+            this.comboBoxMethod.Size = new System.Drawing.Size(156, 21);
+            this.comboBoxMethod.TabIndex = 5;
+            this.comboBoxMethod.SelectedIndexChanged += new System.EventHandler(this.comboBoxMethod_SelectedIndexChanged);
+            // 
+            // buttonCapGenerate
+            // 
+            this.buttonCapGenerate.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.buttonCapGenerate.ForeColor = System.Drawing.Color.Black;
+            this.buttonCapGenerate.Location = new System.Drawing.Point(12, 157);
+            this.buttonCapGenerate.Name = "buttonCapGenerate";
+            this.buttonCapGenerate.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.buttonCapGenerate.ShineColor = System.Drawing.SystemColors.Window;
+            this.buttonCapGenerate.Size = new System.Drawing.Size(73, 23);
+            this.buttonCapGenerate.TabIndex = 9;
+            this.buttonCapGenerate.Text = "Generate";
+            this.buttonCapGenerate.Click += new System.EventHandler(this.buttonCapGenerate_Click);
+            // 
+            // buttonAnyNature
+            // 
+            this.buttonAnyNature.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.buttonAnyNature.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.buttonAnyNature.ForeColor = System.Drawing.Color.Black;
+            this.buttonAnyNature.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.buttonAnyNature.Location = new System.Drawing.Point(922, 15);
+            this.buttonAnyNature.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonAnyNature.Name = "buttonAnyNature";
+            this.buttonAnyNature.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.buttonAnyNature.ShineColor = System.Drawing.SystemColors.Window;
+            this.buttonAnyNature.Size = new System.Drawing.Size(41, 22);
+            this.buttonAnyNature.TabIndex = 24;
+            this.buttonAnyNature.Text = "Any";
+            this.buttonAnyNature.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.buttonAnyNature.Click += new System.EventHandler(this.buttonAnyNature_Click);
+            // 
+            // comboBoxAbility
+            // 
+            this.comboBoxAbility.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAbility.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxAbility.FormattingEnabled = true;
+            this.comboBoxAbility.Items.AddRange(new object[] {
+            "Any",
+            "Ability 0",
+            "Ability 1"});
+            this.comboBoxAbility.Location = new System.Drawing.Point(743, 43);
+            this.comboBoxAbility.Name = "comboBoxAbility";
+            this.comboBoxAbility.ShineColor = System.Drawing.SystemColors.Window;
+            this.comboBoxAbility.Size = new System.Drawing.Size(67, 21);
+            this.comboBoxAbility.TabIndex = 25;
+            // 
+            // maskedTextBoxID
+            // 
+            this.maskedTextBoxID.Hex = false;
+            this.maskedTextBoxID.Location = new System.Drawing.Point(743, 132);
+            this.maskedTextBoxID.Mask = "00000";
+            this.maskedTextBoxID.Name = "maskedTextBoxID";
+            this.maskedTextBoxID.Size = new System.Drawing.Size(48, 20);
+            this.maskedTextBoxID.TabIndex = 28;
+            this.maskedTextBoxID.Tag = "id/sid";
+            this.maskedTextBoxID.ValidatingType = typeof(int);
+            // 
+            // maskedTextBoxSID
+            // 
+            this.maskedTextBoxSID.Hex = false;
+            this.maskedTextBoxSID.Location = new System.Drawing.Point(797, 132);
+            this.maskedTextBoxSID.Mask = "00000";
+            this.maskedTextBoxSID.Name = "maskedTextBoxSID";
+            this.maskedTextBoxSID.Size = new System.Drawing.Size(48, 20);
+            this.maskedTextBoxSID.TabIndex = 29;
+            this.maskedTextBoxSID.Tag = "id/sid";
+            this.maskedTextBoxSID.ValidatingType = typeof(int);
+            // 
+            // comboBoxNature
+            // 
+            this.comboBoxNature.BlankText = "Any";
+            checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.comboBoxNature.CheckBoxProperties = checkBoxProperties2;
+            this.comboBoxNature.DisplayMemberSingleItem = "";
+            this.comboBoxNature.DropDownHeight = 300;
+            this.comboBoxNature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxNature.FormattingEnabled = true;
+            this.comboBoxNature.Location = new System.Drawing.Point(743, 16);
+            this.comboBoxNature.Name = "comboBoxNature";
+            this.comboBoxNature.Size = new System.Drawing.Size(176, 21);
+            this.comboBoxNature.TabIndex = 23;
+            this.comboBoxNature.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FocusControl);
+            // 
+            // dataGridViewShinyResults
+            // 
+            this.dataGridViewShinyResults.AllowUserToAddRows = false;
+            this.dataGridViewShinyResults.AllowUserToDeleteRows = false;
+            this.dataGridViewShinyResults.AllowUserToOrderColumns = true;
+            this.dataGridViewShinyResults.AllowUserToResizeRows = false;
+            this.dataGridViewShinyResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewShinyResults.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewShinyResults.ColumnHeadersHeight = 20;
+            this.dataGridViewShinyResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.EggSeed,
+            this.ShinyOffset,
+            this.EggPID,
+            this.shinyShinyDisplay,
+            this.ShinyNature,
+            this.dataGridViewTextBoxColumn4,
+            this.ShinyFemale50,
+            this.ShinyFemale25,
+            this.ShinyFemale125,
+            this.ShinyFemale75,
+            this.ShinyFlipSequence,
+            this.ShinyTaps,
+            this.ShinyFlips});
+            this.dataGridViewShinyResults.ContextMenuStrip = this.contextMenuStripEggPid;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewShinyResults.DefaultCellStyle = dataGridViewCellStyle7;
+            this.dataGridViewShinyResults.Location = new System.Drawing.Point(6, 189);
+            this.dataGridViewShinyResults.MultiSelect = false;
+            this.dataGridViewShinyResults.Name = "dataGridViewShinyResults";
+            this.dataGridViewShinyResults.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewShinyResults.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            this.dataGridViewShinyResults.RowHeadersVisible = false;
+            this.dataGridViewShinyResults.RowTemplate.Height = 20;
+            this.dataGridViewShinyResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewShinyResults.ShowCellErrors = false;
+            this.dataGridViewShinyResults.ShowCellToolTips = false;
+            this.dataGridViewShinyResults.ShowEditingIcon = false;
+            this.dataGridViewShinyResults.ShowRowErrors = false;
+            this.dataGridViewShinyResults.Size = new System.Drawing.Size(957, 303);
+            this.dataGridViewShinyResults.TabIndex = 17;
+            this.dataGridViewShinyResults.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewShinyResults_CellFormatting);
+            this.dataGridViewShinyResults.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridViewShinyResults_MouseDown);
+            // 
+            // EggSeed
+            // 
+            this.EggSeed.DataPropertyName = "Seed";
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Consolas", 8.75F);
+            this.EggSeed.DefaultCellStyle = dataGridViewCellStyle5;
+            this.EggSeed.HeaderText = "Seed";
+            this.EggSeed.Name = "EggSeed";
+            this.EggSeed.ReadOnly = true;
+            this.EggSeed.Width = 65;
+            // 
+            // ShinyOffset
+            // 
+            this.ShinyOffset.DataPropertyName = "Offset";
+            this.ShinyOffset.HeaderText = "Frame";
+            this.ShinyOffset.Name = "ShinyOffset";
+            this.ShinyOffset.ReadOnly = true;
+            this.ShinyOffset.Width = 45;
+            // 
+            // EggPID
+            // 
+            this.EggPID.DataPropertyName = "Pid";
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Consolas", 8.75F);
+            this.EggPID.DefaultCellStyle = dataGridViewCellStyle6;
+            this.EggPID.HeaderText = "PID";
+            this.EggPID.Name = "EggPID";
+            this.EggPID.ReadOnly = true;
+            this.EggPID.Width = 70;
+            // 
+            // shinyShinyDisplay
+            // 
+            this.shinyShinyDisplay.DataPropertyName = "ShinyDisplay";
+            this.shinyShinyDisplay.HeaderText = "!!!";
+            this.shinyShinyDisplay.Name = "shinyShinyDisplay";
+            this.shinyShinyDisplay.ReadOnly = true;
+            this.shinyShinyDisplay.Width = 20;
+            // 
+            // ShinyNature
+            // 
+            this.ShinyNature.DataPropertyName = "Nature";
+            this.ShinyNature.HeaderText = "Nature";
+            this.ShinyNature.Name = "ShinyNature";
+            this.ShinyNature.ReadOnly = true;
+            this.ShinyNature.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ShinyNature.Width = 75;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Ability";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Ability";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn4.Width = 40;
+            // 
+            // ShinyFemale50
+            // 
+            this.ShinyFemale50.DataPropertyName = "Female50";
+            this.ShinyFemale50.HeaderText = "50% F";
+            this.ShinyFemale50.Name = "ShinyFemale50";
+            this.ShinyFemale50.ReadOnly = true;
+            this.ShinyFemale50.Width = 50;
+            // 
+            // ShinyFemale25
+            // 
+            this.ShinyFemale25.DataPropertyName = "Female25";
+            this.ShinyFemale25.HeaderText = "25% F";
+            this.ShinyFemale25.Name = "ShinyFemale25";
+            this.ShinyFemale25.ReadOnly = true;
+            this.ShinyFemale25.Width = 50;
+            // 
+            // ShinyFemale125
+            // 
+            this.ShinyFemale125.DataPropertyName = "Female125";
+            this.ShinyFemale125.HeaderText = "12.5%F";
+            this.ShinyFemale125.Name = "ShinyFemale125";
+            this.ShinyFemale125.ReadOnly = true;
+            this.ShinyFemale125.Width = 50;
+            // 
+            // ShinyFemale75
+            // 
+            this.ShinyFemale75.DataPropertyName = "Female75";
+            this.ShinyFemale75.HeaderText = "75% F";
+            this.ShinyFemale75.Name = "ShinyFemale75";
+            this.ShinyFemale75.ReadOnly = true;
+            this.ShinyFemale75.Width = 50;
+            // 
+            // ShinyFlipSequence
+            // 
+            this.ShinyFlipSequence.DataPropertyName = "FlipSequence";
+            this.ShinyFlipSequence.HeaderText = "Flip Sequence";
+            this.ShinyFlipSequence.Name = "ShinyFlipSequence";
+            this.ShinyFlipSequence.ReadOnly = true;
+            this.ShinyFlipSequence.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ShinyFlipSequence.Width = 150;
+            // 
+            // ShinyTaps
+            // 
+            this.ShinyTaps.DataPropertyName = "Taps";
+            this.ShinyTaps.HeaderText = "Taps";
+            this.ShinyTaps.Name = "ShinyTaps";
+            this.ShinyTaps.ReadOnly = true;
+            this.ShinyTaps.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ShinyTaps.Width = 50;
+            // 
+            // ShinyFlips
+            // 
+            this.ShinyFlips.DataPropertyName = "Flips";
+            this.ShinyFlips.HeaderText = "Additional Flips";
+            this.ShinyFlips.Name = "ShinyFlips";
+            this.ShinyFlips.ReadOnly = true;
+            this.ShinyFlips.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // comboBoxShinyGender
+            // 
+            this.comboBoxShinyGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxShinyGender.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxShinyGender.FormattingEnabled = true;
+            this.comboBoxShinyGender.Items.AddRange(new object[] {
+            "Don\'t Care/Fixed Gender/Genderless",
+            "Female (50% Male, 50% Female)",
+            "Male (50% Male, 50% Female)",
+            "Female (25% Male, 75% Female)",
+            "Male (25% Male, 75% Female)",
+            "Female (75% Male, 25% Female)",
+            "Male (75% Male, 25% Female)",
+            "Female (87.5% Male, 12.5% Female)",
+            "Male (87.5% Male, 12.5% Female)"});
+            this.comboBoxShinyGender.Location = new System.Drawing.Point(700, 91);
+            this.comboBoxShinyGender.MaxDropDownItems = 3;
+            this.comboBoxShinyGender.Name = "comboBoxShinyGender";
+            this.comboBoxShinyGender.ShineColor = System.Drawing.SystemColors.Window;
+            this.comboBoxShinyGender.Size = new System.Drawing.Size(220, 21);
+            this.comboBoxShinyGender.TabIndex = 13;
+            // 
+            // buttonShinyClearAbility
+            // 
+            this.buttonShinyClearAbility.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.buttonShinyClearAbility.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.buttonShinyClearAbility.ForeColor = System.Drawing.Color.Black;
+            this.buttonShinyClearAbility.Location = new System.Drawing.Point(784, 42);
+            this.buttonShinyClearAbility.Name = "buttonShinyClearAbility";
+            this.buttonShinyClearAbility.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.buttonShinyClearAbility.ShineColor = System.Drawing.SystemColors.Window;
+            this.buttonShinyClearAbility.Size = new System.Drawing.Size(46, 22);
+            this.buttonShinyClearAbility.TabIndex = 12;
+            this.buttonShinyClearAbility.TabStop = false;
+            this.buttonShinyClearAbility.Text = "Any";
+            this.buttonShinyClearAbility.Click += new System.EventHandler(this.buttonShinyClearAbility_Click);
+            // 
+            // comboBoxShinyAbility
+            // 
+            this.comboBoxShinyAbility.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxShinyAbility.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxShinyAbility.FormattingEnabled = true;
+            this.comboBoxShinyAbility.Items.AddRange(new object[] {
+            "Any",
+            "Ability 0",
+            "Ability 1"});
+            this.comboBoxShinyAbility.Location = new System.Drawing.Point(700, 43);
+            this.comboBoxShinyAbility.MaxDropDownItems = 3;
+            this.comboBoxShinyAbility.Name = "comboBoxShinyAbility";
+            this.comboBoxShinyAbility.ShineColor = System.Drawing.SystemColors.Window;
+            this.comboBoxShinyAbility.Size = new System.Drawing.Size(76, 21);
+            this.comboBoxShinyAbility.TabIndex = 11;
+            // 
+            // buttonShinyGenerate
+            // 
+            this.buttonShinyGenerate.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.buttonShinyGenerate.ForeColor = System.Drawing.Color.Black;
+            this.buttonShinyGenerate.Location = new System.Drawing.Point(12, 157);
+            this.buttonShinyGenerate.Name = "buttonShinyGenerate";
+            this.buttonShinyGenerate.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.buttonShinyGenerate.ShineColor = System.Drawing.SystemColors.Window;
+            this.buttonShinyGenerate.Size = new System.Drawing.Size(73, 23);
+            this.buttonShinyGenerate.TabIndex = 6;
+            this.buttonShinyGenerate.Text = "Generate";
+            this.buttonShinyGenerate.Click += new System.EventHandler(this.buttonShinyGenerate_Click);
+            // 
+            // buttonShinyClearNature
+            // 
+            this.buttonShinyClearNature.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.buttonShinyClearNature.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.buttonShinyClearNature.ForeColor = System.Drawing.Color.Black;
+            this.buttonShinyClearNature.Location = new System.Drawing.Point(784, 14);
+            this.buttonShinyClearNature.Name = "buttonShinyClearNature";
+            this.buttonShinyClearNature.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.buttonShinyClearNature.ShineColor = System.Drawing.SystemColors.Window;
+            this.buttonShinyClearNature.Size = new System.Drawing.Size(46, 22);
+            this.buttonShinyClearNature.TabIndex = 10;
+            this.buttonShinyClearNature.TabStop = false;
+            this.buttonShinyClearNature.Text = "Any";
+            this.buttonShinyClearNature.Click += new System.EventHandler(this.buttonShinyClearNature_Click);
+            // 
+            // comboBoxShinyNature
+            // 
+            this.comboBoxShinyNature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxShinyNature.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxShinyNature.FormattingEnabled = true;
+            this.comboBoxShinyNature.Location = new System.Drawing.Point(700, 16);
+            this.comboBoxShinyNature.MaxDropDownItems = 26;
+            this.comboBoxShinyNature.Name = "comboBoxShinyNature";
+            this.comboBoxShinyNature.ShineColor = System.Drawing.SystemColors.Window;
+            this.comboBoxShinyNature.Size = new System.Drawing.Size(76, 21);
+            this.comboBoxShinyNature.TabIndex = 9;
+            this.comboBoxShinyNature.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FocusControl);
+            // 
+            // maskedTextBoxMaxTaps
+            // 
+            this.maskedTextBoxMaxTaps.Hex = false;
+            this.maskedTextBoxMaxTaps.Location = new System.Drawing.Point(499, 24);
+            this.maskedTextBoxMaxTaps.Mask = "000";
+            this.maskedTextBoxMaxTaps.Name = "maskedTextBoxMaxTaps";
+            this.maskedTextBoxMaxTaps.Size = new System.Drawing.Size(44, 20);
+            this.maskedTextBoxMaxTaps.TabIndex = 7;
+            this.maskedTextBoxMaxTaps.Text = "10";
+            // 
+            // maskedTextBoxShinySecretID
+            // 
+            this.maskedTextBoxShinySecretID.Hex = false;
+            this.maskedTextBoxShinySecretID.Location = new System.Drawing.Point(754, 132);
+            this.maskedTextBoxShinySecretID.Mask = "00000";
+            this.maskedTextBoxShinySecretID.Name = "maskedTextBoxShinySecretID";
+            this.maskedTextBoxShinySecretID.Size = new System.Drawing.Size(48, 20);
+            this.maskedTextBoxShinySecretID.TabIndex = 15;
+            this.maskedTextBoxShinySecretID.Tag = "id/sid";
+            this.maskedTextBoxShinySecretID.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            // 
+            // maskedTextBoxShinyID
+            // 
+            this.maskedTextBoxShinyID.Hex = false;
+            this.maskedTextBoxShinyID.Location = new System.Drawing.Point(700, 132);
+            this.maskedTextBoxShinyID.Mask = "00000";
+            this.maskedTextBoxShinyID.Name = "maskedTextBoxShinyID";
+            this.maskedTextBoxShinyID.Size = new System.Drawing.Size(48, 20);
+            this.maskedTextBoxShinyID.TabIndex = 14;
+            this.maskedTextBoxShinyID.Tag = "id/sid";
+            this.maskedTextBoxShinyID.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            // 
+            // maskedTextBoxShinyMaxDelay
+            // 
+            this.maskedTextBoxShinyMaxDelay.Hex = false;
+            this.maskedTextBoxShinyMaxDelay.Location = new System.Drawing.Point(142, 24);
+            this.maskedTextBoxShinyMaxDelay.Mask = "00000";
+            this.maskedTextBoxShinyMaxDelay.Name = "maskedTextBoxShinyMaxDelay";
+            this.maskedTextBoxShinyMaxDelay.Size = new System.Drawing.Size(40, 20);
+            this.maskedTextBoxShinyMaxDelay.TabIndex = 2;
+            this.maskedTextBoxShinyMaxDelay.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            // 
+            // maskedTextBoxShinyMinDelay
+            // 
+            this.maskedTextBoxShinyMinDelay.Hex = false;
+            this.maskedTextBoxShinyMinDelay.Location = new System.Drawing.Point(96, 24);
+            this.maskedTextBoxShinyMinDelay.Mask = "00000";
+            this.maskedTextBoxShinyMinDelay.Name = "maskedTextBoxShinyMinDelay";
+            this.maskedTextBoxShinyMinDelay.Size = new System.Drawing.Size(41, 20);
+            this.maskedTextBoxShinyMinDelay.TabIndex = 1;
+            this.maskedTextBoxShinyMinDelay.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            // 
+            // maskedTextBoxShinyYear
+            // 
+            this.maskedTextBoxShinyYear.Hex = false;
+            this.maskedTextBoxShinyYear.Location = new System.Drawing.Point(55, 24);
+            this.maskedTextBoxShinyYear.Mask = "0000";
+            this.maskedTextBoxShinyYear.Name = "maskedTextBoxShinyYear";
+            this.maskedTextBoxShinyYear.Size = new System.Drawing.Size(35, 20);
+            this.maskedTextBoxShinyYear.TabIndex = 0;
+            this.maskedTextBoxShinyYear.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            // 
+            // ivFiltersEgg
+            // 
+            this.ivFiltersEgg.Location = new System.Drawing.Point(315, 6);
+            this.ivFiltersEgg.Name = "ivFiltersEgg";
+            this.ivFiltersEgg.Size = new System.Drawing.Size(315, 166);
+            this.ivFiltersEgg.TabIndex = 101;
             // 
             // dataGridViewEggIVValues
             // 
@@ -657,33 +1764,6 @@ namespace RNGReporter
             this.Flips.Name = "Flips";
             this.Flips.ReadOnly = true;
             this.Flips.Width = 400;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(52, 9);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(29, 13);
-            this.label14.TabIndex = 0;
-            this.label14.Text = "Year";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(97, 9);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(85, 13);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "Min / Max Delay";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(191, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(87, 13);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Min / Max Frame";
             // 
             // button1
             // 
@@ -888,706 +1968,6 @@ namespace RNGReporter
             this.maskedTextBoxMaxDelay.Size = new System.Drawing.Size(41, 20);
             this.maskedTextBoxMaxDelay.TabIndex = 2;
             // 
-            // tabPageShinyEgg
-            // 
-            this.tabPageShinyEgg.Controls.Add(this.labelHappinessWarning);
-            this.tabPageShinyEgg.Controls.Add(this.checkBoxNoHappiness);
-            this.tabPageShinyEgg.Controls.Add(this.label8);
-            this.tabPageShinyEgg.Controls.Add(this.checkBoxIntlParents);
-            this.tabPageShinyEgg.Controls.Add(this.radioButtonHGSS);
-            this.tabPageShinyEgg.Controls.Add(this.radioButtonDPPt);
-            this.tabPageShinyEgg.Controls.Add(this.label92);
-            this.tabPageShinyEgg.Controls.Add(this.checkBoxShinyShinyOnly);
-            this.tabPageShinyEgg.Controls.Add(this.labelDPPtWarning);
-            this.tabPageShinyEgg.Controls.Add(this.dataGridViewShinyResults);
-            this.tabPageShinyEgg.Controls.Add(this.labelShinySecretID);
-            this.tabPageShinyEgg.Controls.Add(this.labelShinyNature);
-            this.tabPageShinyEgg.Controls.Add(this.labelShinyTrainerID);
-            this.tabPageShinyEgg.Controls.Add(this.labelShinyAbility);
-            this.tabPageShinyEgg.Controls.Add(this.labelShinyDelay);
-            this.tabPageShinyEgg.Controls.Add(this.labelShinyYear);
-            this.tabPageShinyEgg.Controls.Add(this.comboBoxShinyGender);
-            this.tabPageShinyEgg.Controls.Add(this.buttonShinyClearAbility);
-            this.tabPageShinyEgg.Controls.Add(this.comboBoxShinyAbility);
-            this.tabPageShinyEgg.Controls.Add(this.buttonShinyGenerate);
-            this.tabPageShinyEgg.Controls.Add(this.buttonShinyClearNature);
-            this.tabPageShinyEgg.Controls.Add(this.comboBoxShinyNature);
-            this.tabPageShinyEgg.Controls.Add(this.maskedTextBoxMaxTaps);
-            this.tabPageShinyEgg.Controls.Add(this.maskedTextBoxShinySecretID);
-            this.tabPageShinyEgg.Controls.Add(this.maskedTextBoxShinyID);
-            this.tabPageShinyEgg.Controls.Add(this.maskedTextBoxShinyMaxDelay);
-            this.tabPageShinyEgg.Controls.Add(this.maskedTextBoxShinyMinDelay);
-            this.tabPageShinyEgg.Controls.Add(this.maskedTextBoxShinyYear);
-            this.tabPageShinyEgg.Location = new System.Drawing.Point(4, 22);
-            this.tabPageShinyEgg.Name = "tabPageShinyEgg";
-            this.tabPageShinyEgg.Size = new System.Drawing.Size(991, 498);
-            this.tabPageShinyEgg.TabIndex = 2;
-            this.tabPageShinyEgg.Text = "Shiny Egg";
-            this.tabPageShinyEgg.UseVisualStyleBackColor = true;
-            // 
-            // labelHappinessWarning
-            // 
-            this.labelHappinessWarning.Location = new System.Drawing.Point(221, 84);
-            this.labelHappinessWarning.Name = "labelHappinessWarning";
-            this.labelHappinessWarning.Size = new System.Drawing.Size(269, 81);
-            this.labelHappinessWarning.TabIndex = 325;
-            this.labelHappinessWarning.Text = "It also assumes that you start the game from the coin flip application, and then " +
-    "switch to the happiness checker application.\r\n";
-            // 
-            // checkBoxNoHappiness
-            // 
-            this.checkBoxNoHappiness.AutoSize = true;
-            this.checkBoxNoHappiness.Location = new System.Drawing.Point(499, 50);
-            this.checkBoxNoHappiness.Name = "checkBoxNoHappiness";
-            this.checkBoxNoHappiness.Size = new System.Drawing.Size(149, 17);
-            this.checkBoxNoHappiness.TabIndex = 8;
-            this.checkBoxNoHappiness.Text = "Avoid Happiness Checker";
-            this.checkBoxNoHappiness.UseVisualStyleBackColor = true;
-            this.checkBoxNoHappiness.CheckedChanged += new System.EventHandler(this.checkBoxNoHappiness_CheckedChanged);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(496, 8);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(54, 13);
-            this.label8.TabIndex = 322;
-            this.label8.Text = "Max Taps";
-            // 
-            // checkBoxIntlParents
-            // 
-            this.checkBoxIntlParents.AutoSize = true;
-            this.checkBoxIntlParents.Location = new System.Drawing.Point(55, 86);
-            this.checkBoxIntlParents.Name = "checkBoxIntlParents";
-            this.checkBoxIntlParents.Size = new System.Drawing.Size(123, 17);
-            this.checkBoxIntlParents.TabIndex = 5;
-            this.checkBoxIntlParents.Text = "International Parents";
-            this.checkBoxIntlParents.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonHGSS
-            // 
-            this.radioButtonHGSS.AutoSize = true;
-            this.radioButtonHGSS.Location = new System.Drawing.Point(55, 67);
-            this.radioButtonHGSS.Name = "radioButtonHGSS";
-            this.radioButtonHGSS.Size = new System.Drawing.Size(131, 17);
-            this.radioButtonHGSS.TabIndex = 4;
-            this.radioButtonHGSS.Text = "Heart Gold\\Soul Silver";
-            this.radioButtonHGSS.UseVisualStyleBackColor = true;
-            this.radioButtonHGSS.CheckedChanged += new System.EventHandler(this.comboBoxShinyVersion_SelectedIndexChanged);
-            // 
-            // radioButtonDPPt
-            // 
-            this.radioButtonDPPt.AutoSize = true;
-            this.radioButtonDPPt.Checked = true;
-            this.radioButtonDPPt.Location = new System.Drawing.Point(55, 49);
-            this.radioButtonDPPt.Name = "radioButtonDPPt";
-            this.radioButtonDPPt.Size = new System.Drawing.Size(141, 17);
-            this.radioButtonDPPt.TabIndex = 3;
-            this.radioButtonDPPt.TabStop = true;
-            this.radioButtonDPPt.Text = "Diamond\\Pearl\\Platinum";
-            this.radioButtonDPPt.UseVisualStyleBackColor = true;
-            this.radioButtonDPPt.CheckedChanged += new System.EventHandler(this.comboBoxShinyVersion_SelectedIndexChanged);
-            // 
-            // label92
-            // 
-            this.label92.AutoSize = true;
-            this.label92.Location = new System.Drawing.Point(655, 94);
-            this.label92.Name = "label92";
-            this.label92.Size = new System.Drawing.Size(42, 13);
-            this.label92.TabIndex = 317;
-            this.label92.Text = "Gender";
-            // 
-            // checkBoxShinyShinyOnly
-            // 
-            this.checkBoxShinyShinyOnly.AutoSize = true;
-            this.checkBoxShinyShinyOnly.Location = new System.Drawing.Point(700, 157);
-            this.checkBoxShinyShinyOnly.Name = "checkBoxShinyShinyOnly";
-            this.checkBoxShinyShinyOnly.Size = new System.Drawing.Size(76, 17);
-            this.checkBoxShinyShinyOnly.TabIndex = 16;
-            this.checkBoxShinyShinyOnly.Text = "Shiny Only";
-            this.checkBoxShinyShinyOnly.UseVisualStyleBackColor = true;
-            // 
-            // labelDPPtWarning
-            // 
-            this.labelDPPtWarning.Location = new System.Drawing.Point(221, 11);
-            this.labelDPPtWarning.Name = "labelDPPtWarning";
-            this.labelDPPtWarning.Size = new System.Drawing.Size(269, 71);
-            this.labelDPPtWarning.TabIndex = 117;
-            this.labelDPPtWarning.Text = "Please note that number of flips and taps that are listed assume that you will al" +
-    "so be doing 10 coin flips to verify your initial seed. ";
-            // 
-            // dataGridViewShinyResults
-            // 
-            this.dataGridViewShinyResults.AllowUserToAddRows = false;
-            this.dataGridViewShinyResults.AllowUserToDeleteRows = false;
-            this.dataGridViewShinyResults.AllowUserToOrderColumns = true;
-            this.dataGridViewShinyResults.AllowUserToResizeRows = false;
-            this.dataGridViewShinyResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewShinyResults.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridViewShinyResults.ColumnHeadersHeight = 20;
-            this.dataGridViewShinyResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.EggSeed,
-            this.ShinyOffset,
-            this.EggPID,
-            this.shinyShinyDisplay,
-            this.ShinyNature,
-            this.dataGridViewTextBoxColumn4,
-            this.ShinyFemale50,
-            this.ShinyFemale25,
-            this.ShinyFemale125,
-            this.ShinyFemale75,
-            this.ShinyFlipSequence,
-            this.ShinyTaps,
-            this.ShinyFlips});
-            this.dataGridViewShinyResults.ContextMenuStrip = this.contextMenuStripEggPid;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewShinyResults.DefaultCellStyle = dataGridViewCellStyle7;
-            this.dataGridViewShinyResults.Location = new System.Drawing.Point(6, 189);
-            this.dataGridViewShinyResults.MultiSelect = false;
-            this.dataGridViewShinyResults.Name = "dataGridViewShinyResults";
-            this.dataGridViewShinyResults.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewShinyResults.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            this.dataGridViewShinyResults.RowHeadersVisible = false;
-            this.dataGridViewShinyResults.RowTemplate.Height = 20;
-            this.dataGridViewShinyResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewShinyResults.ShowCellErrors = false;
-            this.dataGridViewShinyResults.ShowCellToolTips = false;
-            this.dataGridViewShinyResults.ShowEditingIcon = false;
-            this.dataGridViewShinyResults.ShowRowErrors = false;
-            this.dataGridViewShinyResults.Size = new System.Drawing.Size(957, 303);
-            this.dataGridViewShinyResults.TabIndex = 17;
-            this.dataGridViewShinyResults.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewShinyResults_CellFormatting);
-            this.dataGridViewShinyResults.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridViewShinyResults_MouseDown);
-            // 
-            // EggSeed
-            // 
-            this.EggSeed.DataPropertyName = "Seed";
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Consolas", 8.75F);
-            this.EggSeed.DefaultCellStyle = dataGridViewCellStyle5;
-            this.EggSeed.HeaderText = "Seed";
-            this.EggSeed.Name = "EggSeed";
-            this.EggSeed.ReadOnly = true;
-            this.EggSeed.Width = 65;
-            // 
-            // ShinyOffset
-            // 
-            this.ShinyOffset.DataPropertyName = "Offset";
-            this.ShinyOffset.HeaderText = "Frame";
-            this.ShinyOffset.Name = "ShinyOffset";
-            this.ShinyOffset.ReadOnly = true;
-            this.ShinyOffset.Width = 45;
-            // 
-            // EggPID
-            // 
-            this.EggPID.DataPropertyName = "Pid";
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Consolas", 8.75F);
-            this.EggPID.DefaultCellStyle = dataGridViewCellStyle6;
-            this.EggPID.HeaderText = "PID";
-            this.EggPID.Name = "EggPID";
-            this.EggPID.ReadOnly = true;
-            this.EggPID.Width = 70;
-            // 
-            // shinyShinyDisplay
-            // 
-            this.shinyShinyDisplay.DataPropertyName = "ShinyDisplay";
-            this.shinyShinyDisplay.HeaderText = "!!!";
-            this.shinyShinyDisplay.Name = "shinyShinyDisplay";
-            this.shinyShinyDisplay.ReadOnly = true;
-            this.shinyShinyDisplay.Width = 20;
-            // 
-            // ShinyNature
-            // 
-            this.ShinyNature.DataPropertyName = "Nature";
-            this.ShinyNature.HeaderText = "Nature";
-            this.ShinyNature.Name = "ShinyNature";
-            this.ShinyNature.ReadOnly = true;
-            this.ShinyNature.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ShinyNature.Width = 75;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "Ability";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Ability";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn4.Width = 40;
-            // 
-            // ShinyFemale50
-            // 
-            this.ShinyFemale50.DataPropertyName = "Female50";
-            this.ShinyFemale50.HeaderText = "50% F";
-            this.ShinyFemale50.Name = "ShinyFemale50";
-            this.ShinyFemale50.ReadOnly = true;
-            this.ShinyFemale50.Width = 50;
-            // 
-            // ShinyFemale25
-            // 
-            this.ShinyFemale25.DataPropertyName = "Female25";
-            this.ShinyFemale25.HeaderText = "25% F";
-            this.ShinyFemale25.Name = "ShinyFemale25";
-            this.ShinyFemale25.ReadOnly = true;
-            this.ShinyFemale25.Width = 50;
-            // 
-            // ShinyFemale125
-            // 
-            this.ShinyFemale125.DataPropertyName = "Female125";
-            this.ShinyFemale125.HeaderText = "12.5%F";
-            this.ShinyFemale125.Name = "ShinyFemale125";
-            this.ShinyFemale125.ReadOnly = true;
-            this.ShinyFemale125.Width = 50;
-            // 
-            // ShinyFemale75
-            // 
-            this.ShinyFemale75.DataPropertyName = "Female75";
-            this.ShinyFemale75.HeaderText = "75% F";
-            this.ShinyFemale75.Name = "ShinyFemale75";
-            this.ShinyFemale75.ReadOnly = true;
-            this.ShinyFemale75.Width = 50;
-            // 
-            // ShinyFlipSequence
-            // 
-            this.ShinyFlipSequence.DataPropertyName = "FlipSequence";
-            this.ShinyFlipSequence.HeaderText = "Flip Sequence";
-            this.ShinyFlipSequence.Name = "ShinyFlipSequence";
-            this.ShinyFlipSequence.ReadOnly = true;
-            this.ShinyFlipSequence.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ShinyFlipSequence.Width = 150;
-            // 
-            // ShinyTaps
-            // 
-            this.ShinyTaps.DataPropertyName = "Taps";
-            this.ShinyTaps.HeaderText = "Taps";
-            this.ShinyTaps.Name = "ShinyTaps";
-            this.ShinyTaps.ReadOnly = true;
-            this.ShinyTaps.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ShinyTaps.Width = 50;
-            // 
-            // ShinyFlips
-            // 
-            this.ShinyFlips.DataPropertyName = "Flips";
-            this.ShinyFlips.HeaderText = "Additional Flips";
-            this.ShinyFlips.Name = "ShinyFlips";
-            this.ShinyFlips.ReadOnly = true;
-            this.ShinyFlips.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // labelShinySecretID
-            // 
-            this.labelShinySecretID.AutoSize = true;
-            this.labelShinySecretID.Location = new System.Drawing.Point(753, 117);
-            this.labelShinySecretID.Name = "labelShinySecretID";
-            this.labelShinySecretID.Size = new System.Drawing.Size(25, 13);
-            this.labelShinySecretID.TabIndex = 23;
-            this.labelShinySecretID.Text = "SID";
-            // 
-            // labelShinyNature
-            // 
-            this.labelShinyNature.AutoSize = true;
-            this.labelShinyNature.Location = new System.Drawing.Point(660, 20);
-            this.labelShinyNature.Name = "labelShinyNature";
-            this.labelShinyNature.Size = new System.Drawing.Size(39, 13);
-            this.labelShinyNature.TabIndex = 14;
-            this.labelShinyNature.Text = "Nature";
-            // 
-            // labelShinyTrainerID
-            // 
-            this.labelShinyTrainerID.AutoSize = true;
-            this.labelShinyTrainerID.Location = new System.Drawing.Point(699, 117);
-            this.labelShinyTrainerID.Name = "labelShinyTrainerID";
-            this.labelShinyTrainerID.Size = new System.Drawing.Size(18, 13);
-            this.labelShinyTrainerID.TabIndex = 21;
-            this.labelShinyTrainerID.Text = "ID";
-            // 
-            // labelShinyAbility
-            // 
-            this.labelShinyAbility.AutoSize = true;
-            this.labelShinyAbility.Location = new System.Drawing.Point(663, 47);
-            this.labelShinyAbility.Name = "labelShinyAbility";
-            this.labelShinyAbility.Size = new System.Drawing.Size(34, 13);
-            this.labelShinyAbility.TabIndex = 20;
-            this.labelShinyAbility.Text = "Ability";
-            // 
-            // labelShinyDelay
-            // 
-            this.labelShinyDelay.AutoSize = true;
-            this.labelShinyDelay.Location = new System.Drawing.Point(97, 9);
-            this.labelShinyDelay.Name = "labelShinyDelay";
-            this.labelShinyDelay.Size = new System.Drawing.Size(85, 13);
-            this.labelShinyDelay.TabIndex = 12;
-            this.labelShinyDelay.Text = "Min / Max Delay";
-            // 
-            // labelShinyYear
-            // 
-            this.labelShinyYear.AutoSize = true;
-            this.labelShinyYear.Location = new System.Drawing.Point(52, 9);
-            this.labelShinyYear.Name = "labelShinyYear";
-            this.labelShinyYear.Size = new System.Drawing.Size(29, 13);
-            this.labelShinyYear.TabIndex = 2;
-            this.labelShinyYear.Text = "Year";
-            // 
-            // comboBoxShinyGender
-            // 
-            this.comboBoxShinyGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxShinyGender.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxShinyGender.FormattingEnabled = true;
-            this.comboBoxShinyGender.Items.AddRange(new object[] {
-            "Don\'t Care/Fixed Gender/Genderless",
-            "Female (50% Male, 50% Female)",
-            "Male (50% Male, 50% Female)",
-            "Female (25% Male, 75% Female)",
-            "Male (25% Male, 75% Female)",
-            "Female (75% Male, 25% Female)",
-            "Male (75% Male, 25% Female)",
-            "Female (87.5% Male, 12.5% Female)",
-            "Male (87.5% Male, 12.5% Female)"});
-            this.comboBoxShinyGender.Location = new System.Drawing.Point(700, 91);
-            this.comboBoxShinyGender.MaxDropDownItems = 3;
-            this.comboBoxShinyGender.Name = "comboBoxShinyGender";
-            this.comboBoxShinyGender.ShineColor = System.Drawing.SystemColors.Window;
-            this.comboBoxShinyGender.Size = new System.Drawing.Size(220, 21);
-            this.comboBoxShinyGender.TabIndex = 13;
-            // 
-            // buttonShinyClearAbility
-            // 
-            this.buttonShinyClearAbility.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.buttonShinyClearAbility.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.buttonShinyClearAbility.ForeColor = System.Drawing.Color.Black;
-            this.buttonShinyClearAbility.Location = new System.Drawing.Point(784, 42);
-            this.buttonShinyClearAbility.Name = "buttonShinyClearAbility";
-            this.buttonShinyClearAbility.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.buttonShinyClearAbility.ShineColor = System.Drawing.SystemColors.Window;
-            this.buttonShinyClearAbility.Size = new System.Drawing.Size(46, 22);
-            this.buttonShinyClearAbility.TabIndex = 12;
-            this.buttonShinyClearAbility.TabStop = false;
-            this.buttonShinyClearAbility.Text = "Any";
-            this.buttonShinyClearAbility.Click += new System.EventHandler(this.buttonShinyClearAbility_Click);
-            // 
-            // comboBoxShinyAbility
-            // 
-            this.comboBoxShinyAbility.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxShinyAbility.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxShinyAbility.FormattingEnabled = true;
-            this.comboBoxShinyAbility.Items.AddRange(new object[] {
-            "Any",
-            "Ability 0",
-            "Ability 1"});
-            this.comboBoxShinyAbility.Location = new System.Drawing.Point(700, 43);
-            this.comboBoxShinyAbility.MaxDropDownItems = 3;
-            this.comboBoxShinyAbility.Name = "comboBoxShinyAbility";
-            this.comboBoxShinyAbility.ShineColor = System.Drawing.SystemColors.Window;
-            this.comboBoxShinyAbility.Size = new System.Drawing.Size(76, 21);
-            this.comboBoxShinyAbility.TabIndex = 11;
-            // 
-            // buttonShinyGenerate
-            // 
-            this.buttonShinyGenerate.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.buttonShinyGenerate.ForeColor = System.Drawing.Color.Black;
-            this.buttonShinyGenerate.Location = new System.Drawing.Point(12, 157);
-            this.buttonShinyGenerate.Name = "buttonShinyGenerate";
-            this.buttonShinyGenerate.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.buttonShinyGenerate.ShineColor = System.Drawing.SystemColors.Window;
-            this.buttonShinyGenerate.Size = new System.Drawing.Size(73, 23);
-            this.buttonShinyGenerate.TabIndex = 6;
-            this.buttonShinyGenerate.Text = "Generate";
-            this.buttonShinyGenerate.Click += new System.EventHandler(this.buttonShinyGenerate_Click);
-            // 
-            // buttonShinyClearNature
-            // 
-            this.buttonShinyClearNature.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.buttonShinyClearNature.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.buttonShinyClearNature.ForeColor = System.Drawing.Color.Black;
-            this.buttonShinyClearNature.Location = new System.Drawing.Point(784, 14);
-            this.buttonShinyClearNature.Name = "buttonShinyClearNature";
-            this.buttonShinyClearNature.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.buttonShinyClearNature.ShineColor = System.Drawing.SystemColors.Window;
-            this.buttonShinyClearNature.Size = new System.Drawing.Size(46, 22);
-            this.buttonShinyClearNature.TabIndex = 10;
-            this.buttonShinyClearNature.TabStop = false;
-            this.buttonShinyClearNature.Text = "Any";
-            this.buttonShinyClearNature.Click += new System.EventHandler(this.buttonShinyClearNature_Click);
-            // 
-            // comboBoxShinyNature
-            // 
-            this.comboBoxShinyNature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxShinyNature.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxShinyNature.FormattingEnabled = true;
-            this.comboBoxShinyNature.Location = new System.Drawing.Point(700, 16);
-            this.comboBoxShinyNature.MaxDropDownItems = 26;
-            this.comboBoxShinyNature.Name = "comboBoxShinyNature";
-            this.comboBoxShinyNature.ShineColor = System.Drawing.SystemColors.Window;
-            this.comboBoxShinyNature.Size = new System.Drawing.Size(76, 21);
-            this.comboBoxShinyNature.TabIndex = 9;
-            this.comboBoxShinyNature.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FocusControl);
-            // 
-            // maskedTextBoxMaxTaps
-            // 
-            this.maskedTextBoxMaxTaps.Hex = false;
-            this.maskedTextBoxMaxTaps.Location = new System.Drawing.Point(499, 24);
-            this.maskedTextBoxMaxTaps.Mask = "000";
-            this.maskedTextBoxMaxTaps.Name = "maskedTextBoxMaxTaps";
-            this.maskedTextBoxMaxTaps.Size = new System.Drawing.Size(44, 20);
-            this.maskedTextBoxMaxTaps.TabIndex = 7;
-            this.maskedTextBoxMaxTaps.Text = "10";
-            // 
-            // maskedTextBoxShinySecretID
-            // 
-            this.maskedTextBoxShinySecretID.Hex = false;
-            this.maskedTextBoxShinySecretID.Location = new System.Drawing.Point(754, 132);
-            this.maskedTextBoxShinySecretID.Mask = "00000";
-            this.maskedTextBoxShinySecretID.Name = "maskedTextBoxShinySecretID";
-            this.maskedTextBoxShinySecretID.Size = new System.Drawing.Size(48, 20);
-            this.maskedTextBoxShinySecretID.TabIndex = 15;
-            this.maskedTextBoxShinySecretID.Tag = "id/sid";
-            this.maskedTextBoxShinySecretID.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            // 
-            // maskedTextBoxShinyID
-            // 
-            this.maskedTextBoxShinyID.Hex = false;
-            this.maskedTextBoxShinyID.Location = new System.Drawing.Point(700, 132);
-            this.maskedTextBoxShinyID.Mask = "00000";
-            this.maskedTextBoxShinyID.Name = "maskedTextBoxShinyID";
-            this.maskedTextBoxShinyID.Size = new System.Drawing.Size(48, 20);
-            this.maskedTextBoxShinyID.TabIndex = 14;
-            this.maskedTextBoxShinyID.Tag = "id/sid";
-            this.maskedTextBoxShinyID.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            // 
-            // maskedTextBoxShinyMaxDelay
-            // 
-            this.maskedTextBoxShinyMaxDelay.Hex = false;
-            this.maskedTextBoxShinyMaxDelay.Location = new System.Drawing.Point(142, 24);
-            this.maskedTextBoxShinyMaxDelay.Mask = "00000";
-            this.maskedTextBoxShinyMaxDelay.Name = "maskedTextBoxShinyMaxDelay";
-            this.maskedTextBoxShinyMaxDelay.Size = new System.Drawing.Size(40, 20);
-            this.maskedTextBoxShinyMaxDelay.TabIndex = 2;
-            this.maskedTextBoxShinyMaxDelay.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            // 
-            // maskedTextBoxShinyMinDelay
-            // 
-            this.maskedTextBoxShinyMinDelay.Hex = false;
-            this.maskedTextBoxShinyMinDelay.Location = new System.Drawing.Point(96, 24);
-            this.maskedTextBoxShinyMinDelay.Mask = "00000";
-            this.maskedTextBoxShinyMinDelay.Name = "maskedTextBoxShinyMinDelay";
-            this.maskedTextBoxShinyMinDelay.Size = new System.Drawing.Size(41, 20);
-            this.maskedTextBoxShinyMinDelay.TabIndex = 1;
-            this.maskedTextBoxShinyMinDelay.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            // 
-            // maskedTextBoxShinyYear
-            // 
-            this.maskedTextBoxShinyYear.Hex = false;
-            this.maskedTextBoxShinyYear.Location = new System.Drawing.Point(55, 24);
-            this.maskedTextBoxShinyYear.Mask = "0000";
-            this.maskedTextBoxShinyYear.Name = "maskedTextBoxShinyYear";
-            this.maskedTextBoxShinyYear.Size = new System.Drawing.Size(35, 20);
-            this.maskedTextBoxShinyYear.TabIndex = 0;
-            this.maskedTextBoxShinyYear.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            // 
-            // tabPageCapture
-            // 
-            this.tabPageCapture.Controls.Add(this.ivFiltersCapture);
-            this.tabPageCapture.Controls.Add(this.comboBoxCapGenderRatio);
-            this.tabPageCapture.Controls.Add(this.label2);
-            this.tabPageCapture.Controls.Add(this.comboBoxCapGender);
-            this.tabPageCapture.Controls.Add(this.label31);
-            this.tabPageCapture.Controls.Add(this.dataGridViewCapValues);
-            this.tabPageCapture.Controls.Add(this.buttonAnySlot);
-            this.tabPageCapture.Controls.Add(this.maskedTextBoxCapMinOffset);
-            this.tabPageCapture.Controls.Add(this.label54);
-            this.tabPageCapture.Controls.Add(this.comboBoxEncounterType);
-            this.tabPageCapture.Controls.Add(this.comboBoxEncounterSlot);
-            this.tabPageCapture.Controls.Add(this.maskedTextBoxCapMaxDelay);
-            this.tabPageCapture.Controls.Add(this.label52);
-            this.tabPageCapture.Controls.Add(this.maskedTextBoxCapMinDelay);
-            this.tabPageCapture.Controls.Add(this.maskedTextBoxCapYear);
-            this.tabPageCapture.Controls.Add(this.maskedTextBoxCapMaxOffset);
-            this.tabPageCapture.Controls.Add(this.labelCapMinMaxFrame);
-            this.tabPageCapture.Controls.Add(this.label22);
-            this.tabPageCapture.Controls.Add(this.label20);
-            this.tabPageCapture.Controls.Add(this.comboBoxMethod);
-            this.tabPageCapture.Controls.Add(this.label30);
-            this.tabPageCapture.Controls.Add(this.buttonCapGenerate);
-            this.tabPageCapture.Controls.Add(this.buttonAnyNature);
-            this.tabPageCapture.Controls.Add(this.lblID);
-            this.tabPageCapture.Controls.Add(this.comboBoxAbility);
-            this.tabPageCapture.Controls.Add(this.label26);
-            this.tabPageCapture.Controls.Add(this.label23);
-            this.tabPageCapture.Controls.Add(this.checkBoxShinyOnly);
-            this.tabPageCapture.Controls.Add(this.maskedTextBoxID);
-            this.tabPageCapture.Controls.Add(this.maskedTextBoxSID);
-            this.tabPageCapture.Controls.Add(this.label21);
-            this.tabPageCapture.Controls.Add(this.comboBoxNature);
-            this.tabPageCapture.Location = new System.Drawing.Point(4, 22);
-            this.tabPageCapture.Name = "tabPageCapture";
-            this.tabPageCapture.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCapture.Size = new System.Drawing.Size(991, 498);
-            this.tabPageCapture.TabIndex = 1;
-            this.tabPageCapture.Text = "Capture";
-            this.tabPageCapture.UseVisualStyleBackColor = true;
-            // 
-            // ivFiltersCapture
-            // 
-            this.ivFiltersCapture.Location = new System.Drawing.Point(367, 6);
-            this.ivFiltersCapture.Name = "ivFiltersCapture";
-            this.ivFiltersCapture.Size = new System.Drawing.Size(315, 166);
-            this.ivFiltersCapture.TabIndex = 325;
-            // 
-            // comboBoxCapGenderRatio
-            // 
-            this.comboBoxCapGenderRatio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxCapGenderRatio.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxCapGenderRatio.FormattingEnabled = true;
-            this.comboBoxCapGenderRatio.Items.AddRange(new object[] {
-            "All Ratios",
-            "50% M / 50% F",
-            "25% M / 75% F",
-            "75% M / 25% F",
-            "87.5% M / 12.5% F",
-            "Fixed Gender"});
-            this.comboBoxCapGenderRatio.Location = new System.Drawing.Point(844, 90);
-            this.comboBoxCapGenderRatio.MaxDropDownItems = 3;
-            this.comboBoxCapGenderRatio.Name = "comboBoxCapGenderRatio";
-            this.comboBoxCapGenderRatio.ShineColor = System.Drawing.SystemColors.Window;
-            this.comboBoxCapGenderRatio.Size = new System.Drawing.Size(119, 21);
-            this.comboBoxCapGenderRatio.TabIndex = 27;
-            this.toolTipGenderRatio.SetToolTip(this.comboBoxCapGenderRatio, "Right-click to look up the gender\r\nratio of a certain Pokémon.\r\n\r\nUse this box to" +
-        " filter out unwanted\r\nCute Charm results.\r\n");
-            this.comboBoxCapGenderRatio.SelectedIndexChanged += new System.EventHandler(this.comboBoxCapGenderRatio_SelectedIndexChanged);
-            this.comboBoxCapGenderRatio.MouseDown += new System.Windows.Forms.MouseEventHandler(this.comboBoxCapGenderRatio_MouseDown);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(811, 95);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(32, 13);
-            this.label2.TabIndex = 324;
-            this.label2.Text = "Ratio";
-            // 
-            // comboBoxCapGender
-            // 
-            this.comboBoxCapGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxCapGender.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxCapGender.FormattingEnabled = true;
-            this.comboBoxCapGender.Items.AddRange(new object[] {
-            "Any",
-            "Male",
-            "Female"});
-            this.comboBoxCapGender.Location = new System.Drawing.Point(743, 91);
-            this.comboBoxCapGender.MaxDropDownItems = 3;
-            this.comboBoxCapGender.Name = "comboBoxCapGender";
-            this.comboBoxCapGender.ShineColor = System.Drawing.SystemColors.Window;
-            this.comboBoxCapGender.Size = new System.Drawing.Size(59, 21);
-            this.comboBoxCapGender.TabIndex = 26;
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(698, 94);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(42, 13);
-            this.label31.TabIndex = 321;
-            this.label31.Text = "Gender";
-            // 
-            // dataGridViewCapValues
-            // 
-            this.dataGridViewCapValues.AllowUserToAddRows = false;
-            this.dataGridViewCapValues.AllowUserToDeleteRows = false;
-            this.dataGridViewCapValues.AllowUserToResizeRows = false;
-            this.dataGridViewCapValues.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewCapValues.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewCapValues.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            this.dataGridViewCapValues.ColumnHeadersHeight = 20;
-            this.dataGridViewCapValues.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dataGridViewCapValues.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CapSeed,
-            this.CapOffset,
-            this.Hour,
-            this.EncounterMod,
-            this.PID,
-            this.EncounterSlot,
-            this.Shiny,
-            this.Nature,
-            this.Ability,
-            this.CapHP,
-            this.CapAtk,
-            this.CapDef,
-            this.CapSpA,
-            this.CapSpD,
-            this.CapSpe,
-            this.HiddenPower,
-            this.HiddenPowerPower,
-            this.f50,
-            this.f125,
-            this.f25,
-            this.f75});
-            this.dataGridViewCapValues.ContextMenuStrip = this.contextMenuStripCap;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewCapValues.DefaultCellStyle = dataGridViewCellStyle12;
-            this.dataGridViewCapValues.Location = new System.Drawing.Point(6, 189);
-            this.dataGridViewCapValues.MultiSelect = false;
-            this.dataGridViewCapValues.Name = "dataGridViewCapValues";
-            this.dataGridViewCapValues.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewCapValues.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
-            this.dataGridViewCapValues.RowHeadersVisible = false;
-            this.dataGridViewCapValues.RowTemplate.Height = 20;
-            this.dataGridViewCapValues.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewCapValues.ShowCellErrors = false;
-            this.dataGridViewCapValues.ShowCellToolTips = false;
-            this.dataGridViewCapValues.ShowEditingIcon = false;
-            this.dataGridViewCapValues.ShowRowErrors = false;
-            this.dataGridViewCapValues.Size = new System.Drawing.Size(957, 303);
-            this.dataGridViewCapValues.TabIndex = 10;
-            this.toolTipDataGrid.SetToolTip(this.dataGridViewCapValues, "test");
-            this.dataGridViewCapValues.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewCapValues_CellFormatting);
-            this.dataGridViewCapValues.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCapValues_CellMouseEnter);
-            this.dataGridViewCapValues.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCapValues_CellMouseLeave);
-            this.dataGridViewCapValues.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewCapValues_ColumnHeaderMouseClick);
-            this.dataGridViewCapValues.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridViewCapValues_KeyDown);
-            this.dataGridViewCapValues.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridViewCapValues_MouseDown);
-            // 
             // CapSeed
             // 
             this.CapSeed.DataPropertyName = "Seed";
@@ -1599,6 +1979,15 @@ namespace RNGReporter
             this.CapSeed.ReadOnly = true;
             this.CapSeed.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.CapSeed.Width = 65;
+            // 
+            // ShinyPatchFrame
+            // 
+            this.ShinyPatchFrame.DataPropertyName = "PatchFrame";
+            this.ShinyPatchFrame.HeaderText = "✨Patch Frame";
+            this.ShinyPatchFrame.Name = "ShinyPatchFrame";
+            this.ShinyPatchFrame.ReadOnly = true;
+            this.ShinyPatchFrame.Visible = false;
+            this.ShinyPatchFrame.Width = 85;
             // 
             // CapOffset
             // 
@@ -1764,384 +2153,6 @@ namespace RNGReporter
             this.f75.ReadOnly = true;
             this.f75.Width = 50;
             // 
-            // contextMenuStripCap
-            // 
-            this.contextMenuStripCap.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copySeedToClipboardToolStripMenuItem1,
-            this.toolStripMenuItem6,
-            this.generateTimesToolStripMenuItem,
-            this.toolStripMenuItem3,
-            this.outputCapResultsToTXTToolStripMenuItem});
-            this.contextMenuStripCap.Name = "contextMenuStripCap";
-            this.contextMenuStripCap.Size = new System.Drawing.Size(203, 82);
-            this.contextMenuStripCap.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripCap_Opening);
-            // 
-            // copySeedToClipboardToolStripMenuItem1
-            // 
-            this.copySeedToClipboardToolStripMenuItem1.Name = "copySeedToClipboardToolStripMenuItem1";
-            this.copySeedToClipboardToolStripMenuItem1.Size = new System.Drawing.Size(202, 22);
-            this.copySeedToClipboardToolStripMenuItem1.Text = "Copy Seed to Clipboard";
-            this.copySeedToClipboardToolStripMenuItem1.Click += new System.EventHandler(this.copySeedToClipboardToolStripMenuItem1_Click);
-            // 
-            // toolStripMenuItem6
-            // 
-            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(199, 6);
-            // 
-            // generateTimesToolStripMenuItem
-            // 
-            this.generateTimesToolStripMenuItem.Name = "generateTimesToolStripMenuItem";
-            this.generateTimesToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.generateTimesToolStripMenuItem.Text = "Generate More Times ...";
-            this.generateTimesToolStripMenuItem.Click += new System.EventHandler(this.generateTimesToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(199, 6);
-            // 
-            // outputCapResultsToTXTToolStripMenuItem
-            // 
-            this.outputCapResultsToTXTToolStripMenuItem.Name = "outputCapResultsToTXTToolStripMenuItem";
-            this.outputCapResultsToTXTToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.outputCapResultsToTXTToolStripMenuItem.Text = "Output Results to TXT ...";
-            this.outputCapResultsToTXTToolStripMenuItem.Click += new System.EventHandler(this.outputCapResultsToTXTToolStripMenuItem_Click);
-            // 
-            // buttonAnySlot
-            // 
-            this.buttonAnySlot.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.buttonAnySlot.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.buttonAnySlot.ForeColor = System.Drawing.Color.Black;
-            this.buttonAnySlot.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.buttonAnySlot.Location = new System.Drawing.Point(256, 98);
-            this.buttonAnySlot.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonAnySlot.Name = "buttonAnySlot";
-            this.buttonAnySlot.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.buttonAnySlot.ShineColor = System.Drawing.SystemColors.Window;
-            this.buttonAnySlot.Size = new System.Drawing.Size(41, 22);
-            this.buttonAnySlot.TabIndex = 8;
-            this.buttonAnySlot.Text = "Any";
-            this.buttonAnySlot.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.buttonAnySlot.Click += new System.EventHandler(this.buttonAnySlot_Click);
-            // 
-            // maskedTextBoxCapMinOffset
-            // 
-            this.maskedTextBoxCapMinOffset.Hex = false;
-            this.maskedTextBoxCapMinOffset.Location = new System.Drawing.Point(188, 24);
-            this.maskedTextBoxCapMinOffset.Mask = "00000";
-            this.maskedTextBoxCapMinOffset.Name = "maskedTextBoxCapMinOffset";
-            this.maskedTextBoxCapMinOffset.Size = new System.Drawing.Size(44, 20);
-            this.maskedTextBoxCapMinOffset.TabIndex = 3;
-            this.maskedTextBoxCapMinOffset.Text = "1";
-            // 
-            // label54
-            // 
-            this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(17, 104);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(77, 13);
-            this.label54.TabIndex = 120;
-            this.label54.Text = "Encounter Slot";
-            this.label54.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // comboBoxEncounterType
-            // 
-            this.comboBoxEncounterType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxEncounterType.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxEncounterType.FormattingEnabled = true;
-            this.comboBoxEncounterType.Items.AddRange(new object[] {
-            "Stationary\\Gift Pokémon"});
-            this.comboBoxEncounterType.Location = new System.Drawing.Point(97, 76);
-            this.comboBoxEncounterType.Name = "comboBoxEncounterType";
-            this.comboBoxEncounterType.ShineColor = System.Drawing.SystemColors.Window;
-            this.comboBoxEncounterType.Size = new System.Drawing.Size(156, 21);
-            this.comboBoxEncounterType.TabIndex = 6;
-            // 
-            // comboBoxEncounterSlot
-            // 
-            this.comboBoxEncounterSlot.BlankText = "Any";
-            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.comboBoxEncounterSlot.CheckBoxProperties = checkBoxProperties1;
-            this.comboBoxEncounterSlot.DisplayMemberSingleItem = "";
-            this.comboBoxEncounterSlot.DropDownHeight = 310;
-            this.comboBoxEncounterSlot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxEncounterSlot.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.comboBoxEncounterSlot.FormattingEnabled = true;
-            this.comboBoxEncounterSlot.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11"});
-            this.comboBoxEncounterSlot.Location = new System.Drawing.Point(97, 99);
-            this.comboBoxEncounterSlot.Name = "comboBoxEncounterSlot";
-            this.comboBoxEncounterSlot.Size = new System.Drawing.Size(156, 21);
-            this.comboBoxEncounterSlot.TabIndex = 7;
-            this.comboBoxEncounterSlot.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FocusControl);
-            // 
-            // maskedTextBoxCapMaxDelay
-            // 
-            this.maskedTextBoxCapMaxDelay.Hex = false;
-            this.maskedTextBoxCapMaxDelay.Location = new System.Drawing.Point(142, 24);
-            this.maskedTextBoxCapMaxDelay.Mask = "00000";
-            this.maskedTextBoxCapMaxDelay.Name = "maskedTextBoxCapMaxDelay";
-            this.maskedTextBoxCapMaxDelay.Size = new System.Drawing.Size(41, 20);
-            this.maskedTextBoxCapMaxDelay.TabIndex = 2;
-            // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(12, 81);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(83, 13);
-            this.label52.TabIndex = 121;
-            this.label52.Text = "Encounter Type";
-            this.label52.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // maskedTextBoxCapMinDelay
-            // 
-            this.maskedTextBoxCapMinDelay.Hex = false;
-            this.maskedTextBoxCapMinDelay.Location = new System.Drawing.Point(96, 24);
-            this.maskedTextBoxCapMinDelay.Mask = "00000";
-            this.maskedTextBoxCapMinDelay.Name = "maskedTextBoxCapMinDelay";
-            this.maskedTextBoxCapMinDelay.Size = new System.Drawing.Size(41, 20);
-            this.maskedTextBoxCapMinDelay.TabIndex = 1;
-            this.maskedTextBoxCapMinDelay.ValidatingType = typeof(int);
-            // 
-            // maskedTextBoxCapYear
-            // 
-            this.maskedTextBoxCapYear.Hex = false;
-            this.maskedTextBoxCapYear.Location = new System.Drawing.Point(55, 24);
-            this.maskedTextBoxCapYear.Mask = "0000";
-            this.maskedTextBoxCapYear.Name = "maskedTextBoxCapYear";
-            this.maskedTextBoxCapYear.Size = new System.Drawing.Size(35, 20);
-            this.maskedTextBoxCapYear.TabIndex = 0;
-            this.maskedTextBoxCapYear.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            // 
-            // maskedTextBoxCapMaxOffset
-            // 
-            this.maskedTextBoxCapMaxOffset.Hex = false;
-            this.maskedTextBoxCapMaxOffset.Location = new System.Drawing.Point(238, 24);
-            this.maskedTextBoxCapMaxOffset.Mask = "00000";
-            this.maskedTextBoxCapMaxOffset.Name = "maskedTextBoxCapMaxOffset";
-            this.maskedTextBoxCapMaxOffset.Size = new System.Drawing.Size(44, 20);
-            this.maskedTextBoxCapMaxOffset.TabIndex = 4;
-            // 
-            // labelCapMinMaxFrame
-            // 
-            this.labelCapMinMaxFrame.AutoSize = true;
-            this.labelCapMinMaxFrame.Location = new System.Drawing.Point(191, 9);
-            this.labelCapMinMaxFrame.Name = "labelCapMinMaxFrame";
-            this.labelCapMinMaxFrame.Size = new System.Drawing.Size(87, 13);
-            this.labelCapMinMaxFrame.TabIndex = 107;
-            this.labelCapMinMaxFrame.Text = "Min / Max Frame";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(97, 9);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(85, 13);
-            this.label22.TabIndex = 108;
-            this.label22.Text = "Min / Max Delay";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(52, 9);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(29, 13);
-            this.label20.TabIndex = 106;
-            this.label20.Text = "Year";
-            // 
-            // comboBoxMethod
-            // 
-            this.comboBoxMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxMethod.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxMethod.FormattingEnabled = true;
-            this.comboBoxMethod.Location = new System.Drawing.Point(97, 53);
-            this.comboBoxMethod.Name = "comboBoxMethod";
-            this.comboBoxMethod.ShineColor = System.Drawing.SystemColors.Window;
-            this.comboBoxMethod.Size = new System.Drawing.Size(156, 21);
-            this.comboBoxMethod.TabIndex = 5;
-            this.comboBoxMethod.SelectedIndexChanged += new System.EventHandler(this.comboBoxMethod_SelectedIndexChanged);
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(51, 57);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(43, 13);
-            this.label30.TabIndex = 113;
-            this.label30.Text = "Method";
-            this.label30.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // buttonCapGenerate
-            // 
-            this.buttonCapGenerate.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.buttonCapGenerate.ForeColor = System.Drawing.Color.Black;
-            this.buttonCapGenerate.Location = new System.Drawing.Point(12, 157);
-            this.buttonCapGenerate.Name = "buttonCapGenerate";
-            this.buttonCapGenerate.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.buttonCapGenerate.ShineColor = System.Drawing.SystemColors.Window;
-            this.buttonCapGenerate.Size = new System.Drawing.Size(73, 23);
-            this.buttonCapGenerate.TabIndex = 9;
-            this.buttonCapGenerate.Text = "Generate";
-            this.buttonCapGenerate.Click += new System.EventHandler(this.buttonCapGenerate_Click);
-            // 
-            // buttonAnyNature
-            // 
-            this.buttonAnyNature.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.buttonAnyNature.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.buttonAnyNature.ForeColor = System.Drawing.Color.Black;
-            this.buttonAnyNature.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.buttonAnyNature.Location = new System.Drawing.Point(922, 15);
-            this.buttonAnyNature.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonAnyNature.Name = "buttonAnyNature";
-            this.buttonAnyNature.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.buttonAnyNature.ShineColor = System.Drawing.SystemColors.Window;
-            this.buttonAnyNature.Size = new System.Drawing.Size(41, 22);
-            this.buttonAnyNature.TabIndex = 24;
-            this.buttonAnyNature.Text = "Any";
-            this.buttonAnyNature.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.buttonAnyNature.Click += new System.EventHandler(this.buttonAnyNature_Click);
-            // 
-            // lblID
-            // 
-            this.lblID.AutoSize = true;
-            this.lblID.Location = new System.Drawing.Point(742, 117);
-            this.lblID.Name = "lblID";
-            this.lblID.Size = new System.Drawing.Size(18, 13);
-            this.lblID.TabIndex = 69;
-            this.lblID.Text = "ID";
-            this.lblID.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // comboBoxAbility
-            // 
-            this.comboBoxAbility.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxAbility.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxAbility.FormattingEnabled = true;
-            this.comboBoxAbility.Items.AddRange(new object[] {
-            "Any",
-            "Ability 0",
-            "Ability 1"});
-            this.comboBoxAbility.Location = new System.Drawing.Point(743, 43);
-            this.comboBoxAbility.Name = "comboBoxAbility";
-            this.comboBoxAbility.ShineColor = System.Drawing.SystemColors.Window;
-            this.comboBoxAbility.Size = new System.Drawing.Size(67, 21);
-            this.comboBoxAbility.TabIndex = 25;
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(796, 117);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(25, 13);
-            this.label26.TabIndex = 71;
-            this.label26.Text = "SID";
-            this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(706, 47);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(34, 13);
-            this.label23.TabIndex = 68;
-            this.label23.Text = "Ability";
-            // 
-            // checkBoxShinyOnly
-            // 
-            this.checkBoxShinyOnly.AutoSize = true;
-            this.checkBoxShinyOnly.Location = new System.Drawing.Point(743, 157);
-            this.checkBoxShinyOnly.Name = "checkBoxShinyOnly";
-            this.checkBoxShinyOnly.Size = new System.Drawing.Size(76, 17);
-            this.checkBoxShinyOnly.TabIndex = 30;
-            this.checkBoxShinyOnly.Text = "Shiny Only";
-            this.checkBoxShinyOnly.UseVisualStyleBackColor = true;
-            // 
-            // maskedTextBoxID
-            // 
-            this.maskedTextBoxID.Hex = false;
-            this.maskedTextBoxID.Location = new System.Drawing.Point(743, 132);
-            this.maskedTextBoxID.Mask = "00000";
-            this.maskedTextBoxID.Name = "maskedTextBoxID";
-            this.maskedTextBoxID.Size = new System.Drawing.Size(48, 20);
-            this.maskedTextBoxID.TabIndex = 28;
-            this.maskedTextBoxID.Tag = "id/sid";
-            this.maskedTextBoxID.ValidatingType = typeof(int);
-            // 
-            // maskedTextBoxSID
-            // 
-            this.maskedTextBoxSID.Hex = false;
-            this.maskedTextBoxSID.Location = new System.Drawing.Point(797, 132);
-            this.maskedTextBoxSID.Mask = "00000";
-            this.maskedTextBoxSID.Name = "maskedTextBoxSID";
-            this.maskedTextBoxSID.Size = new System.Drawing.Size(48, 20);
-            this.maskedTextBoxSID.TabIndex = 29;
-            this.maskedTextBoxSID.Tag = "id/sid";
-            this.maskedTextBoxSID.ValidatingType = typeof(int);
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(703, 20);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(39, 13);
-            this.label21.TabIndex = 11;
-            this.label21.Text = "Nature";
-            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // comboBoxNature
-            // 
-            this.comboBoxNature.BlankText = "Any";
-            checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.comboBoxNature.CheckBoxProperties = checkBoxProperties2;
-            this.comboBoxNature.DisplayMemberSingleItem = "";
-            this.comboBoxNature.DropDownHeight = 300;
-            this.comboBoxNature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxNature.FormattingEnabled = true;
-            this.comboBoxNature.Location = new System.Drawing.Point(743, 16);
-            this.comboBoxNature.Name = "comboBoxNature";
-            this.comboBoxNature.Size = new System.Drawing.Size(176, 21);
-            this.comboBoxNature.TabIndex = 23;
-            this.comboBoxNature.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FocusControl);
-            // 
-            // tabControl
-            // 
-            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl.Controls.Add(this.tabPageCapture);
-            this.tabControl.Controls.Add(this.tabPageShinyEgg);
-            this.tabControl.Controls.Add(this.tabPageEggIVs);
-            this.tabControl.Location = new System.Drawing.Point(12, 12);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(999, 524);
-            this.tabControl.TabIndex = 0;
-            // 
-            // toolTipDataGrid
-            // 
-            this.toolTipDataGrid.AutoPopDelay = 6000;
-            this.toolTipDataGrid.InitialDelay = 300;
-            this.toolTipDataGrid.ReshowDelay = 100;
-            this.toolTipDataGrid.ToolTipTitle = "Gender Ratio";
-            // 
-            // toolTipGenderRatio
-            // 
-            this.toolTipGenderRatio.AutoPopDelay = 6000;
-            this.toolTipGenderRatio.InitialDelay = 300;
-            this.toolTipGenderRatio.ReshowDelay = 100;
-            this.toolTipGenderRatio.ToolTipTitle = "Gender Ratio";
-            // 
             // TimeFinder4th
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -2156,15 +2167,15 @@ namespace RNGReporter
             this.contextMenuStrip.ResumeLayout(false);
             this.tabPageEggIVs.ResumeLayout(false);
             this.tabPageEggIVs.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEggIVValues)).EndInit();
             this.tabPageShinyEgg.ResumeLayout(false);
             this.tabPageShinyEgg.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewShinyResults)).EndInit();
             this.tabPageCapture.ResumeLayout(false);
             this.tabPageCapture.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCapValues)).EndInit();
             this.contextMenuStripCap.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCapValues)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewShinyResults)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEggIVValues)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2320,6 +2331,7 @@ namespace RNGReporter
         private IVFilters ivFiltersEgg;
         private IVFilters ivFiltersCapture;
         private System.Windows.Forms.DataGridViewTextBoxColumn CapSeed;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ShinyPatchFrame;
         private System.Windows.Forms.DataGridViewTextBoxColumn CapOffset;
         private System.Windows.Forms.DataGridViewTextBoxColumn Hour;
         private System.Windows.Forms.DataGridViewTextBoxColumn EncounterMod;

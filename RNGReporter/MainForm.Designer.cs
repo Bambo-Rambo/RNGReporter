@@ -1804,6 +1804,7 @@ namespace RNGReporter
             this.Offset.HeaderText = "Occidentary";
             this.Offset.Name = "Offset";
             this.Offset.ReadOnly = true;
+            this.Offset.Visible = false;
             this.Offset.Width = 75;
             // 
             // Time
@@ -1812,6 +1813,7 @@ namespace RNGReporter
             this.Time.HeaderText = "Time";
             this.Time.Name = "Time";
             this.Time.ReadOnly = true;
+            this.Time.Visible = false;
             this.Time.Width = 55;
             // 
             // Elm
@@ -1820,6 +1822,7 @@ namespace RNGReporter
             this.Elm.HeaderText = "Elm";
             this.Elm.Name = "Elm";
             this.Elm.ReadOnly = true;
+            this.Elm.Visible = false;
             this.Elm.Width = 35;
             // 
             // Chatot
@@ -1845,6 +1848,7 @@ namespace RNGReporter
             this.EncType.HeaderText = "Encounter Type";
             this.EncType.Name = "EncType";
             this.EncType.ReadOnly = true;
+            this.EncType.Visible = false;
             this.EncType.Width = 90;
             // 
             // EncounterSlot
@@ -1861,6 +1865,7 @@ namespace RNGReporter
             this.Level.HeaderText = "Level";
             this.Level.Name = "Level";
             this.Level.ReadOnly = true;
+            this.Level.Visible = false;
             this.Level.Width = 60;
             // 
             // ItemCalc
@@ -1930,6 +1935,7 @@ namespace RNGReporter
             this.Coin.HeaderText = "Coin";
             this.Coin.Name = "Coin";
             this.Coin.ReadOnly = true;
+            this.Coin.Visible = false;
             this.Coin.Width = 55;
             // 
             // HP
@@ -1938,6 +1944,7 @@ namespace RNGReporter
             this.HP.HeaderText = "HP";
             this.HP.Name = "HP";
             this.HP.ReadOnly = true;
+            this.HP.Visible = false;
             this.HP.Width = 35;
             // 
             // Atk
@@ -1946,6 +1953,7 @@ namespace RNGReporter
             this.Atk.HeaderText = "Atk";
             this.Atk.Name = "Atk";
             this.Atk.ReadOnly = true;
+            this.Atk.Visible = false;
             this.Atk.Width = 35;
             // 
             // Def
@@ -1954,6 +1962,7 @@ namespace RNGReporter
             this.Def.HeaderText = "Def";
             this.Def.Name = "Def";
             this.Def.ReadOnly = true;
+            this.Def.Visible = false;
             this.Def.Width = 35;
             // 
             // SpA
@@ -1962,6 +1971,7 @@ namespace RNGReporter
             this.SpA.HeaderText = "SpA";
             this.SpA.Name = "SpA";
             this.SpA.ReadOnly = true;
+            this.SpA.Visible = false;
             this.SpA.Width = 35;
             // 
             // SpD
@@ -1970,6 +1980,7 @@ namespace RNGReporter
             this.SpD.HeaderText = "SpD";
             this.SpD.Name = "SpD";
             this.SpD.ReadOnly = true;
+            this.SpD.Visible = false;
             this.SpD.Width = 35;
             // 
             // Spe
@@ -1978,6 +1989,7 @@ namespace RNGReporter
             this.Spe.HeaderText = "Spe";
             this.Spe.Name = "Spe";
             this.Spe.ReadOnly = true;
+            this.Spe.Visible = false;
             this.Spe.Width = 35;
             // 
             // HiddenPower
@@ -1986,6 +1998,7 @@ namespace RNGReporter
             this.HiddenPower.HeaderText = "Hidden";
             this.HiddenPower.Name = "HiddenPower";
             this.HiddenPower.ReadOnly = true;
+            this.HiddenPower.Visible = false;
             this.HiddenPower.Width = 50;
             // 
             // HiddenPowerPower
@@ -1994,6 +2007,7 @@ namespace RNGReporter
             this.HiddenPowerPower.HeaderText = "Power";
             this.HiddenPowerPower.Name = "HiddenPowerPower";
             this.HiddenPowerPower.ReadOnly = true;
+            this.HiddenPowerPower.Visible = false;
             this.HiddenPowerPower.Width = 50;
             // 
             // Characteristic
@@ -2011,6 +2025,7 @@ namespace RNGReporter
             this.MaleOnlySpecies.HeaderText = "Species";
             this.MaleOnlySpecies.Name = "MaleOnlySpecies";
             this.MaleOnlySpecies.ReadOnly = true;
+            this.MaleOnlySpecies.Visible = false;
             this.MaleOnlySpecies.Width = 105;
             // 
             // f50

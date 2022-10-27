@@ -179,51 +179,51 @@ namespace RNGReporter
             this.outputResultsToTXTToolStripMenuItem,
             this.outputSelectedColumnsToTXTToolStripMenuItem});
             this.contextMenuStripGrid.Name = "contextMenuStripGrid";
-            this.contextMenuStripGrid.Size = new System.Drawing.Size(258, 126);
+            this.contextMenuStripGrid.Size = new System.Drawing.Size(256, 126);
             this.contextMenuStripGrid.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripGrid_Opening);
             // 
             // copyItemToolStripMenuItem
             // 
             this.copyItemToolStripMenuItem.Name = "copyItemToolStripMenuItem";
-            this.copyItemToolStripMenuItem.Size = new System.Drawing.Size(257, 22);
+            this.copyItemToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.copyItemToolStripMenuItem.Text = "Copy Item";
             this.copyItemToolStripMenuItem.Click += new System.EventHandler(this.copyItemToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(254, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(252, 6);
             // 
             // copySelectedColumnsToolStripMenuItem
             // 
             this.copySelectedColumnsToolStripMenuItem.Name = "copySelectedColumnsToolStripMenuItem";
-            this.copySelectedColumnsToolStripMenuItem.Size = new System.Drawing.Size(257, 22);
+            this.copySelectedColumnsToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.copySelectedColumnsToolStripMenuItem.Text = "Copy Selected Columns";
             this.copySelectedColumnsToolStripMenuItem.Click += new System.EventHandler(this.copySelectedColumnsToolStripMenuItem_Click);
             // 
             // copyColumnToolStripMenuItem
             // 
             this.copyColumnToolStripMenuItem.Name = "copyColumnToolStripMenuItem";
-            this.copyColumnToolStripMenuItem.Size = new System.Drawing.Size(257, 22);
+            this.copyColumnToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.copyColumnToolStripMenuItem.Text = "Copy Row from Selected Columns";
             this.copyColumnToolStripMenuItem.Click += new System.EventHandler(this.copyColumnToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(254, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(252, 6);
             // 
             // outputResultsToTXTToolStripMenuItem
             // 
             this.outputResultsToTXTToolStripMenuItem.Name = "outputResultsToTXTToolStripMenuItem";
-            this.outputResultsToTXTToolStripMenuItem.Size = new System.Drawing.Size(257, 22);
+            this.outputResultsToTXTToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.outputResultsToTXTToolStripMenuItem.Text = "Output Results to TXT ...";
             this.outputResultsToTXTToolStripMenuItem.Click += new System.EventHandler(this.outputResultsToTXTToolStripMenuItem_Click);
             // 
             // outputSelectedColumnsToTXTToolStripMenuItem
             // 
             this.outputSelectedColumnsToTXTToolStripMenuItem.Name = "outputSelectedColumnsToTXTToolStripMenuItem";
-            this.outputSelectedColumnsToTXTToolStripMenuItem.Size = new System.Drawing.Size(257, 22);
+            this.outputSelectedColumnsToTXTToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.outputSelectedColumnsToTXTToolStripMenuItem.Text = "Output Selected Columns to TXT...";
             this.outputSelectedColumnsToTXTToolStripMenuItem.Click += new System.EventHandler(this.outputSelectedColumnsToTXTToolStripMenuItem_Click);
             // 
@@ -1510,8 +1510,8 @@ namespace RNGReporter
             this.dataGridViewValues.AllowUserToAddRows = false;
             this.dataGridViewValues.AllowUserToDeleteRows = false;
             this.dataGridViewValues.AllowUserToResizeRows = false;
-            this.dataGridViewValues.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.dataGridViewValues.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;

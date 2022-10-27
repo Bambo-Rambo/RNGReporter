@@ -30,23 +30,30 @@ namespace RNGReporter.Objects
 
         public List<Frame> GenerateG5PID(FrameCompare frameCompare, uint id, uint sid)
         {
-            bool G5_Gift = EncounterType == EncounterType.Gift;
-            bool G5_Roamer = EncounterType == EncounterType.Roamer;
             bool G5_Wild = EncounterType == EncounterType.Wild;
+            bool G5_WildDarkGrass = EncounterType == EncounterType.WildDarkGrass;
+            bool G5_WildShakerGrass = EncounterType == EncounterType.WildShakerGrass;
             bool G5_WildSurfing = EncounterType == EncounterType.WildSurfing;
+            bool G5_WildSuperRod = EncounterType == EncounterType.WildSuperRod;
             bool G5_WildWaterSpot = EncounterType == EncounterType.WildWaterSpot;
             bool G5_WildFishingSpot = EncounterType == EncounterType.WildFishingSpot;
             bool G5_WildCaveSpot = EncounterType == EncounterType.WildCaveSpot;
             bool G5_WildSwarm = EncounterType == EncounterType.WildSwarm;
+            bool G5_Roamer = EncounterType == EncounterType.Roamer;
             bool G5_Stationary = EncounterType == EncounterType.Stationary;
-            bool G5_AllEncounterShiny = EncounterType == EncounterType.AllEncounterShiny;
-            bool G5_LarvestaEgg = EncounterType == EncounterType.LarvestaEgg;
+            bool G5_Gift = EncounterType == EncounterType.Gift;
             bool G5_Jellicent = EncounterType == EncounterType.JellicentHA;
+            bool G5_LarvestaHappinyEgg = EncounterType == EncounterType.LarvestaHappiny;
+            bool G5_Haxorus = EncounterType == EncounterType.Haxorus;
+            bool G5_GibleDratini = EncounterType == EncounterType.GibleDratini;
+            bool G5_Eevee = EncounterType == EncounterType.Eevee;
+            bool G5_Deerling = EncounterType == EncounterType.Deerling;
             bool G5_Entralink = EncounterType == EncounterType.Entralink;
             bool G5_HiddenGrotto = EncounterType == EncounterType.HiddenGrotto;
-            bool G5_WildSuperRod = EncounterType == EncounterType.WildSuperRod;
-            bool G5_WildShakerGrass = EncounterType == EncounterType.WildShakerGrass;
-            bool G5_WildDarkGrass = EncounterType == EncounterType.WildDarkGrass;
+
+            bool G5_WildEncounter =
+                G5_Wild || G5_WildDarkGrass || G5_WildShakerGrass || G5_WildSurfing || 
+                G5_WildSuperRod ||  G5_WildWaterSpot || G5_WildFishingSpot || G5_WildCaveSpot || G5_WildSwarm;
 
             bool TimeFinder5 = EncounterMod == EncounterMod.Search;            // WHY WAS THE SEARCHER ADDED TO ENCOUNTER MODS???
             bool IsSync = EncounterMod == EncounterMod.Synchronize;
@@ -87,17 +94,10 @@ namespace RNGReporter.Objects
                 bool synchable;
                 byte level = 0;
 
-                if (G5_Gift || G5_Roamer)
-                {
-                    nature = (uint)(((ulong)rngList[1] * 25) >> 32);
-                    synchable = false;
 
-                    pid = rngList[0];
-                    if (!G5_Roamer)
-                        pid = pid ^ 0x10000;
-                }
-                else
+                if (G5_WildEncounter)
                 {
+                    #region Wild
                     if (G5_Wild || G5_WildSurfing || G5_WildWaterSpot || G5_WildFishingSpot)
                     {
                         if (G5_WildWaterSpot)
@@ -157,93 +157,8 @@ namespace RNGReporter.Objects
                                 synchable = false;
 
                         }
-
                     }
 
-                    else if (G5_WildCaveSpot)
-                    {
-                        if (TimeFinder5)
-                        {
-                            //Advance(1);
-                            if (!CheckBattle()) 
-                                continue;
-
-                            // Let's do Suction Cups since it affects the hittable frames
-
-                            encounterSlot = getSlot();
-                            Advance(1);
-                            pid = FindPID(id, sid, idLower, false);
-                            nature = (uint)(((ulong)NextRand() * 25) >> 32);
-
-                            frame = Frame.GenerateFrame5(FrameType.Method5Natures, EncounterType, CurrentFrame, rngList[0], rngList[1], 
-                                pid, id, sid, nature, false, encounterSlot, 0, item, 0, false);
-
-                            if (frameCompare.Compare(frame))
-                            {
-                                frame.EncounterMod = EncounterMod.SuctionCups;
-                                frames.Add(frame);
-                            }
-
-
-                            // Now for regular\Synchronize\Cute Charm encounters
-
-                            // Restore the RNG state in order to check for Cute Charm
-                            pointer = 0;
-                            if (!CheckBattle())
-                                continue;
-
-                            if (CheckLead(true))      //Cute Charm Success
-                            {
-                                encounterSlot = getSlot();
-                                Advance(1);
-                                CuteCharmModify(frameCompare, id, sid, idLower, CurrentFrame, CurrentRatio, encounterSlot, 0, pointer);
-                            }
-
-                            // Restore the RNG state in order to check for Sync / No Lead
-                            pointer = 0;
-                            if (!CheckBattle())
-                                continue;
-
-                            synchable = CheckLead(false);
-                            encounterSlot = getSlot();
-                            Advance(1);
-                            pid = FindPID(id, sid, idLower, false);
-                            nature = (uint)(((ulong)NextRand() * 25) >> 32);
-                            if (synchable && !frameCompare.CompareNature(nature))
-                                mod = EncounterMod.Synchronize;
-                            else
-                                mod = EncounterMod.None;
-                            CurrentFrame--;
-                        }
-                        else
-                        {
-                            bool battle = CheckBattle();
-
-                            if (!(IsCompEyes || IsSuctionCups))
-                                synchable = CheckLead(IsCuteCharm);         // Temporarily use synchable for Cute charm
-                            else
-                                synchable = false;
-
-                            if (IsCuteCharm && !synchable)
-                                Advance(1);
-
-                            encounterSlot = battle ? getSlot() : FindItem();
-
-                            Advance(1);     // Level is fixed for Cave spots slots
-
-                            pid = FindPID(id, sid, idLower, IsCuteCharm && synchable);
-
-                            if (IsSync && synchable)
-                                nature = (uint)SynchNature;
-                            else
-                                nature = (uint)(((ulong)NextRand() * 25) >> 32);
-
-                            if (IsCuteCharm)
-                                synchable = false;
-                        }
-
-                    }
-                    
                     else if (G5_WildSwarm)
                     {
                         if (TimeFinder5)
@@ -319,7 +234,93 @@ namespace RNGReporter.Objects
                         }
 
                     }
+
+                    else if (G5_WildCaveSpot)
+                    {
+                        if (TimeFinder5)
+                        {
+                            //Advance(1);
+                            if (!CheckBattle())
+                                continue;
+
+                            // Let's do Suction Cups since it affects the hittable frames
+
+                            encounterSlot = getSlot();
+                            Advance(1);
+                            pid = FindPID(id, sid, idLower, false);
+                            nature = (uint)(((ulong)NextRand() * 25) >> 32);
+
+                            frame = Frame.GenerateFrame5(FrameType.Method5Natures, EncounterType, CurrentFrame, rngList[0], rngList[1],
+                                pid, id, sid, nature, false, encounterSlot, 0, item, 0, false);
+
+                            if (frameCompare.Compare(frame))
+                            {
+                                frame.EncounterMod = EncounterMod.SuctionCups;
+                                frames.Add(frame);
+                            }
+
+
+                            // Now for regular\Synchronize\Cute Charm encounters
+
+                            // Restore the RNG state in order to check for Cute Charm
+                            pointer = 0;
+                            if (!CheckBattle())
+                                continue;
+
+                            if (CheckLead(true))      //Cute Charm Success
+                            {
+                                encounterSlot = getSlot();
+                                Advance(1);
+                                CuteCharmModify(frameCompare, id, sid, idLower, CurrentFrame, CurrentRatio, encounterSlot, 0, pointer);
+                            }
+
+                            // Restore the RNG state in order to check for Sync / No Lead
+                            pointer = 0;
+                            if (!CheckBattle())
+                                continue;
+
+                            synchable = CheckLead(false);
+                            encounterSlot = getSlot();
+                            Advance(1);
+                            pid = FindPID(id, sid, idLower, false);
+                            nature = (uint)(((ulong)NextRand() * 25) >> 32);
+                            if (synchable && !frameCompare.CompareNature(nature))
+                                mod = EncounterMod.Synchronize;
+                            else
+                                mod = EncounterMod.None;
+                            CurrentFrame--;
+                        }
+                        else
+                        {
+                            bool battle = CheckBattle();
+
+                            if (!(IsCompEyes || IsSuctionCups))
+                                synchable = CheckLead(IsCuteCharm);         // Temporarily use synchable for Cute charm
+                            else
+                                synchable = false;
+
+                            if (IsCuteCharm && !synchable)
+                                Advance(1);
+
+                            encounterSlot = battle ? getSlot() : FindItem();
+
+                            Advance(1);     // Level is fixed for Cave spots slots
+
+                            pid = FindPID(id, sid, idLower, IsCuteCharm && synchable);
+
+                            if (IsSync && synchable)
+                                nature = (uint)SynchNature;
+                            else
+                                nature = (uint)(((ulong)NextRand() * 25) >> 32);
+
+                            if (IsCuteCharm)
+                                synchable = false;
+                        }
+
+                    }
+
                     
+
                     else if (G5_WildDarkGrass)
                     {
                         if (TimeFinder5)
@@ -387,174 +388,6 @@ namespace RNGReporter.Objects
                                 synchable = false;
                         }
 
-                    }
-                    
-                    else if (G5_Stationary)
-                    {
-                        if (TimeFinder5)
-                        {
-                            if (CheckLead(true))      //Cute Charm Success
-                                CuteCharmModify(frameCompare, id, sid, idLower, CurrentFrame, 0, 0, 0, pointer);
-
-                            // Restore the RNG state in order to check for Sync / No Lead
-                            pointer = 0;
-                            synchable = CheckLead(false);
-                            pid = FindPID(id, sid, idLower, false);
-                            nature = (uint)(((ulong)NextRand() * 25) >> 32);
-                            if (synchable && !frameCompare.CompareNature(nature))
-                                mod = EncounterMod.Synchronize;
-                            else
-                                mod = EncounterMod.None;
-                            CurrentFrame--;
-                        }
-                        else
-                        {
-                            synchable = CheckLead(IsCuteCharm);
-
-                            if (IsCuteCharm && !synchable)
-                                Advance(1);
-
-                            pid = FindPID(id, sid, idLower, IsCuteCharm && synchable);
-
-                            if (IsSync && synchable)
-                                nature = (uint)SynchNature;
-                            else
-                                nature = (uint)(((ulong)NextRand() * 25) >> 32);
-
-                            if (IsCuteCharm)
-                                synchable = false;
-                        }
-
-                    }
-
-                    #region I have not checked these
-
-                    else if (G5_AllEncounterShiny)
-                    {
-                        // used for Time Finder searches only
-
-                        pid = rngList[3];
-                        pid = pid ^ 0x10000;
-
-                        nature = (uint)(((ulong)rngList[4] * 25) >> 32);
-
-                        synchable = ((rngList[0] >> 31) == 1) && ((rngList[2] >> 31) == 1);
-
-                        uint idTest = (idLower ^ (pid & 1) ^ (pid >> 31));
-                        if (idTest == 1)
-                        {
-                            // not the actual PID, but guaranteed to be non-shiny so it won't show up in search results
-                            pid = id << 16 | sid ^ 0x100;
-                        }
-                    }
-                    else if (G5_LarvestaEgg)
-                    {
-                        pid = rngList[0];
-                        nature = (uint)(((ulong)rngList[2] * 25) >> 32);
-                        synchable = false;
-                    }
-                    else if (G5_Entralink)
-                    {
-                        pid = rngList[1];
-
-                        synchable = false;
-
-                        // genderless
-                        if (frameCompare.GenderFilter.GenderValue == 0xFF)
-                        {
-                            // leave it as-is
-                            nature = (uint)(((ulong)rngList[5] * 25) >> 32);
-                        }
-                        // always female
-                        else if (frameCompare.GenderFilter.GenderValue == 0xFE)
-                        {
-                            var genderAdjustment = (uint)((0x8 * (ulong)rngList[2]) >> 32);
-                            pid = (pid & 0xFFFFFF00) | (genderAdjustment + 1);
-                            nature = (uint)(((ulong)rngList[6] * 25) >> 32);
-                        }
-                        // always male
-                        else if (frameCompare.GenderFilter.GenderValue == 0x0)
-                        {
-                            var genderAdjustment = (uint)((0xF6 * (ulong)rngList[2]) >> 32);
-                            pid = (pid & 0xFFFFFF00) | (genderAdjustment + 8);
-                            nature = (uint)(((ulong)rngList[6] * 25) >> 32);
-                        }
-                        else
-                        {
-                            if (frameCompare.GenderFilter.GenderCriteria == GenderCriteria.Male)
-                            {
-                                var genderAdjustment =
-                                    (uint)
-                                    (((0xFE - frameCompare.GenderFilter.GenderValue) * (ulong)rngList[2]) >>
-                                     32);
-                                pid = (pid & 0xFFFFFF00) |
-                                      (genderAdjustment + frameCompare.GenderFilter.GenderValue);
-                            }
-                            else if (frameCompare.GenderFilter.GenderCriteria == GenderCriteria.Female)
-                            {
-                                var genderAdjustment =
-                                    (uint)
-                                    (((frameCompare.GenderFilter.GenderValue - 1) * (ulong)rngList[2]) >> 32);
-                                pid = (pid & 0xFFFFFF00) | (genderAdjustment + 1);
-                            }
-                            nature = (uint)(((ulong)rngList[6] * 25) >> 32);
-                        }
-                        if ((pid & 0x10000) == 0x10000)
-                            pid = pid ^ 0x10000;
-                    }
-
-                    #endregion
-
-                    else if (G5_Jellicent)
-                    {
-                        if (!(IsCompEyes || IsSuctionCups))
-                            synchable = CheckLead(IsCuteCharm);
-                        else
-                            synchable = false;
-
-                        if (IsCuteCharm && !synchable)
-                            Advance(1);
-
-                        pid = GenderLockPID(id, sid, idLower, frameCompare, false);
-
-                        nature = (uint)(((ulong)NextRand() * 25) >> 32);
-
-                        if (synchable && IsSync)
-                            nature = (uint)SynchNature;
-
-                        if (TimeFinder5)
-                        {
-                            if (synchable && !frameCompare.CompareNature(nature))
-                                mod = EncounterMod.Synchronize;
-                            else
-                                mod = EncounterMod.None;
-                        }
-
-                        if (IsCuteCharm)
-                            synchable = false;
-                    }
-
-                    else if (G5_HiddenGrotto)
-                    {
-                        Advance(1);
-
-                        if (!(IsCompEyes || IsSuctionCups))
-                            synchable = CheckLead(IsCuteCharm);
-                        else
-                            synchable = false;
-
-                        if (IsCuteCharm && !synchable)
-                            Advance(1);
-
-                        pid = GenderLockPID(id, sid, idLower, frameCompare, true);
-
-                        nature = (uint)(((ulong)NextRand() * 25) >> 32);
-
-                        if (synchable && IsSync)
-                            nature = (uint)SynchNature;
-
-                        if (IsCuteCharm)
-                            synchable = false;
                     }
 
                     else
@@ -648,7 +481,7 @@ namespace RNGReporter.Objects
                                 {
                                     synchable = false;
                                     Advance(1);
-                                }  
+                                }
                                 else
                                 {
                                     synchable = CheckLead(IsCuteCharm);
@@ -686,7 +519,230 @@ namespace RNGReporter.Objects
 
                         }
                     }
+                    #endregion
                 }
+                else
+                {
+                    #region Not Wild
+                    if (G5_Stationary)
+                    {
+                        if (TimeFinder5)
+                        {
+                            if (CheckLead(true))      //Cute Charm Success
+                                CuteCharmModify(frameCompare, id, sid, idLower, CurrentFrame, 0, 0, 0, pointer);
+
+                            // Restore the RNG state in order to check for Sync / No Lead
+                            pointer = 0;
+                            synchable = CheckLead(false);
+                            pid = FindPID(id, sid, idLower, false);
+                            nature = (uint)(((ulong)NextRand() * 25) >> 32);
+                            if (synchable && !frameCompare.CompareNature(nature))
+                                mod = EncounterMod.Synchronize;
+                            else
+                                mod = EncounterMod.None;
+                            CurrentFrame--;
+                        }
+                        else
+                        {
+                            synchable = CheckLead(IsCuteCharm);
+
+                            if (IsCuteCharm && !synchable)
+                                Advance(1);
+
+                            pid = FindPID(id, sid, idLower, IsCuteCharm && synchable);
+
+                            if (IsSync && synchable)
+                                nature = (uint)SynchNature;
+                            else
+                                nature = (uint)(((ulong)NextRand() * 25) >> 32);
+
+                            if (IsCuteCharm)
+                                synchable = false;
+                        }
+
+                    }
+
+                    #region I have not checked Entralink yet
+
+                    else if (G5_Entralink)
+                    {
+                        pid = rngList[1];
+
+                        synchable = false;
+
+                        // genderless
+                        if (frameCompare.GenderFilter.GenderValue == 0xFF)
+                        {
+                            // leave it as-is
+                            nature = (uint)(((ulong)rngList[5] * 25) >> 32);
+                        }
+                        // always female
+                        else if (frameCompare.GenderFilter.GenderValue == 0xFE)
+                        {
+                            var genderAdjustment = (uint)((0x8 * (ulong)rngList[2]) >> 32);
+                            pid = (pid & 0xFFFFFF00) | (genderAdjustment + 1);
+                            nature = (uint)(((ulong)rngList[6] * 25) >> 32);
+                        }
+                        // always male
+                        else if (frameCompare.GenderFilter.GenderValue == 0x0)
+                        {
+                            var genderAdjustment = (uint)((0xF6 * (ulong)rngList[2]) >> 32);
+                            pid = (pid & 0xFFFFFF00) | (genderAdjustment + 8);
+                            nature = (uint)(((ulong)rngList[6] * 25) >> 32);
+                        }
+                        else
+                        {
+                            if (frameCompare.GenderFilter.GenderCriteria == GenderCriteria.Male)
+                            {
+                                var genderAdjustment =
+                                    (uint)
+                                    (((0xFE - frameCompare.GenderFilter.GenderValue) * (ulong)rngList[2]) >>
+                                     32);
+                                pid = (pid & 0xFFFFFF00) |
+                                      (genderAdjustment + frameCompare.GenderFilter.GenderValue);
+                            }
+                            else if (frameCompare.GenderFilter.GenderCriteria == GenderCriteria.Female)
+                            {
+                                var genderAdjustment =
+                                    (uint)
+                                    (((frameCompare.GenderFilter.GenderValue - 1) * (ulong)rngList[2]) >> 32);
+                                pid = (pid & 0xFFFFFF00) | (genderAdjustment + 1);
+                            }
+                            nature = (uint)(((ulong)rngList[6] * 25) >> 32);
+                        }
+                        if ((pid & 0x10000) == 0x10000)
+                            pid = pid ^ 0x10000;
+                    }
+                    #endregion
+
+                    else if (G5_Jellicent)
+                    {
+                        if (!(IsCompEyes || IsSuctionCups))
+                            synchable = CheckLead(IsCuteCharm);
+                        else
+                            synchable = false;
+
+                        if (IsCuteCharm && !synchable)
+                            Advance(1);
+
+                        pid = ForcedGenderPID(id, sid, idLower, frameCompare, false);
+
+                        nature = (uint)(((ulong)NextRand() * 25) >> 32);
+
+                        if (synchable && IsSync)
+                            nature = (uint)SynchNature;
+
+                        if (TimeFinder5)
+                        {
+                            if (synchable && !frameCompare.CompareNature(nature))
+                                mod = EncounterMod.Synchronize;
+                            else
+                                mod = EncounterMod.None;
+                        }
+
+                        if (IsCuteCharm)
+                            synchable = false;
+                    }
+
+                    else if (G5_Gift || G5_Roamer)
+                    {
+                        pid = NextRand();
+                        if (!G5_Roamer)
+                            pid = pid ^ 0x10000;
+                        nature = (uint)(((ulong)NextRand() * 25) >> 32);
+                        synchable = false;
+                    }
+                    else if (G5_LarvestaHappinyEgg)
+                    {
+                        pid = NextRand();
+                        Advance(1);
+                        nature = (uint)(((ulong)NextRand() * 25) >> 32);
+                        synchable = false;
+                    }
+                    else if (G5_Haxorus)
+                    {
+                        if (!(IsCompEyes || IsSuctionCups))
+                            synchable = CheckLead(IsCuteCharm);
+                        else
+                            synchable = false;
+
+                        if (IsCuteCharm && !synchable)
+                            Advance(1);
+
+                        pid = NextRand();
+
+                        if (IsCuteCharm && synchable)
+                            pid = Functions.CuteCharmModPID(pid, NextRand(), GenderCase);
+                        pid = ForceShiny(pid, id, sid);
+                        pid = pid ^ 0x10000;
+
+                        nature = (uint)(((ulong)NextRand() * 25) >> 32);
+
+                        if (synchable && IsSync)
+                            nature = (uint)SynchNature;
+
+                        if (TimeFinder5)
+                        {
+                            if (synchable && !frameCompare.CompareNature(nature))
+                                mod = EncounterMod.Synchronize;
+                            else
+                                mod = EncounterMod.None;
+                        }
+
+                        if (IsCuteCharm)
+                            synchable = false;
+                    }
+                    else if (G5_GibleDratini)
+                    {
+                        pid = NextRand();
+                        pid = ModifyPIDGender(frameCompare, pid);
+                        pid = ForceShiny(pid, id, sid);
+                        nature = (uint)(((ulong)NextRand() * 25) >> 32);
+                        synchable = false;
+                    }
+                    else if (G5_Eevee || G5_Deerling)
+                    {
+                        pid = NextRand() ^ 0x10000;
+
+                        if (G5_Eevee)
+                            pid = ModifyPIDGender(frameCompare, pid);
+
+                        if (CheckShiny(id, sid, pid))
+                            pid ^= 0x10000000;
+                        nature = (uint)(((ulong)NextRand() * 25) >> 32);
+                        synchable = false;
+                    }
+
+                    else if (G5_HiddenGrotto)
+                    {
+                        Advance(1);
+
+                        if (!(IsCompEyes || IsSuctionCups))
+                            synchable = CheckLead(IsCuteCharm);
+                        else
+                            synchable = false;
+
+                        if (IsCuteCharm && !synchable)
+                            Advance(1);
+
+                        pid = ForcedGenderPID(id, sid, idLower, frameCompare, true);
+
+                        nature = (uint)(((ulong)NextRand() * 25) >> 32);
+
+                        if (synchable && IsSync)
+                            nature = (uint)SynchNature;
+
+                        if (IsCuteCharm)
+                            synchable = false;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    #endregion
+                }
+
+
 
                 // worthless calculation
                 //int ability = (int) (pid >> 16) & 1;
@@ -746,38 +802,16 @@ namespace RNGReporter.Objects
 
         }
 
-        private uint GenderLockPID(uint id, uint sid, uint idLower, FrameCompare frameCompare, bool shinyLocked)
+
+        // Hidden Grotto, HA Jellicent, Gender locked gifts etc...
+        private uint ForcedGenderPID(uint id, uint sid, uint idLower, FrameCompare frameCompare, bool shinyLocked)
         {
             uint pid = 0;
             for (int i = 0; i < RerollCount; i++)
             {
                 pid = NextRand() ^ 0x10000;
 
-                // always female
-                if (frameCompare.GenderFilter.GenderValue == 0xFE)
-                {
-                    var genderAdjustment = (uint)((0x8 * (ulong)NextRand()) >> 32);
-                    pid = (pid & 0xFFFFFF00) | (genderAdjustment + 1);
-                }
-                // always male
-                else if (frameCompare.GenderFilter.GenderValue == 0x0)
-                {
-                    var genderAdjustment = (uint)((0xF6 * (ulong)NextRand()) >> 32);
-                    pid = (pid & 0xFFFFFF00) | (genderAdjustment + 8);
-                }
-                else
-                {
-                    if (frameCompare.GenderFilter.GenderCriteria == GenderCriteria.Male)
-                    {
-                        var genderAdjustment = (uint)(((0xFE - frameCompare.GenderFilter.GenderValue) * (ulong)NextRand()) >> 32);
-                        pid = (pid & 0xFFFFFF00) | (genderAdjustment + frameCompare.GenderFilter.GenderValue);
-                    }
-                    else if (frameCompare.GenderFilter.GenderCriteria == GenderCriteria.Female)
-                    {
-                        var genderAdjustment = (uint)(((frameCompare.GenderFilter.GenderValue - 1) * (ulong)NextRand()) >> 32);
-                        pid = (pid & 0xFFFFFF00) | (genderAdjustment + 1);
-                    }
-                }
+                pid = ModifyPIDGender(frameCompare, pid);
 
                 if (!shinyLocked)
                     pid = TIDBitTwiddle(idLower, pid);
@@ -795,7 +829,38 @@ namespace RNGReporter.Objects
             }
             return pid;
         }
+        private uint ModifyPIDGender(FrameCompare frameCompare, uint pid)
+        {
+            // always female
+            if (frameCompare.GenderFilter.GenderValue == 0xFE)
+            {
+                var genderAdjustment = (uint)((0x8 * (ulong)NextRand()) >> 32);
+                pid = (pid & 0xFFFFFF00) | (genderAdjustment + 1);
+            }
+            // always male
+            else if (frameCompare.GenderFilter.GenderValue == 0x0)
+            {
+                var genderAdjustment = (uint)((0xF6 * (ulong)NextRand()) >> 32);
+                pid = (pid & 0xFFFFFF00) | (genderAdjustment + 8);
+            }
+            else
+            {
+                if (frameCompare.GenderFilter.GenderCriteria == GenderCriteria.Male)
+                {
+                    var genderAdjustment = (uint)(((0xFE - frameCompare.GenderFilter.GenderValue) * (ulong)NextRand()) >> 32);
+                    pid = (pid & 0xFFFFFF00) | (genderAdjustment + frameCompare.GenderFilter.GenderValue);
+                }
+                else if (frameCompare.GenderFilter.GenderCriteria == GenderCriteria.Female)
+                {
+                    var genderAdjustment = (uint)(((frameCompare.GenderFilter.GenderValue - 1) * (ulong)NextRand()) >> 32);
+                    pid = (pid & 0xFFFFFF00) | (genderAdjustment + 1);
+                }
+            }
+            return pid;
+        }
 
+
+        // For cases the are not shiny locked and are affected by shiny charm
         private uint FindPID(uint id, uint sid, uint idLower, bool CC_Success)
         {
             uint pid = 0;
