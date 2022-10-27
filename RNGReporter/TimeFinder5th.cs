@@ -127,7 +127,6 @@ namespace RNGReporter
                     new ComboBoxItem("Gift Pokémon", EncounterType.Gift),
                     new ComboBoxItem("Larvesta/Happiny Egg", EncounterType.LarvestaHappiny),
                     new ComboBoxItem("Jellicent", EncounterType.JellicentHA),
-                    new ComboBoxItem("Hidden Grotto (Shiny Locked)", EncounterType.HiddenGrotto),
                 });
 
             var shinyNatureList = new BindingSource {DataSource = Objects.Nature.NatureDropDownCollection()};
@@ -2431,7 +2430,6 @@ namespace RNGReporter
             
             checkBoxTriggerBattle.Visible = RatioConditions();
 
-            checkBoxShinyOnly.Visible = comboBoxEncounterType.SelectedIndex != 14;
             maskedTextBoxMaxShiny.Visible = labelMaxShiny.Visible = checkBoxShinyOnly.Visible && checkBoxShinyOnly.Checked;
         }
 
