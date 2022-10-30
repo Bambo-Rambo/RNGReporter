@@ -1138,8 +1138,13 @@ namespace RNGReporter
                 if (generator.EncounterType != EncounterType.Stationary &&
                     generator.EncounterType != EncounterType.Gift &&
                     generator.EncounterType != EncounterType.Roamer &&
-                    generator.EncounterType != EncounterType.LarvestaEgg &&
+                    generator.EncounterType != EncounterType.LarvestaHappiny &&
+                    generator.EncounterType != EncounterType.Haxorus &&
+                    generator.EncounterType != EncounterType.GibleDratini &&
+                    generator.EncounterType != EncounterType.Eevee &&
+                    generator.EncounterType != EncounterType.Deerling &&
                     generator.EncounterType != EncounterType.Entralink &&
+                    generator.EncounterType != EncounterType.JellicentHA &&
                     generator.EncounterType != EncounterType.HiddenGrotto)
                     EncounterSlot.Visible = true;
                 else
@@ -1201,8 +1206,24 @@ namespace RNGReporter
                 HiddenPower.Visible = false;
                 HiddenPowerPower.Visible = false;
 
-                Shiny.Visible = Ability.Visible = f50.Visible = f75.Visible = f25.Visible = f125.Visible = 
+                Shiny.Visible = 
+                    generator.EncounterType != EncounterType.Eevee &&
+                    generator.EncounterType != EncounterType.Deerling &&
                     generator.EncounterType != EncounterType.HiddenGrotto;
+
+                Ability.Visible =
+                    generator.EncounterType != EncounterType.HiddenGrotto &&
+                    generator.EncounterType != EncounterType.GibleDratini &&
+                    generator.EncounterType != EncounterType.Eevee &&
+                    generator.EncounterType != EncounterType.Deerling &&
+                    generator.EncounterType != EncounterType.JellicentHA;
+
+                f50.Visible = f75.Visible = f25.Visible = f125.Visible =
+                    generator.EncounterType != EncounterType.Roamer &&
+                    generator.EncounterType != EncounterType.HiddenGrotto &&
+                    generator.EncounterType != EncounterType.GibleDratini &&
+                    generator.EncounterType != EncounterType.Eevee &&
+                    generator.EncounterType != EncounterType.JellicentHA;
 
                 MaleOnlySpecies.Visible = false;
             }
@@ -2160,12 +2181,27 @@ namespace RNGReporter
             }
             else if (((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.MethodH1) ||
                      ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.MethodH2) ||
-                     ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.MethodH4) ||
-                     ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.MethodJ))
+                     ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.MethodH4))
             {
                 encounterMenu = new[]
                     {
                         "Wild Pokémon",
+                        "Wild Pokémon (Surfing)",
+                        "Wild Pokémon (Old Rod)",
+                        "Wild Pokémon (Good Rod)",
+                        "Wild Pokémon (Super Rod)",
+                        "Stationary Pokémon",
+                        "Safari Zone"
+                    };
+
+                comboBoxEncounterType.DataSource = encounterMenu;
+            }
+            else if (((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.MethodJ))
+            {
+                encounterMenu = new[]
+                    {
+                        "Wild Pokémon",
+                        "Wild Pokemon (Poké Radar)",
                         "Wild Pokémon (Surfing)",
                         "Wild Pokémon (Old Rod)",
                         "Wild Pokémon (Good Rod)",
@@ -2189,11 +2225,16 @@ namespace RNGReporter
                         "Wild Pokémon (Bubble Spot)",
                         "Wild Pokémon (Fishing Spot)",
                         "Wild Pokémon (Cave Spot)",
-                        "Stationary Pokémon",
                         "Roaming Pokémon",
+                        "Stationary Pokémon",
                         "Gift Pokémon",
+                        "Jellicent",
+                        "Larvesta/Happiny Egg",
+                        "Haxorus (Forced Shiny)",
+                        "Gible/Dratini (Forced Shiny)",
+                        "Eevee (Shiny Locked)",
+                        "Deerling (Shiny Locked)",
                         "Entralink Pokémon",
-                        "Larvesta Egg",
                         "Hidden Grotto"
                     };
 
@@ -2230,14 +2271,14 @@ namespace RNGReporter
                     };
             }
 
-            for (int i = 0; i < encounterMenu.Length; i++)
+            /*for (int i = 0; i < encounterMenu.Length; i++)
             {
                 if (encounterMenu[i] == previousEncounter)
                 {
                     comboBoxEncounterType.SelectedIndex = i;
                     break;
                 }
-            }
+            }*/
 
             if (((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.BWBred) ||
                 ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.BWBredInternational))
@@ -2362,10 +2403,15 @@ namespace RNGReporter
             CheckTriggerBox();
             int method = comboBoxMethod.SelectedIndex;
             Gen5GroupBox.Visible = (method >= 9 && method <= 11) || (method >= 21 && method <= 25 && method != 23);
-            labelMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible =
+            /*labelMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible =
                 comboBoxMethod.SelectedIndex == 11 &&
                 comboBoxEncounterType.SelectedIndex != 5 &&
                 comboBoxEncounterType.SelectedIndex >= 2 && comboBoxEncounterType.SelectedIndex <= 7;
+
+            comboBoxGender.Enabled = true;
+            comboBoxGender.SelectedIndex = 0;*/
+            comboBoxEncounterType.SelectedIndex = 0;
+            ManageGen4SeedInfo();
         }
 
         private void comboBoxEncounterType_SelectedIndexChanged(object sender, EventArgs e)
@@ -2376,6 +2422,52 @@ namespace RNGReporter
                 comboBoxEncounterType.SelectedIndex != 5 &&
                 comboBoxEncounterType.SelectedIndex >= 2 && comboBoxEncounterType.SelectedIndex <= 7;
 
+            if (CheckEncType("Gible/Dratini (Forced Shiny)"))
+            {
+                comboBoxGender.SelectedIndex = 1;
+                comboBoxGender.Enabled = false;
+            }
+            else if (CheckEncType("Eevee (Shiny Locked)"))
+            {
+                comboBoxGender.SelectedIndex = 7;
+                comboBoxGender.Enabled = false;
+            }
+            else
+            {
+                //comboBoxGender.SelectedIndex = 0;
+                comboBoxGender.Enabled = true;
+            }
+
+            /*try
+            {
+                if (((ComboBoxItem)comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.JellicentHA))
+                {
+                    if (timeFinder5th.getProfile().VersionStr.Equals("Black2"))
+                        comboBoxGender.SelectedIndex = 1;
+                    else if (timeFinder5th.getProfile().VersionStr.Equals("White2"))
+                        comboBoxGender.SelectedIndex = 2;
+                }
+            }
+            catch { }*/
+        }
+
+        private void ManageGen4SeedInfo()
+        {
+            label17.Visible = label18.Visible = label19.Visible = buttonRoamerMap.Visible = checkBoxRPresent.Visible =
+                    maskedTextBoxRRoute.Visible = checkBoxEPresent.Visible = maskedTextBoxERoute.Visible = checkBoxLPresent.Visible =
+                    maskedTextBoxLRoute.Visible = labelFlipsForSeed.Visible = labelElmForSeed.Visible = 
+                    !((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Natures) &&
+                    !((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.BWBred) &&
+                    !((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.BW2BredInternational) &&
+                    !((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Standard) &&
+                    !((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5CGear) &&
+                    !((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Wondercard5thGen) &&
+                    !((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Wondercard5thGenFixed);
+        }
+
+        private bool CheckEncType(string method)
+        {
+            return comboBoxEncounterType.SelectedItem.ToString().Equals(method);
         }
 
         private void CheckTriggerBox()

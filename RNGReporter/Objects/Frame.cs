@@ -100,6 +100,8 @@ namespace RNGReporter.Objects
             set { seed = value; }
         }
 
+        public uint PatchFrame { get; set; }
+
         public uint Number
         {
             get { return number; }

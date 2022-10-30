@@ -555,7 +555,7 @@ namespace RNGReporter.Objects
 
         //----------------------------------------------------------------------------------------------------------------------        
 
-        public static uint GenderModPID(uint pid, uint rngResult, int genderRatio)
+        public static uint CuteCharmModPID(uint pid, uint rngResult, int genderRatio)
         {
             uint genderAdjustment;
 
@@ -563,43 +563,43 @@ namespace RNGReporter.Objects
             {
                 // Female, 50% F ratio      ✔
                 case -1:
-                    genderAdjustment = (uint) (((126)*(ulong) rngResult) >> 32) + 1;
+                    genderAdjustment = (uint) ((0x7E * (ulong) rngResult) >> 32) + 1;
                     break;
                 // Female, 75% F ratio      ✔
                 case -2:
-                    genderAdjustment = (uint) (((190)*(ulong) rngResult) >> 32) + 1;
+                    genderAdjustment = (uint) ((0xBE * (ulong) rngResult) >> 32) + 1;
                     break;
                 // Female, 25% F ratio      ✔
                 case -3:
-                    genderAdjustment = (uint) (((62)*(ulong) rngResult) >> 32) + 1;
+                    genderAdjustment = (uint) ((0x3E * (ulong) rngResult) >> 32) + 1;
                     break;
                 // Female, 12.5% F ratio    ✔
                 case -4:
-                    genderAdjustment = (uint) (((30)*(ulong) rngResult) >> 32) + 1;
+                    genderAdjustment = (uint) ((0x1E * (ulong) rngResult) >> 32) + 1;
                     break;
                 // Female, 100% F ratio     ✔
                 case -5:
-                    genderAdjustment = (uint) ((0x8*(ulong) rngResult) >> 32) + 1;
+                    genderAdjustment = (uint) ((8 * (ulong) rngResult) >> 32) + 1;
                     break;
                 // Male, 50% M ratio        ✔
                 case 1:
-                    genderAdjustment = (uint) (((254 - 127)*(ulong) rngResult) >> 32) + 127;
+                    genderAdjustment = (uint) ((0x7F * (ulong) rngResult) >> 32) + 0x7F;
                     break;
                 // Male, 75% M ratio        ✔
                 case 2:
-                    genderAdjustment = (uint) (((254 - 63)*(ulong) rngResult) >> 32) + 63;
+                    genderAdjustment = (uint) ((0xBF * (ulong) rngResult) >> 32) + 0x3F;
                     break;
                 // Male, 25% M ratio        ✔
                 case 3:
-                    genderAdjustment = (uint) (((254 - 191)*(ulong) rngResult) >> 32) + 191;
+                    genderAdjustment = (uint) ((0x3F * (ulong) rngResult) >> 32) + 0xBF;
                     break;
                 // Male, 87.5% M ratio      ✔
                 case 4:
-                    genderAdjustment = (uint) (((254 - 31)*(ulong) rngResult) >> 32) + 31;
+                    genderAdjustment = (uint) ((0xDF * (ulong) rngResult) >> 32) + 0x1F;
                     break;
                 // Male, 100% M ratio       ✔
                 case 5:
-                    genderAdjustment = (uint) ((0xF6*(ulong) rngResult) >> 32) + 8;
+                    genderAdjustment = (uint) ((0xF6 * (ulong) rngResult) >> 32) + 8;
                     break;
                 default:
                     genderAdjustment = 0;

@@ -31,6 +31,7 @@ namespace RNGReporter.Objects
         public uint Offset { get; set; }
 
         public Frame Frame { get; set; }
+        public uint PatchFrame { get; set; }
 
         public uint Hour
         {
@@ -297,7 +298,9 @@ namespace RNGReporter.Objects
                     }
                     return result;
                 case "Offset":
-                    return direction*x.Offset.CompareTo(y.Offset);
+                    return direction * x.Offset.CompareTo(y.Offset);
+                case "PatchFrame":
+                    return direction*x.PatchFrame.CompareTo(y.PatchFrame);
                 case "NearestShiny":
                     return direction*x.NearestShiny.CompareTo(y.NearestShiny);
                 case "Pid":

@@ -293,7 +293,6 @@ namespace RNGReporter.Objects
                                                             rng1, second,
                                                             id, sid,
                                                             0, 0);
-
                                 candidates.Add(frame);
                             }
                         }
@@ -1030,10 +1029,26 @@ namespace RNGReporter.Objects
                                 if (backCount >= InitialFrame)
                                 {
                                     Frame frameCopy = Frame.Clone(candidate);
-
                                     frameCopy.Seed = testSeed;
-                                    frameCopy.Number = backCount;
-                                    frames.Add(frameCopy);
+                                    frameCopy.Number = backCount - 2;
+
+                                    // We need to check if there is an earlier frame that generates a shiny patch
+                                    if (frameType == FrameType.ChainedShiny)
+                                    {
+                                        uint tempSeed = testSeed;
+                                        for (uint i = 0; i < backCount; i++)
+                                        {
+                                            tempSeed = tempSeed * 0x41C64E6D + 0x6073;
+                                            if ((tempSeed >> 16) < 8)
+                                            {
+                                                frameCopy.PatchFrame = i;
+                                                frames.Add(frameCopy);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    else
+                                        frames.Add(frameCopy);
                                 }
                             }
                         }
@@ -2006,7 +2021,7 @@ namespace RNGReporter.Objects
                 for (uint cnt = 0; cnt < maxResults; cnt++, rngList.RemoveAt(0), rngList.Add(rng64.GetNext32BitNumber()))
                 {
                     //note: pid field is unused look into later
-                    uint pid = Functions.GenderModPID(rngList[32], rngList[33], gender);
+                    uint pid = Functions.CuteCharmModPID(rngList[32], rngList[33], gender);
                     Frame frame =
                         Frame.GenerateFrame(
                             FrameType.Wondercard5thGenFixed,
@@ -2232,6 +2247,14 @@ namespace RNGReporter.Objects
 
                     if (EncounterType == EncounterType.Wild)
                     {
+                        encounterSlot = EncounterSlotCalc.encounterSlot(rng2.Seed, frameType, EncounterType);
+                        firstRng = rng2.GetNext16BitNumber();
+                        offset++;
+                    }
+                    else if (EncounterType == EncounterType.WildRadar)
+                    {
+                        rng2.Next();
+                        rng2.Next();
                         encounterSlot = EncounterSlotCalc.encounterSlot(rng2.Seed, frameType, EncounterType);
                         firstRng = rng2.GetNext16BitNumber();
                         offset++;
@@ -2768,7 +2791,8 @@ namespace RNGReporter.Objects
 
                         case FrameType.ChainedShiny:
                             uint chainedPIDLower = Functions.ChainedPIDLower(
-                                rngList[1],
+                                rngList[2],
+                                rngList[16],
                                 rngList[15],
                                 rngList[14],
                                 rngList[13],
@@ -2780,8 +2804,7 @@ namespace RNGReporter.Objects
                                 rngList[7],
                                 rngList[6],
                                 rngList[5],
-                                rngList[4],
-                                rngList[3]);
+                                rngList[4]);
 
                             frame = Frame.GenerateFrame(
                                 0,
@@ -2789,9 +2812,9 @@ namespace RNGReporter.Objects
                                 cnt + InitialFrame,
                                 rngList[0],
                                 chainedPIDLower,
-                                Functions.ChainedPIDUpper(rngList[2], chainedPIDLower, id, sid),
-                                rngList[16],
+                                Functions.ChainedPIDUpper(rngList[3], chainedPIDLower, id, sid),
                                 rngList[17],
+                                rngList[18],
                                 0, 0, 0, 0, 0, 0,
                                 id, sid, cnt);
                             break;
@@ -3256,7 +3279,7 @@ namespace RNGReporter.Objects
 
                 for (uint cnt = InitialFrame; cnt < InitialFrame + maxResults; cnt++, rngList.RemoveAt(0), rngList.Add(rng64.GetNext32BitNumber()))
                 {
-                    uint pid = Functions.GenderModPID(rngList[32], rngList[33], gender);
+                    uint pid = Functions.CuteCharmModPID(rngList[32], rngList[33], gender);
                     switch (shiny)
                     {
                         case 0:

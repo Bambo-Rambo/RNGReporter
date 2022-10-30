@@ -25,6 +25,7 @@ namespace RNGReporter.Objects
     public enum EncounterType
     {
         Wild,
+        WildRadar,
         WildDarkGrass,
         WildSurfing,
         WildOldRod,
@@ -35,16 +36,20 @@ namespace RNGReporter.Objects
         WildSwarm,
         WildShakerGrass,
         WildCaveSpot,
-        Stationary,
         Roamer,
+        Stationary,
         Gift,
-        Entralink,
-        LarvestaEgg,
-        AllEncounterShiny,
+        JellicentHA,
+        LarvestaHappiny,
+        Haxorus,
+        GibleDratini,
+        Eevee,
+        Deerling,
         BugCatchingContest,
         SafariZone,
         Headbutt,
         Manaphy,
+        Entralink,
         HiddenGrotto
     };
 
@@ -154,6 +159,8 @@ namespace RNGReporter.Objects
             {
                 case "Wild Pokémon":
                     return EncounterType.Wild;
+                case "Wild Pokemon (Poké Radar)":
+                    return EncounterType.WildRadar;
                 case "Wild Pokémon (Dark Grass)":
                     return EncounterType.WildDarkGrass;
                 case "Wild Pokémon (Surfing)":
@@ -176,20 +183,28 @@ namespace RNGReporter.Objects
                     return EncounterType.WildFishingSpot;
                 case "Wild Pokémon (Cave Spot)":
                     return EncounterType.WildCaveSpot;
-                case "Stationary Pokémon":
-                    return EncounterType.Stationary;
                 case "Roaming Pokémon":
                     return EncounterType.Roamer;
+                case "Stationary Pokémon":
+                    return EncounterType.Stationary;
                 case "Gift Pokémon":
                     return EncounterType.Gift;
+                case "Jellicent":
+                    return EncounterType.JellicentHA;
+                case "Larvesta/Happiny Egg":
+                    return EncounterType.LarvestaHappiny;
+                case "Haxorus (Forced Shiny)":
+                    return EncounterType.Haxorus;
+                case "Gible/Dratini (Forced Shiny)":
+                    return EncounterType.GibleDratini;
+                case "Eevee (Shiny Locked)":
+                    return EncounterType.Eevee;
+                case "Deerling (Shiny Locked)":
+                    return EncounterType.Deerling;
                 case "Entralink Pokémon":
                     return EncounterType.Entralink;
-                case "Larvesta Egg":
-                    return EncounterType.LarvestaEgg;
                 case "Hidden Grotto":
                     return EncounterType.HiddenGrotto;
-                case "All Encounters Shiny":
-                    return EncounterType.AllEncounterShiny;
                 case "Bug-Catching Contest":
                     return EncounterType.BugCatchingContest;
                 case "Safari Zone":

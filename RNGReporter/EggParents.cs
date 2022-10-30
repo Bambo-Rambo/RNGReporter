@@ -97,7 +97,7 @@ namespace RNGReporter
                 maskedTextBoxSpe_ParentB.Enabled = false;
 
                 Text = "Display Characteristics in List";
-                buttonRetrieveIVs.Text = encounterType == EncounterType.LarvestaEgg
+                buttonRetrieveIVs.Text = encounterType == EncounterType.LarvestaHappiny
                                              ? "Get IVs from IVRNG (Frame 2)"
                                              : "Get IVs from IVRNG (Frame 1)";
             }
@@ -236,7 +236,7 @@ namespace RNGReporter
                     rngArray[4],
                     rngArray[5]);
             }
-            else if (encounterType == EncounterType.LarvestaEgg)
+            else if (encounterType == EncounterType.LarvestaHappiny)
             {
                 frame = Frame.GenerateFrame(
                     FrameType.Method5Standard,

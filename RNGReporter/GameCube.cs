@@ -207,7 +207,7 @@ namespace RNGReporter
         private void getGalesShadowMethod()
         {
             natureLockIndex = shadowPokemon.SelectedIndex;
-            shinyLock = shadowPokemon.SelectedIndex != 17;
+            shinyLock = false;// shadowPokemon.SelectedIndex != 17;
             natureLock.changeLockGales(natureLockIndex);
             shadow = natureLock.getType();
 
@@ -294,8 +294,8 @@ namespace RNGReporter
                             case ShadowType.NoLock:
                                 if (pass)
                                     filterSeedGales(hp, atk, def, spa, spd, spe, pid, nature, seed, 0, false);
-                                if (antiPass)
-                                    filterSeedGales(hp, atk, def, spa, spd, spe, antipid, antiNature, seed, 0, true);
+                                //if (antiPass)
+                                    //filterSeedGales(hp, atk, def, spa, spd, spe, pid, antiNature, seed, 0, true);
                                 break;
                             case ShadowType.FirstShadow:
                                 if (!nlPass && natureLock.firstShadow(seed))
@@ -303,8 +303,8 @@ namespace RNGReporter
                                     nlPass = true;
                                     if (pass)
                                         filterSeedGales(hp, atk, def, spa, spd, spe, pid, nature, seed, 0, false);
-                                    if (antiPass)
-                                        filterSeedGales(hp, atk, def, spa, spd, spe, antipid, antiNature, seed, 0, true);
+                                    //if (antiPass)
+                                        //filterSeedGales(hp, atk, def, spa, spd, spe, pid, antiNature, seed, 0, true);
                                 }
                                 break;
                             case ShadowType.SingleLock:
@@ -313,8 +313,8 @@ namespace RNGReporter
                                     nlPass = true;
                                     if (pass)
                                         filterSeedGales(hp, atk, def, spa, spd, spe, pid, nature, seed, 0, false);
-                                    if (antiPass)
-                                        filterSeedGales(hp, atk, def, spa, spd, spe, antipid, antiNature, seed, 0, true);
+                                    //if (antiPass)
+                                        //filterSeedGales(hp, atk, def, spa, spd, spe, pid, antiNature, seed, 0, true);
                                 }
                                 break;
                             case ShadowType.Salamence:
@@ -323,21 +323,21 @@ namespace RNGReporter
                                     setPass = true;
                                     if (pass)
                                         filterSeedGales(hp, atk, def, spa, spd, spe, pid, nature, seed, 1, false);
-                                    if (antiPass)
-                                        filterSeedGales(hp, atk, def, spa, spd, spe, antipid, antiNature, seed, 1, true);
+                                    //if (antiPass)
+                                        //filterSeedGales(hp, atk, def, spa, spd, spe, pid, antiNature, seed, 1, true);
                                 }
                                 else if (!unsetPass && natureLock.salamenceUnset(seed))
                                 {
                                     unsetPass = true;
                                     if (pass)
                                         filterSeedGales(hp, atk, def, spa, spd, spe, pid, nature, seed, 2, false);
-                                    if (antiPass)
-                                        filterSeedGales(hp, atk, def, spa, spd, spe, antipid, antiNature, seed, 2, true);
+                                    //if (antiPass)
+                                        //filterSeedGales(hp, atk, def, spa, spd, spe, pid, antiNature, seed, 2, true);
                                 }
                                 else if (!skipPass && natureLock.salamenceShinySkip(seed))
                                 {
                                     skipPass = true;
-                                    filterShinySkip(hp, atk, def, spa, spd, spe, pid, nature, seed, antipid, antiNature);
+                                    filterShinySkip(hp, atk, def, spa, spd, spe, pid, nature, seed, pid, antiNature);
                                 }
                                 break;
                             case ShadowType.SecondShadow:
@@ -346,21 +346,21 @@ namespace RNGReporter
                                     setPass = true;
                                     if (pass)
                                         filterSeedGales(hp, atk, def, spa, spd, spe, pid, nature, seed, 1, false);
-                                    if (antiPass)
-                                        filterSeedGales(hp, atk, def, spa, spd, spe, antipid, antiNature, seed, 1, true);
+                                    //if (antiPass)
+                                        //filterSeedGales(hp, atk, def, spa, spd, spe, pid, antiNature, seed, 1, true);
                                 }
                                 else if (!unsetPass && natureLock.secondShadowUnset(seed))
                                 {
                                     unsetPass = true;
                                     if (pass)
                                         filterSeedGales(hp, atk, def, spa, spd, spe, pid, nature, seed, 2, false);
-                                    if (antiPass)
-                                        filterSeedGales(hp, atk, def, spa, spd, spe, antipid, antiNature, seed, 2, true);
+                                    //if (antiPass)
+                                        //filterSeedGales(hp, atk, def, spa, spd, spe, pid, antiNature, seed, 2, true);
                                 }
                                 else if (!skipPass && natureLock.secondShadowShinySkip(seed))
                                 {
                                     skipPass = true;
-                                    filterShinySkip(hp, atk, def, spa, spd, spe, pid, nature, seed, antipid, antiNature);
+                                    filterShinySkip(hp, atk, def, spa, spd, spe, pid, nature, seed, pid, antiNature);
                                 }
                                 break;
                         }
@@ -434,14 +434,22 @@ namespace RNGReporter
                     break;
             }
 
-            String reason = "";
+            /*String reason = "";
             if (num == 0)
                 reason = anti ? "Pass NL (Anti-Shiny)" : "Pass NL";
             else if (num == 1)
                 reason = anti ? "1st shadow set (Anti-Shiny)" : "1st shadow set";
             else
-                reason = anti ? "1st shadow unset (Anti-Shiny)" : "1st shadow unset";
-            addSeed(hp, atk, def, spa, spd, spe, nature, ability, gender, actualHP, pid, "", seed, reason, 0);
+                reason = anti ? "1st shadow unset (Anti-Shiny)" : "1st shadow unset";*/
+
+            String shiny = "";
+            if (Shiny_Check.Checked)
+            {
+                if (!isShiny(pid, 0))
+                    return;
+                shiny = "!!!";
+            }
+            addSeed(hp, atk, def, spa, spd, spe, nature, ability, gender, actualHP, pid, shiny, seed, "", 0);
         }
 
         private void filterShinySkip(uint hp, uint atk, uint def, uint spa, uint spd, uint spe, uint pid, uint nature, uint seed, uint antipid, uint antinature)
@@ -459,12 +467,20 @@ namespace RNGReporter
                 tsv = tsvtemp;
                 tsvtemp = (reverse.GetNext16BitNumber() ^ reverse.GetNext16BitNumber()) >> 3;
             }
-            String reason = "Shiny skip (TSV: " + tsvtemp + ")";
+            /*String reason = "Shiny skip (TSV: " + tsvtemp + ")";
             if (tsvtemp == shinyval[7])
             {
                 reason += " (Anti-Shiny)";
                 pid = antipid;
                 nature = antinature;
+            }*/
+
+            String shiny = "";
+            if (Shiny_Check.Checked)
+            {
+                if (!isShiny(pid, 0))
+                    return;
+                shiny = "!!!";
             }
 
             if (natureList != null && !natureList.Contains(nature))
@@ -510,7 +526,7 @@ namespace RNGReporter
                         return;
                     break;
             }
-            addSeed(hp, atk, def, spa, spd, spe, nature, ability, gender, actualHP, pid, "", seed, reason, 0);
+            addSeed(hp, atk, def, spa, spd, spe, nature, ability, gender, actualHP, pid, shiny, seed, "", 0);
         }
 
         private void filterSeedEevee(uint hp, uint atk, uint def, uint spa, uint spd, uint spe, uint pid, uint nature, uint seed)
@@ -575,7 +591,7 @@ namespace RNGReporter
         private void getColoShadowMethod()
         {
             natureLockIndex = shadowPokemon.SelectedIndex;
-            shinyLock = shadowPokemon.SelectedIndex != 0;
+            shinyLock = false;// shadowPokemon.SelectedIndex != 0;
             natureLock.changeLockColo(natureLockIndex);
             shadow = natureLock.getType();
 
@@ -719,7 +735,7 @@ namespace RNGReporter
                             for (uint e = ivsLower[4]; e <= ivsUpper[4]; e++)
                                 for (uint f = ivsLower[5]; f <= ivsUpper[5]; f++)
                                     checkSeed(a, b, c, d, e, f);
-            
+
             isSearching = false;
             Invoke(new Action(() => { binding.ResetBindings(false); }));
             status.Invoke((MethodInvoker)(() => status.Text = "Done. - Awaiting Command"));
@@ -914,7 +930,7 @@ namespace RNGReporter
                             for (uint e = ivsLower[4]; e <= ivsUpper[4]; e++)
                                 for (uint f = ivsLower[5]; f <= ivsUpper[5]; f++)
                                     checkSeedChannel(a, b, c, d, e, f);
-            
+
             isSearching = false;
             Invoke(new Action(() => { binding.ResetBindings(false); }));
             status.Invoke((MethodInvoker)(() => status.Text = "Done. - Awaiting Command"));
@@ -1007,7 +1023,7 @@ namespace RNGReporter
 
                         if (natureList == null || natureList.Contains(nature))
                         {
-                            
+
                             ivs = createIVsChannel(new uint[] { seedShort[j >= 6 ? j - 6 : j + 7] >> 11,
                                                             seedShort[j >= 5 ? j - 5 : j + 8] >> 11,
                                                             seedShort[j >= 4 ? j - 4 : j + 9] >> 11,
@@ -1133,7 +1149,7 @@ namespace RNGReporter
                             for (uint e = ivsLower[4]; e <= ivsUpper[4]; e++)
                                 for (uint f = ivsLower[5]; f <= ivsUpper[5]; f++)
                                     checkSeedR(a, b, c, d, e, f);
-            
+
             isSearching = false;
             Invoke(new Action(() => { binding.ResetBindings(false); }));
             status.Invoke((MethodInvoker)(() => status.Text = "Done. - Awaiting Command"));
@@ -1300,7 +1316,7 @@ namespace RNGReporter
             uint pid, iv1, iv2, nature;
             uint[] ivs;
 
-            switch(shadow)
+            switch (shadow)
             {
                 case ShadowType.NoLock:
 
@@ -1349,7 +1365,7 @@ namespace RNGReporter
                     break;
                 case ShadowType.Salamence:
                 case ShadowType.SecondShadow:
-                    switch(secondMethod)
+                    switch (secondMethod)
                     {
                         //Set
                         case 0:
@@ -2137,6 +2153,22 @@ namespace RNGReporter
             };
         }
 
+        private void dataGridViewResult_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (Convert.ToString(dataGridViewResult.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn2"].Value).Equals("!!!"))
+            {
+                uint tid = (Convert.ToUInt32(id.Text) & 0xffff) | ((Convert.ToUInt32(sid.Text) & 0xffff) << 16);
+                uint a = Convert.ToUInt32(dataGridViewResult.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn1"].Value.ToString(), 16) ^ tid;
+                uint b = a & 0xffff;
+                uint c = (a >> 16);
+                uint d = b ^ c;
+                if (d == 0)
+                    dataGridViewResult.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.Aqua;
+                else
+                    dataGridViewResult.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.LightCyan;
+            }
+        }
+
         private void setComboBox()
         {
             comboBoxNature.CheckBoxItems[0].Checked = true;
@@ -2160,6 +2192,8 @@ namespace RNGReporter
             }
             else
                 Shiny_Check.Visible = true;
+
+            Shiny_Check.Visible = true;
         }
 
         private void shadowPokemon_SelectionChangeCommitted(object sender, EventArgs e)
@@ -2171,6 +2205,7 @@ namespace RNGReporter
                 else
                     Shiny_Check.Visible = shadowPokemon.SelectedIndex == 17;
             }
+            Shiny_Check.Visible = true;
 
         }
 

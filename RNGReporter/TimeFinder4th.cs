@@ -1000,6 +1000,7 @@ namespace RNGReporter
                     null,
                     new NoGenderFilter());
             }
+            ShinyPatchFrame.Visible = ((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.ChainedShiny);
 
             jobs = new Thread[1];
 
@@ -1102,7 +1103,8 @@ namespace RNGReporter
                                             {
                                                 Frame = frame,
                                                 Seed = frame.Seed,
-                                                Offset = frame.Number
+                                                Offset = frame.Number,
+                                                PatchFrame = frame.PatchFrame,
                                             };
 
                                         lock (threadLock)
