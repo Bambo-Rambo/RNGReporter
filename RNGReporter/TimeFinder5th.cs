@@ -34,6 +34,7 @@ using RNGReporter.Objects;
 using RNGReporter.Objects.Generators;
 using RNGReporter.Objects.Searchers;
 using RNGReporter.Properties;
+using static System.Net.WebRequestMethods;
 
 namespace RNGReporter
 {
@@ -127,6 +128,8 @@ namespace RNGReporter
                     new ComboBoxItem("Gift Pokémon", EncounterType.Gift),
                     new ComboBoxItem("Larvesta/Happiny Egg", EncounterType.LarvestaHappiny),
                     new ComboBoxItem("Jellicent", EncounterType.JellicentHA),
+                    new ComboBoxItem("Haxorus (Forced Shiny)", EncounterType.Haxorus),
+                    new ComboBoxItem("Gible/Dratini (Forced Shiny)", EncounterType.GibleDratini),
                 });
 
             var shinyNatureList = new BindingSource {DataSource = Objects.Nature.NatureDropDownCollection()};
@@ -265,6 +268,9 @@ namespace RNGReporter
             txtDRYear.Text = DateTime.Now.Year.ToString();
 
             cbCapShinyCharm.Visible = ((Profile)comboBoxProfiles.SelectedItem).IsBW2();
+
+            //checkBox256.Location = new Point(760, 157);
+            //maskedTextBoxPID.Location = new Point(818, 155);
 
             RefreshParameters();
         }
@@ -571,6 +577,8 @@ namespace RNGReporter
                                 MaxResults = shinyOffset,
                                 MinLevel = (int)numericLevelMin.Value,
                                 MaxLevel = (int)numericLevelMax.Value,
+                                specificMod = checkBox256.Checked,
+                                modValue = (byte)(maskedTextBoxPID.Text.Equals("") ? 0 : byte.Parse(maskedTextBoxPID.Text, NumberStyles.HexNumber)),
                                 SearchForTrigger = ConsiderTrigger,
                                 RerollCount = (cbCapShinyCharm.Visible && cbCapShinyCharm.Checked) ? 3 : 1,
                             };
@@ -599,7 +607,9 @@ namespace RNGReporter
                             shinygenerator.EncounterType != EncounterType.Gift &&
                             shinygenerator.EncounterType != EncounterType.Roamer &&
                             shinygenerator.EncounterType != EncounterType.LarvestaHappiny &&
-                            shinygenerator.EncounterType != EncounterType.JellicentHA)
+                            shinygenerator.EncounterType != EncounterType.JellicentHA &&
+                            shinygenerator.EncounterType != EncounterType.Haxorus &&
+                                shinygenerator.EncounterType != EncounterType.GibleDratini)
                             EncounterSlot.Visible = true;
                         else
                             EncounterSlot.Visible = false;
@@ -1262,6 +1272,12 @@ namespace RNGReporter
                                                         Functions.initialPIDRNG(seed, profile) + minAdvances;
                                                     shinygenerators[listIndex].MinLevel = (int)numericLevelMin.Value;
                                                     shinygenerators[listIndex].MaxLevel = (int)numericLevelMax.Value;
+                                                    if (checkBox256.Checked)
+                                                    {
+                                                        shinygenerators[listIndex].specificMod = checkBox256.Checked;
+                                                        shinygenerators[listIndex].modValue = (byte)(maskedTextBoxPID.Text.Equals("") ? 0 :
+                                                            byte.Parse(maskedTextBoxPID.Text, NumberStyles.HexNumber));
+                                                    }
                                                     shinygenerators[listIndex].SearchForTrigger = ConsiderTrigger;
                                                     shinygenerators[listIndex].RerollCount = (cbCapShinyCharm.Visible && cbCapShinyCharm.Checked) ? 3 : 1;
 
@@ -2420,7 +2436,26 @@ namespace RNGReporter
 
         private void comboBoxEncounterType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CheckJellicentCase();
+            if (((ComboBoxItem)comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.GibleDratini))
+            {
+                comboBoxCapGenderRatio.SelectedIndex = 1;
+                comboBoxCapGender.SelectedIndex = 1;
+                //comboBoxCapGenderRatio.Enabled = comboBoxCapGender.Enabled = false;
+            }
+            else if (((ComboBoxItem)comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.JellicentHA))
+            {
+                comboBoxCapGenderRatio.SelectedIndex = 1;
+                if (((Profile)comboBoxProfiles.SelectedItem).VersionStr.Equals("Black2"))
+                    comboBoxCapGender.SelectedIndex = 1;
+                else if (((Profile)comboBoxProfiles.SelectedItem).VersionStr.Equals("White2"))
+                    comboBoxCapGender.SelectedIndex = 2;
+                //comboBoxCapGenderRatio.Enabled = comboBoxCapGender.Enabled = false;
+            }
+            else
+            {
+                comboBoxCapGenderRatio.Enabled = comboBoxCapGender.Enabled = true;
+                comboBoxCapGenderRatio.SelectedIndex = 0;
+            }
 
             IVFilters_Changed(sender, e);
 
@@ -2431,11 +2466,19 @@ namespace RNGReporter
             checkBoxTriggerBattle.Visible = RatioConditions();
 
             maskedTextBoxMaxShiny.Visible = labelMaxShiny.Visible = checkBoxShinyOnly.Visible && checkBoxShinyOnly.Checked;
+
+            checkBox256.Visible = maskedTextBoxPID.Visible = comboBoxEncounterType.SelectedIndex >= 14;
+
         }
 
         private void checkBoxShinyOnly_CheckedChanged(object sender, EventArgs e)
         {
             controlsShowHide();
+        }
+
+        private void checkBox256_CheckedChanged(object sender, EventArgs e)
+        {
+            maskedTextBoxPID.Enabled = checkBox256.Checked;
         }
 
         private void dataGridViewShinyResults_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -3164,18 +3207,6 @@ namespace RNGReporter
         {
             Invoke(new Action(() => { cond = comboBoxMethod.SelectedIndex == 0 && comboBoxEncounterType.SelectedIndex <= 3; }));
             return cond;
-        }
-
-        private void CheckJellicentCase()
-        {
-            if (((ComboBoxItem)comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.JellicentHA))
-            {
-                comboBoxCapGenderRatio.SelectedIndex = 1;
-                if (((Profile)comboBoxProfiles.SelectedItem).VersionStr.Equals("Black2"))
-                    comboBoxCapGender.SelectedIndex = 1;
-                else if (((Profile)comboBoxProfiles.SelectedItem).VersionStr.Equals("White2"))
-                    comboBoxCapGender.SelectedIndex = 2;
-            }
         }
 
         private bool ShinyOnly() => checkBoxShinyOnly.Visible && checkBoxShinyOnly.Checked;

@@ -17,6 +17,9 @@ namespace RNGReporter.Objects
 
         public int pointer;
 
+        public bool specificMod;
+        public byte modValue;
+
         public uint CurrentRand() => rngList[pointer];
         public uint NextRand()
         {
@@ -676,6 +679,9 @@ namespace RNGReporter.Objects
                         pid = ForceShiny(pid, id, sid);
                         pid = pid ^ 0x10000;
 
+                        if (specificMod && (pid % 256 != modValue))
+                            continue;
+
                         nature = (uint)(((ulong)NextRand() * 25) >> 32);
 
                         if (synchable && IsSync)
@@ -697,6 +703,8 @@ namespace RNGReporter.Objects
                         pid = NextRand();
                         pid = ModifyPIDGender(frameCompare, pid);
                         pid = ForceShiny(pid, id, sid);
+                        if (specificMod && (pid % 256 != modValue))
+                            continue;
                         nature = (uint)(((ulong)NextRand() * 25) >> 32);
                         synchable = false;
                     }
@@ -803,7 +811,7 @@ namespace RNGReporter.Objects
         }
 
 
-        // Hidden Grotto, HA Jellicent, Gender locked gifts etc...
+        // Hidden Grotto, HA Jellicent
         private uint ForcedGenderPID(uint id, uint sid, uint idLower, FrameCompare frameCompare, bool shinyLocked)
         {
             uint pid = 0;

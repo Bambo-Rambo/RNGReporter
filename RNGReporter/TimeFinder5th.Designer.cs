@@ -32,25 +32,25 @@ namespace RNGReporter
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            RNGReporter.Controls.CheckBoxProperties checkBoxProperties8 = new RNGReporter.Controls.CheckBoxProperties();
-            RNGReporter.Controls.CheckBoxProperties checkBoxProperties11 = new RNGReporter.Controls.CheckBoxProperties();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             RNGReporter.Controls.CheckBoxProperties checkBoxProperties1 = new RNGReporter.Controls.CheckBoxProperties();
             RNGReporter.Controls.CheckBoxProperties checkBoxProperties2 = new RNGReporter.Controls.CheckBoxProperties();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            RNGReporter.Controls.CheckBoxProperties checkBoxProperties9 = new RNGReporter.Controls.CheckBoxProperties();
-            RNGReporter.Controls.CheckBoxProperties checkBoxProperties10 = new RNGReporter.Controls.CheckBoxProperties();
-            RNGReporter.Controls.CheckBoxProperties checkBoxProperties5 = new RNGReporter.Controls.CheckBoxProperties();
-            RNGReporter.Controls.CheckBoxProperties checkBoxProperties6 = new RNGReporter.Controls.CheckBoxProperties();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             RNGReporter.Controls.CheckBoxProperties checkBoxProperties3 = new RNGReporter.Controls.CheckBoxProperties();
             RNGReporter.Controls.CheckBoxProperties checkBoxProperties4 = new RNGReporter.Controls.CheckBoxProperties();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties5 = new RNGReporter.Controls.CheckBoxProperties();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties6 = new RNGReporter.Controls.CheckBoxProperties();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties7 = new RNGReporter.Controls.CheckBoxProperties();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties8 = new RNGReporter.Controls.CheckBoxProperties();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties9 = new RNGReporter.Controls.CheckBoxProperties();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties10 = new RNGReporter.Controls.CheckBoxProperties();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStripCap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copySeedToClipboardToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
@@ -135,6 +135,8 @@ namespace RNGReporter
             this.maskedTextBoxShinyHPParentA = new RNGReporter.Controls.MaskedTextBox2();
             this.maskedTextBoxShinyYear = new RNGReporter.Controls.MaskedTextBox2();
             this.tabPageCapture = new System.Windows.Forms.TabPage();
+            this.maskedTextBoxPID = new RNGReporter.Controls.MaskedTextBox2();
+            this.checkBox256 = new System.Windows.Forms.CheckBox();
             this.cbCapShinyCharm = new System.Windows.Forms.CheckBox();
             this.checkBoxTriggerBattle = new System.Windows.Forms.CheckBox();
             this.numericLevelMax = new System.Windows.Forms.NumericUpDown();
@@ -743,8 +745,8 @@ namespace RNGReporter
             // EggSeed
             // 
             this.EggSeed.DataPropertyName = "Seed";
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Consolas", 8.75F);
-            this.EggSeed.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Consolas", 8.75F);
+            this.EggSeed.DefaultCellStyle = dataGridViewCellStyle1;
             this.EggSeed.HeaderText = "Seed";
             this.EggSeed.Name = "EggSeed";
             this.EggSeed.ReadOnly = true;
@@ -761,8 +763,8 @@ namespace RNGReporter
             // EggPID
             // 
             this.EggPID.DataPropertyName = "Pid";
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Consolas", 8.75F);
-            this.EggPID.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Consolas", 8.75F);
+            this.EggPID.DefaultCellStyle = dataGridViewCellStyle2;
             this.EggPID.HeaderText = "PID";
             this.EggPID.Name = "EggPID";
             this.EggPID.ReadOnly = true;
@@ -1005,8 +1007,8 @@ namespace RNGReporter
             // comboBoxShinyMonth
             // 
             this.comboBoxShinyMonth.BlankText = null;
-            checkBoxProperties8.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.comboBoxShinyMonth.CheckBoxProperties = checkBoxProperties8;
+            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.comboBoxShinyMonth.CheckBoxProperties = checkBoxProperties1;
             this.comboBoxShinyMonth.DisplayMemberSingleItem = "";
             this.comboBoxShinyMonth.DropDownHeight = 300;
             this.comboBoxShinyMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1194,6 +1196,8 @@ namespace RNGReporter
             // 
             // tabPageCapture
             // 
+            this.tabPageCapture.Controls.Add(this.maskedTextBoxPID);
+            this.tabPageCapture.Controls.Add(this.checkBox256);
             this.tabPageCapture.Controls.Add(this.cbCapShinyCharm);
             this.tabPageCapture.Controls.Add(this.checkBoxTriggerBattle);
             this.tabPageCapture.Controls.Add(this.numericLevelMax);
@@ -1244,10 +1248,34 @@ namespace RNGReporter
             this.tabPageCapture.Text = "Capture";
             this.tabPageCapture.UseVisualStyleBackColor = true;
             // 
+            // maskedTextBoxPID
+            // 
+            this.maskedTextBoxPID.Enabled = false;
+            this.maskedTextBoxPID.Hex = true;
+            this.maskedTextBoxPID.Location = new System.Drawing.Point(899, 130);
+            this.maskedTextBoxPID.Mask = "AA";
+            this.maskedTextBoxPID.Name = "maskedTextBoxPID";
+            this.maskedTextBoxPID.Size = new System.Drawing.Size(43, 20);
+            this.maskedTextBoxPID.TabIndex = 344;
+            this.maskedTextBoxPID.Text = "C0";
+            this.maskedTextBoxPID.Visible = false;
+            // 
+            // checkBox256
+            // 
+            this.checkBox256.AutoSize = true;
+            this.checkBox256.Location = new System.Drawing.Point(842, 132);
+            this.checkBox256.Name = "checkBox256";
+            this.checkBox256.Size = new System.Drawing.Size(55, 17);
+            this.checkBox256.TabIndex = 343;
+            this.checkBox256.Text = "% 256";
+            this.checkBox256.UseVisualStyleBackColor = true;
+            this.checkBox256.Visible = false;
+            this.checkBox256.CheckedChanged += new System.EventHandler(this.checkBox256_CheckedChanged);
+            // 
             // cbCapShinyCharm
             // 
             this.cbCapShinyCharm.AutoSize = true;
-            this.cbCapShinyCharm.Location = new System.Drawing.Point(760, 133);
+            this.cbCapShinyCharm.Location = new System.Drawing.Point(754, 132);
             this.cbCapShinyCharm.Name = "cbCapShinyCharm";
             this.cbCapShinyCharm.Size = new System.Drawing.Size(85, 17);
             this.cbCapShinyCharm.TabIndex = 342;
@@ -1432,8 +1460,8 @@ namespace RNGReporter
             // comboBoxCapMonth
             // 
             this.comboBoxCapMonth.BlankText = null;
-            checkBoxProperties11.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.comboBoxCapMonth.CheckBoxProperties = checkBoxProperties11;
+            checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.comboBoxCapMonth.CheckBoxProperties = checkBoxProperties2;
             this.comboBoxCapMonth.DisplayMemberSingleItem = "";
             this.comboBoxCapMonth.DropDownHeight = 310;
             this.comboBoxCapMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1513,8 +1541,8 @@ namespace RNGReporter
             // comboBoxEncounterSlot
             // 
             this.comboBoxEncounterSlot.BlankText = "Any";
-            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.comboBoxEncounterSlot.CheckBoxProperties = checkBoxProperties1;
+            checkBoxProperties3.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.comboBoxEncounterSlot.CheckBoxProperties = checkBoxProperties3;
             this.comboBoxEncounterSlot.DisplayMemberSingleItem = "";
             this.comboBoxEncounterSlot.DropDownHeight = 330;
             this.comboBoxEncounterSlot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1731,8 +1759,8 @@ namespace RNGReporter
             // comboBoxNature
             // 
             this.comboBoxNature.BlankText = "Any";
-            checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.comboBoxNature.CheckBoxProperties = checkBoxProperties2;
+            checkBoxProperties4.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.comboBoxNature.CheckBoxProperties = checkBoxProperties4;
             this.comboBoxNature.DisplayMemberSingleItem = "";
             this.comboBoxNature.DropDownHeight = 300;
             this.comboBoxNature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1805,8 +1833,8 @@ namespace RNGReporter
             // CapSeed
             // 
             this.CapSeed.DataPropertyName = "Seed";
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Consolas", 8.75F);
-            this.CapSeed.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Consolas", 8.75F);
+            this.CapSeed.DefaultCellStyle = dataGridViewCellStyle3;
             this.CapSeed.FillWeight = 90F;
             this.CapSeed.HeaderText = "Seed";
             this.CapSeed.Name = "CapSeed";
@@ -1844,8 +1872,8 @@ namespace RNGReporter
             // PID
             // 
             this.PID.DataPropertyName = "Pid";
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Consolas", 8.75F);
-            this.PID.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Consolas", 8.75F);
+            this.PID.DefaultCellStyle = dataGridViewCellStyle4;
             this.PID.HeaderText = "PID";
             this.PID.Name = "PID";
             this.PID.ReadOnly = true;
@@ -2236,8 +2264,8 @@ namespace RNGReporter
             // cbHHSubSlot
             // 
             this.cbHHSubSlot.BlankText = null;
-            checkBoxProperties9.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cbHHSubSlot.CheckBoxProperties = checkBoxProperties9;
+            checkBoxProperties5.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cbHHSubSlot.CheckBoxProperties = checkBoxProperties5;
             this.cbHHSubSlot.DisplayMemberSingleItem = "";
             this.cbHHSubSlot.DropDownHeight = 300;
             this.cbHHSubSlot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -2255,8 +2283,8 @@ namespace RNGReporter
             // cbHHSlot
             // 
             this.cbHHSlot.BlankText = null;
-            checkBoxProperties10.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cbHHSlot.CheckBoxProperties = checkBoxProperties10;
+            checkBoxProperties6.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cbHHSlot.CheckBoxProperties = checkBoxProperties6;
             this.cbHHSlot.DisplayMemberSingleItem = "";
             this.cbHHSlot.DropDownHeight = 300;
             this.cbHHSlot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -2281,8 +2309,8 @@ namespace RNGReporter
             // cbHHHollowNumber
             // 
             this.cbHHHollowNumber.BlankText = null;
-            checkBoxProperties5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cbHHHollowNumber.CheckBoxProperties = checkBoxProperties5;
+            checkBoxProperties7.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cbHHHollowNumber.CheckBoxProperties = checkBoxProperties7;
             this.cbHHHollowNumber.DisplayMemberSingleItem = "";
             this.cbHHHollowNumber.DropDownHeight = 300;
             this.cbHHHollowNumber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -2317,8 +2345,8 @@ namespace RNGReporter
             // cbHHMonth
             // 
             this.cbHHMonth.BlankText = null;
-            checkBoxProperties6.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cbHHMonth.CheckBoxProperties = checkBoxProperties6;
+            checkBoxProperties8.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cbHHMonth.CheckBoxProperties = checkBoxProperties8;
             this.cbHHMonth.DisplayMemberSingleItem = "";
             this.cbHHMonth.DropDownHeight = 300;
             this.cbHHMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -2429,9 +2457,9 @@ namespace RNGReporter
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "Seed";
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("Consolas", 8.75F);
-            dataGridViewCellStyle25.Format = "X16";
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Consolas", 8.75F);
+            dataGridViewCellStyle5.Format = "X16";
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewTextBoxColumn1.FillWeight = 90F;
             this.dataGridViewTextBoxColumn1.HeaderText = "Seed";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
@@ -2536,8 +2564,8 @@ namespace RNGReporter
             // dataGridViewTextBoxColumn23
             // 
             this.dataGridViewTextBoxColumn23.DataPropertyName = "DateTime";
-            dataGridViewCellStyle26.Format = "MM/dd/yy HH:mm:ss";
-            this.dataGridViewTextBoxColumn23.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle6.Format = "MM/dd/yy HH:mm:ss";
+            this.dataGridViewTextBoxColumn23.DefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewTextBoxColumn23.HeaderText = "Date\\Time";
             this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
             this.dataGridViewTextBoxColumn23.ReadOnly = true;
@@ -2545,8 +2573,8 @@ namespace RNGReporter
             // dataGridViewTextBoxColumn24
             // 
             this.dataGridViewTextBoxColumn24.DataPropertyName = "Timer0";
-            dataGridViewCellStyle27.Format = "X";
-            this.dataGridViewTextBoxColumn24.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle7.Format = "X";
+            this.dataGridViewTextBoxColumn24.DefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewTextBoxColumn24.FillWeight = 60F;
             this.dataGridViewTextBoxColumn24.HeaderText = "Timer0";
             this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
@@ -2764,8 +2792,8 @@ namespace RNGReporter
             // cbDRMonth
             // 
             this.cbDRMonth.BlankText = null;
-            checkBoxProperties3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cbDRMonth.CheckBoxProperties = checkBoxProperties3;
+            checkBoxProperties9.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cbDRMonth.CheckBoxProperties = checkBoxProperties9;
             this.cbDRMonth.DisplayMemberSingleItem = "";
             this.cbDRMonth.DropDownHeight = 300;
             this.cbDRMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -2850,8 +2878,8 @@ namespace RNGReporter
             // cbDRNature
             // 
             this.cbDRNature.BlankText = "Any";
-            checkBoxProperties4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cbDRNature.CheckBoxProperties = checkBoxProperties4;
+            checkBoxProperties10.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cbDRNature.CheckBoxProperties = checkBoxProperties10;
             this.cbDRNature.DisplayMemberSingleItem = "";
             this.cbDRNature.DropDownHeight = 300;
             this.cbDRNature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -2905,8 +2933,8 @@ namespace RNGReporter
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.DataPropertyName = "Seed";
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("Consolas", 8.75F);
-            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Consolas", 8.75F);
+            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewTextBoxColumn6.HeaderText = "Seed";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
@@ -2923,8 +2951,8 @@ namespace RNGReporter
             // dataGridViewTextBoxColumn11
             // 
             this.dataGridViewTextBoxColumn11.DataPropertyName = "Pid";
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Consolas", 8.75F);
-            this.dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Consolas", 8.75F);
+            this.dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewTextBoxColumn11.HeaderText = "PID";
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
@@ -3363,5 +3391,7 @@ namespace RNGReporter
         private System.Windows.Forms.DataGridViewTextBoxColumn CapTimer0;
         private System.Windows.Forms.DataGridViewTextBoxColumn CapKeypress;
         private System.Windows.Forms.DataGridViewTextBoxColumn Synchable;
+        private System.Windows.Forms.CheckBox checkBox256;
+        private MaskedTextBox2 maskedTextBoxPID;
     }
 }
