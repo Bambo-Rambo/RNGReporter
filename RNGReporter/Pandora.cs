@@ -127,6 +127,7 @@ namespace RNGReporter
                 profilesSource = new BindingSource {DataSource = Profiles.List};
                 comboBoxProfiles.DataSource = profilesSource;
             }
+            dateTimeSearch.Value = dateTimeSeedSearch.Value = DateTime.Now;
         }
 
         private void btnCredits_Click(object sender, EventArgs e)
@@ -1234,15 +1235,15 @@ namespace RNGReporter
 
         private void textVSeed_TextChanged(object sender, EventArgs e)
         {
-            textVSeed.Enabled = checkVSeed.Checked;
-            textVFrame.Enabled = checkVSeed.Checked;
-            if (checkVSeed.Checked) checkVPID.Checked = false;
+            //textVSeed.Enabled = checkVSeed.Checked;
+            //textVFrame.Enabled = checkVSeed.Checked;
+            //if (checkVSeed.Checked) checkVPID.Checked = false;
         }
 
         private void checkVPID_CheckedChanged(object sender, EventArgs e)
         {
             textVPID.Enabled = checkVPID.Checked;
-            if (checkVPID.Checked) checkVSeed.Checked = false;
+            //if (checkVPID.Checked) checkVSeed.Checked = false;
         }
 
         private void buttonVFindSeeds_Click(object sender, EventArgs e)
@@ -1259,30 +1260,16 @@ namespace RNGReporter
 
             try
             {
-                minFrame = int.Parse(textVMinFrame.Text);
-                maxFrame = int.Parse(textVMaxFrame.Text);
-                ulong seed;
-                ulong.TryParse(textVSeed.Text, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out seed);
+                //minFrame = int.Parse(textVMinFrame.Text);
+                maxFrame = int.Parse(textVMaxAdvances.Text);
                 uint pid;
                 uint.TryParse(textVPID.Text, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out pid);
                 uint tid;
                 uint.TryParse(textVTID.Text, out tid);
                 uint sid;
                 uint.TryParse(textVSID.Text, out sid);
-                int frame;
-                int.TryParse(textVFrame.Text, out frame);
                 var dateTime = new DateTime(dateTimeSearch.Value.Year, dateTimeSearch.Value.Month,
                                             dateTimeSearch.Value.Day);
-                bool calcMinFrame = checkBoxMinFrameCalc.Checked;
-                bool existingFile = checkBoxSaveExists.Checked;
-
-                if (minFrame > maxFrame)
-                {
-                    textVMinFrame.Focus();
-                    textVMinFrame.Text = "28";
-                    textVMaxFrame.Text = "40";
-                    return;
-                }
                 if (tid > 65535)
                     MessageBox.Show("IDs can only be between 0 and 65535");
 
@@ -1295,9 +1282,9 @@ namespace RNGReporter
                 searchThread =
                     new Thread(
                         () =>
-                        searchGenV(dateTime, checkVMonth.Checked, checkVSeed.Checked, seed, frame, checkVPID.Checked,
+                        searchGenV(dateTime, checkVMonth.Checked, checkVPID.Checked,
                                    pid,
-                                   checkVTID.Checked, tid, checkVSID.Checked, sid, calcMinFrame, existingFile,
+                                   checkVTID.Checked, tid, checkVSID.Checked, sid,
                                    profile.MAC_Address, profile.Version, profile.Language, profile.DSType,
                                    profile.SoftReset,
                                    profile.VCount, profile.Timer0Min, profile.GxStat, profile.VFrame));
@@ -1313,34 +1300,20 @@ namespace RNGReporter
             }
         }
 
-        private void searchGenV(DateTime date, bool entireMonth, bool useSeed, ulong shinySeed, int seedFrame,
+        private void searchGenV(DateTime date, bool entireMonth,
                                 bool usePID, uint pid, bool useID,
-                                uint id, bool useSID, uint sid, bool calcMinFrame, bool existingFile, ulong mAC,
+                                uint id, bool useSID, uint sid, ulong mAC,
                                 Version version, Language language, DSType dstype, bool softRest, uint vCount,
                                 uint timer0, uint gxStat,
                                 uint vFrame)
         {
             int dayMin, dayMax;
-            uint shinyUpper = 0;
-            bool xOR2 = false, starter = false;
+            bool starter = false;
             var rng = new BWRng(0);
             resultsCount = 0;
             int[] buttons = {0};
 
             isSearching = true;
-
-            if (useSeed)
-            {
-                rng.Seed = shinySeed;
-                for (int i = 0; i < seedFrame; i++)
-                {
-                    rng.Next();
-                }
-
-                shinyUpper = (uint) (rng.Seed >> 32);
-
-                xOR2 = Convert.ToBoolean((shinyUpper >> 31) ^ (shinyUpper & 1));
-            }
 
             if (entireMonth)
             {
@@ -1373,17 +1346,14 @@ namespace RNGReporter
                                 rng.Seed = seed;
                                 ulong oSeed = seed;
 
-                                if (calcMinFrame)
-                                {
-                                    minFrame = (int) Functions.initialPIDRNG_ID(seed, existingFile, version);
-                                }
+                                minFrame = (int)Functions.initialPIDRNG_ID(seed, version);
 
                                 for (int frame = 0; frame < minFrame; frame++)
                                 {
                                     rng.Next();
                                 }
 
-                                for (int frame = minFrame; frame <= maxFrame; frame++)
+                                for (int frame = minFrame; frame <= minFrame + maxFrame; frame++)
                                 {
                                     rng.Next();
                                     seed = rng.Seed;
@@ -1392,27 +1362,8 @@ namespace RNGReporter
                                     uint tid = (upper & 0xFFFF);
                                     uint tsid = (upper >> 16);
 
-                                    if (useSeed)
-                                    {
-                                        bool xOR1 = Convert.ToBoolean((tid + tsid) & 1);
-
-                                        if (xOR1 ^ xOR2)
-                                        {
-                                            pid = shinyUpper ^ 0x80010000;
-                                            starter = false;
-                                        }
-                                        else
-                                        {
-                                            pid = shinyUpper ^ 0x00010000;
-                                            starter = true;
-                                        }
-
-                                        pid = ((pid >> 16) ^ (pid << 16 >> 16));
-                                    }
-
                                     if ((!useID || (tid == id)) && (!useSID || (tsid == sid)))
                                     {
-                                        if (useSeed && (tid ^ tsid ^ pid) >= 8) continue;
                                         if (usePID && !Functions.Shiny(pid, tid, tsid)) continue;
                                         var iDSeed = new IDListBW
                                             {
@@ -1577,7 +1528,7 @@ namespace RNGReporter
                                     Date = dTime.ToShortDateString(),
                                     Time = dTime.ToString("HH:mm:ss"),
                                     Frame = frame,
-                                    InitialFrame = (int) Functions.initialPIDRNG_ID(oSeed, false, version),
+                                    InitialFrame = (int) Functions.initialPIDRNG_ID(oSeed, version),
                                     ID = tid,
                                     SID = sid,
                                     Starter = "N/A",
@@ -1652,7 +1603,7 @@ namespace RNGReporter
             clmFrame.Visible = true;
             clmDate.Visible = true;
             clmTime.Visible = true;
-            clmStarter.Visible = true;
+            //clmStarter.Visible = true;
             clmButton.Visible = true;
             dgvResults.AutoResizeColumns();
         }
@@ -1690,10 +1641,10 @@ namespace RNGReporter
             dgvResults.AutoResizeColumns();
         }
 
-        private void checkBoxMinFrameCalc_CheckedChanged(object sender, EventArgs e)
+        /*private void checkBoxMinFrameCalc_CheckedChanged(object sender, EventArgs e)
         {
             checkBoxSaveExists.Enabled = checkBoxMinFrameCalc.Checked;
-        }
+        }*/
 
         private void dgvResults_MouseDown(object sender, MouseEventArgs e)
         {
