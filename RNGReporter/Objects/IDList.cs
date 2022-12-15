@@ -42,6 +42,25 @@ namespace RNGReporter.Objects
         public string Starter { get; set; }
 
         public string Button { get; set; }
+        public List<ButtonComboType> KeyPresses { get; set; }
+
+        public string Keypress
+        {
+            get
+            {
+                string keyString = "";
+                int i = 0;
+                foreach (ButtonComboType button in KeyPresses)
+                {
+                    keyString = keyString + Functions.buttonStrings[(int)button];
+                    i++;
+                    if (i < KeyPresses.Count)
+                        keyString = keyString + "-";
+                }
+
+                return keyString;
+            }
+        }
     }
 
     public class IDList

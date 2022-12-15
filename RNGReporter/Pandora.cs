@@ -1260,7 +1260,6 @@ namespace RNGReporter
 
             try
             {
-                //minFrame = int.Parse(textVMinFrame.Text);
                 maxFrame = int.Parse(textVMaxAdvances.Text);
                 uint pid;
                 uint.TryParse(textVPID.Text, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out pid);
@@ -1287,7 +1286,7 @@ namespace RNGReporter
                                    checkVTID.Checked, tid, checkVSID.Checked, sid,
                                    profile.MAC_Address, profile.Version, profile.Language, profile.DSType,
                                    profile.SoftReset,
-                                   profile.VCount, profile.Timer0Min, profile.GxStat, profile.VFrame));
+                                   profile.VCount, profile.Timer0Min, profile.GxStat, profile.VFrame, profile));
                 searchThread.Start();
 
                 var update = new Thread(updateGUI);
@@ -1305,13 +1304,21 @@ namespace RNGReporter
                                 uint id, bool useSID, uint sid, ulong mAC,
                                 Version version, Language language, DSType dstype, bool softRest, uint vCount,
                                 uint timer0, uint gxStat,
-                                uint vFrame)
+                                uint vFrame, Profile profile)
         {
             int dayMin, dayMax;
             bool starter = false;
             var rng = new BWRng(0);
             resultsCount = 0;
-            int[] buttons = {0};
+
+            List<List<ButtonComboType>> keypressList = profile.GetKeypresses();
+            List<ButtonComboType>[] buttons = keypressList.ToArray();
+            var buttonMashValue = new uint[keypressList.Count];
+
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                buttonMashValue[i] = Functions.buttonMashed(buttons[i]);
+            }
 
             isSearching = true;
 
@@ -1335,13 +1342,12 @@ namespace RNGReporter
                         {
                             var dTime = new DateTime(date.Year, date.Month, day, hour, minute, second);
 
-                            for (int button = 0; button < 13; button++)
+                            for (int buttonCount = 0; buttonCount < keypressList.Count; buttonCount++)
                             {
-                                buttons[0] = button;
                                 ulong seed = Functions.EncryptSeed(dTime, mAC, version, language, dstype, softRest,
                                                                    vCount, timer0,
                                                                    gxStat,
-                                                                   vFrame, Functions.buttonMashed(buttons));
+                                                                   vFrame, buttonMashValue[buttonCount]);
 
                                 rng.Seed = seed;
                                 ulong oSeed = seed;
@@ -1375,8 +1381,8 @@ namespace RNGReporter
                                                 ID = tid,
                                                 SID = tsid,
                                                 Starter = starter.ToString(),
-                                                Button = Functions.buttonStrings[button]
-                                            };
+                                                KeyPresses = buttons[buttonCount]
+                                        };
 
                                         resultsListBW.Add(iDSeed);
                                         refresh = true;
@@ -1640,11 +1646,6 @@ namespace RNGReporter
             clmButton.Visible = false;
             dgvResults.AutoResizeColumns();
         }
-
-        /*private void checkBoxMinFrameCalc_CheckedChanged(object sender, EventArgs e)
-        {
-            checkBoxSaveExists.Enabled = checkBoxMinFrameCalc.Checked;
-        }*/
 
         private void dgvResults_MouseDown(object sender, MouseEventArgs e)
         {

@@ -34,19 +34,33 @@ namespace RNGReporter
             this.components = new System.ComponentModel.Container();
             this.grpShiny = new System.Windows.Forms.GroupBox();
             this.cbxShinyInf = new System.Windows.Forms.CheckBox();
+            this.textBoxShinyTID = new RNGReporter.Controls.MaskedTextBox2();
             this.lblShinyTrainerID = new System.Windows.Forms.Label();
             this.cbxSearchID = new System.Windows.Forms.CheckBox();
+            this.btnShinyCancel = new RNGReporter.GlassButton();
+            this.btnShinyGo = new RNGReporter.GlassButton();
+            this.txtShinyMaxDelay = new RNGReporter.Controls.MaskedTextBox2();
             this.lblShinyMaxDelay = new System.Windows.Forms.Label();
             this.lblShinyMinDelay = new System.Windows.Forms.Label();
+            this.txtShinyMinDelay = new RNGReporter.Controls.MaskedTextBox2();
+            this.textBoxShinyYear = new RNGReporter.Controls.MaskedTextBox2();
             this.lblShinyYr = new System.Windows.Forms.Label();
             this.lblShinyPID = new System.Windows.Forms.Label();
+            this.textBoxShinyPID = new RNGReporter.Controls.MaskedTextBox2();
             this.grpID = new System.Windows.Forms.GroupBox();
             this.cbxIDInf = new System.Windows.Forms.CheckBox();
+            this.btnIDCancel = new RNGReporter.GlassButton();
+            this.btnIDGo = new RNGReporter.GlassButton();
+            this.textBoxIDMaxDelay = new RNGReporter.Controls.MaskedTextBox2();
+            this.textBoxIDMinDelay = new RNGReporter.Controls.MaskedTextBox2();
             this.lblIDMaxDelay = new System.Windows.Forms.Label();
             this.lblIDMinDelay = new System.Windows.Forms.Label();
+            this.textBoxIDYear = new RNGReporter.Controls.MaskedTextBox2();
             this.lblIDYr = new System.Windows.Forms.Label();
+            this.textBoxDesiredSID = new RNGReporter.Controls.MaskedTextBox2();
             this.lblSecretID = new System.Windows.Forms.Label();
             this.cbxSearchSID = new System.Windows.Forms.CheckBox();
+            this.textBoxDesiredTID = new RNGReporter.Controls.MaskedTextBox2();
             this.lblTrainerID = new System.Windows.Forms.Label();
             this.grpSeed = new System.Windows.Forms.GroupBox();
             this.lblSeedMaxDelay = new System.Windows.Forms.Label();
@@ -55,7 +69,16 @@ namespace RNGReporter
             this.lblHour = new System.Windows.Forms.Label();
             this.lblSeedYr = new System.Windows.Forms.Label();
             this.lblDay = new System.Windows.Forms.Label();
+            this.txtSeedMaxDelay = new RNGReporter.Controls.MaskedTextBox2();
+            this.btnSeedGo = new RNGReporter.GlassButton();
+            this.txtSeedMinDelay = new RNGReporter.Controls.MaskedTextBox2();
+            this.txtMinute = new RNGReporter.Controls.MaskedTextBox2();
+            this.txtHour = new RNGReporter.Controls.MaskedTextBox2();
+            this.txtSeedYr = new RNGReporter.Controls.MaskedTextBox2();
+            this.txtDay = new RNGReporter.Controls.MaskedTextBox2();
             this.lblMonth = new System.Windows.Forms.Label();
+            this.txtMonth = new RNGReporter.Controls.MaskedTextBox2();
+            this.txtIDObtained = new RNGReporter.Controls.MaskedTextBox2();
             this.lblIDObtained = new System.Windows.Forms.Label();
             this.StatusBar = new System.Windows.Forms.StatusStrip();
             this.lblAction = new System.Windows.Forms.ToolStripStatusLabel();
@@ -69,125 +92,102 @@ namespace RNGReporter
             this.lblSimple = new System.Windows.Forms.Label();
             this.lblSeed = new System.Windows.Forms.Label();
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSimpleGo = new RNGReporter.GlassButton();
+            this.textBoxSeed = new RNGReporter.Controls.MaskedTextBox2();
             this.bgwShinyInf = new System.ComponentModel.BackgroundWorker();
             this.tabGenSelect = new System.Windows.Forms.TabControl();
             this.tabXDColo = new System.Windows.Forms.TabPage();
             this.labelXDColo = new System.Windows.Forms.Label();
+            this.genCancelXDColo = new RNGReporter.GlassButton();
+            this.searchGenXDColo = new RNGReporter.GlassButton();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.XDColoMaxFrame = new RNGReporter.Controls.MaskedTextBox2();
             this.label16 = new System.Windows.Forms.Label();
+            this.XDColoMinFrame = new RNGReporter.Controls.MaskedTextBox2();
             this.label17 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.XDColoPID = new RNGReporter.Controls.MaskedTextBox2();
+            this.XDColoPRNG = new RNGReporter.Controls.MaskedTextBox2();
             this.tabGen3FRLGE = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.genFRLGEMaxFrame = new RNGReporter.Controls.MaskedTextBox2();
             this.label12 = new System.Windows.Forms.Label();
+            this.genFRLGEMinFrame = new RNGReporter.Controls.MaskedTextBox2();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.tabGen3RS = new System.Windows.Forms.TabPage();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.checkIIIClock = new System.Windows.Forms.CheckBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.dateIII = new System.Windows.Forms.DateTimePicker();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.checkIIISID = new System.Windows.Forms.CheckBox();
-            this.checkIIIPID = new System.Windows.Forms.CheckBox();
-            this.checkIIITID = new System.Windows.Forms.CheckBox();
-            this.tabGen4 = new System.Windows.Forms.TabPage();
-            this.labelBy = new System.Windows.Forms.Label();
-            this.tabGen5 = new System.Windows.Forms.TabPage();
-            this.groupVSeedFinder = new System.Windows.Forms.GroupBox();
-            this.labelTIDReceived = new System.Windows.Forms.Label();
-            this.labelVMinute = new System.Windows.Forms.Label();
-            this.labelVHour = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dateTimeSeedSearch = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.groupVDSParams = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.labelProfileInformation = new System.Windows.Forms.Label();
-            this.groupVPID = new System.Windows.Forms.GroupBox();
-            this.checkVSID = new System.Windows.Forms.CheckBox();
-            this.checkVPID = new System.Windows.Forms.CheckBox();
-            this.labelVMaxFrame = new System.Windows.Forms.Label();
-            this.checkVMonth = new System.Windows.Forms.CheckBox();
-            this.checkVTID = new System.Windows.Forms.CheckBox();
-            this.labelVDate = new System.Windows.Forms.Label();
-            this.dateTimeSearch = new System.Windows.Forms.DateTimePicker();
-            this.toolTips = new System.Windows.Forms.ToolTip(this.components);
-            this.genCancelXDColo = new RNGReporter.GlassButton();
-            this.searchGenXDColo = new RNGReporter.GlassButton();
-            this.XDColoMaxFrame = new RNGReporter.Controls.MaskedTextBox2();
-            this.XDColoMinFrame = new RNGReporter.Controls.MaskedTextBox2();
-            this.XDColoPID = new RNGReporter.Controls.MaskedTextBox2();
-            this.XDColoPRNG = new RNGReporter.Controls.MaskedTextBox2();
-            this.genFRLGEMaxFrame = new RNGReporter.Controls.MaskedTextBox2();
-            this.genFRLGEMinFrame = new RNGReporter.Controls.MaskedTextBox2();
             this.genFRLGEPID = new RNGReporter.Controls.MaskedTextBox2();
             this.genFRLGETID = new RNGReporter.Controls.MaskedTextBox2();
             this.genCancelFRLGE = new RNGReporter.GlassButton();
             this.genSearchFRLGE = new RNGReporter.GlassButton();
+            this.tabGen3RS = new System.Windows.Forms.TabPage();
             this.buttonIIICancel = new RNGReporter.GlassButton();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.maskedTextBox21 = new RNGReporter.Controls.MaskedTextBox2();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.checkIIIClock = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.textIIIMaxFrame = new RNGReporter.Controls.MaskedTextBox2();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.textIIIMinFrame = new RNGReporter.Controls.MaskedTextBox2();
+            this.label7 = new System.Windows.Forms.Label();
             this.textIIIMinute = new RNGReporter.Controls.MaskedTextBox2();
+            this.dateIII = new System.Windows.Forms.DateTimePicker();
             this.textIIIHour = new RNGReporter.Controls.MaskedTextBox2();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.textIIISID = new RNGReporter.Controls.MaskedTextBox2();
+            this.checkIIISID = new System.Windows.Forms.CheckBox();
+            this.checkIIIPID = new System.Windows.Forms.CheckBox();
             this.textIIIPID = new RNGReporter.Controls.MaskedTextBox2();
             this.textIIITID = new RNGReporter.Controls.MaskedTextBox2();
+            this.checkIIITID = new System.Windows.Forms.CheckBox();
             this.buttonIIIFindFrames = new RNGReporter.GlassButton();
-            this.btnSimpleGo = new RNGReporter.GlassButton();
-            this.textBoxSeed = new RNGReporter.Controls.MaskedTextBox2();
-            this.textBoxShinyTID = new RNGReporter.Controls.MaskedTextBox2();
-            this.btnShinyCancel = new RNGReporter.GlassButton();
-            this.btnShinyGo = new RNGReporter.GlassButton();
-            this.txtShinyMaxDelay = new RNGReporter.Controls.MaskedTextBox2();
-            this.txtShinyMinDelay = new RNGReporter.Controls.MaskedTextBox2();
-            this.textBoxShinyYear = new RNGReporter.Controls.MaskedTextBox2();
-            this.textBoxShinyPID = new RNGReporter.Controls.MaskedTextBox2();
-            this.btnIDCancel = new RNGReporter.GlassButton();
-            this.btnIDGo = new RNGReporter.GlassButton();
-            this.textBoxIDMaxDelay = new RNGReporter.Controls.MaskedTextBox2();
-            this.textBoxIDMinDelay = new RNGReporter.Controls.MaskedTextBox2();
-            this.textBoxIDYear = new RNGReporter.Controls.MaskedTextBox2();
-            this.textBoxDesiredSID = new RNGReporter.Controls.MaskedTextBox2();
-            this.textBoxDesiredTID = new RNGReporter.Controls.MaskedTextBox2();
-            this.txtSeedMaxDelay = new RNGReporter.Controls.MaskedTextBox2();
-            this.btnSeedGo = new RNGReporter.GlassButton();
-            this.txtSeedMinDelay = new RNGReporter.Controls.MaskedTextBox2();
-            this.txtMinute = new RNGReporter.Controls.MaskedTextBox2();
-            this.txtHour = new RNGReporter.Controls.MaskedTextBox2();
-            this.txtSeedYr = new RNGReporter.Controls.MaskedTextBox2();
-            this.txtDay = new RNGReporter.Controls.MaskedTextBox2();
-            this.txtMonth = new RNGReporter.Controls.MaskedTextBox2();
-            this.txtIDObtained = new RNGReporter.Controls.MaskedTextBox2();
+            this.tabGen4 = new System.Windows.Forms.TabPage();
+            this.labelBy = new System.Windows.Forms.Label();
             this.btnCredits = new RNGReporter.GlassButton();
+            this.tabGen5 = new System.Windows.Forms.TabPage();
             this.buttonVFindSeedHit = new RNGReporter.GlassButton();
+            this.groupVSeedFinder = new System.Windows.Forms.GroupBox();
             this.textVMinute = new RNGReporter.Controls.MaskedTextBox2();
             this.textVHour = new RNGReporter.Controls.MaskedTextBox2();
+            this.labelTIDReceived = new System.Windows.Forms.Label();
+            this.labelVMinute = new System.Windows.Forms.Label();
             this.textVTIDReceived = new RNGReporter.Controls.MaskedTextBox2();
             this.textVMaxSec = new RNGReporter.Controls.MaskedTextBox2();
+            this.labelVHour = new System.Windows.Forms.Label();
             this.textVMinSec = new RNGReporter.Controls.MaskedTextBox2();
+            this.label1 = new System.Windows.Forms.Label();
             this.textVMaxFrameHit = new RNGReporter.Controls.MaskedTextBox2();
+            this.dateTimeSeedSearch = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
             this.textVMinFrameHit = new RNGReporter.Controls.MaskedTextBox2();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupVDSParams = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.labelProfileInformation = new System.Windows.Forms.Label();
             this.comboBoxProfiles = new RNGReporter.GlassComboBox();
             this.buttonEditProfile = new RNGReporter.GlassButton();
+            this.groupVPID = new System.Windows.Forms.GroupBox();
             this.textVSID = new RNGReporter.Controls.MaskedTextBox2();
+            this.checkVSID = new System.Windows.Forms.CheckBox();
             this.textVMaxAdvances = new RNGReporter.Controls.MaskedTextBox2();
+            this.checkVPID = new System.Windows.Forms.CheckBox();
+            this.labelVMaxFrame = new System.Windows.Forms.Label();
             this.textVPID = new RNGReporter.Controls.MaskedTextBox2();
+            this.checkVMonth = new System.Windows.Forms.CheckBox();
             this.textVTID = new RNGReporter.Controls.MaskedTextBox2();
+            this.checkVTID = new System.Windows.Forms.CheckBox();
+            this.labelVDate = new System.Windows.Forms.Label();
+            this.dateTimeSearch = new System.Windows.Forms.DateTimePicker();
             this.buttonVFindSeeds = new RNGReporter.GlassButton();
             this.buttonVCancel = new RNGReporter.GlassButton();
+            this.toolTips = new System.Windows.Forms.ToolTip(this.components);
             this.dgvResults = new RNGReporter.DoubleBufferedDataGridView();
             this.clmSeed = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmFrame = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -258,6 +258,16 @@ namespace RNGReporter
             this.cbxShinyInf.UseVisualStyleBackColor = true;
             this.cbxShinyInf.CheckedChanged += new System.EventHandler(this.cbxShinyInf_CheckedChanged);
             // 
+            // textBoxShinyTID
+            // 
+            this.textBoxShinyTID.Enabled = false;
+            this.textBoxShinyTID.Hex = false;
+            this.textBoxShinyTID.Location = new System.Drawing.Point(104, 77);
+            this.textBoxShinyTID.Mask = "00000";
+            this.textBoxShinyTID.Name = "textBoxShinyTID";
+            this.textBoxShinyTID.Size = new System.Drawing.Size(37, 20);
+            this.textBoxShinyTID.TabIndex = 3;
+            // 
             // lblShinyTrainerID
             // 
             this.lblShinyTrainerID.AutoSize = true;
@@ -280,6 +290,42 @@ namespace RNGReporter
             this.cbxSearchID.UseVisualStyleBackColor = true;
             this.cbxSearchID.CheckedChanged += new System.EventHandler(this.cbxSearchID_CheckedChanged);
             // 
+            // btnShinyCancel
+            // 
+            this.btnShinyCancel.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.btnShinyCancel.Enabled = false;
+            this.btnShinyCancel.ForeColor = System.Drawing.Color.Black;
+            this.btnShinyCancel.Location = new System.Drawing.Point(11, 245);
+            this.btnShinyCancel.Name = "btnShinyCancel";
+            this.btnShinyCancel.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.btnShinyCancel.ShineColor = System.Drawing.SystemColors.Window;
+            this.btnShinyCancel.Size = new System.Drawing.Size(159, 29);
+            this.btnShinyCancel.TabIndex = 9;
+            this.btnShinyCancel.Text = "Cancel";
+            this.btnShinyCancel.Click += new System.EventHandler(this.btnShinyCancel_Click);
+            // 
+            // btnShinyGo
+            // 
+            this.btnShinyGo.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.btnShinyGo.ForeColor = System.Drawing.Color.Black;
+            this.btnShinyGo.Location = new System.Drawing.Point(10, 210);
+            this.btnShinyGo.Name = "btnShinyGo";
+            this.btnShinyGo.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.btnShinyGo.ShineColor = System.Drawing.SystemColors.Window;
+            this.btnShinyGo.Size = new System.Drawing.Size(159, 29);
+            this.btnShinyGo.TabIndex = 8;
+            this.btnShinyGo.Text = "Find Compatible Seeds";
+            this.btnShinyGo.Click += new System.EventHandler(this.btnShinyGo_Click);
+            // 
+            // txtShinyMaxDelay
+            // 
+            this.txtShinyMaxDelay.Hex = false;
+            this.txtShinyMaxDelay.Location = new System.Drawing.Point(104, 156);
+            this.txtShinyMaxDelay.Mask = "00000000";
+            this.txtShinyMaxDelay.Name = "txtShinyMaxDelay";
+            this.txtShinyMaxDelay.Size = new System.Drawing.Size(65, 20);
+            this.txtShinyMaxDelay.TabIndex = 6;
+            // 
             // lblShinyMaxDelay
             // 
             this.lblShinyMaxDelay.AutoSize = true;
@@ -300,6 +346,24 @@ namespace RNGReporter
             this.lblShinyMinDelay.Text = "Minimum Delay:";
             this.lblShinyMinDelay.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // txtShinyMinDelay
+            // 
+            this.txtShinyMinDelay.Hex = false;
+            this.txtShinyMinDelay.Location = new System.Drawing.Point(104, 129);
+            this.txtShinyMinDelay.Mask = "00000000";
+            this.txtShinyMinDelay.Name = "txtShinyMinDelay";
+            this.txtShinyMinDelay.Size = new System.Drawing.Size(65, 20);
+            this.txtShinyMinDelay.TabIndex = 5;
+            // 
+            // textBoxShinyYear
+            // 
+            this.textBoxShinyYear.Hex = false;
+            this.textBoxShinyYear.Location = new System.Drawing.Point(104, 103);
+            this.textBoxShinyYear.Mask = "2\\000";
+            this.textBoxShinyYear.Name = "textBoxShinyYear";
+            this.textBoxShinyYear.Size = new System.Drawing.Size(35, 20);
+            this.textBoxShinyYear.TabIndex = 4;
+            // 
             // lblShinyYr
             // 
             this.lblShinyYr.AutoSize = true;
@@ -319,6 +383,15 @@ namespace RNGReporter
             this.lblShinyPID.TabIndex = 1;
             this.lblShinyPID.Text = "Desired PID (Hex):";
             this.lblShinyPID.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // textBoxShinyPID
+            // 
+            this.textBoxShinyPID.Hex = true;
+            this.textBoxShinyPID.Location = new System.Drawing.Point(104, 25);
+            this.textBoxShinyPID.Mask = "AAAAAAAA";
+            this.textBoxShinyPID.Name = "textBoxShinyPID";
+            this.textBoxShinyPID.Size = new System.Drawing.Size(65, 20);
+            this.textBoxShinyPID.TabIndex = 1;
             // 
             // grpID
             // 
@@ -354,6 +427,51 @@ namespace RNGReporter
             this.cbxIDInf.UseVisualStyleBackColor = true;
             this.cbxIDInf.CheckedChanged += new System.EventHandler(this.cbxIDInf_CheckedChanged);
             // 
+            // btnIDCancel
+            // 
+            this.btnIDCancel.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.btnIDCancel.Enabled = false;
+            this.btnIDCancel.ForeColor = System.Drawing.Color.Black;
+            this.btnIDCancel.Location = new System.Drawing.Point(12, 245);
+            this.btnIDCancel.Name = "btnIDCancel";
+            this.btnIDCancel.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.btnIDCancel.ShineColor = System.Drawing.SystemColors.Window;
+            this.btnIDCancel.Size = new System.Drawing.Size(159, 29);
+            this.btnIDCancel.TabIndex = 18;
+            this.btnIDCancel.Text = "Cancel";
+            this.btnIDCancel.Click += new System.EventHandler(this.btnIDCancel_Click);
+            // 
+            // btnIDGo
+            // 
+            this.btnIDGo.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.btnIDGo.ForeColor = System.Drawing.Color.Black;
+            this.btnIDGo.Location = new System.Drawing.Point(12, 210);
+            this.btnIDGo.Name = "btnIDGo";
+            this.btnIDGo.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.btnIDGo.ShineColor = System.Drawing.SystemColors.Window;
+            this.btnIDGo.Size = new System.Drawing.Size(159, 29);
+            this.btnIDGo.TabIndex = 17;
+            this.btnIDGo.Text = "Find Compatible Seeds";
+            this.btnIDGo.Click += new System.EventHandler(this.btnIDGo_Click);
+            // 
+            // textBoxIDMaxDelay
+            // 
+            this.textBoxIDMaxDelay.Hex = false;
+            this.textBoxIDMaxDelay.Location = new System.Drawing.Point(106, 156);
+            this.textBoxIDMaxDelay.Mask = "00000000";
+            this.textBoxIDMaxDelay.Name = "textBoxIDMaxDelay";
+            this.textBoxIDMaxDelay.Size = new System.Drawing.Size(65, 20);
+            this.textBoxIDMaxDelay.TabIndex = 15;
+            // 
+            // textBoxIDMinDelay
+            // 
+            this.textBoxIDMinDelay.Hex = false;
+            this.textBoxIDMinDelay.Location = new System.Drawing.Point(106, 129);
+            this.textBoxIDMinDelay.Mask = "00000000";
+            this.textBoxIDMinDelay.Name = "textBoxIDMinDelay";
+            this.textBoxIDMinDelay.Size = new System.Drawing.Size(65, 20);
+            this.textBoxIDMinDelay.TabIndex = 14;
+            // 
             // lblIDMaxDelay
             // 
             this.lblIDMaxDelay.AutoSize = true;
@@ -374,6 +492,15 @@ namespace RNGReporter
             this.lblIDMinDelay.Text = "Minimum Delay:";
             this.lblIDMinDelay.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // textBoxIDYear
+            // 
+            this.textBoxIDYear.Hex = false;
+            this.textBoxIDYear.Location = new System.Drawing.Point(106, 103);
+            this.textBoxIDYear.Mask = "2\\000";
+            this.textBoxIDYear.Name = "textBoxIDYear";
+            this.textBoxIDYear.Size = new System.Drawing.Size(49, 20);
+            this.textBoxIDYear.TabIndex = 13;
+            // 
             // lblIDYr
             // 
             this.lblIDYr.AutoSize = true;
@@ -383,6 +510,16 @@ namespace RNGReporter
             this.lblIDYr.TabIndex = 10;
             this.lblIDYr.Text = "Year:";
             this.lblIDYr.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // textBoxDesiredSID
+            // 
+            this.textBoxDesiredSID.Enabled = false;
+            this.textBoxDesiredSID.Hex = false;
+            this.textBoxDesiredSID.Location = new System.Drawing.Point(106, 77);
+            this.textBoxDesiredSID.Mask = "00000";
+            this.textBoxDesiredSID.Name = "textBoxDesiredSID";
+            this.textBoxDesiredSID.Size = new System.Drawing.Size(49, 20);
+            this.textBoxDesiredSID.TabIndex = 12;
             // 
             // lblSecretID
             // 
@@ -405,6 +542,15 @@ namespace RNGReporter
             this.cbxSearchSID.Text = "Search for SID";
             this.cbxSearchSID.UseVisualStyleBackColor = true;
             this.cbxSearchSID.CheckedChanged += new System.EventHandler(this.cbxSearchSID_CheckedChanged);
+            // 
+            // textBoxDesiredTID
+            // 
+            this.textBoxDesiredTID.Hex = false;
+            this.textBoxDesiredTID.Location = new System.Drawing.Point(108, 25);
+            this.textBoxDesiredTID.Mask = "00000";
+            this.textBoxDesiredTID.Name = "textBoxDesiredTID";
+            this.textBoxDesiredTID.Size = new System.Drawing.Size(47, 20);
+            this.textBoxDesiredTID.TabIndex = 10;
             // 
             // lblTrainerID
             // 
@@ -437,7 +583,7 @@ namespace RNGReporter
             this.grpSeed.Controls.Add(this.lblIDObtained);
             this.grpSeed.Location = new System.Drawing.Point(389, 41);
             this.grpSeed.Name = "grpSeed";
-            this.grpSeed.Size = new System.Drawing.Size(183, 284);
+            this.grpSeed.Size = new System.Drawing.Size(190, 284);
             this.grpSeed.TabIndex = 3;
             this.grpSeed.TabStop = false;
             this.grpSeed.Text = "Seed Finder";
@@ -496,6 +642,73 @@ namespace RNGReporter
             this.lblDay.TabIndex = 25;
             this.lblDay.Text = "Day:";
             // 
+            // txtSeedMaxDelay
+            // 
+            this.txtSeedMaxDelay.Hex = false;
+            this.txtSeedMaxDelay.Location = new System.Drawing.Point(112, 208);
+            this.txtSeedMaxDelay.Mask = "00000000";
+            this.txtSeedMaxDelay.Name = "txtSeedMaxDelay";
+            this.txtSeedMaxDelay.Size = new System.Drawing.Size(65, 20);
+            this.txtSeedMaxDelay.TabIndex = 26;
+            // 
+            // btnSeedGo
+            // 
+            this.btnSeedGo.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.btnSeedGo.ForeColor = System.Drawing.Color.Black;
+            this.btnSeedGo.Location = new System.Drawing.Point(12, 234);
+            this.btnSeedGo.Name = "btnSeedGo";
+            this.btnSeedGo.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.btnSeedGo.ShineColor = System.Drawing.SystemColors.Window;
+            this.btnSeedGo.Size = new System.Drawing.Size(159, 29);
+            this.btnSeedGo.TabIndex = 27;
+            this.btnSeedGo.Text = "Find Compatible Seeds";
+            this.btnSeedGo.Click += new System.EventHandler(this.btnSeedGo_Click);
+            // 
+            // txtSeedMinDelay
+            // 
+            this.txtSeedMinDelay.Hex = false;
+            this.txtSeedMinDelay.Location = new System.Drawing.Point(112, 182);
+            this.txtSeedMinDelay.Mask = "00000000";
+            this.txtSeedMinDelay.Name = "txtSeedMinDelay";
+            this.txtSeedMinDelay.Size = new System.Drawing.Size(65, 20);
+            this.txtSeedMinDelay.TabIndex = 25;
+            // 
+            // txtMinute
+            // 
+            this.txtMinute.Hex = false;
+            this.txtMinute.Location = new System.Drawing.Point(112, 156);
+            this.txtMinute.Mask = "00";
+            this.txtMinute.Name = "txtMinute";
+            this.txtMinute.Size = new System.Drawing.Size(24, 20);
+            this.txtMinute.TabIndex = 24;
+            // 
+            // txtHour
+            // 
+            this.txtHour.Hex = false;
+            this.txtHour.Location = new System.Drawing.Point(112, 129);
+            this.txtHour.Mask = "00";
+            this.txtHour.Name = "txtHour";
+            this.txtHour.Size = new System.Drawing.Size(24, 20);
+            this.txtHour.TabIndex = 23;
+            // 
+            // txtSeedYr
+            // 
+            this.txtSeedYr.Hex = false;
+            this.txtSeedYr.Location = new System.Drawing.Point(112, 103);
+            this.txtSeedYr.Mask = "2\\000";
+            this.txtSeedYr.Name = "txtSeedYr";
+            this.txtSeedYr.Size = new System.Drawing.Size(35, 20);
+            this.txtSeedYr.TabIndex = 22;
+            // 
+            // txtDay
+            // 
+            this.txtDay.Hex = false;
+            this.txtDay.Location = new System.Drawing.Point(112, 77);
+            this.txtDay.Mask = "00";
+            this.txtDay.Name = "txtDay";
+            this.txtDay.Size = new System.Drawing.Size(24, 20);
+            this.txtDay.TabIndex = 21;
+            // 
             // lblMonth
             // 
             this.lblMonth.AutoSize = true;
@@ -505,6 +718,24 @@ namespace RNGReporter
             this.lblMonth.TabIndex = 17;
             this.lblMonth.Text = "Month:";
             this.lblMonth.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // txtMonth
+            // 
+            this.txtMonth.Hex = false;
+            this.txtMonth.Location = new System.Drawing.Point(112, 50);
+            this.txtMonth.Mask = "00";
+            this.txtMonth.Name = "txtMonth";
+            this.txtMonth.Size = new System.Drawing.Size(24, 20);
+            this.txtMonth.TabIndex = 20;
+            // 
+            // txtIDObtained
+            // 
+            this.txtIDObtained.Hex = false;
+            this.txtIDObtained.Location = new System.Drawing.Point(112, 25);
+            this.txtIDObtained.Mask = "00000";
+            this.txtIDObtained.Name = "txtIDObtained";
+            this.txtIDObtained.Size = new System.Drawing.Size(49, 20);
+            this.txtIDObtained.TabIndex = 19;
             // 
             // lblIDObtained
             // 
@@ -521,7 +752,7 @@ namespace RNGReporter
             this.lblAction});
             this.StatusBar.Location = new System.Drawing.Point(0, 635);
             this.StatusBar.Name = "StatusBar";
-            this.StatusBar.Size = new System.Drawing.Size(607, 22);
+            this.StatusBar.Size = new System.Drawing.Size(615, 22);
             this.StatusBar.SizingGrip = false;
             this.StatusBar.TabIndex = 5;
             // 
@@ -612,6 +843,28 @@ namespace RNGReporter
             this.GroupBox1.TabIndex = 30;
             this.GroupBox1.TabStop = false;
             // 
+            // btnSimpleGo
+            // 
+            this.btnSimpleGo.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.btnSimpleGo.ForeColor = System.Drawing.Color.Black;
+            this.btnSimpleGo.Location = new System.Drawing.Point(327, 7);
+            this.btnSimpleGo.Name = "btnSimpleGo";
+            this.btnSimpleGo.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.btnSimpleGo.ShineColor = System.Drawing.SystemColors.Window;
+            this.btnSimpleGo.Size = new System.Drawing.Size(38, 24);
+            this.btnSimpleGo.TabIndex = 30;
+            this.btnSimpleGo.Text = "Go";
+            this.btnSimpleGo.Click += new System.EventHandler(this.btnSimpleGo_Click);
+            // 
+            // textBoxSeed
+            // 
+            this.textBoxSeed.Hex = true;
+            this.textBoxSeed.Location = new System.Drawing.Point(256, 10);
+            this.textBoxSeed.Mask = "AAAAAAAA";
+            this.textBoxSeed.Name = "textBoxSeed";
+            this.textBoxSeed.Size = new System.Drawing.Size(65, 20);
+            this.textBoxSeed.TabIndex = 29;
+            // 
             // bgwShinyInf
             // 
             this.bgwShinyInf.WorkerReportsProgress = true;
@@ -629,7 +882,7 @@ namespace RNGReporter
             this.tabGenSelect.Location = new System.Drawing.Point(10, 5);
             this.tabGenSelect.Name = "tabGenSelect";
             this.tabGenSelect.SelectedIndex = 0;
-            this.tabGenSelect.Size = new System.Drawing.Size(585, 355);
+            this.tabGenSelect.Size = new System.Drawing.Size(593, 355);
             this.tabGenSelect.TabIndex = 31;
             this.tabGenSelect.SelectedIndexChanged += new System.EventHandler(this.tabGenSelect_SelectedIndexChanged);
             // 
@@ -642,7 +895,7 @@ namespace RNGReporter
             this.tabXDColo.Controls.Add(this.groupBox6);
             this.tabXDColo.Location = new System.Drawing.Point(4, 22);
             this.tabXDColo.Name = "tabXDColo";
-            this.tabXDColo.Size = new System.Drawing.Size(577, 346);
+            this.tabXDColo.Size = new System.Drawing.Size(585, 329);
             this.tabXDColo.TabIndex = 4;
             this.tabXDColo.Text = "XD/Colo";
             this.tabXDColo.UseVisualStyleBackColor = true;
@@ -654,6 +907,32 @@ namespace RNGReporter
             this.labelXDColo.Size = new System.Drawing.Size(269, 30);
             this.labelXDColo.TabIndex = 123;
             this.labelXDColo.Text = "This feature will only work for Gales of Darkness and Colosseum.";
+            // 
+            // genCancelXDColo
+            // 
+            this.genCancelXDColo.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.genCancelXDColo.ForeColor = System.Drawing.Color.Black;
+            this.genCancelXDColo.Location = new System.Drawing.Point(204, 234);
+            this.genCancelXDColo.Name = "genCancelXDColo";
+            this.genCancelXDColo.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.genCancelXDColo.ShineColor = System.Drawing.SystemColors.Window;
+            this.genCancelXDColo.Size = new System.Drawing.Size(177, 25);
+            this.genCancelXDColo.TabIndex = 122;
+            this.genCancelXDColo.Text = "Cancel";
+            this.genCancelXDColo.Click += new System.EventHandler(this.genCancelXDColo_Click);
+            // 
+            // searchGenXDColo
+            // 
+            this.searchGenXDColo.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.searchGenXDColo.ForeColor = System.Drawing.Color.Black;
+            this.searchGenXDColo.Location = new System.Drawing.Point(3, 234);
+            this.searchGenXDColo.Name = "searchGenXDColo";
+            this.searchGenXDColo.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.searchGenXDColo.ShineColor = System.Drawing.SystemColors.Window;
+            this.searchGenXDColo.Size = new System.Drawing.Size(195, 25);
+            this.searchGenXDColo.TabIndex = 32;
+            this.searchGenXDColo.Text = "Find ID Frames";
+            this.searchGenXDColo.Click += new System.EventHandler(this.searchGenXDColo_Click);
             // 
             // groupBox7
             // 
@@ -668,6 +947,16 @@ namespace RNGReporter
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Search Parameters";
             // 
+            // XDColoMaxFrame
+            // 
+            this.XDColoMaxFrame.Hex = false;
+            this.XDColoMaxFrame.Location = new System.Drawing.Point(72, 50);
+            this.XDColoMaxFrame.Mask = "000000";
+            this.XDColoMaxFrame.Name = "XDColoMaxFrame";
+            this.XDColoMaxFrame.Size = new System.Drawing.Size(90, 20);
+            this.XDColoMaxFrame.TabIndex = 7;
+            this.XDColoMaxFrame.Text = "10000";
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -677,6 +966,16 @@ namespace RNGReporter
             this.label16.TabIndex = 9;
             this.label16.Text = "Min Frame:";
             this.label16.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // XDColoMinFrame
+            // 
+            this.XDColoMinFrame.Hex = false;
+            this.XDColoMinFrame.Location = new System.Drawing.Point(72, 24);
+            this.XDColoMinFrame.Mask = "000000";
+            this.XDColoMinFrame.Name = "XDColoMinFrame";
+            this.XDColoMinFrame.Size = new System.Drawing.Size(90, 20);
+            this.XDColoMinFrame.TabIndex = 6;
+            this.XDColoMinFrame.Text = "5000";
             // 
             // label17
             // 
@@ -719,6 +1018,26 @@ namespace RNGReporter
             this.label15.TabIndex = 27;
             this.label15.Text = "PID";
             // 
+            // XDColoPID
+            // 
+            this.XDColoPID.Hex = true;
+            this.XDColoPID.Location = new System.Drawing.Point(62, 17);
+            this.XDColoPID.Mask = "AAAAAAAA";
+            this.XDColoPID.Name = "XDColoPID";
+            this.XDColoPID.Size = new System.Drawing.Size(119, 20);
+            this.XDColoPID.TabIndex = 7;
+            this.toolTips.SetToolTip(this.XDColoPID, "Enter the PID you want shiny.");
+            // 
+            // XDColoPRNG
+            // 
+            this.XDColoPRNG.Hex = true;
+            this.XDColoPRNG.Location = new System.Drawing.Point(62, 43);
+            this.XDColoPRNG.Mask = "AAAAAAAA";
+            this.XDColoPRNG.Name = "XDColoPRNG";
+            this.XDColoPRNG.Size = new System.Drawing.Size(119, 20);
+            this.XDColoPRNG.TabIndex = 3;
+            this.toolTips.SetToolTip(this.XDColoPRNG, "Enter the current PRNG state.");
+            // 
             // tabGen3FRLGE
             // 
             this.tabGen3FRLGE.Controls.Add(this.label11);
@@ -728,7 +1047,7 @@ namespace RNGReporter
             this.tabGen3FRLGE.Controls.Add(this.genSearchFRLGE);
             this.tabGen3FRLGE.Location = new System.Drawing.Point(4, 22);
             this.tabGen3FRLGE.Name = "tabGen3FRLGE";
-            this.tabGen3FRLGE.Size = new System.Drawing.Size(577, 346);
+            this.tabGen3FRLGE.Size = new System.Drawing.Size(585, 329);
             this.tabGen3FRLGE.TabIndex = 3;
             this.tabGen3FRLGE.Text = "Gen III FRLGE";
             this.tabGen3FRLGE.UseVisualStyleBackColor = true;
@@ -754,6 +1073,16 @@ namespace RNGReporter
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Search Parameters";
             // 
+            // genFRLGEMaxFrame
+            // 
+            this.genFRLGEMaxFrame.Hex = false;
+            this.genFRLGEMaxFrame.Location = new System.Drawing.Point(72, 50);
+            this.genFRLGEMaxFrame.Mask = "000000";
+            this.genFRLGEMaxFrame.Name = "genFRLGEMaxFrame";
+            this.genFRLGEMaxFrame.Size = new System.Drawing.Size(90, 20);
+            this.genFRLGEMaxFrame.TabIndex = 7;
+            this.genFRLGEMaxFrame.Text = "10000";
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -763,6 +1092,16 @@ namespace RNGReporter
             this.label12.TabIndex = 9;
             this.label12.Text = "Min Frame:";
             this.label12.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // genFRLGEMinFrame
+            // 
+            this.genFRLGEMinFrame.Hex = false;
+            this.genFRLGEMinFrame.Location = new System.Drawing.Point(72, 24);
+            this.genFRLGEMinFrame.Mask = "000000";
+            this.genFRLGEMinFrame.Name = "genFRLGEMinFrame";
+            this.genFRLGEMinFrame.Size = new System.Drawing.Size(90, 20);
+            this.genFRLGEMinFrame.TabIndex = 6;
+            this.genFRLGEMinFrame.Text = "5000";
             // 
             // label14
             // 
@@ -805,6 +1144,53 @@ namespace RNGReporter
             this.label9.TabIndex = 27;
             this.label9.Text = "PID";
             // 
+            // genFRLGEPID
+            // 
+            this.genFRLGEPID.Hex = true;
+            this.genFRLGEPID.Location = new System.Drawing.Point(62, 17);
+            this.genFRLGEPID.Mask = "AAAAAAAA";
+            this.genFRLGEPID.Name = "genFRLGEPID";
+            this.genFRLGEPID.Size = new System.Drawing.Size(119, 20);
+            this.genFRLGEPID.TabIndex = 7;
+            this.toolTips.SetToolTip(this.genFRLGEPID, "Enter the PID you want shiny.");
+            // 
+            // genFRLGETID
+            // 
+            this.genFRLGETID.Hex = false;
+            this.genFRLGETID.Location = new System.Drawing.Point(62, 43);
+            this.genFRLGETID.Mask = "00000";
+            this.genFRLGETID.Name = "genFRLGETID";
+            this.genFRLGETID.Size = new System.Drawing.Size(119, 20);
+            this.genFRLGETID.TabIndex = 3;
+            this.genFRLGETID.Tag = "id/sid";
+            this.toolTips.SetToolTip(this.genFRLGETID, "Enter the TID you obtained.");
+            // 
+            // genCancelFRLGE
+            // 
+            this.genCancelFRLGE.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.genCancelFRLGE.ForeColor = System.Drawing.Color.Black;
+            this.genCancelFRLGE.Location = new System.Drawing.Point(204, 220);
+            this.genCancelFRLGE.Name = "genCancelFRLGE";
+            this.genCancelFRLGE.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.genCancelFRLGE.ShineColor = System.Drawing.SystemColors.Window;
+            this.genCancelFRLGE.Size = new System.Drawing.Size(177, 25);
+            this.genCancelFRLGE.TabIndex = 121;
+            this.genCancelFRLGE.Text = "Cancel";
+            this.genCancelFRLGE.Click += new System.EventHandler(this.genCancelFRLGE_Click);
+            // 
+            // genSearchFRLGE
+            // 
+            this.genSearchFRLGE.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.genSearchFRLGE.ForeColor = System.Drawing.Color.Black;
+            this.genSearchFRLGE.Location = new System.Drawing.Point(3, 220);
+            this.genSearchFRLGE.Name = "genSearchFRLGE";
+            this.genSearchFRLGE.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.genSearchFRLGE.ShineColor = System.Drawing.SystemColors.Window;
+            this.genSearchFRLGE.Size = new System.Drawing.Size(195, 25);
+            this.genSearchFRLGE.TabIndex = 31;
+            this.genSearchFRLGE.Text = "Find ID Frames";
+            this.genSearchFRLGE.Click += new System.EventHandler(this.genSearchFRLGE_Click);
+            // 
             // tabGen3RS
             // 
             this.tabGen3RS.Controls.Add(this.buttonIIICancel);
@@ -814,10 +1200,23 @@ namespace RNGReporter
             this.tabGen3RS.Location = new System.Drawing.Point(4, 22);
             this.tabGen3RS.Name = "tabGen3RS";
             this.tabGen3RS.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGen3RS.Size = new System.Drawing.Size(577, 346);
+            this.tabGen3RS.Size = new System.Drawing.Size(585, 329);
             this.tabGen3RS.TabIndex = 2;
             this.tabGen3RS.Text = "Gen III RS";
             this.tabGen3RS.UseVisualStyleBackColor = true;
+            // 
+            // buttonIIICancel
+            // 
+            this.buttonIIICancel.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.buttonIIICancel.ForeColor = System.Drawing.Color.Black;
+            this.buttonIIICancel.Location = new System.Drawing.Point(207, 226);
+            this.buttonIIICancel.Name = "buttonIIICancel";
+            this.buttonIIICancel.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.buttonIIICancel.ShineColor = System.Drawing.SystemColors.Window;
+            this.buttonIIICancel.Size = new System.Drawing.Size(177, 25);
+            this.buttonIIICancel.TabIndex = 120;
+            this.buttonIIICancel.Text = "Cancel";
+            this.buttonIIICancel.Click += new System.EventHandler(this.buttonIIICancel_Click);
             // 
             // groupBox4
             // 
@@ -840,6 +1239,17 @@ namespace RNGReporter
             this.groupBox4.TabIndex = 29;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Search Parameters";
+            // 
+            // maskedTextBox21
+            // 
+            this.maskedTextBox21.Enabled = false;
+            this.maskedTextBox21.Hex = true;
+            this.maskedTextBox21.Location = new System.Drawing.Point(98, 43);
+            this.maskedTextBox21.Mask = "AAAA";
+            this.maskedTextBox21.Name = "maskedTextBox21";
+            this.maskedTextBox21.ReadOnly = true;
+            this.maskedTextBox21.Size = new System.Drawing.Size(73, 20);
+            this.maskedTextBox21.TabIndex = 123;
             // 
             // radioButton1
             // 
@@ -889,6 +1299,16 @@ namespace RNGReporter
             this.label5.Text = "Minute:";
             this.label5.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // textIIIMaxFrame
+            // 
+            this.textIIIMaxFrame.Hex = false;
+            this.textIIIMaxFrame.Location = new System.Drawing.Point(72, 175);
+            this.textIIIMaxFrame.Mask = "000000";
+            this.textIIIMaxFrame.Name = "textIIIMaxFrame";
+            this.textIIIMaxFrame.Size = new System.Drawing.Size(90, 20);
+            this.textIIIMaxFrame.TabIndex = 7;
+            this.textIIIMaxFrame.Text = "10000";
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -909,6 +1329,16 @@ namespace RNGReporter
             this.label8.Text = "Hour:";
             this.label8.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // textIIIMinFrame
+            // 
+            this.textIIIMinFrame.Hex = false;
+            this.textIIIMinFrame.Location = new System.Drawing.Point(72, 149);
+            this.textIIIMinFrame.Mask = "000000";
+            this.textIIIMinFrame.Name = "textIIIMinFrame";
+            this.textIIIMinFrame.Size = new System.Drawing.Size(90, 20);
+            this.textIIIMinFrame.TabIndex = 6;
+            this.textIIIMinFrame.Text = "5000";
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -918,6 +1348,17 @@ namespace RNGReporter
             this.label7.TabIndex = 7;
             this.label7.Text = "Max Frame:";
             this.label7.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // textIIIMinute
+            // 
+            this.textIIIMinute.Enabled = false;
+            this.textIIIMinute.Hex = false;
+            this.textIIIMinute.Location = new System.Drawing.Point(72, 123);
+            this.textIIIMinute.Mask = "00";
+            this.textIIIMinute.Name = "textIIIMinute";
+            this.textIIIMinute.Size = new System.Drawing.Size(24, 20);
+            this.textIIIMinute.TabIndex = 30;
+            this.textIIIMinute.Text = "0";
             // 
             // dateIII
             // 
@@ -933,6 +1374,17 @@ namespace RNGReporter
             this.toolTips.SetToolTip(this.dateIII, "Select the date to search.");
             this.dateIII.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             // 
+            // textIIIHour
+            // 
+            this.textIIIHour.Enabled = false;
+            this.textIIIHour.Hex = false;
+            this.textIIIHour.Location = new System.Drawing.Point(72, 95);
+            this.textIIIHour.Mask = "00";
+            this.textIIIHour.Name = "textIIIHour";
+            this.textIIIHour.Size = new System.Drawing.Size(24, 20);
+            this.textIIIHour.TabIndex = 29;
+            this.textIIIHour.Text = "0";
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.textIIISID);
@@ -947,6 +1399,18 @@ namespace RNGReporter
             this.groupBox3.TabIndex = 25;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Search By";
+            // 
+            // textIIISID
+            // 
+            this.textIIISID.Enabled = false;
+            this.textIIISID.Hex = false;
+            this.textIIISID.Location = new System.Drawing.Point(62, 67);
+            this.textIIISID.Mask = "00000";
+            this.textIIISID.Name = "textIIISID";
+            this.textIIISID.Size = new System.Drawing.Size(119, 20);
+            this.textIIISID.TabIndex = 9;
+            this.textIIISID.Tag = "id/sid";
+            this.toolTips.SetToolTip(this.textIIISID, "Enter TID to search for here.");
             // 
             // checkIIISID
             // 
@@ -970,6 +1434,29 @@ namespace RNGReporter
             this.checkIIIPID.UseVisualStyleBackColor = true;
             this.checkIIIPID.CheckedChanged += new System.EventHandler(this.checkIIIPID_CheckedChanged);
             // 
+            // textIIIPID
+            // 
+            this.textIIIPID.Enabled = false;
+            this.textIIIPID.Hex = true;
+            this.textIIIPID.Location = new System.Drawing.Point(62, 17);
+            this.textIIIPID.Mask = "AAAAAAAA";
+            this.textIIIPID.Name = "textIIIPID";
+            this.textIIIPID.Size = new System.Drawing.Size(119, 20);
+            this.textIIIPID.TabIndex = 7;
+            this.toolTips.SetToolTip(this.textIIIPID, "Enter the full seed given by RNG Reporter.");
+            // 
+            // textIIITID
+            // 
+            this.textIIITID.Enabled = false;
+            this.textIIITID.Hex = false;
+            this.textIIITID.Location = new System.Drawing.Point(62, 43);
+            this.textIIITID.Mask = "00000";
+            this.textIIITID.Name = "textIIITID";
+            this.textIIITID.Size = new System.Drawing.Size(119, 20);
+            this.textIIITID.TabIndex = 3;
+            this.textIIITID.Tag = "id/sid";
+            this.toolTips.SetToolTip(this.textIIITID, "Enter TID to search for here.");
+            // 
             // checkIIITID
             // 
             this.checkIIITID.AutoSize = true;
@@ -980,6 +1467,19 @@ namespace RNGReporter
             this.checkIIITID.Text = "TID: ";
             this.checkIIITID.UseVisualStyleBackColor = true;
             this.checkIIITID.CheckedChanged += new System.EventHandler(this.checkIIITID_CheckedChanged);
+            // 
+            // buttonIIIFindFrames
+            // 
+            this.buttonIIIFindFrames.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.buttonIIIFindFrames.ForeColor = System.Drawing.Color.Black;
+            this.buttonIIIFindFrames.Location = new System.Drawing.Point(6, 226);
+            this.buttonIIIFindFrames.Name = "buttonIIIFindFrames";
+            this.buttonIIIFindFrames.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.buttonIIIFindFrames.ShineColor = System.Drawing.SystemColors.Window;
+            this.buttonIIIFindFrames.Size = new System.Drawing.Size(195, 25);
+            this.buttonIIIFindFrames.TabIndex = 26;
+            this.buttonIIIFindFrames.Text = "Find ID Frames";
+            this.buttonIIIFindFrames.Click += new System.EventHandler(this.buttonIIIFindFrames_Click);
             // 
             // tabGen4
             // 
@@ -992,7 +1492,7 @@ namespace RNGReporter
             this.tabGen4.Location = new System.Drawing.Point(4, 22);
             this.tabGen4.Name = "tabGen4";
             this.tabGen4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGen4.Size = new System.Drawing.Size(577, 329);
+            this.tabGen4.Size = new System.Drawing.Size(585, 329);
             this.tabGen4.TabIndex = 0;
             this.tabGen4.Text = "Gen IV";
             this.tabGen4.UseVisualStyleBackColor = true;
@@ -1001,11 +1501,24 @@ namespace RNGReporter
             // 
             this.labelBy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelBy.AutoSize = true;
-            this.labelBy.Location = new System.Drawing.Point(12, 14);
+            this.labelBy.Location = new System.Drawing.Point(20, 14);
             this.labelBy.Name = "labelBy";
             this.labelBy.Size = new System.Drawing.Size(62, 13);
             this.labelBy.TabIndex = 32;
             this.labelBy.Text = "By WildEep";
+            // 
+            // btnCredits
+            // 
+            this.btnCredits.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.btnCredits.ForeColor = System.Drawing.Color.Black;
+            this.btnCredits.Location = new System.Drawing.Point(99, 6);
+            this.btnCredits.Name = "btnCredits";
+            this.btnCredits.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.btnCredits.ShineColor = System.Drawing.SystemColors.Window;
+            this.btnCredits.Size = new System.Drawing.Size(90, 29);
+            this.btnCredits.TabIndex = 0;
+            this.btnCredits.Text = "Credits";
+            this.btnCredits.Click += new System.EventHandler(this.btnCredits_Click);
             // 
             // tabGen5
             // 
@@ -1018,10 +1531,23 @@ namespace RNGReporter
             this.tabGen5.Location = new System.Drawing.Point(4, 22);
             this.tabGen5.Name = "tabGen5";
             this.tabGen5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGen5.Size = new System.Drawing.Size(577, 329);
+            this.tabGen5.Size = new System.Drawing.Size(585, 329);
             this.tabGen5.TabIndex = 1;
             this.tabGen5.Text = "Gen V";
             this.tabGen5.UseVisualStyleBackColor = true;
+            // 
+            // buttonVFindSeedHit
+            // 
+            this.buttonVFindSeedHit.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.buttonVFindSeedHit.ForeColor = System.Drawing.Color.Black;
+            this.buttonVFindSeedHit.Location = new System.Drawing.Point(208, 296);
+            this.buttonVFindSeedHit.Name = "buttonVFindSeedHit";
+            this.buttonVFindSeedHit.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.buttonVFindSeedHit.ShineColor = System.Drawing.SystemColors.Window;
+            this.buttonVFindSeedHit.Size = new System.Drawing.Size(190, 25);
+            this.buttonVFindSeedHit.TabIndex = 15;
+            this.buttonVFindSeedHit.Text = "Find Seed Hit";
+            this.buttonVFindSeedHit.Click += new System.EventHandler(this.buttonVFindSeedHit_Click);
             // 
             // groupVSeedFinder
             // 
@@ -1046,6 +1572,26 @@ namespace RNGReporter
             this.groupVSeedFinder.TabStop = false;
             this.groupVSeedFinder.Text = "Seed Finder";
             // 
+            // textVMinute
+            // 
+            this.textVMinute.Hex = false;
+            this.textVMinute.Location = new System.Drawing.Point(139, 80);
+            this.textVMinute.Name = "textVMinute";
+            this.textVMinute.Size = new System.Drawing.Size(41, 20);
+            this.textVMinute.TabIndex = 10;
+            this.textVMinute.Text = "0";
+            this.toolTips.SetToolTip(this.textVMinute, "Enter the minute you started your game/");
+            // 
+            // textVHour
+            // 
+            this.textVHour.Hex = false;
+            this.textVHour.Location = new System.Drawing.Point(42, 80);
+            this.textVHour.Name = "textVHour";
+            this.textVHour.Size = new System.Drawing.Size(44, 20);
+            this.textVHour.TabIndex = 11;
+            this.textVHour.Text = "0";
+            this.toolTips.SetToolTip(this.textVHour, "Enter the hour that you started the game.");
+            // 
             // labelTIDReceived
             // 
             this.labelTIDReceived.AutoSize = true;
@@ -1064,6 +1610,25 @@ namespace RNGReporter
             this.labelVMinute.TabIndex = 25;
             this.labelVMinute.Text = "Minute:";
             // 
+            // textVTIDReceived
+            // 
+            this.textVTIDReceived.Hex = false;
+            this.textVTIDReceived.Location = new System.Drawing.Point(84, 28);
+            this.textVTIDReceived.Mask = "00000";
+            this.textVTIDReceived.Name = "textVTIDReceived";
+            this.textVTIDReceived.Size = new System.Drawing.Size(100, 20);
+            this.textVTIDReceived.TabIndex = 8;
+            this.toolTips.SetToolTip(this.textVTIDReceived, "Enter the ID you received here to see what seed you hit.");
+            // 
+            // textVMaxSec
+            // 
+            this.textVMaxSec.Hex = false;
+            this.textVMaxSec.Location = new System.Drawing.Point(139, 107);
+            this.textVMaxSec.Name = "textVMaxSec";
+            this.textVMaxSec.Size = new System.Drawing.Size(44, 20);
+            this.textVMaxSec.TabIndex = 13;
+            this.textVMaxSec.Text = "59";
+            // 
             // labelVHour
             // 
             this.labelVHour.AutoSize = true;
@@ -1073,6 +1638,15 @@ namespace RNGReporter
             this.labelVHour.TabIndex = 23;
             this.labelVHour.Text = "Hour:";
             // 
+            // textVMinSec
+            // 
+            this.textVMinSec.Hex = false;
+            this.textVMinSec.Location = new System.Drawing.Point(89, 107);
+            this.textVMinSec.Name = "textVMinSec";
+            this.textVMinSec.Size = new System.Drawing.Size(44, 20);
+            this.textVMinSec.TabIndex = 12;
+            this.textVMinSec.Text = "0";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -1081,6 +1655,15 @@ namespace RNGReporter
             this.label1.Size = new System.Drawing.Size(74, 13);
             this.label1.TabIndex = 18;
             this.label1.Text = "Min/Max Sec:";
+            // 
+            // textVMaxFrameHit
+            // 
+            this.textVMaxFrameHit.Hex = false;
+            this.textVMaxFrameHit.Location = new System.Drawing.Point(139, 133);
+            this.textVMaxFrameHit.Name = "textVMaxFrameHit";
+            this.textVMaxFrameHit.Size = new System.Drawing.Size(44, 20);
+            this.textVMaxFrameHit.TabIndex = 15;
+            this.textVMaxFrameHit.Text = "40";
             // 
             // dateTimeSeedSearch
             // 
@@ -1102,6 +1685,15 @@ namespace RNGReporter
             this.label3.Size = new System.Drawing.Size(33, 13);
             this.label3.TabIndex = 13;
             this.label3.Text = "Date:";
+            // 
+            // textVMinFrameHit
+            // 
+            this.textVMinFrameHit.Hex = false;
+            this.textVMinFrameHit.Location = new System.Drawing.Point(89, 133);
+            this.textVMinFrameHit.Name = "textVMinFrameHit";
+            this.textVMinFrameHit.Size = new System.Drawing.Size(44, 20);
+            this.textVMinFrameHit.TabIndex = 14;
+            this.textVMinFrameHit.Text = "10";
             // 
             // label2
             // 
@@ -1142,6 +1734,32 @@ namespace RNGReporter
             this.labelProfileInformation.Size = new System.Drawing.Size(0, 13);
             this.labelProfileInformation.TabIndex = 323;
             // 
+            // comboBoxProfiles
+            // 
+            this.comboBoxProfiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxProfiles.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxProfiles.FormattingEnabled = true;
+            this.comboBoxProfiles.Location = new System.Drawing.Point(6, 19);
+            this.comboBoxProfiles.MaxDropDownItems = 3;
+            this.comboBoxProfiles.Name = "comboBoxProfiles";
+            this.comboBoxProfiles.ShineColor = System.Drawing.SystemColors.Window;
+            this.comboBoxProfiles.Size = new System.Drawing.Size(119, 21);
+            this.comboBoxProfiles.TabIndex = 322;
+            this.comboBoxProfiles.SelectedIndexChanged += new System.EventHandler(this.comboBoxProfiles_SelectedIndexChanged);
+            // 
+            // buttonEditProfile
+            // 
+            this.buttonEditProfile.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.buttonEditProfile.ForeColor = System.Drawing.Color.Black;
+            this.buttonEditProfile.Location = new System.Drawing.Point(131, 17);
+            this.buttonEditProfile.Name = "buttonEditProfile";
+            this.buttonEditProfile.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.buttonEditProfile.ShineColor = System.Drawing.SystemColors.Window;
+            this.buttonEditProfile.Size = new System.Drawing.Size(39, 23);
+            this.buttonEditProfile.TabIndex = 321;
+            this.buttonEditProfile.Text = "Edit";
+            this.buttonEditProfile.Click += new System.EventHandler(this.buttonEditProfile_Click);
+            // 
             // groupVPID
             // 
             this.groupVPID.Controls.Add(this.textVSID);
@@ -1162,6 +1780,18 @@ namespace RNGReporter
             this.groupVPID.TabStop = false;
             this.groupVPID.Text = "Search By";
             // 
+            // textVSID
+            // 
+            this.textVSID.Enabled = false;
+            this.textVSID.Hex = false;
+            this.textVSID.Location = new System.Drawing.Point(100, 141);
+            this.textVSID.Mask = "00000";
+            this.textVSID.Name = "textVSID";
+            this.textVSID.Size = new System.Drawing.Size(81, 20);
+            this.textVSID.TabIndex = 9;
+            this.textVSID.Tag = "id/sid";
+            this.toolTips.SetToolTip(this.textVSID, "Enter TID to search for here.");
+            // 
             // checkVSID
             // 
             this.checkVSID.AutoSize = true;
@@ -1172,6 +1802,16 @@ namespace RNGReporter
             this.checkVSID.Text = "SID: ";
             this.checkVSID.UseVisualStyleBackColor = true;
             this.checkVSID.CheckedChanged += new System.EventHandler(this.checkVSID_CheckedChanged);
+            // 
+            // textVMaxAdvances
+            // 
+            this.textVMaxAdvances.Hex = false;
+            this.textVMaxAdvances.Location = new System.Drawing.Point(100, 68);
+            this.textVMaxAdvances.Mask = "00";
+            this.textVMaxAdvances.Name = "textVMaxAdvances";
+            this.textVMaxAdvances.Size = new System.Drawing.Size(81, 20);
+            this.textVMaxAdvances.TabIndex = 7;
+            this.textVMaxAdvances.Text = "5";
             // 
             // checkVPID
             // 
@@ -1193,6 +1833,17 @@ namespace RNGReporter
             this.labelVMaxFrame.TabIndex = 9;
             this.labelVMaxFrame.Text = "Max Advances:";
             // 
+            // textVPID
+            // 
+            this.textVPID.Enabled = false;
+            this.textVPID.Hex = true;
+            this.textVPID.Location = new System.Drawing.Point(100, 94);
+            this.textVPID.Mask = "AAAAAAAA";
+            this.textVPID.Name = "textVPID";
+            this.textVPID.Size = new System.Drawing.Size(81, 20);
+            this.textVPID.TabIndex = 7;
+            this.toolTips.SetToolTip(this.textVPID, "Enter the full seed given by RNG Reporter.");
+            // 
             // checkVMonth
             // 
             this.checkVMonth.AutoSize = true;
@@ -1203,6 +1854,18 @@ namespace RNGReporter
             this.checkVMonth.Text = "Search Entire Month";
             this.toolTips.SetToolTip(this.checkVMonth, "Choose any day during the month you want to search.");
             this.checkVMonth.UseVisualStyleBackColor = true;
+            // 
+            // textVTID
+            // 
+            this.textVTID.Enabled = false;
+            this.textVTID.Hex = false;
+            this.textVTID.Location = new System.Drawing.Point(100, 117);
+            this.textVTID.Mask = "00000";
+            this.textVTID.Name = "textVTID";
+            this.textVTID.Size = new System.Drawing.Size(81, 20);
+            this.textVTID.TabIndex = 3;
+            this.textVTID.Tag = "id/sid";
+            this.toolTips.SetToolTip(this.textVTID, "Enter TID to search for here.");
             // 
             // checkVTID
             // 
@@ -1236,669 +1899,6 @@ namespace RNGReporter
             this.dateTimeSearch.TabIndex = 4;
             this.toolTips.SetToolTip(this.dateTimeSearch, "Select the date to search.");
             this.dateTimeSearch.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            // 
-            // genCancelXDColo
-            // 
-            this.genCancelXDColo.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.genCancelXDColo.ForeColor = System.Drawing.Color.Black;
-            this.genCancelXDColo.Location = new System.Drawing.Point(204, 234);
-            this.genCancelXDColo.Name = "genCancelXDColo";
-            this.genCancelXDColo.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.genCancelXDColo.ShineColor = System.Drawing.SystemColors.Window;
-            this.genCancelXDColo.Size = new System.Drawing.Size(177, 25);
-            this.genCancelXDColo.TabIndex = 122;
-            this.genCancelXDColo.Text = "Cancel";
-            this.genCancelXDColo.Click += new System.EventHandler(this.genCancelXDColo_Click);
-            // 
-            // searchGenXDColo
-            // 
-            this.searchGenXDColo.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.searchGenXDColo.ForeColor = System.Drawing.Color.Black;
-            this.searchGenXDColo.Location = new System.Drawing.Point(3, 234);
-            this.searchGenXDColo.Name = "searchGenXDColo";
-            this.searchGenXDColo.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.searchGenXDColo.ShineColor = System.Drawing.SystemColors.Window;
-            this.searchGenXDColo.Size = new System.Drawing.Size(195, 25);
-            this.searchGenXDColo.TabIndex = 32;
-            this.searchGenXDColo.Text = "Find ID Frames";
-            this.searchGenXDColo.Click += new System.EventHandler(this.searchGenXDColo_Click);
-            // 
-            // XDColoMaxFrame
-            // 
-            this.XDColoMaxFrame.Hex = false;
-            this.XDColoMaxFrame.Location = new System.Drawing.Point(72, 50);
-            this.XDColoMaxFrame.Mask = "000000";
-            this.XDColoMaxFrame.Name = "XDColoMaxFrame";
-            this.XDColoMaxFrame.Size = new System.Drawing.Size(90, 20);
-            this.XDColoMaxFrame.TabIndex = 7;
-            this.XDColoMaxFrame.Text = "10000";
-            // 
-            // XDColoMinFrame
-            // 
-            this.XDColoMinFrame.Hex = false;
-            this.XDColoMinFrame.Location = new System.Drawing.Point(72, 24);
-            this.XDColoMinFrame.Mask = "000000";
-            this.XDColoMinFrame.Name = "XDColoMinFrame";
-            this.XDColoMinFrame.Size = new System.Drawing.Size(90, 20);
-            this.XDColoMinFrame.TabIndex = 6;
-            this.XDColoMinFrame.Text = "5000";
-            // 
-            // XDColoPID
-            // 
-            this.XDColoPID.Hex = true;
-            this.XDColoPID.Location = new System.Drawing.Point(62, 17);
-            this.XDColoPID.Mask = "AAAAAAAA";
-            this.XDColoPID.Name = "XDColoPID";
-            this.XDColoPID.Size = new System.Drawing.Size(119, 20);
-            this.XDColoPID.TabIndex = 7;
-            this.toolTips.SetToolTip(this.XDColoPID, "Enter the PID you want shiny.");
-            // 
-            // XDColoPRNG
-            // 
-            this.XDColoPRNG.Hex = true;
-            this.XDColoPRNG.Location = new System.Drawing.Point(62, 43);
-            this.XDColoPRNG.Mask = "AAAAAAAA";
-            this.XDColoPRNG.Name = "XDColoPRNG";
-            this.XDColoPRNG.Size = new System.Drawing.Size(119, 20);
-            this.XDColoPRNG.TabIndex = 3;
-            this.toolTips.SetToolTip(this.XDColoPRNG, "Enter the current PRNG state.");
-            // 
-            // genFRLGEMaxFrame
-            // 
-            this.genFRLGEMaxFrame.Hex = false;
-            this.genFRLGEMaxFrame.Location = new System.Drawing.Point(72, 50);
-            this.genFRLGEMaxFrame.Mask = "000000";
-            this.genFRLGEMaxFrame.Name = "genFRLGEMaxFrame";
-            this.genFRLGEMaxFrame.Size = new System.Drawing.Size(90, 20);
-            this.genFRLGEMaxFrame.TabIndex = 7;
-            this.genFRLGEMaxFrame.Text = "10000";
-            // 
-            // genFRLGEMinFrame
-            // 
-            this.genFRLGEMinFrame.Hex = false;
-            this.genFRLGEMinFrame.Location = new System.Drawing.Point(72, 24);
-            this.genFRLGEMinFrame.Mask = "000000";
-            this.genFRLGEMinFrame.Name = "genFRLGEMinFrame";
-            this.genFRLGEMinFrame.Size = new System.Drawing.Size(90, 20);
-            this.genFRLGEMinFrame.TabIndex = 6;
-            this.genFRLGEMinFrame.Text = "5000";
-            // 
-            // genFRLGEPID
-            // 
-            this.genFRLGEPID.Hex = true;
-            this.genFRLGEPID.Location = new System.Drawing.Point(62, 17);
-            this.genFRLGEPID.Mask = "AAAAAAAA";
-            this.genFRLGEPID.Name = "genFRLGEPID";
-            this.genFRLGEPID.Size = new System.Drawing.Size(119, 20);
-            this.genFRLGEPID.TabIndex = 7;
-            this.toolTips.SetToolTip(this.genFRLGEPID, "Enter the PID you want shiny.");
-            // 
-            // genFRLGETID
-            // 
-            this.genFRLGETID.Hex = false;
-            this.genFRLGETID.Location = new System.Drawing.Point(62, 43);
-            this.genFRLGETID.Mask = "00000";
-            this.genFRLGETID.Name = "genFRLGETID";
-            this.genFRLGETID.Size = new System.Drawing.Size(119, 20);
-            this.genFRLGETID.TabIndex = 3;
-            this.genFRLGETID.Tag = "id/sid";
-            this.toolTips.SetToolTip(this.genFRLGETID, "Enter the TID you obtained.");
-            // 
-            // genCancelFRLGE
-            // 
-            this.genCancelFRLGE.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.genCancelFRLGE.ForeColor = System.Drawing.Color.Black;
-            this.genCancelFRLGE.Location = new System.Drawing.Point(204, 220);
-            this.genCancelFRLGE.Name = "genCancelFRLGE";
-            this.genCancelFRLGE.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.genCancelFRLGE.ShineColor = System.Drawing.SystemColors.Window;
-            this.genCancelFRLGE.Size = new System.Drawing.Size(177, 25);
-            this.genCancelFRLGE.TabIndex = 121;
-            this.genCancelFRLGE.Text = "Cancel";
-            this.genCancelFRLGE.Click += new System.EventHandler(this.genCancelFRLGE_Click);
-            // 
-            // genSearchFRLGE
-            // 
-            this.genSearchFRLGE.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.genSearchFRLGE.ForeColor = System.Drawing.Color.Black;
-            this.genSearchFRLGE.Location = new System.Drawing.Point(3, 220);
-            this.genSearchFRLGE.Name = "genSearchFRLGE";
-            this.genSearchFRLGE.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.genSearchFRLGE.ShineColor = System.Drawing.SystemColors.Window;
-            this.genSearchFRLGE.Size = new System.Drawing.Size(195, 25);
-            this.genSearchFRLGE.TabIndex = 31;
-            this.genSearchFRLGE.Text = "Find ID Frames";
-            this.genSearchFRLGE.Click += new System.EventHandler(this.genSearchFRLGE_Click);
-            // 
-            // buttonIIICancel
-            // 
-            this.buttonIIICancel.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.buttonIIICancel.ForeColor = System.Drawing.Color.Black;
-            this.buttonIIICancel.Location = new System.Drawing.Point(207, 226);
-            this.buttonIIICancel.Name = "buttonIIICancel";
-            this.buttonIIICancel.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.buttonIIICancel.ShineColor = System.Drawing.SystemColors.Window;
-            this.buttonIIICancel.Size = new System.Drawing.Size(177, 25);
-            this.buttonIIICancel.TabIndex = 120;
-            this.buttonIIICancel.Text = "Cancel";
-            this.buttonIIICancel.Click += new System.EventHandler(this.buttonIIICancel_Click);
-            // 
-            // maskedTextBox21
-            // 
-            this.maskedTextBox21.Enabled = false;
-            this.maskedTextBox21.Hex = true;
-            this.maskedTextBox21.Location = new System.Drawing.Point(98, 43);
-            this.maskedTextBox21.Mask = "AAAA";
-            this.maskedTextBox21.Name = "maskedTextBox21";
-            this.maskedTextBox21.ReadOnly = true;
-            this.maskedTextBox21.Size = new System.Drawing.Size(73, 20);
-            this.maskedTextBox21.TabIndex = 123;
-            // 
-            // textIIIMaxFrame
-            // 
-            this.textIIIMaxFrame.Hex = false;
-            this.textIIIMaxFrame.Location = new System.Drawing.Point(72, 175);
-            this.textIIIMaxFrame.Mask = "000000";
-            this.textIIIMaxFrame.Name = "textIIIMaxFrame";
-            this.textIIIMaxFrame.Size = new System.Drawing.Size(90, 20);
-            this.textIIIMaxFrame.TabIndex = 7;
-            this.textIIIMaxFrame.Text = "10000";
-            // 
-            // textIIIMinFrame
-            // 
-            this.textIIIMinFrame.Hex = false;
-            this.textIIIMinFrame.Location = new System.Drawing.Point(72, 149);
-            this.textIIIMinFrame.Mask = "000000";
-            this.textIIIMinFrame.Name = "textIIIMinFrame";
-            this.textIIIMinFrame.Size = new System.Drawing.Size(90, 20);
-            this.textIIIMinFrame.TabIndex = 6;
-            this.textIIIMinFrame.Text = "5000";
-            // 
-            // textIIIMinute
-            // 
-            this.textIIIMinute.Enabled = false;
-            this.textIIIMinute.Hex = false;
-            this.textIIIMinute.Location = new System.Drawing.Point(72, 123);
-            this.textIIIMinute.Mask = "00";
-            this.textIIIMinute.Name = "textIIIMinute";
-            this.textIIIMinute.Size = new System.Drawing.Size(24, 20);
-            this.textIIIMinute.TabIndex = 30;
-            this.textIIIMinute.Text = "0";
-            // 
-            // textIIIHour
-            // 
-            this.textIIIHour.Enabled = false;
-            this.textIIIHour.Hex = false;
-            this.textIIIHour.Location = new System.Drawing.Point(72, 95);
-            this.textIIIHour.Mask = "00";
-            this.textIIIHour.Name = "textIIIHour";
-            this.textIIIHour.Size = new System.Drawing.Size(24, 20);
-            this.textIIIHour.TabIndex = 29;
-            this.textIIIHour.Text = "0";
-            // 
-            // textIIISID
-            // 
-            this.textIIISID.Enabled = false;
-            this.textIIISID.Hex = false;
-            this.textIIISID.Location = new System.Drawing.Point(62, 67);
-            this.textIIISID.Mask = "00000";
-            this.textIIISID.Name = "textIIISID";
-            this.textIIISID.Size = new System.Drawing.Size(119, 20);
-            this.textIIISID.TabIndex = 9;
-            this.textIIISID.Tag = "id/sid";
-            this.toolTips.SetToolTip(this.textIIISID, "Enter TID to search for here.");
-            // 
-            // textIIIPID
-            // 
-            this.textIIIPID.Enabled = false;
-            this.textIIIPID.Hex = true;
-            this.textIIIPID.Location = new System.Drawing.Point(62, 17);
-            this.textIIIPID.Mask = "AAAAAAAA";
-            this.textIIIPID.Name = "textIIIPID";
-            this.textIIIPID.Size = new System.Drawing.Size(119, 20);
-            this.textIIIPID.TabIndex = 7;
-            this.toolTips.SetToolTip(this.textIIIPID, "Enter the full seed given by RNG Reporter.");
-            // 
-            // textIIITID
-            // 
-            this.textIIITID.Enabled = false;
-            this.textIIITID.Hex = false;
-            this.textIIITID.Location = new System.Drawing.Point(62, 43);
-            this.textIIITID.Mask = "00000";
-            this.textIIITID.Name = "textIIITID";
-            this.textIIITID.Size = new System.Drawing.Size(119, 20);
-            this.textIIITID.TabIndex = 3;
-            this.textIIITID.Tag = "id/sid";
-            this.toolTips.SetToolTip(this.textIIITID, "Enter TID to search for here.");
-            // 
-            // buttonIIIFindFrames
-            // 
-            this.buttonIIIFindFrames.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.buttonIIIFindFrames.ForeColor = System.Drawing.Color.Black;
-            this.buttonIIIFindFrames.Location = new System.Drawing.Point(6, 226);
-            this.buttonIIIFindFrames.Name = "buttonIIIFindFrames";
-            this.buttonIIIFindFrames.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.buttonIIIFindFrames.ShineColor = System.Drawing.SystemColors.Window;
-            this.buttonIIIFindFrames.Size = new System.Drawing.Size(195, 25);
-            this.buttonIIIFindFrames.TabIndex = 26;
-            this.buttonIIIFindFrames.Text = "Find ID Frames";
-            this.buttonIIIFindFrames.Click += new System.EventHandler(this.buttonIIIFindFrames_Click);
-            // 
-            // btnSimpleGo
-            // 
-            this.btnSimpleGo.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.btnSimpleGo.ForeColor = System.Drawing.Color.Black;
-            this.btnSimpleGo.Location = new System.Drawing.Point(327, 7);
-            this.btnSimpleGo.Name = "btnSimpleGo";
-            this.btnSimpleGo.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.btnSimpleGo.ShineColor = System.Drawing.SystemColors.Window;
-            this.btnSimpleGo.Size = new System.Drawing.Size(38, 24);
-            this.btnSimpleGo.TabIndex = 30;
-            this.btnSimpleGo.Text = "Go";
-            this.btnSimpleGo.Click += new System.EventHandler(this.btnSimpleGo_Click);
-            // 
-            // textBoxSeed
-            // 
-            this.textBoxSeed.Hex = true;
-            this.textBoxSeed.Location = new System.Drawing.Point(256, 10);
-            this.textBoxSeed.Mask = "AAAAAAAA";
-            this.textBoxSeed.Name = "textBoxSeed";
-            this.textBoxSeed.Size = new System.Drawing.Size(65, 20);
-            this.textBoxSeed.TabIndex = 29;
-            // 
-            // textBoxShinyTID
-            // 
-            this.textBoxShinyTID.Enabled = false;
-            this.textBoxShinyTID.Hex = false;
-            this.textBoxShinyTID.Location = new System.Drawing.Point(104, 77);
-            this.textBoxShinyTID.Mask = "00000";
-            this.textBoxShinyTID.Name = "textBoxShinyTID";
-            this.textBoxShinyTID.Size = new System.Drawing.Size(37, 20);
-            this.textBoxShinyTID.TabIndex = 3;
-            // 
-            // btnShinyCancel
-            // 
-            this.btnShinyCancel.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.btnShinyCancel.Enabled = false;
-            this.btnShinyCancel.ForeColor = System.Drawing.Color.Black;
-            this.btnShinyCancel.Location = new System.Drawing.Point(11, 245);
-            this.btnShinyCancel.Name = "btnShinyCancel";
-            this.btnShinyCancel.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.btnShinyCancel.ShineColor = System.Drawing.SystemColors.Window;
-            this.btnShinyCancel.Size = new System.Drawing.Size(159, 29);
-            this.btnShinyCancel.TabIndex = 9;
-            this.btnShinyCancel.Text = "Cancel";
-            this.btnShinyCancel.Click += new System.EventHandler(this.btnShinyCancel_Click);
-            // 
-            // btnShinyGo
-            // 
-            this.btnShinyGo.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.btnShinyGo.ForeColor = System.Drawing.Color.Black;
-            this.btnShinyGo.Location = new System.Drawing.Point(10, 210);
-            this.btnShinyGo.Name = "btnShinyGo";
-            this.btnShinyGo.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.btnShinyGo.ShineColor = System.Drawing.SystemColors.Window;
-            this.btnShinyGo.Size = new System.Drawing.Size(159, 29);
-            this.btnShinyGo.TabIndex = 8;
-            this.btnShinyGo.Text = "Find Compatible Seeds";
-            this.btnShinyGo.Click += new System.EventHandler(this.btnShinyGo_Click);
-            // 
-            // txtShinyMaxDelay
-            // 
-            this.txtShinyMaxDelay.Hex = false;
-            this.txtShinyMaxDelay.Location = new System.Drawing.Point(104, 156);
-            this.txtShinyMaxDelay.Mask = "00000000";
-            this.txtShinyMaxDelay.Name = "txtShinyMaxDelay";
-            this.txtShinyMaxDelay.Size = new System.Drawing.Size(65, 20);
-            this.txtShinyMaxDelay.TabIndex = 6;
-            // 
-            // txtShinyMinDelay
-            // 
-            this.txtShinyMinDelay.Hex = false;
-            this.txtShinyMinDelay.Location = new System.Drawing.Point(104, 129);
-            this.txtShinyMinDelay.Mask = "00000000";
-            this.txtShinyMinDelay.Name = "txtShinyMinDelay";
-            this.txtShinyMinDelay.Size = new System.Drawing.Size(65, 20);
-            this.txtShinyMinDelay.TabIndex = 5;
-            // 
-            // textBoxShinyYear
-            // 
-            this.textBoxShinyYear.Hex = false;
-            this.textBoxShinyYear.Location = new System.Drawing.Point(104, 103);
-            this.textBoxShinyYear.Mask = "2\\000";
-            this.textBoxShinyYear.Name = "textBoxShinyYear";
-            this.textBoxShinyYear.Size = new System.Drawing.Size(35, 20);
-            this.textBoxShinyYear.TabIndex = 4;
-            // 
-            // textBoxShinyPID
-            // 
-            this.textBoxShinyPID.Hex = true;
-            this.textBoxShinyPID.Location = new System.Drawing.Point(104, 25);
-            this.textBoxShinyPID.Mask = "AAAAAAAA";
-            this.textBoxShinyPID.Name = "textBoxShinyPID";
-            this.textBoxShinyPID.Size = new System.Drawing.Size(65, 20);
-            this.textBoxShinyPID.TabIndex = 1;
-            // 
-            // btnIDCancel
-            // 
-            this.btnIDCancel.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.btnIDCancel.Enabled = false;
-            this.btnIDCancel.ForeColor = System.Drawing.Color.Black;
-            this.btnIDCancel.Location = new System.Drawing.Point(12, 245);
-            this.btnIDCancel.Name = "btnIDCancel";
-            this.btnIDCancel.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.btnIDCancel.ShineColor = System.Drawing.SystemColors.Window;
-            this.btnIDCancel.Size = new System.Drawing.Size(159, 29);
-            this.btnIDCancel.TabIndex = 18;
-            this.btnIDCancel.Text = "Cancel";
-            this.btnIDCancel.Click += new System.EventHandler(this.btnIDCancel_Click);
-            // 
-            // btnIDGo
-            // 
-            this.btnIDGo.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.btnIDGo.ForeColor = System.Drawing.Color.Black;
-            this.btnIDGo.Location = new System.Drawing.Point(12, 210);
-            this.btnIDGo.Name = "btnIDGo";
-            this.btnIDGo.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.btnIDGo.ShineColor = System.Drawing.SystemColors.Window;
-            this.btnIDGo.Size = new System.Drawing.Size(159, 29);
-            this.btnIDGo.TabIndex = 17;
-            this.btnIDGo.Text = "Find Compatible Seeds";
-            this.btnIDGo.Click += new System.EventHandler(this.btnIDGo_Click);
-            // 
-            // textBoxIDMaxDelay
-            // 
-            this.textBoxIDMaxDelay.Hex = false;
-            this.textBoxIDMaxDelay.Location = new System.Drawing.Point(106, 156);
-            this.textBoxIDMaxDelay.Mask = "00000000";
-            this.textBoxIDMaxDelay.Name = "textBoxIDMaxDelay";
-            this.textBoxIDMaxDelay.Size = new System.Drawing.Size(65, 20);
-            this.textBoxIDMaxDelay.TabIndex = 15;
-            // 
-            // textBoxIDMinDelay
-            // 
-            this.textBoxIDMinDelay.Hex = false;
-            this.textBoxIDMinDelay.Location = new System.Drawing.Point(106, 129);
-            this.textBoxIDMinDelay.Mask = "00000000";
-            this.textBoxIDMinDelay.Name = "textBoxIDMinDelay";
-            this.textBoxIDMinDelay.Size = new System.Drawing.Size(65, 20);
-            this.textBoxIDMinDelay.TabIndex = 14;
-            // 
-            // textBoxIDYear
-            // 
-            this.textBoxIDYear.Hex = false;
-            this.textBoxIDYear.Location = new System.Drawing.Point(106, 103);
-            this.textBoxIDYear.Mask = "2\\000";
-            this.textBoxIDYear.Name = "textBoxIDYear";
-            this.textBoxIDYear.Size = new System.Drawing.Size(49, 20);
-            this.textBoxIDYear.TabIndex = 13;
-            // 
-            // textBoxDesiredSID
-            // 
-            this.textBoxDesiredSID.Enabled = false;
-            this.textBoxDesiredSID.Hex = false;
-            this.textBoxDesiredSID.Location = new System.Drawing.Point(106, 77);
-            this.textBoxDesiredSID.Mask = "00000";
-            this.textBoxDesiredSID.Name = "textBoxDesiredSID";
-            this.textBoxDesiredSID.Size = new System.Drawing.Size(49, 20);
-            this.textBoxDesiredSID.TabIndex = 12;
-            // 
-            // textBoxDesiredTID
-            // 
-            this.textBoxDesiredTID.Hex = false;
-            this.textBoxDesiredTID.Location = new System.Drawing.Point(108, 25);
-            this.textBoxDesiredTID.Mask = "00000";
-            this.textBoxDesiredTID.Name = "textBoxDesiredTID";
-            this.textBoxDesiredTID.Size = new System.Drawing.Size(47, 20);
-            this.textBoxDesiredTID.TabIndex = 10;
-            // 
-            // txtSeedMaxDelay
-            // 
-            this.txtSeedMaxDelay.Hex = false;
-            this.txtSeedMaxDelay.Location = new System.Drawing.Point(112, 208);
-            this.txtSeedMaxDelay.Mask = "00000000";
-            this.txtSeedMaxDelay.Name = "txtSeedMaxDelay";
-            this.txtSeedMaxDelay.Size = new System.Drawing.Size(65, 20);
-            this.txtSeedMaxDelay.TabIndex = 26;
-            // 
-            // btnSeedGo
-            // 
-            this.btnSeedGo.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.btnSeedGo.ForeColor = System.Drawing.Color.Black;
-            this.btnSeedGo.Location = new System.Drawing.Point(12, 234);
-            this.btnSeedGo.Name = "btnSeedGo";
-            this.btnSeedGo.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.btnSeedGo.ShineColor = System.Drawing.SystemColors.Window;
-            this.btnSeedGo.Size = new System.Drawing.Size(159, 29);
-            this.btnSeedGo.TabIndex = 27;
-            this.btnSeedGo.Text = "Find Compatible Seeds";
-            this.btnSeedGo.Click += new System.EventHandler(this.btnSeedGo_Click);
-            // 
-            // txtSeedMinDelay
-            // 
-            this.txtSeedMinDelay.Hex = false;
-            this.txtSeedMinDelay.Location = new System.Drawing.Point(112, 182);
-            this.txtSeedMinDelay.Mask = "00000000";
-            this.txtSeedMinDelay.Name = "txtSeedMinDelay";
-            this.txtSeedMinDelay.Size = new System.Drawing.Size(65, 20);
-            this.txtSeedMinDelay.TabIndex = 25;
-            // 
-            // txtMinute
-            // 
-            this.txtMinute.Hex = false;
-            this.txtMinute.Location = new System.Drawing.Point(112, 156);
-            this.txtMinute.Mask = "00";
-            this.txtMinute.Name = "txtMinute";
-            this.txtMinute.Size = new System.Drawing.Size(24, 20);
-            this.txtMinute.TabIndex = 24;
-            // 
-            // txtHour
-            // 
-            this.txtHour.Hex = false;
-            this.txtHour.Location = new System.Drawing.Point(112, 129);
-            this.txtHour.Mask = "00";
-            this.txtHour.Name = "txtHour";
-            this.txtHour.Size = new System.Drawing.Size(24, 20);
-            this.txtHour.TabIndex = 23;
-            // 
-            // txtSeedYr
-            // 
-            this.txtSeedYr.Hex = false;
-            this.txtSeedYr.Location = new System.Drawing.Point(112, 103);
-            this.txtSeedYr.Mask = "2\\000";
-            this.txtSeedYr.Name = "txtSeedYr";
-            this.txtSeedYr.Size = new System.Drawing.Size(35, 20);
-            this.txtSeedYr.TabIndex = 22;
-            // 
-            // txtDay
-            // 
-            this.txtDay.Hex = false;
-            this.txtDay.Location = new System.Drawing.Point(112, 77);
-            this.txtDay.Mask = "00";
-            this.txtDay.Name = "txtDay";
-            this.txtDay.Size = new System.Drawing.Size(24, 20);
-            this.txtDay.TabIndex = 21;
-            // 
-            // txtMonth
-            // 
-            this.txtMonth.Hex = false;
-            this.txtMonth.Location = new System.Drawing.Point(112, 50);
-            this.txtMonth.Mask = "00";
-            this.txtMonth.Name = "txtMonth";
-            this.txtMonth.Size = new System.Drawing.Size(24, 20);
-            this.txtMonth.TabIndex = 20;
-            // 
-            // txtIDObtained
-            // 
-            this.txtIDObtained.Hex = false;
-            this.txtIDObtained.Location = new System.Drawing.Point(112, 25);
-            this.txtIDObtained.Mask = "00000";
-            this.txtIDObtained.Name = "txtIDObtained";
-            this.txtIDObtained.Size = new System.Drawing.Size(49, 20);
-            this.txtIDObtained.TabIndex = 19;
-            // 
-            // btnCredits
-            // 
-            this.btnCredits.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.btnCredits.ForeColor = System.Drawing.Color.Black;
-            this.btnCredits.Location = new System.Drawing.Point(99, 6);
-            this.btnCredits.Name = "btnCredits";
-            this.btnCredits.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.btnCredits.ShineColor = System.Drawing.SystemColors.Window;
-            this.btnCredits.Size = new System.Drawing.Size(90, 29);
-            this.btnCredits.TabIndex = 0;
-            this.btnCredits.Text = "Credits";
-            this.btnCredits.Click += new System.EventHandler(this.btnCredits_Click);
-            // 
-            // buttonVFindSeedHit
-            // 
-            this.buttonVFindSeedHit.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.buttonVFindSeedHit.ForeColor = System.Drawing.Color.Black;
-            this.buttonVFindSeedHit.Location = new System.Drawing.Point(208, 296);
-            this.buttonVFindSeedHit.Name = "buttonVFindSeedHit";
-            this.buttonVFindSeedHit.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.buttonVFindSeedHit.ShineColor = System.Drawing.SystemColors.Window;
-            this.buttonVFindSeedHit.Size = new System.Drawing.Size(190, 25);
-            this.buttonVFindSeedHit.TabIndex = 15;
-            this.buttonVFindSeedHit.Text = "Find Seed Hit";
-            this.buttonVFindSeedHit.Click += new System.EventHandler(this.buttonVFindSeedHit_Click);
-            // 
-            // textVMinute
-            // 
-            this.textVMinute.Hex = false;
-            this.textVMinute.Location = new System.Drawing.Point(139, 80);
-            this.textVMinute.Name = "textVMinute";
-            this.textVMinute.Size = new System.Drawing.Size(41, 20);
-            this.textVMinute.TabIndex = 10;
-            this.textVMinute.Text = "0";
-            this.toolTips.SetToolTip(this.textVMinute, "Enter the minute you started your game/");
-            // 
-            // textVHour
-            // 
-            this.textVHour.Hex = false;
-            this.textVHour.Location = new System.Drawing.Point(42, 80);
-            this.textVHour.Name = "textVHour";
-            this.textVHour.Size = new System.Drawing.Size(44, 20);
-            this.textVHour.TabIndex = 11;
-            this.textVHour.Text = "0";
-            this.toolTips.SetToolTip(this.textVHour, "Enter the hour that you started the game.");
-            // 
-            // textVTIDReceived
-            // 
-            this.textVTIDReceived.Hex = false;
-            this.textVTIDReceived.Location = new System.Drawing.Point(84, 28);
-            this.textVTIDReceived.Mask = "00000";
-            this.textVTIDReceived.Name = "textVTIDReceived";
-            this.textVTIDReceived.Size = new System.Drawing.Size(100, 20);
-            this.textVTIDReceived.TabIndex = 8;
-            this.toolTips.SetToolTip(this.textVTIDReceived, "Enter the ID you received here to see what seed you hit.");
-            // 
-            // textVMaxSec
-            // 
-            this.textVMaxSec.Hex = false;
-            this.textVMaxSec.Location = new System.Drawing.Point(139, 107);
-            this.textVMaxSec.Name = "textVMaxSec";
-            this.textVMaxSec.Size = new System.Drawing.Size(44, 20);
-            this.textVMaxSec.TabIndex = 13;
-            this.textVMaxSec.Text = "59";
-            // 
-            // textVMinSec
-            // 
-            this.textVMinSec.Hex = false;
-            this.textVMinSec.Location = new System.Drawing.Point(89, 107);
-            this.textVMinSec.Name = "textVMinSec";
-            this.textVMinSec.Size = new System.Drawing.Size(44, 20);
-            this.textVMinSec.TabIndex = 12;
-            this.textVMinSec.Text = "0";
-            // 
-            // textVMaxFrameHit
-            // 
-            this.textVMaxFrameHit.Hex = false;
-            this.textVMaxFrameHit.Location = new System.Drawing.Point(139, 133);
-            this.textVMaxFrameHit.Name = "textVMaxFrameHit";
-            this.textVMaxFrameHit.Size = new System.Drawing.Size(44, 20);
-            this.textVMaxFrameHit.TabIndex = 15;
-            this.textVMaxFrameHit.Text = "40";
-            // 
-            // textVMinFrameHit
-            // 
-            this.textVMinFrameHit.Hex = false;
-            this.textVMinFrameHit.Location = new System.Drawing.Point(89, 133);
-            this.textVMinFrameHit.Name = "textVMinFrameHit";
-            this.textVMinFrameHit.Size = new System.Drawing.Size(44, 20);
-            this.textVMinFrameHit.TabIndex = 14;
-            this.textVMinFrameHit.Text = "10";
-            // 
-            // comboBoxProfiles
-            // 
-            this.comboBoxProfiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxProfiles.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxProfiles.FormattingEnabled = true;
-            this.comboBoxProfiles.Location = new System.Drawing.Point(6, 19);
-            this.comboBoxProfiles.MaxDropDownItems = 3;
-            this.comboBoxProfiles.Name = "comboBoxProfiles";
-            this.comboBoxProfiles.ShineColor = System.Drawing.SystemColors.Window;
-            this.comboBoxProfiles.Size = new System.Drawing.Size(119, 21);
-            this.comboBoxProfiles.TabIndex = 322;
-            this.comboBoxProfiles.SelectedIndexChanged += new System.EventHandler(this.comboBoxProfiles_SelectedIndexChanged);
-            // 
-            // buttonEditProfile
-            // 
-            this.buttonEditProfile.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.buttonEditProfile.ForeColor = System.Drawing.Color.Black;
-            this.buttonEditProfile.Location = new System.Drawing.Point(131, 17);
-            this.buttonEditProfile.Name = "buttonEditProfile";
-            this.buttonEditProfile.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.buttonEditProfile.ShineColor = System.Drawing.SystemColors.Window;
-            this.buttonEditProfile.Size = new System.Drawing.Size(39, 23);
-            this.buttonEditProfile.TabIndex = 321;
-            this.buttonEditProfile.Text = "Edit";
-            this.buttonEditProfile.Click += new System.EventHandler(this.buttonEditProfile_Click);
-            // 
-            // textVSID
-            // 
-            this.textVSID.Enabled = false;
-            this.textVSID.Hex = false;
-            this.textVSID.Location = new System.Drawing.Point(100, 141);
-            this.textVSID.Mask = "00000";
-            this.textVSID.Name = "textVSID";
-            this.textVSID.Size = new System.Drawing.Size(81, 20);
-            this.textVSID.TabIndex = 9;
-            this.textVSID.Tag = "id/sid";
-            this.toolTips.SetToolTip(this.textVSID, "Enter TID to search for here.");
-            // 
-            // textVMaxAdvances
-            // 
-            this.textVMaxAdvances.Hex = false;
-            this.textVMaxAdvances.Location = new System.Drawing.Point(100, 68);
-            this.textVMaxAdvances.Mask = "00";
-            this.textVMaxAdvances.Name = "textVMaxAdvances";
-            this.textVMaxAdvances.Size = new System.Drawing.Size(81, 20);
-            this.textVMaxAdvances.TabIndex = 7;
-            this.textVMaxAdvances.Text = "5";
-            // 
-            // textVPID
-            // 
-            this.textVPID.Enabled = false;
-            this.textVPID.Hex = true;
-            this.textVPID.Location = new System.Drawing.Point(100, 94);
-            this.textVPID.Mask = "AAAAAAAA";
-            this.textVPID.Name = "textVPID";
-            this.textVPID.Size = new System.Drawing.Size(81, 20);
-            this.textVPID.TabIndex = 7;
-            this.toolTips.SetToolTip(this.textVPID, "Enter the full seed given by RNG Reporter.");
-            // 
-            // textVTID
-            // 
-            this.textVTID.Enabled = false;
-            this.textVTID.Hex = false;
-            this.textVTID.Location = new System.Drawing.Point(100, 117);
-            this.textVTID.Mask = "00000";
-            this.textVTID.Name = "textVTID";
-            this.textVTID.Size = new System.Drawing.Size(81, 20);
-            this.textVTID.TabIndex = 3;
-            this.textVTID.Tag = "id/sid";
-            this.toolTips.SetToolTip(this.textVTID, "Enter TID to search for here.");
             // 
             // buttonVFindSeeds
             // 
@@ -1934,7 +1934,7 @@ namespace RNGReporter
             this.dgvResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.clmSeed,
             this.clmFrame,
@@ -1954,7 +1954,7 @@ namespace RNGReporter
             this.dgvResults.RowHeadersVisible = false;
             this.dgvResults.RowTemplate.Height = 20;
             this.dgvResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvResults.Size = new System.Drawing.Size(585, 267);
+            this.dgvResults.Size = new System.Drawing.Size(593, 267);
             this.dgvResults.TabIndex = 25;
             this.dgvResults.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewCapValues_ColumnHeaderMouseClick);
             this.dgvResults.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvResults_MouseDown);
@@ -1981,6 +1981,7 @@ namespace RNGReporter
             this.clmInitialFrame.Name = "clmInitialFrame";
             this.clmInitialFrame.ReadOnly = true;
             this.clmInitialFrame.Visible = false;
+            this.clmInitialFrame.Width = 75;
             // 
             // clmID
             // 
@@ -2038,7 +2039,7 @@ namespace RNGReporter
             // 
             // clmButton
             // 
-            this.clmButton.DataPropertyName = "Button";
+            this.clmButton.DataPropertyName = "Keypress";
             this.clmButton.HeaderText = "Buttons";
             this.clmButton.Name = "clmButton";
             this.clmButton.ReadOnly = true;
@@ -2048,7 +2049,7 @@ namespace RNGReporter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(607, 657);
+            this.ClientSize = new System.Drawing.Size(615, 657);
             this.Controls.Add(this.tabGenSelect);
             this.Controls.Add(this.dgvResults);
             this.Controls.Add(this.StatusBar);
@@ -2195,17 +2196,6 @@ namespace RNGReporter
         private System.ComponentModel.BackgroundWorker bgwShinyInf;
         private System.Windows.Forms.ToolStripStatusLabel lblAction;
         private MaskedTextBox2 textBoxSeed;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmSeed;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmFrame;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmInitialFrame;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmSID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmDelay;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmSeconds;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmStarter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmButton;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem copySeedToClipboardToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
@@ -2268,5 +2258,16 @@ namespace RNGReporter
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
         private MaskedTextBox2 maskedTextBox21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmSeed;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmFrame;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmInitialFrame;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmSID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmDelay;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmSeconds;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmStarter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmButton;
     }
 }
