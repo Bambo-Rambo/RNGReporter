@@ -123,7 +123,7 @@ namespace RNGReporter
                     new ComboBoxItem("Bubble Spot", EncounterType.WildWaterSpot),
                     new ComboBoxItem("Fishing Spot", EncounterType.WildFishingSpot),
                     new ComboBoxItem("Cave Spot", EncounterType.WildCaveSpot),
-                    new ComboBoxItem("Driftveil Drawbridge", EncounterType.WildDriftveil),
+                    new ComboBoxItem("Flying Shadow", EncounterType.WildShadow),
                     new ComboBoxItem("Stationary", EncounterType.Stationary),
                     new ComboBoxItem("Roamer", EncounterType.Roamer),
                     new ComboBoxItem("Gift Pokémon", EncounterType.Gift),

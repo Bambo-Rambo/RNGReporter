@@ -36,7 +36,7 @@ namespace RNGReporter.Objects
         WildSwarm,
         WildShakerGrass,
         WildCaveSpot,
-        WildDriftveil,
+        WildShadow,
         Roamer,
         Stationary,
         Gift,
@@ -184,8 +184,8 @@ namespace RNGReporter.Objects
                     return EncounterType.WildFishingSpot;
                 case "Wild Pokémon (Cave Spot)":
                     return EncounterType.WildCaveSpot;
-                case "Driftveil Drawbridge":
-                    return EncounterType.WildDriftveil;
+                case "Wild Pokémon (Flying Shadow)":
+                    return EncounterType.WildShadow;
                 case "Roaming Pokémon":
                     return EncounterType.Roamer;
                 case "Stationary Pokémon":

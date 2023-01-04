@@ -42,7 +42,7 @@ namespace RNGReporter.Objects
             bool G5_WildWaterSpot = EncounterType == EncounterType.WildWaterSpot;
             bool G5_WildFishingSpot = EncounterType == EncounterType.WildFishingSpot;
             bool G5_WildCaveSpot = EncounterType == EncounterType.WildCaveSpot;
-            bool G5_WildDriftveil = EncounterType == EncounterType.WildDriftveil;
+            bool G5_WildShadow = EncounterType == EncounterType.WildShadow;
             bool G5_WildSwarm = EncounterType == EncounterType.WildSwarm;
             bool G5_Roamer = EncounterType == EncounterType.Roamer;
             bool G5_Stationary = EncounterType == EncounterType.Stationary;
@@ -58,7 +58,7 @@ namespace RNGReporter.Objects
 
             bool G5_WildEncounter =
                 G5_Wild || G5_WildDarkGrass || G5_WildShakerGrass || G5_WildSurfing || 
-                G5_WildSuperRod ||  G5_WildWaterSpot || G5_WildFishingSpot || G5_WildCaveSpot || G5_WildDriftveil || G5_WildSwarm;
+                G5_WildSuperRod ||  G5_WildWaterSpot || G5_WildFishingSpot || G5_WildCaveSpot || G5_WildShadow || G5_WildSwarm;
 
             bool TimeFinder5 = EncounterMod == EncounterMod.Search;            // WHY WAS THE SEARCHER ADDED TO ENCOUNTER MODS???
             bool IsSync = EncounterMod == EncounterMod.Synchronize;
@@ -242,7 +242,7 @@ namespace RNGReporter.Objects
 
                     }
 
-                    else if (G5_WildCaveSpot || G5_WildDriftveil)
+                    else if (G5_WildCaveSpot || G5_WildShadow)
                     {
                         if (TimeFinder5)
                         {
