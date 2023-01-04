@@ -2225,6 +2225,7 @@ namespace RNGReporter
                         "Wild Pokémon (Bubble Spot)",
                         "Wild Pokémon (Fishing Spot)",
                         "Wild Pokémon (Cave Spot)",
+                        "Driftveil Drawbridge",
                         "Roaming Pokémon",
                         "Stationary Pokémon",
                         "Gift Pokémon",

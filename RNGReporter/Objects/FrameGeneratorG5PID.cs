@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Security.Cryptography;
+using System.Windows.Forms;
 
 namespace RNGReporter.Objects
 {
@@ -41,6 +42,7 @@ namespace RNGReporter.Objects
             bool G5_WildWaterSpot = EncounterType == EncounterType.WildWaterSpot;
             bool G5_WildFishingSpot = EncounterType == EncounterType.WildFishingSpot;
             bool G5_WildCaveSpot = EncounterType == EncounterType.WildCaveSpot;
+            bool G5_WildDriftveil = EncounterType == EncounterType.WildDriftveil;
             bool G5_WildSwarm = EncounterType == EncounterType.WildSwarm;
             bool G5_Roamer = EncounterType == EncounterType.Roamer;
             bool G5_Stationary = EncounterType == EncounterType.Stationary;
@@ -56,13 +58,15 @@ namespace RNGReporter.Objects
 
             bool G5_WildEncounter =
                 G5_Wild || G5_WildDarkGrass || G5_WildShakerGrass || G5_WildSurfing || 
-                G5_WildSuperRod ||  G5_WildWaterSpot || G5_WildFishingSpot || G5_WildCaveSpot || G5_WildSwarm;
+                G5_WildSuperRod ||  G5_WildWaterSpot || G5_WildFishingSpot || G5_WildCaveSpot || G5_WildDriftveil || G5_WildSwarm;
 
             bool TimeFinder5 = EncounterMod == EncounterMod.Search;            // WHY WAS THE SEARCHER ADDED TO ENCOUNTER MODS???
             bool IsSync = EncounterMod == EncounterMod.Synchronize;
             bool IsCuteCharm = EncounterMod == EncounterMod.CuteCharm;
             bool IsCompEyes = EncounterMod == EncounterMod.Compoundeyes;
             bool IsSuctionCups = EncounterMod == EncounterMod.SuctionCups;
+
+            ulong BattleParam = (ulong)(G5_WildCaveSpot ? 400 : 200);
 
             // Fix later
             if (InitialFrame <= 1)
@@ -238,12 +242,12 @@ namespace RNGReporter.Objects
 
                     }
 
-                    else if (G5_WildCaveSpot)
+                    else if (G5_WildCaveSpot || G5_WildDriftveil)
                     {
                         if (TimeFinder5)
                         {
                             //Advance(1);
-                            if (!CheckBattle())
+                            if (!CheckBattle(BattleParam))
                                 continue;
 
                             // Let's do Suction Cups since it affects the hittable frames
@@ -267,7 +271,7 @@ namespace RNGReporter.Objects
 
                             // Restore the RNG state in order to check for Cute Charm
                             pointer = 0;
-                            if (!CheckBattle())
+                            if (!CheckBattle(BattleParam))
                                 continue;
 
                             if (CheckLead(true))      //Cute Charm Success
@@ -279,7 +283,7 @@ namespace RNGReporter.Objects
 
                             // Restore the RNG state in order to check for Sync / No Lead
                             pointer = 0;
-                            if (!CheckBattle())
+                            if (!CheckBattle(BattleParam))
                                 continue;
 
                             synchable = CheckLead(false);
@@ -295,7 +299,7 @@ namespace RNGReporter.Objects
                         }
                         else
                         {
-                            bool battle = CheckBattle();
+                            bool battle = CheckBattle(BattleParam);
 
                             if (!(IsCompEyes || IsSuctionCups))
                                 synchable = CheckLead(IsCuteCharm);         // Temporarily use synchable for Cute charm
@@ -305,7 +309,7 @@ namespace RNGReporter.Objects
                             if (IsCuteCharm && !synchable)
                                 Advance(1);
 
-                            encounterSlot = battle ? getSlot() : FindItem();
+                            encounterSlot = battle ? getSlot() : FindItem(G5_WildCaveSpot);
 
                             Advance(1);     // Level is fixed for Cave spots slots
 
@@ -968,7 +972,7 @@ namespace RNGReporter.Objects
 
         public byte getLevel(ulong seed) => (byte)((uint)(seed * 100 >> 32) % (MaxLevel - MinLevel + 1) + MinLevel);
 
-        private bool CheckBattle() => ((ulong)NextRand() * 1000 >> 32) < 400;
+        private bool CheckBattle(ulong battleParam) => ((ulong)NextRand() * 1000 >> 32) < battleParam;
 
         private bool DoubleEnc_Swarm() => ((ulong)NextRand() * 100 >> 32) < 40;
 
@@ -979,16 +983,28 @@ namespace RNGReporter.Objects
             //return ((((ulong)seed) * 0xFFFF) >> 32) / 0x290; // -> Alternative
         }
 
-        //Item calculation has minor mistakes, maybe check later
-        private int FindItem()
+        //Cave item calculation has minor mistakes, maybe check later
+        private int FindItem(bool cave)
         {
-            uint calc = ((ulong)CurrentRand() * 1000 >> 32) < 100 ? 1000u : 1700u;
-            uint result = (uint)((ulong)NextRand() * calc >> 32) / 100;
+            if (cave)
+            {
+                uint calc = ((ulong)CurrentRand() * 1000 >> 32) < 100 ? 1000u : 1700u;
+                uint result = (uint)((ulong)NextRand() * calc >> 32) / 100;
 
-            if (calc == 1000)
-                return (int)result + 13;
+                if (calc == 1000)
+                    return (int)result + 13;
+                else
+                    return (int)result + 23;
+            }
             else
-                return (int)result + 23;
+            {
+                uint calc = (uint)((ulong)CurrentRand() * 1000 >> 32);
+                if (calc > 900)
+                    return 0x23B;   // Pretty Wing
+                else
+                    return (int)(((ulong)NextRand() * 6 >> 32) + 0x235);
+            }
+            
         }
 
     }

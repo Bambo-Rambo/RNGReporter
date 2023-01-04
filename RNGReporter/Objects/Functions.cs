@@ -169,8 +169,29 @@ namespace RNGReporter.Objects
 
         public static string encounterItems(int slot)
         {
-            if (slot < 12 || slot > 41)
+            if (slot < 12)// || slot > 41)
                 return slot.ToString();
+
+            if (slot > 500)
+            {
+                switch (slot)
+                {
+                    case 0x235:
+                        return "Health Wing";
+                    case 0x236:
+                        return "Muscle Wing";
+                    case 0x237:
+                        return "Resist Wing";
+                    case 0x238:
+                        return "Genius Wing";
+                    case 0x239:
+                        return "Clever Wing";
+                    case 0x23A:
+                        return "Swift Wing";
+                    default:    // 0x23B
+                        return "Pretty Wing";
+                }
+            }
 
             switch ((Language) Settings.Default.Language)
             {

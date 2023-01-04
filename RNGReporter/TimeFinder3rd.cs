@@ -29,6 +29,7 @@ using RNGReporter.Properties;
 using System.Linq;
 using System.Globalization;
 using RNGReporter.Controls;
+using System.Security.Cryptography;
 
 namespace RNGReporter
 {
@@ -173,6 +174,7 @@ namespace RNGReporter
             glassComboBoxAbilityFRLG.DataSource = ability;
             glassComboBoxAbilityFRLG.SelectedIndex = 0;
             compatibilityFRLG.SelectedIndex = 0;
+            methodFRLG.SelectedIndex = 0;
             glassComboBoxGenderFRLG.SelectedIndex = 0;
 
             var everstoneList = new BindingSource { DataSource = Objects.Nature.NatureDropDownCollectionSynch() };
@@ -485,6 +487,7 @@ namespace RNGReporter
             {
                 waitHandle.WaitOne();
                 ivGenerator.StaticPID = frame.Pid;
+
                 List<Frame> shinyFrames = ivGenerator.Generate(subFrameCompare, id, sid);
 
                 progressSearched += searchRange;
@@ -511,6 +514,13 @@ namespace RNGReporter
                         DisplaySpdInh = shinyFrame.DisplaySpd,
                         DisplaySpeInh = shinyFrame.DisplaySpe
                     };
+
+                    
+
+                    //lowerHalf = (ushort)iframe.Pid;
+                    //if ((iframe.Pid >> 16) >= 0xEFF0)
+                        //return;
+                    //MessageBox.Show("" + (iframe.Pid >> 16).ToString("X"));
 
                     lock (threadLock)
                     {
@@ -1857,9 +1867,15 @@ namespace RNGReporter
             checkBoxNatureFRLG.ClearSelection();
         }
 
+        private void lowerHalfBox_CheckedChanged(object sender, EventArgs e)
+        {
+            lowerHalfPID.Enabled = lowerHalfBox.Checked;
+            label61.Enabled = compatibilityFRLG.Enabled = !lowerHalfBox.Checked;
+        }
+
         private void generateFRLGEggShiny_Click(object sender, EventArgs e)
         {
-            uint.TryParse(textBoxSeed.Text, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out uint seed); ;
+            uint.TryParse(textBoxSeed.Text, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out uint seed);
 
             if (tidFRLG.Text != "")
                 id = ushort.Parse(tidFRLG.Text);
@@ -1941,8 +1957,38 @@ namespace RNGReporter
             else
                 lowerGenerator.Compatibility = 20;
 
-            lowerGenerator.FrameType = FrameType.FRLGBredLower;
+            switch (methodFRLG.SelectedIndex)
+            {
+                case 0:     // Normal
+                    lowerGenerator.FrameType = FrameType.FRLGBredLower;
+                    break;
+                case 1:     // Split
+                    lowerGenerator.FrameType = FrameType.BredSplit;
+                    break;
+                case 2:     // Alternate
+                    lowerGenerator.FrameType = FrameType.BredAlternate;
+                    break;
+                case 3:     // Mixed
+
+                    break;
+            }
             ivGenerator.FrameType = FrameType.FRLGBredUpper;
+
+
+            // Added code for half PID method
+            if (lowerHalfBox.Checked)
+            {
+                maxHeldFrame = minHeldFrame;
+                dataGridViewTextBoxColumn42.Visible = dataGridViewTextBoxColumn43.Visible = false;
+                ivGenerator.HalfPID = true;
+                lowerGenerator.Compatibility = 100;
+            }
+            else
+            {
+                dataGridViewTextBoxColumn42.Visible = dataGridViewTextBoxColumn43.Visible = true;
+                ivGenerator.HalfPID = false;
+            }
+
 
             lowerGenerator.InitialFrame = minHeldFrame;
             ivGenerator.InitialFrame = minPickupFrame;
@@ -1954,7 +2000,10 @@ namespace RNGReporter
             ivGenerator.InitialSeed = seed;
 
             ivGenerator.ParentA = parentA;
-            ivGenerator.ParentB = parentB;
+            ivGenerator.ParentB = parentB;  
+
+            uint.TryParse(lowerHalfPID.Text, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out uint PIDHalfValue);
+            ivGenerator.halfPIDvalue = PIDHalfValue;
 
             List<uint> natures = null;
             if (checkBoxNatureFRLG.Text != "Any" && checkBoxNatureFRLG.CheckBoxItems.Count > 0)

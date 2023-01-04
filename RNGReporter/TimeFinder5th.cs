@@ -123,6 +123,7 @@ namespace RNGReporter
                     new ComboBoxItem("Bubble Spot", EncounterType.WildWaterSpot),
                     new ComboBoxItem("Fishing Spot", EncounterType.WildFishingSpot),
                     new ComboBoxItem("Cave Spot", EncounterType.WildCaveSpot),
+                    new ComboBoxItem("Driftveil Drawbridge", EncounterType.WildDriftveil),
                     new ComboBoxItem("Stationary", EncounterType.Stationary),
                     new ComboBoxItem("Roamer", EncounterType.Roamer),
                     new ComboBoxItem("Gift Pokémon", EncounterType.Gift),
@@ -2467,7 +2468,7 @@ namespace RNGReporter
 
             maskedTextBoxMaxShiny.Visible = labelMaxShiny.Visible = checkBoxShinyOnly.Visible && checkBoxShinyOnly.Checked;
 
-            checkBox256.Visible = maskedTextBoxPID.Visible = comboBoxEncounterType.SelectedIndex >= 14;
+            checkBox256.Visible = maskedTextBoxPID.Visible = comboBoxEncounterType.SelectedIndex >= 15;
 
         }
 

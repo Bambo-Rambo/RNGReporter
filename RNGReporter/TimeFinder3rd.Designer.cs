@@ -409,6 +409,10 @@ namespace RNGReporter
             this.maskedTextBoxShiny3rdID = new RNGReporter.Controls.MaskedTextBox2();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageShinyFRLGEgg = new System.Windows.Forms.TabPage();
+            this.lowerHalfPID = new RNGReporter.Controls.MaskedTextBox2();
+            this.methodFRLG = new RNGReporter.GlassComboBox();
+            this.label99 = new System.Windows.Forms.Label();
+            this.lowerHalfBox = new System.Windows.Forms.CheckBox();
             this.label97 = new System.Windows.Forms.Label();
             this.textBoxSeed = new RNGReporter.Controls.MaskedTextBox2();
             this.ivFiltersFRLG = new RNGReporter.Controls.IVFilters();
@@ -594,13 +598,13 @@ namespace RNGReporter
             this.contextMenuStripEggPid3rd.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.outputShiny3rdResultsToTXTToolStripMenuItem});
             this.contextMenuStripEggPid3rd.Name = "contextMenuStripEggPid3rd";
-            this.contextMenuStripEggPid3rd.Size = new System.Drawing.Size(200, 26);
+            this.contextMenuStripEggPid3rd.Size = new System.Drawing.Size(198, 26);
             this.contextMenuStripEggPid3rd.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripEggPid3rd_Opening);
             // 
             // outputShiny3rdResultsToTXTToolStripMenuItem
             // 
             this.outputShiny3rdResultsToTXTToolStripMenuItem.Name = "outputShiny3rdResultsToTXTToolStripMenuItem";
-            this.outputShiny3rdResultsToTXTToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.outputShiny3rdResultsToTXTToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.outputShiny3rdResultsToTXTToolStripMenuItem.Text = "Output Results to TXT...";
             this.outputShiny3rdResultsToTXTToolStripMenuItem.Click += new System.EventHandler(this.outputShiny3rdResultsToTXTToolStripMenuItem_Click);
             // 
@@ -1251,7 +1255,7 @@ namespace RNGReporter
             this.label90.ForeColor = System.Drawing.Color.Red;
             this.label90.Location = new System.Drawing.Point(684, 29);
             this.label90.Name = "label90";
-            this.label90.Size = new System.Drawing.Size(217, 16);
+            this.label90.Size = new System.Drawing.Size(216, 16);
             this.label90.TabIndex = 306;
             this.label90.Text = "This feature is not working yet.";
             this.label90.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -4663,6 +4667,10 @@ namespace RNGReporter
             // 
             // tabPageShinyFRLGEgg
             // 
+            this.tabPageShinyFRLGEgg.Controls.Add(this.lowerHalfPID);
+            this.tabPageShinyFRLGEgg.Controls.Add(this.methodFRLG);
+            this.tabPageShinyFRLGEgg.Controls.Add(this.label99);
+            this.tabPageShinyFRLGEgg.Controls.Add(this.lowerHalfBox);
             this.tabPageShinyFRLGEgg.Controls.Add(this.label97);
             this.tabPageShinyFRLGEgg.Controls.Add(this.textBoxSeed);
             this.tabPageShinyFRLGEgg.Controls.Add(this.ivFiltersFRLG);
@@ -4720,6 +4728,54 @@ namespace RNGReporter
             this.tabPageShinyFRLGEgg.Text = "FRLG Shiny Egg";
             this.tabPageShinyFRLGEgg.UseVisualStyleBackColor = true;
             // 
+            // lowerHalfPID
+            // 
+            this.lowerHalfPID.Enabled = false;
+            this.lowerHalfPID.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.lowerHalfPID.Hex = true;
+            this.lowerHalfPID.Location = new System.Drawing.Point(521, 39);
+            this.lowerHalfPID.Mask = "AAAA";
+            this.lowerHalfPID.Name = "lowerHalfPID";
+            this.lowerHalfPID.Size = new System.Drawing.Size(40, 20);
+            this.lowerHalfPID.TabIndex = 376;
+            // 
+            // methodFRLG
+            // 
+            this.methodFRLG.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.methodFRLG.ForeColor = System.Drawing.Color.Black;
+            this.methodFRLG.FormattingEnabled = true;
+            this.methodFRLG.Items.AddRange(new object[] {
+            "Normal",
+            "Split",
+            "Alternate",
+            "Mixed"});
+            this.methodFRLG.Location = new System.Drawing.Point(197, 101);
+            this.methodFRLG.MaxDropDownItems = 3;
+            this.methodFRLG.Name = "methodFRLG";
+            this.methodFRLG.ShineColor = System.Drawing.SystemColors.Window;
+            this.methodFRLG.Size = new System.Drawing.Size(87, 21);
+            this.methodFRLG.TabIndex = 375;
+            // 
+            // label99
+            // 
+            this.label99.AutoSize = true;
+            this.label99.Location = new System.Drawing.Point(148, 104);
+            this.label99.Name = "label99";
+            this.label99.Size = new System.Drawing.Size(43, 13);
+            this.label99.TabIndex = 374;
+            this.label99.Text = "Method";
+            // 
+            // lowerHalfBox
+            // 
+            this.lowerHalfBox.AutoSize = true;
+            this.lowerHalfBox.Location = new System.Drawing.Point(521, 16);
+            this.lowerHalfBox.Name = "lowerHalfBox";
+            this.lowerHalfBox.Size = new System.Drawing.Size(98, 17);
+            this.lowerHalfBox.TabIndex = 372;
+            this.lowerHalfBox.Text = "Lower Half PID";
+            this.lowerHalfBox.UseVisualStyleBackColor = true;
+            this.lowerHalfBox.CheckedChanged += new System.EventHandler(this.lowerHalfBox_CheckedChanged);
+            // 
             // label97
             // 
             this.label97.AutoSize = true;
@@ -4740,7 +4796,7 @@ namespace RNGReporter
             // 
             // ivFiltersFRLG
             // 
-            this.ivFiltersFRLG.Location = new System.Drawing.Point(609, 9);
+            this.ivFiltersFRLG.Location = new System.Drawing.Point(625, 9);
             this.ivFiltersFRLG.Name = "ivFiltersFRLG";
             this.ivFiltersFRLG.Size = new System.Drawing.Size(315, 166);
             this.ivFiltersFRLG.TabIndex = 369;
@@ -4751,12 +4807,12 @@ namespace RNGReporter
             this.anyNatureFRLG.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.anyNatureFRLG.ForeColor = System.Drawing.Color.Black;
             this.anyNatureFRLG.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.anyNatureFRLG.Location = new System.Drawing.Point(521, 12);
+            this.anyNatureFRLG.Location = new System.Drawing.Point(442, 14);
             this.anyNatureFRLG.Margin = new System.Windows.Forms.Padding(0);
             this.anyNatureFRLG.Name = "anyNatureFRLG";
             this.anyNatureFRLG.OuterBorderColor = System.Drawing.Color.Transparent;
             this.anyNatureFRLG.ShineColor = System.Drawing.SystemColors.Window;
-            this.anyNatureFRLG.Size = new System.Drawing.Size(41, 22);
+            this.anyNatureFRLG.Size = new System.Drawing.Size(46, 22);
             this.anyNatureFRLG.TabIndex = 330;
             this.anyNatureFRLG.Text = "Any";
             this.anyNatureFRLG.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -4773,7 +4829,7 @@ namespace RNGReporter
             this.checkBoxNatureFRLG.FormattingEnabled = true;
             this.checkBoxNatureFRLG.Location = new System.Drawing.Point(342, 14);
             this.checkBoxNatureFRLG.Name = "checkBoxNatureFRLG";
-            this.checkBoxNatureFRLG.Size = new System.Drawing.Size(176, 21);
+            this.checkBoxNatureFRLG.Size = new System.Drawing.Size(93, 21);
             this.checkBoxNatureFRLG.TabIndex = 329;
             // 
             // glassComboBoxGenderFRLG
@@ -4997,7 +5053,7 @@ namespace RNGReporter
             this.anyAbilityFRLG.BackColor = System.Drawing.Color.AntiqueWhite;
             this.anyAbilityFRLG.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.anyAbilityFRLG.ForeColor = System.Drawing.Color.Black;
-            this.anyAbilityFRLG.Location = new System.Drawing.Point(424, 38);
+            this.anyAbilityFRLG.Location = new System.Drawing.Point(442, 39);
             this.anyAbilityFRLG.Name = "anyAbilityFRLG";
             this.anyAbilityFRLG.OuterBorderColor = System.Drawing.Color.Transparent;
             this.anyAbilityFRLG.ShineColor = System.Drawing.SystemColors.Window;
@@ -5020,7 +5076,7 @@ namespace RNGReporter
             this.glassComboBoxAbilityFRLG.MaxDropDownItems = 3;
             this.glassComboBoxAbilityFRLG.Name = "glassComboBoxAbilityFRLG";
             this.glassComboBoxAbilityFRLG.ShineColor = System.Drawing.SystemColors.Window;
-            this.glassComboBoxAbilityFRLG.Size = new System.Drawing.Size(76, 21);
+            this.glassComboBoxAbilityFRLG.Size = new System.Drawing.Size(93, 21);
             this.glassComboBoxAbilityFRLG.TabIndex = 331;
             // 
             // label65
@@ -7151,5 +7207,9 @@ namespace RNGReporter
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn37;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn40;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn41;
+        private System.Windows.Forms.CheckBox lowerHalfBox;
+        private GlassComboBox methodFRLG;
+        private System.Windows.Forms.Label label99;
+        private MaskedTextBox2 lowerHalfPID;
     }
 }

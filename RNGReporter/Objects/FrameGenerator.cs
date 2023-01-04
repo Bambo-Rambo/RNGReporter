@@ -83,8 +83,9 @@ namespace RNGReporter.Objects
                 SelectRNG();
             }
         }
-        
-        
+
+        public bool HalfPID;
+        public uint halfPIDvalue;
         public byte MotherAbility { get; set; }
 
         public bool DittoUsed { get; set; }
@@ -2864,8 +2865,7 @@ namespace RNGReporter.Objects
                             break;
 
                         case FrameType.FRLGBredLower:
-                            frame =
-                                Frame.GenerateFrame(
+                            frame = Frame.GenerateFrame(
                                     FrameType.FRLGBredLower,
                                     cnt + InitialFrame,
                                     rngList[18],
@@ -2875,12 +2875,12 @@ namespace RNGReporter.Objects
                             break;
 
                         case FrameType.FRLGBredUpper:
-                            frame =
-                                Frame.GenerateFrame(
+                            frame = Frame.GenerateFrame(
+
                                     FrameType.FRLGBredUpper,
                                     cnt + InitialFrame,
                                     rngList[0],
-                                    StaticPID,
+                                    HalfPID ? halfPIDvalue : StaticPID,
                                     rngList[3],
                                     rngList[5],
                                     rngList[6],
