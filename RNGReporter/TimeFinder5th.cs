@@ -2460,7 +2460,7 @@ namespace RNGReporter
 
             IVFilters_Changed(sender, e);
 
-            label54.Visible = comboBoxEncounterSlot.Visible = buttonAnySlot.Visible = comboBoxEncounterType.SelectedIndex < 9;
+            label54.Visible = comboBoxEncounterSlot.Visible = buttonAnySlot.Visible = comboBoxEncounterType.SelectedIndex <= 9;
 
             labelCapMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible = LevelLabel.Visible = numericLevel.Visible = LevelConditions();
             
