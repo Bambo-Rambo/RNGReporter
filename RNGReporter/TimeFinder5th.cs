@@ -486,8 +486,7 @@ namespace RNGReporter
                     // Now that each combo box item is a custom object containing the FrameType reference
                     // We can simply retrieve the FrameType from the selected item
                     FrameType = (FrameType) ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference,
-                    EncounterType =
-                        (EncounterType) ((ComboBoxItem) comboBoxEncounterType.SelectedItem).Reference,
+                    EncounterType = (EncounterType) ((ComboBoxItem) comboBoxEncounterType.SelectedItem).Reference,
                     EncounterMod = Objects.EncounterMod.Search,
                     InitialFrame = minOffset,
                     MaxResults = maxOffset - minOffset + 1
@@ -534,7 +533,6 @@ namespace RNGReporter
                 uint.TryParse(maskedTextBoxMinShiny.Text, out shinyOffsetMin);
                 uint.TryParse(maskedTextBoxMaxShiny.Text, out shinyOffset);
             }
-                
 
             Lvl.Visible = LevelConditions();
             EncounterRatio.Visible = ConsiderTrigger && ShinyOnly();
@@ -579,7 +577,8 @@ namespace RNGReporter
                                     (EncounterType)
                                     ((ComboBoxItem) comboBoxEncounterType.SelectedItem).Reference,
                                 EncounterMod = Objects.EncounterMod.Search,
-                                InitialFrame = 1 + shinyOffsetMin,
+                                InitialFrame = 1,
+                                MinAdvances = shinyOffsetMin,
                                 MaxResults = shinyOffset,
                                 MinLevel = (int)numericLevelMin.Value,
                                 MaxLevel = (int)numericLevelMax.Value,
@@ -880,8 +879,7 @@ namespace RNGReporter
                     //copy to prevent issues with it being incremented before the actual thread really starts
                     int i1 = i;
                     //passing in a profile instead of the params would probably be more efficent
-                    if (generator.FrameType == FrameType.Wondercard5thGen ||
-                        generator.FrameType == FrameType.Wondercard5thGenFixed)
+                    if (generator.FrameType == FrameType.Wondercard5thGen || generator.FrameType == FrameType.Wondercard5thGenFixed)
                     {
                         int shiny = comboBoxShiny.SelectedIndex;
                         jobs[i] =
@@ -895,14 +893,13 @@ namespace RNGReporter
                         jobs[i] =
                             new Thread(
                                 () =>
-                                GenerateJob(year, months, 0, 23, profile, shinyOffset, fastSearch, i1));
+                                GenerateJob(year, months, 0, 23, profile, shinyOffsetMin, shinyOffset, fastSearch, i1));
                     }
                     jobs[i].Start();
                     // for some reason not making the thread sleep causes issues with updating dayMin\Max
                     Thread.Sleep(200);
                 }
-                var progressJob =
-                    new Thread(() => ManageProgress(listBindingCap, dataGridViewCapValues, generator.FrameType, 2000));
+                var progressJob = new Thread(() => ManageProgress(listBindingCap, dataGridViewCapValues, generator.FrameType, 2000));
                 progressJob.Start();
                 progressJob.Priority = ThreadPriority.Lowest;
 
@@ -1105,8 +1102,7 @@ namespace RNGReporter
             }
         }
 
-        public void GenerateJob(uint year, List<int> months, int hourMin, int hourMax,
-                                Profile profile, uint shinyOffset, bool fastSearch, int listIndex)
+        public void GenerateJob(uint year, List<int> months, int hourMin, int hourMax, Profile profile, uint shinyOffsetMin, uint shinyOffset, bool fastSearch, int listIndex)
         {
             bool ConsiderTrigger = checkBoxTriggerBattle.Checked && checkBoxTriggerBattle.Visible;
 
@@ -1152,15 +1148,16 @@ namespace RNGReporter
             // for frames 1-6
 
             var included = new bool[6];
+
             uint start = profile.IsBW2() ? 2u : 0;
             uint entralink = (profile.IsBW2() && minAdvances > 24)
                                  ? 24u
                                  : 0;
+
             for (int i = 0; i < 6; i++)
             {
                 if ((i + start + entralink) >= (generators[listIndex].InitialFrame - 1) &&
-                    (i + start + entralink) <
-                    (generators[listIndex].InitialFrame + generators[listIndex].MaxResults - 1))
+                    (i + start + entralink) < (generators[listIndex].InitialFrame + generators[listIndex].MaxResults - 1))
                     included[i] = true;
                 else
                     included[i] = false;
@@ -1276,6 +1273,7 @@ namespace RNGReporter
                                                     shinygenerators[listIndex].InitialSeed = seed;
                                                     shinygenerators[listIndex].InitialFrame =
                                                         Functions.initialPIDRNG(seed, profile) + minAdvances;
+                                                    shinygenerators[listIndex].MinAdvances = shinyOffsetMin;
                                                     shinygenerators[listIndex].MinLevel = (int)numericLevelMin.Value;
                                                     shinygenerators[listIndex].MaxLevel = (int)numericLevelMax.Value;
                                                     if (checkBox256.Checked)

@@ -8,6 +8,7 @@ namespace RNGReporter.Objects
 {
     partial class FrameGenerator
     {
+        public uint MinAdvances { get; set; }
         public bool SearchForTrigger { get; set; }
         public int RerollCount { get; set; }
         public int MinLevel { get; set; }
@@ -84,7 +85,11 @@ namespace RNGReporter.Objects
             var mod = EncounterMod.None;
             uint idLower = (id & 1) ^ (sid & 1);
 
-            for (uint cnt = 0; cnt < InitialFrame - 2; cnt++)
+            uint StartingFrame = MinAdvances;
+            if (MinAdvances < InitialFrame)
+                StartingFrame = InitialFrame;
+
+            for (uint cnt = 0; cnt < StartingFrame - 2; cnt++)
                 rng.GetNext64BitNumber();
 
             rngList.Clear();
@@ -95,7 +100,7 @@ namespace RNGReporter.Objects
             {
                 pointer = 1;
 
-                uint CurrentFrame = cnt + InitialFrame;
+                uint CurrentFrame = cnt + StartingFrame;
                 uint nature;
                 uint pid;
                 bool synchable;
@@ -996,6 +1001,7 @@ namespace RNGReporter.Objects
                 else
                     return (int)result + 23;
             }
+            // https://www.smogon.com/forums/threads/past-gen-rng-research.61090/page-29#post-3536005
             else
             {
                 uint calc = (uint)((ulong)CurrentRand() * 1000 >> 32);
