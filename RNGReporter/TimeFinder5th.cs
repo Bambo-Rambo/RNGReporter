@@ -527,9 +527,14 @@ namespace RNGReporter
             if (comboBoxNature.Text != "Any" && comboBoxNature.CheckBoxItems.Count > 0)
                 natures = (from t in comboBoxNature.CheckBoxItems where t.Checked select (uint)((Nature)t.ComboBoxItem).Number).ToList();
 
+            uint shinyOffsetMin = 0;
             uint shinyOffset = 0;
             if (ShinyOnly())
+            {
+                uint.TryParse(maskedTextBoxMinShiny.Text, out shinyOffsetMin);
                 uint.TryParse(maskedTextBoxMaxShiny.Text, out shinyOffset);
+            }
+                
 
             Lvl.Visible = LevelConditions();
             EncounterRatio.Visible = ConsiderTrigger && ShinyOnly();
@@ -574,7 +579,7 @@ namespace RNGReporter
                                     (EncounterType)
                                     ((ComboBoxItem) comboBoxEncounterType.SelectedItem).Reference,
                                 EncounterMod = Objects.EncounterMod.Search,
-                                InitialFrame = 1,
+                                InitialFrame = 1 + shinyOffsetMin,
                                 MaxResults = shinyOffset,
                                 MinLevel = (int)numericLevelMin.Value,
                                 MaxLevel = (int)numericLevelMax.Value,
@@ -1923,12 +1928,9 @@ namespace RNGReporter
                 comboBoxShiny.Visible = true;
             }
 
-            checkBoxShinyOnly.Text =
-                ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Standard)
-                    ? "Search for Nearby Shiny Frames"
-                    : "Shiny Only";
-
-            controlsShowHide();
+            checkBoxShinyOnly.Text = "Shiny Only";
+            /*((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Standard) ? "Search for Nearby Shiny Frames" : "Shiny Only";*/
+            //controlsShowHide();
 
             IVFilters_Changed(sender, e);
             labelCapMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible = LevelLabel.Visible = numericLevel.Visible = LevelConditions();
@@ -2437,25 +2439,27 @@ namespace RNGReporter
 
         private void comboBoxEncounterType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (comboBoxEncounterType.SelectedIndex >= 14)  // Gible/Dratini, Haxorus, Jellicent
+            {
+                comboBoxCapGenderRatio.SelectedIndex = 1;   // 50% gender ratio
+                comboBoxCapGenderRatio.Enabled = false;
+            }
+            else
+            {
+                comboBoxCapGenderRatio.Enabled = true;
+            }
+                
+
             if (((ComboBoxItem)comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.GibleDratini))
             {
-                comboBoxCapGenderRatio.SelectedIndex = 1;
                 comboBoxCapGender.SelectedIndex = 1;
-                //comboBoxCapGenderRatio.Enabled = comboBoxCapGender.Enabled = false;
             }
             else if (((ComboBoxItem)comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.JellicentHA))
             {
-                comboBoxCapGenderRatio.SelectedIndex = 1;
                 if (((Profile)comboBoxProfiles.SelectedItem).VersionStr.Equals("Black2"))
                     comboBoxCapGender.SelectedIndex = 1;
                 else if (((Profile)comboBoxProfiles.SelectedItem).VersionStr.Equals("White2"))
                     comboBoxCapGender.SelectedIndex = 2;
-                //comboBoxCapGenderRatio.Enabled = comboBoxCapGender.Enabled = false;
-            }
-            else
-            {
-                comboBoxCapGenderRatio.Enabled = comboBoxCapGender.Enabled = true;
-                comboBoxCapGenderRatio.SelectedIndex = 0;
             }
 
             IVFilters_Changed(sender, e);
@@ -2466,7 +2470,7 @@ namespace RNGReporter
             
             checkBoxTriggerBattle.Visible = RatioConditions();
 
-            maskedTextBoxMaxShiny.Visible = labelMaxShiny.Visible = checkBoxShinyOnly.Visible && checkBoxShinyOnly.Checked;
+            //maskedTextBoxMaxShiny.Visible = labelMaxShiny.Visible = checkBoxShinyOnly.Visible && checkBoxShinyOnly.Checked;
 
             checkBox256.Visible = maskedTextBoxPID.Visible = comboBoxEncounterType.SelectedIndex >= 15;
 
@@ -2474,7 +2478,7 @@ namespace RNGReporter
 
         private void checkBoxShinyOnly_CheckedChanged(object sender, EventArgs e)
         {
-            controlsShowHide();
+            //controlsShowHide();
         }
 
         private void checkBox256_CheckedChanged(object sender, EventArgs e)
@@ -2768,8 +2772,7 @@ namespace RNGReporter
 
         private void comboBoxCapGenderRatio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBoxCapGenderRatio.SelectedIndex == 0 || comboBoxCapGenderRatio.SelectedIndex == 5 ||
-                !comboBoxCapGenderRatio.Enabled)
+            if (comboBoxCapGenderRatio.SelectedIndex == 0 || comboBoxCapGenderRatio.SelectedIndex == 5)
             {
                 comboBoxCapGender.Enabled = false;
                 comboBoxCapGender.SelectedIndex = 0;
