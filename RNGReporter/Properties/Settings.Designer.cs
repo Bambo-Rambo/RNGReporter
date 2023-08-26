@@ -130,7 +130,52 @@ namespace RNGReporter.Properties {
                 this["SID"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool BW2
+        {
+            get
+            {
+                return ((bool)(this["BW2"]));
+            }
+            set
+            {
+                this["BW2"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShinyCharm
+        {
+            get
+            {
+                return ((bool)(this["ShinyCharm"]));
+            }
+            set
+            {
+                this["ShinyCharm"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MemoryLink
+        {
+            get
+            {
+                return ((bool)(this["MemoryLink"]));
+            }
+            set
+            {
+                this["MemoryLink"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
