@@ -73,7 +73,8 @@ namespace RNGReporter
                     Keypresses = GetKeypresses(),
                     SoftReset = checkBoxSoftReset.Checked,
                     SkipLR = checkBoxSkipLR.Checked,
-                    MemoryLink = checkBoxMemoryLink.Checked
+                    ShinyCharm = checkBoxShinyCharm.Enabled && checkBoxShinyCharm.Checked,
+                    MemoryLink = checkBoxMemoryLink.Enabled && checkBoxMemoryLink.Checked
                 };
             if (Nazos.Nazo(profile) == null)
             {
@@ -102,6 +103,7 @@ namespace RNGReporter
             LoadKeypresses(profile.Keypresses);
             checkBoxSoftReset.Checked = profile.SoftReset;
             checkBoxSkipLR.Checked = profile.SkipLR;
+            checkBoxShinyCharm.Checked = profile.ShinyCharm;
             checkBoxMemoryLink.Checked = profile.MemoryLink;
         }
 
@@ -159,7 +161,7 @@ namespace RNGReporter
 
         private void comboBoxVersion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            checkBoxMemoryLink.Visible = comboBoxVersion.Text.Contains("2");
+            checkBoxShinyCharm.Enabled = checkBoxMemoryLink.Enabled = comboBoxVersion.Text.Contains("2");
             CheckNazos();
         }
 

@@ -139,9 +139,7 @@ namespace RNGReporter
             this.ivFiltersCapture = new RNGReporter.Controls.IVFilters();
             this.comboBoxCapGender = new RNGReporter.GlassComboBox();
             this.comboBoxShiny = new RNGReporter.GlassComboBox();
-            this.maskedTextBoxPID = new RNGReporter.Controls.MaskedTextBox2();
             this.comboBoxNature = new RNGReporter.Controls.CheckBoxComboBox();
-            this.checkBox256 = new System.Windows.Forms.CheckBox();
             this.label21 = new System.Windows.Forms.Label();
             this.checkBoxTriggerBattle = new System.Windows.Forms.CheckBox();
             this.label23 = new System.Windows.Forms.Label();
@@ -161,7 +159,6 @@ namespace RNGReporter
             this.comboBoxCapMonth = new RNGReporter.Controls.CheckBoxComboBox();
             this.maskedTextBoxMinShiny = new RNGReporter.Controls.MaskedTextBox2();
             this.maskedTextBoxCapMinDelay = new RNGReporter.Controls.MaskedTextBox2();
-            this.cbCapShinyCharm = new System.Windows.Forms.CheckBox();
             this.numericLevelMax = new System.Windows.Forms.NumericUpDown();
             this.maskedTextBoxCapMaxDelay = new RNGReporter.Controls.MaskedTextBox2();
             this.numericLevelMin = new System.Windows.Forms.NumericUpDown();
@@ -1217,9 +1214,7 @@ namespace RNGReporter
             this.PrefGroupBox.Controls.Add(this.ivFiltersCapture);
             this.PrefGroupBox.Controls.Add(this.comboBoxCapGender);
             this.PrefGroupBox.Controls.Add(this.comboBoxShiny);
-            this.PrefGroupBox.Controls.Add(this.maskedTextBoxPID);
             this.PrefGroupBox.Controls.Add(this.comboBoxNature);
-            this.PrefGroupBox.Controls.Add(this.checkBox256);
             this.PrefGroupBox.Controls.Add(this.label21);
             this.PrefGroupBox.Controls.Add(this.checkBoxTriggerBattle);
             this.PrefGroupBox.Controls.Add(this.label23);
@@ -1282,18 +1277,6 @@ namespace RNGReporter
             this.comboBoxShiny.TabIndex = 323;
             this.comboBoxShiny.Visible = false;
             // 
-            // maskedTextBoxPID
-            // 
-            this.maskedTextBoxPID.Enabled = false;
-            this.maskedTextBoxPID.Hex = true;
-            this.maskedTextBoxPID.Location = new System.Drawing.Point(609, 114);
-            this.maskedTextBoxPID.Mask = "AA";
-            this.maskedTextBoxPID.Name = "maskedTextBoxPID";
-            this.maskedTextBoxPID.Size = new System.Drawing.Size(43, 20);
-            this.maskedTextBoxPID.TabIndex = 344;
-            this.maskedTextBoxPID.Text = "C0";
-            this.maskedTextBoxPID.Visible = false;
-            // 
             // comboBoxNature
             // 
             this.comboBoxNature.BlankText = "Any";
@@ -1308,18 +1291,6 @@ namespace RNGReporter
             this.comboBoxNature.Size = new System.Drawing.Size(95, 21);
             this.comboBoxNature.TabIndex = 24;
             this.comboBoxNature.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FocusControl);
-            // 
-            // checkBox256
-            // 
-            this.checkBox256.AutoSize = true;
-            this.checkBox256.Location = new System.Drawing.Point(552, 116);
-            this.checkBox256.Name = "checkBox256";
-            this.checkBox256.Size = new System.Drawing.Size(55, 17);
-            this.checkBox256.TabIndex = 343;
-            this.checkBox256.Text = "% 256";
-            this.checkBox256.UseVisualStyleBackColor = true;
-            this.checkBox256.Visible = false;
-            this.checkBox256.CheckedChanged += new System.EventHandler(this.checkBox256_CheckedChanged);
             // 
             // label21
             // 
@@ -1516,7 +1487,6 @@ namespace RNGReporter
             this.SettingsGroupBox.Controls.Add(this.comboBoxCapMonth);
             this.SettingsGroupBox.Controls.Add(this.maskedTextBoxMinShiny);
             this.SettingsGroupBox.Controls.Add(this.maskedTextBoxCapMinDelay);
-            this.SettingsGroupBox.Controls.Add(this.cbCapShinyCharm);
             this.SettingsGroupBox.Controls.Add(this.numericLevelMax);
             this.SettingsGroupBox.Controls.Add(this.maskedTextBoxCapMaxDelay);
             this.SettingsGroupBox.Controls.Add(this.numericLevelMin);
@@ -1574,7 +1544,7 @@ namespace RNGReporter
             // maskedTextBoxMinShiny
             // 
             this.maskedTextBoxMinShiny.Hex = false;
-            this.maskedTextBoxMinShiny.Location = new System.Drawing.Point(251, 83);
+            this.maskedTextBoxMinShiny.Location = new System.Drawing.Point(251, 85);
             this.maskedTextBoxMinShiny.Mask = "0000";
             this.maskedTextBoxMinShiny.Name = "maskedTextBoxMinShiny";
             this.maskedTextBoxMinShiny.Size = new System.Drawing.Size(44, 21);
@@ -1592,20 +1562,10 @@ namespace RNGReporter
             this.maskedTextBoxCapMinDelay.TabIndex = 330;
             this.maskedTextBoxCapMinDelay.ValidatingType = typeof(int);
             // 
-            // cbCapShinyCharm
-            // 
-            this.cbCapShinyCharm.AutoSize = true;
-            this.cbCapShinyCharm.Location = new System.Drawing.Point(251, 117);
-            this.cbCapShinyCharm.Name = "cbCapShinyCharm";
-            this.cbCapShinyCharm.Size = new System.Drawing.Size(85, 17);
-            this.cbCapShinyCharm.TabIndex = 342;
-            this.cbCapShinyCharm.Text = "Shiny Charm";
-            this.cbCapShinyCharm.UseVisualStyleBackColor = true;
-            // 
             // numericLevelMax
             // 
             this.numericLevelMax.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.numericLevelMax.Location = new System.Drawing.Point(301, 165);
+            this.numericLevelMax.Location = new System.Drawing.Point(301, 133);
             this.numericLevelMax.Minimum = new decimal(new int[] {
             1,
             0,
@@ -1632,7 +1592,7 @@ namespace RNGReporter
             // numericLevelMin
             // 
             this.numericLevelMin.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.numericLevelMin.Location = new System.Drawing.Point(251, 165);
+            this.numericLevelMin.Location = new System.Drawing.Point(251, 133);
             this.numericLevelMin.Minimum = new decimal(new int[] {
             1,
             0,
@@ -1650,7 +1610,7 @@ namespace RNGReporter
             // maskedTextBoxMaxShiny
             // 
             this.maskedTextBoxMaxShiny.Hex = false;
-            this.maskedTextBoxMaxShiny.Location = new System.Drawing.Point(301, 83);
+            this.maskedTextBoxMaxShiny.Location = new System.Drawing.Point(301, 85);
             this.maskedTextBoxMaxShiny.Mask = "0000000";
             this.maskedTextBoxMaxShiny.Name = "maskedTextBoxMaxShiny";
             this.maskedTextBoxMaxShiny.Size = new System.Drawing.Size(49, 21);
@@ -1661,7 +1621,7 @@ namespace RNGReporter
             // labelMaxShiny
             // 
             this.labelMaxShiny.AutoSize = true;
-            this.labelMaxShiny.Location = new System.Drawing.Point(241, 64);
+            this.labelMaxShiny.Location = new System.Drawing.Point(241, 66);
             this.labelMaxShiny.Name = "labelMaxShiny";
             this.labelMaxShiny.Size = new System.Drawing.Size(135, 13);
             this.labelMaxShiny.TabIndex = 100;
@@ -1681,7 +1641,7 @@ namespace RNGReporter
             // labelCapMinMaxLevel
             // 
             this.labelCapMinMaxLevel.AutoSize = true;
-            this.labelCapMinMaxLevel.Location = new System.Drawing.Point(249, 149);
+            this.labelCapMinMaxLevel.Location = new System.Drawing.Point(249, 117);
             this.labelCapMinMaxLevel.Name = "labelCapMinMaxLevel";
             this.labelCapMinMaxLevel.Size = new System.Drawing.Size(84, 13);
             this.labelCapMinMaxLevel.TabIndex = 332;
@@ -3401,7 +3361,6 @@ namespace RNGReporter
         private System.Windows.Forms.NumericUpDown numericLevelMax;
         private System.Windows.Forms.NumericUpDown numericLevelMin;
         private System.Windows.Forms.CheckBox checkBoxTriggerBattle;
-        private System.Windows.Forms.CheckBox cbCapShinyCharm;
         private System.Windows.Forms.DataGridViewTextBoxColumn CapSeed;
         private System.Windows.Forms.DataGridViewTextBoxColumn CapOffset;
         private System.Windows.Forms.DataGridViewTextBoxColumn EncounterMod;
@@ -3430,8 +3389,6 @@ namespace RNGReporter
         private System.Windows.Forms.DataGridViewTextBoxColumn CapTimer0;
         private System.Windows.Forms.DataGridViewTextBoxColumn CapKeypress;
         private System.Windows.Forms.DataGridViewTextBoxColumn Synchable;
-        private System.Windows.Forms.CheckBox checkBox256;
-        private MaskedTextBox2 maskedTextBoxPID;
         private System.Windows.Forms.GroupBox PrefGroupBox;
         private System.Windows.Forms.GroupBox SettingsGroupBox;
         private MaskedTextBox2 maskedTextBoxMinShiny;

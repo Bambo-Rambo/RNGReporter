@@ -44,8 +44,6 @@ namespace RNGReporter.Objects
         LarvestaHappiny,
         Haxorus,
         GibleDratini,
-        Eevee,
-        Deerling,
         BugCatchingContest,
         SafariZone,
         Headbutt,
@@ -158,7 +156,7 @@ namespace RNGReporter.Objects
         {
             switch (encounterType)
             {
-                case "Wild Pokémon":
+                case "Wild Pokémon (Tall Grass)":
                     return EncounterType.Wild;
                 case "Wild Pokemon (Poké Radar)":
                     return EncounterType.WildRadar;
@@ -200,10 +198,6 @@ namespace RNGReporter.Objects
                     return EncounterType.Haxorus;
                 case "Gible/Dratini (Forced Shiny)":
                     return EncounterType.GibleDratini;
-                case "Eevee (Shiny Locked)":
-                    return EncounterType.Eevee;
-                case "Deerling (Shiny Locked)":
-                    return EncounterType.Deerling;
                 case "Entralink Pokémon":
                     return EncounterType.Entralink;
                 case "Hidden Grotto (Shiny Locked)":

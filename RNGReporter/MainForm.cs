@@ -489,6 +489,7 @@ namespace RNGReporter
             generator.DittoUsed = checkBoxDittoParent.Checked;
             generator.MaleOnlySpecies = cbNidoBeat.Checked;
             generator.RerollCount = cbShinyCharm.Checked ? 3 : 1;
+            generator.MemoryLinkUsed = checkBoxMemoryLink.Checked;
             generator.MinLevel = (int)numericLevelMin.Value;
             generator.MaxLevel = (int)numericLevelMax.Value;
             generator.SearchForTrigger = checkBoxTrigger.Checked && checkBoxTrigger.Visible;
@@ -1141,8 +1142,6 @@ namespace RNGReporter
                     generator.EncounterType != EncounterType.LarvestaHappiny &&
                     generator.EncounterType != EncounterType.Haxorus &&
                     generator.EncounterType != EncounterType.GibleDratini &&
-                    generator.EncounterType != EncounterType.Eevee &&
-                    generator.EncounterType != EncounterType.Deerling &&
                     generator.EncounterType != EncounterType.Entralink &&
                     generator.EncounterType != EncounterType.JellicentHA &&
                     generator.EncounterType != EncounterType.HiddenGrotto)
@@ -1207,22 +1206,17 @@ namespace RNGReporter
                 HiddenPowerPower.Visible = false;
 
                 Shiny.Visible = 
-                    generator.EncounterType != EncounterType.Eevee &&
-                    generator.EncounterType != EncounterType.Deerling &&
                     generator.EncounterType != EncounterType.HiddenGrotto;
 
                 Ability.Visible =
                     generator.EncounterType != EncounterType.HiddenGrotto &&
                     generator.EncounterType != EncounterType.GibleDratini &&
-                    generator.EncounterType != EncounterType.Eevee &&
-                    generator.EncounterType != EncounterType.Deerling &&
                     generator.EncounterType != EncounterType.JellicentHA;
 
                 f50.Visible = f75.Visible = f25.Visible = f125.Visible =
                     generator.EncounterType != EncounterType.Roamer &&
                     generator.EncounterType != EncounterType.HiddenGrotto &&
                     generator.EncounterType != EncounterType.GibleDratini &&
-                    generator.EncounterType != EncounterType.Eevee &&
                     generator.EncounterType != EncounterType.JellicentHA;
 
                 MaleOnlySpecies.Visible = false;
@@ -2101,7 +2095,7 @@ namespace RNGReporter
                 ushort.TryParse(maskedTextBoxID.Text, out ushort id);
                 ushort.TryParse(maskedTextBoxSID.Text, out ushort sid);
 
-                timeFinder5th = new TimeFinder5th(maskedTextBoxID, maskedTextBoxSID);
+                timeFinder5th = new TimeFinder5th(maskedTextBoxID, maskedTextBoxSID, checkBoxBW2, cbShinyCharm, checkBoxMemoryLink);
             }
 
             timeFinder5th.Show();
@@ -2158,7 +2152,7 @@ namespace RNGReporter
         private void comboBoxMethod_SelectedIndexChanged(object sender, EventArgs e)
         {
             string[] encounterMenu;
-            string previousEncounter = "Wild Pokémon";
+            string previousEncounter = "Wild Pokémon (Tall Grass)";
             if (comboBoxEncounterType.SelectedItem != null)
                 previousEncounter = comboBoxEncounterType.SelectedItem.ToString();
 
@@ -2166,7 +2160,7 @@ namespace RNGReporter
             {
                 encounterMenu = new[]
                     {
-                        "Wild Pokémon",
+                        "Wild Pokémon (Tall Grass)",
                         "Wild Pokémon (Surfing)",
                         "Wild Pokémon (Old Rod)",
                         "Wild Pokémon (Good Rod)",
@@ -2185,7 +2179,7 @@ namespace RNGReporter
             {
                 encounterMenu = new[]
                     {
-                        "Wild Pokémon",
+                        "Wild Pokémon (Tall Grass)",
                         "Wild Pokémon (Surfing)",
                         "Wild Pokémon (Old Rod)",
                         "Wild Pokémon (Good Rod)",
@@ -2200,7 +2194,7 @@ namespace RNGReporter
             {
                 encounterMenu = new[]
                     {
-                        "Wild Pokémon",
+                        "Wild Pokémon (Tall Grass)",
                         "Wild Pokemon (Poké Radar)",
                         "Wild Pokémon (Surfing)",
                         "Wild Pokémon (Old Rod)",
@@ -2216,7 +2210,7 @@ namespace RNGReporter
             {
                 encounterMenu = new[]
                     {
-                        "Wild Pokémon",
+                        "Wild Pokémon (Tall Grass)",
                         "Wild Pokémon (Dark Grass)",
                         "Wild Pokémon (Swarm)",
                         "Wild Pokémon (Surfing)",
@@ -2233,8 +2227,6 @@ namespace RNGReporter
                         "Larvesta/Happiny Egg",
                         "Haxorus (Forced Shiny)",
                         "Gible/Dratini (Forced Shiny)",
-                        "Eevee (Shiny Locked)",
-                        "Deerling (Shiny Locked)",
                         "Entralink Pokémon",
                         "Hidden Grotto (Shiny Locked)"
                     };
@@ -2246,7 +2238,7 @@ namespace RNGReporter
             {
                 encounterMenu = new[]
                     {
-                        "Wild Pokémon",
+                        "Wild Pokémon (Tall Grass)",
                         "Stationary Pokémon",
                         "Roaming Pokémon",
                         "Gift Pokémon"
@@ -2268,7 +2260,7 @@ namespace RNGReporter
             {
                 encounterMenu = new[]
                     {
-                        "Wild Pokémon"
+                        "Wild Pokémon (Tall Grass)"
                     };
             }
 
@@ -2318,8 +2310,6 @@ namespace RNGReporter
                 cbNidoBeat.Checked = false;
                 comboBoxSynchNatures.Enabled = true;
                 buttonLead.Enabled = true;
-
-                //cbShinyCharm.Checked = false;
                 cbShinyCharm.Enabled = ((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Natures);
             }
             else
@@ -2339,7 +2329,6 @@ namespace RNGReporter
                 checkBoxDreamWorld.Checked = false;
                 checkBoxDittoParent.Checked = false;
                 cbNidoBeat.Checked = false;
-                //cbShinyCharm.Checked = false;
 
                 comboBoxSynchNatures.Enabled = false;
                 buttonLead.Enabled = false;
@@ -2426,11 +2415,6 @@ namespace RNGReporter
             if (CheckEncType("Gible/Dratini (Forced Shiny)"))
             {
                 comboBoxGender.SelectedIndex = 1;
-                comboBoxGender.Enabled = false;
-            }
-            else if (CheckEncType("Eevee (Shiny Locked)"))
-            {
-                comboBoxGender.SelectedIndex = 7;
                 comboBoxGender.Enabled = false;
             }
             else

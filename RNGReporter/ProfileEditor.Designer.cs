@@ -61,12 +61,13 @@
             this.checkBoxMemoryLink = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxLanguage = new RNGReporter.GlassComboBox();
+            this.checkBoxShinyCharm = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // checkBoxSkipLR
             // 
             this.checkBoxSkipLR.AutoSize = true;
-            this.checkBoxSkipLR.Location = new System.Drawing.Point(508, 26);
+            this.checkBoxSkipLR.Location = new System.Drawing.Point(534, 19);
             this.checkBoxSkipLR.Name = "checkBoxSkipLR";
             this.checkBoxSkipLR.Size = new System.Drawing.Size(108, 17);
             this.checkBoxSkipLR.TabIndex = 5;
@@ -77,7 +78,7 @@
             // 
             this.btnParameters.BackColor = System.Drawing.Color.AntiqueWhite;
             this.btnParameters.ForeColor = System.Drawing.Color.Black;
-            this.btnParameters.Location = new System.Drawing.Point(510, 100);
+            this.btnParameters.Location = new System.Drawing.Point(508, 129);
             this.btnParameters.Name = "btnParameters";
             this.btnParameters.OuterBorderColor = System.Drawing.Color.Transparent;
             this.btnParameters.ShineColor = System.Drawing.SystemColors.Window;
@@ -189,7 +190,7 @@
             // checkBoxSoftReset
             // 
             this.checkBoxSoftReset.AutoSize = true;
-            this.checkBoxSoftReset.Location = new System.Drawing.Point(495, 62);
+            this.checkBoxSoftReset.Location = new System.Drawing.Point(534, 42);
             this.checkBoxSoftReset.Name = "checkBoxSoftReset";
             this.checkBoxSoftReset.Size = new System.Drawing.Size(76, 17);
             this.checkBoxSoftReset.TabIndex = 8;
@@ -369,13 +370,12 @@
             // checkBoxMemoryLink
             // 
             this.checkBoxMemoryLink.AutoSize = true;
-            this.checkBoxMemoryLink.Location = new System.Drawing.Point(577, 62);
+            this.checkBoxMemoryLink.Location = new System.Drawing.Point(534, 88);
             this.checkBoxMemoryLink.Name = "checkBoxMemoryLink";
             this.checkBoxMemoryLink.Size = new System.Drawing.Size(86, 17);
             this.checkBoxMemoryLink.TabIndex = 157;
             this.checkBoxMemoryLink.Text = "Memory Link";
             this.checkBoxMemoryLink.UseVisualStyleBackColor = true;
-            this.checkBoxMemoryLink.Visible = false;
             // 
             // label1
             // 
@@ -406,11 +406,22 @@
             this.comboBoxLanguage.Size = new System.Drawing.Size(132, 21);
             this.comboBoxLanguage.TabIndex = 158;
             // 
+            // checkBoxShinyCharm
+            // 
+            this.checkBoxShinyCharm.AutoSize = true;
+            this.checkBoxShinyCharm.Location = new System.Drawing.Point(534, 65);
+            this.checkBoxShinyCharm.Name = "checkBoxShinyCharm";
+            this.checkBoxShinyCharm.Size = new System.Drawing.Size(85, 17);
+            this.checkBoxShinyCharm.TabIndex = 160;
+            this.checkBoxShinyCharm.Text = "Shiny Charm";
+            this.checkBoxShinyCharm.UseVisualStyleBackColor = true;
+            // 
             // ProfileEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(674, 169);
+            this.Controls.Add(this.checkBoxShinyCharm);
             this.Controls.Add(this.label27);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxLanguage);
@@ -484,5 +495,6 @@
         private System.Windows.Forms.CheckBox checkBoxMemoryLink;
         private System.Windows.Forms.Label label1;
         private GlassComboBox comboBoxLanguage;
+        private System.Windows.Forms.CheckBox checkBoxShinyCharm;
     }
 }

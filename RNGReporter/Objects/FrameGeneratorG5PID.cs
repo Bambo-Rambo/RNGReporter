@@ -14,13 +14,11 @@ namespace RNGReporter.Objects
         public int MinLevel { get; set; }
         public int MaxLevel { get; set; }
         public bool isBW2 { get; set; }
+        public bool MemoryLinkUsed { get; set; }
 
         public int GenderCase;
 
         public int pointer;
-
-        public bool specificMod;
-        public byte modValue;
 
         public uint CurrentRand() => rngList[pointer];
         public uint NextRand()
@@ -52,8 +50,6 @@ namespace RNGReporter.Objects
             bool G5_LarvestaHappinyEgg = EncounterType == EncounterType.LarvestaHappiny;
             bool G5_Haxorus = EncounterType == EncounterType.Haxorus;
             bool G5_GibleDratini = EncounterType == EncounterType.GibleDratini;
-            bool G5_Eevee = EncounterType == EncounterType.Eevee;
-            bool G5_Deerling = EncounterType == EncounterType.Deerling;
             bool G5_Entralink = EncounterType == EncounterType.Entralink;
             bool G5_HiddenGrotto = EncounterType == EncounterType.HiddenGrotto;
 
@@ -72,6 +68,10 @@ namespace RNGReporter.Objects
             // Fix later
             if (InitialFrame <= 1)
                 InitialFrame = 2;
+
+            // Memory Link affects these methods only
+            if (!(G5_Wild || G5_WildDarkGrass || G5_WildSurfing || G5_WildSwarm))
+                this.MemoryLinkUsed = false;
 
             BWRng rng = new BWRng(InitialSeed);
             frames = new List<Frame>();
@@ -121,6 +121,8 @@ namespace RNGReporter.Objects
                             {
                                 if (SearchForTrigger)
                                     CurrentRatio = getRatio(NextRand());
+                                if (MemoryLinkUsed)
+                                    Advance(1);
                                 encounterSlot = getSlot();
                                 level = getLevel(NextRand());
                                 CuteCharmModify(frameCompare, id, sid, idLower, CurrentFrame, CurrentRatio, encounterSlot, level, pointer);
@@ -131,6 +133,8 @@ namespace RNGReporter.Objects
                             synchable = CheckLead(false);
                             if (SearchForTrigger)
                                 CurrentRatio = getRatio(NextRand());
+                            if (MemoryLinkUsed)
+                                Advance(1);
                             encounterSlot = getSlot();
                             level = getLevel(NextRand());
                             pid = FindPID(id, sid, idLower, false);
@@ -153,6 +157,9 @@ namespace RNGReporter.Objects
 
                             if (SearchForTrigger)
                                 CurrentRatio = getRatio(NextRand());
+
+                            if (MemoryLinkUsed)
+                                Advance(1);
 
                             encounterSlot = getSlot();
 
@@ -179,6 +186,8 @@ namespace RNGReporter.Objects
                             {
                                 if (SearchForTrigger)
                                     CurrentRatio = getRatio(NextRand());
+                                if (MemoryLinkUsed)
+                                    Advance(1);
                                 if (DoubleEnc_Swarm())
                                 {
                                     encounterSlot = 12;
@@ -195,6 +204,8 @@ namespace RNGReporter.Objects
                             synchable = CheckLead(false);
                             if (SearchForTrigger)
                                 CurrentRatio = getRatio(NextRand());
+                            if (MemoryLinkUsed)
+                                Advance(1);
                             if (DoubleEnc_Swarm())
                             {
                                 encounterSlot = 12;
@@ -223,6 +234,9 @@ namespace RNGReporter.Objects
 
                             if (SearchForTrigger)
                                 CurrentRatio = getRatio(NextRand());
+
+                            if (MemoryLinkUsed)
+                                Advance(1);
 
                             if (DoubleEnc_Swarm())
                             {
@@ -342,6 +356,8 @@ namespace RNGReporter.Objects
                                 DoubleEncounter = DoubleEnc_Swarm();
                                 if (SearchForTrigger)
                                     CurrentRatio = getRatio(NextRand());
+                                if (MemoryLinkUsed)
+                                    Advance(1);
                                 encounterSlot = getSlot();
                                 if (DoubleEncounter)
                                     Advance(2);
@@ -355,6 +371,8 @@ namespace RNGReporter.Objects
                             DoubleEncounter = DoubleEnc_Swarm();
                             if (SearchForTrigger)
                                 CurrentRatio = getRatio(NextRand());
+                            if (MemoryLinkUsed)
+                                Advance(1);
                             encounterSlot = getSlot();
                             if (DoubleEncounter)
                                 Advance(2);
@@ -381,6 +399,9 @@ namespace RNGReporter.Objects
 
                             if (SearchForTrigger)
                                 CurrentRatio = getRatio(NextRand());
+
+                            if (MemoryLinkUsed)
+                                Advance(1);
 
                             encounterSlot = getSlot();
 
@@ -688,9 +709,6 @@ namespace RNGReporter.Objects
                         pid = ForceShiny(pid, id, sid);
                         pid = pid ^ 0x10000;
 
-                        if (specificMod && (pid % 256 != modValue))
-                            continue;
-
                         nature = (uint)(((ulong)NextRand() * 25) >> 32);
 
                         if (synchable && IsSync)
@@ -712,12 +730,10 @@ namespace RNGReporter.Objects
                         pid = NextRand();
                         pid = ModifyPIDGender(frameCompare, pid);
                         pid = ForceShiny(pid, id, sid);
-                        if (specificMod && (pid % 256 != modValue))
-                            continue;
                         nature = (uint)(((ulong)NextRand() * 25) >> 32);
                         synchable = false;
                     }
-                    else if (G5_Eevee || G5_Deerling)
+                    /*else if (G5_Eevee || G5_Deerling)
                     {
                         pid = NextRand() ^ 0x10000;
 
@@ -728,7 +744,7 @@ namespace RNGReporter.Objects
                             pid ^= 0x10000000;
                         nature = (uint)(((ulong)NextRand() * 25) >> 32);
                         synchable = false;
-                    }
+                    }*/
 
                     else if (G5_HiddenGrotto)
                     {
@@ -811,8 +827,6 @@ namespace RNGReporter.Objects
                     frames.Add(frame);
                 }
 
-
-                
             }
             
             return frames;
@@ -877,7 +891,7 @@ namespace RNGReporter.Objects
         }
 
 
-        // For cases the are not shiny locked and are affected by shiny charm
+        // For everything not shiny locked and affected by shiny charm
         private uint FindPID(uint id, uint sid, uint idLower, bool CC_Success)
         {
             uint pid = 0;
@@ -1001,7 +1015,7 @@ namespace RNGReporter.Objects
                 else
                     return (int)result + 23;
             }
-            // https://www.smogon.com/forums/threads/past-gen-rng-research.61090/page-29#post-3536005
+            // Credits: https://www.smogon.com/forums/threads/past-gen-rng-research.61090/page-29#post-3536005
             else
             {
                 uint calc = (uint)((ulong)CurrentRand() * 1000 >> 32);

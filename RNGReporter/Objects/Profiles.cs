@@ -168,6 +168,7 @@ namespace RNGReporter.Objects
         public bool SkipLR { get; set; }
 
         // note: BW2 only
+        public bool ShinyCharm { get; set; }
         public bool MemoryLink { get; set; }
 
         public override string ToString()
