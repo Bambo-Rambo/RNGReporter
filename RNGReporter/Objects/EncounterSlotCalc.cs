@@ -17,19 +17,15 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
+using System.Windows.Forms;
 using System.Collections.Generic;
 
 namespace RNGReporter.Objects
 {
     internal class EncounterSlotCalc
     {
+        #region Gen 3/4
         public static int encounterSlot(uint result, FrameType frameType, EncounterType encounterType)
-        {
-            return encounterSlot(result, frameType, encounterType, false);
-        }
-
-        public static int encounterSlot(uint result, FrameType frameType, EncounterType encounterType, bool isBW2)
         {
             switch (frameType)
             {
@@ -41,9 +37,6 @@ namespace RNGReporter.Objects
                     return KSlot(result, encounterType);
                 case FrameType.MethodJ:
                     return JSlot(result, encounterType);
-                case FrameType.Method5Natures:
-                    //YOU LOSE
-                    return BWSlot(result, encounterType, isBW2);
             }
             return -1;
         }
@@ -192,43 +185,86 @@ namespace RNGReporter.Objects
             }
         }
 
-        public static int BWSlot(uint result, EncounterType encounterType, bool isBW2)
+        #endregion
+
+
+        #region Gen 5
+
+        // Credits: https://www.pokebip.com/page/jeuxvideo/dossier_shasse/auras_porte_bonheur
+
+        public static Range[][] WildRanges = new Range[][]
+        {
+            new Range[]     // No Lucky Power used
+            {
+                new Range(0, 19),   new Range(20, 39),  new Range(40, 49),  new Range(50, 59),
+                new Range(60, 69),  new Range(70, 79),  new Range(80, 84),  new Range(85, 89),
+                new Range(90, 93),  new Range(94, 97),  new Range(98, 98),  new Range(99, 99)
+            },
+            
+            new Range[]     // Lucky Power ↑
+            {
+                new Range(0, 9),    new Range(10, 19),  new Range(20, 29),  new Range(30, 39),
+                new Range(40, 49),  new Range(50, 59),  new Range(60, 69),  new Range(70, 79),
+                new Range(80, 84),  new Range(85, 89),  new Range(90, 94),  new Range(95, 99)
+            },
+            
+            new Range[]     // Lucky Power ↑↑
+            {
+                new Range(0, 4),    new Range(4, 9),    new Range(10, 14),  new Range(15, 19),
+                new Range(20, 29),  new Range(30, 39),  new Range(40, 49),  new Range(50, 59),
+                new Range(60, 69),  new Range(70, 79),  new Range(80, 89),  new Range(90, 99)
+            },
+
+            new Range[]     // Lucky Power ↑↑↑
+            {
+                new Range(0, 0),    new Range(1, 1),    new Range(2, 5),    new Range(6, 9),
+                new Range(10, 14),  new Range(15, 19),  new Range(20, 29),  new Range(30, 39),
+                new Range(40, 49),  new Range(50, 59),  new Range(60, 79),  new Range(80, 99)
+            },
+        };
+
+
+        public static Range[][] SurfingRanges = new Range[][]
+        {
+            new Range[] { new Range(0, 59), new Range(60, 89), new Range(90, 94), new Range(95, 98), new Range(99, 99) },   // No Lucky Power used
+            new Range[] { new Range(0, 49), new Range(50, 79), new Range(80, 89), new Range(90, 94), new Range(95, 99) },   // Lucky Power ↑
+            new Range[] { new Range(0, 39), new Range(40, 69), new Range(70, 79), new Range(80, 89), new Range(90, 99) },   // Lucky Power ↑↑
+            new Range[] { new Range(0, 29), new Range(30, 49), new Range(50, 59), new Range(60, 79), new Range(80, 99) },   // Lucky Power ↑↑↑
+        };
+
+
+        public static Range[][] FishingRanges = new Range[][]
+        {
+            new Range[] { new Range(0, 39), new Range(40, 79), new Range(80, 94), new Range(95, 98), new Range(99, 99) },   // No Lucky Power used
+            new Range[] { new Range(0, 39), new Range(40, 74), new Range(75, 89), new Range(90, 94), new Range(95, 99) },   // Lucky Power ↑
+            new Range[] { new Range(0, 29), new Range(30, 59), new Range(60, 79), new Range(80, 89), new Range(90, 99) },   // Lucky Power ↑↑
+            new Range[] { new Range(0, 19), new Range(20, 39), new Range(40, 59), new Range(60, 79), new Range(80, 99) },   // Lucky Power ↑↑↑
+        };
+
+
+        public static int encounterSlotG5(uint result, EncounterType encounterType, bool isBW2, int luckyPowerLVL)
         {
             uint percent = isBW2 ? (uint) (((ulong) result*100) >> 32) : (result >> 16)/656;
             switch (encounterType)
             {
-                //60%       30%         5%          4%          1%
                 case EncounterType.WildSurfing:
                 case EncounterType.WildWaterSpot:
                     {
-                        Range[] ranges =
-                            {
-                                new Range(0, 59), new Range(60, 89), new Range(90, 94), new Range(95, 98), new Range(99, 99)
-                            };
-                        return CalcSlot(percent, ranges);
+                        return CalcSlot(percent, SurfingRanges[luckyPowerLVL]);
                     }
-                //40%       40%         15%         4%          1%
                 case EncounterType.WildSuperRod:
                 case EncounterType.WildFishingSpot:
                     {
-                        Range[] ranges =
-                            {
-                                new Range(0, 39), new Range(40, 79), new Range(80, 94), new Range(95, 98), new Range(99, 99)
-                            };
-                        return CalcSlot(percent, ranges);
+                        return CalcSlot(percent, FishingRanges[luckyPowerLVL]);
                     }
                 default:
                     {
-                        Range[] ranges =
-                            {
-                                new Range(0, 19), new Range(20, 39), new Range(40, 49), new Range(50, 59),
-                                new Range(60, 69), new Range(70, 79), new Range(80, 84), new Range(85, 89),
-                                new Range(90, 93), new Range(94, 97), new Range(98, 98), new Range(99, 99)
-                            };
-                        return CalcSlot(percent, ranges);
+                        return CalcSlot(percent, WildRanges[luckyPowerLVL]);
                     }
             }
         }
+
+        #endregion
 
         /// <summary>
         ///     Calculates the encounter slot based off given values

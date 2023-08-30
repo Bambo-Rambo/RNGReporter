@@ -62,6 +62,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxLanguage = new RNGReporter.GlassComboBox();
             this.checkBoxShinyCharm = new System.Windows.Forms.CheckBox();
+            this.comboLuckyPower = new RNGReporter.GlassComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.labelLuckyPower = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // checkBoxSkipLR
@@ -78,7 +81,7 @@
             // 
             this.btnParameters.BackColor = System.Drawing.Color.AntiqueWhite;
             this.btnParameters.ForeColor = System.Drawing.Color.Black;
-            this.btnParameters.Location = new System.Drawing.Point(508, 129);
+            this.btnParameters.Location = new System.Drawing.Point(366, 185);
             this.btnParameters.Name = "btnParameters";
             this.btnParameters.OuterBorderColor = System.Drawing.Color.Transparent;
             this.btnParameters.ShineColor = System.Drawing.SystemColors.Window;
@@ -110,7 +113,7 @@
             // label71
             // 
             this.label71.AutoSize = true;
-            this.label71.Location = new System.Drawing.Point(364, 87);
+            this.label71.Location = new System.Drawing.Point(364, 120);
             this.label71.Name = "label71";
             this.label71.Size = new System.Drawing.Size(49, 13);
             this.label71.TabIndex = 151;
@@ -118,7 +121,7 @@
             // 
             // textBoxTimer0Max
             // 
-            this.textBoxTimer0Max.Location = new System.Drawing.Point(431, 60);
+            this.textBoxTimer0Max.Location = new System.Drawing.Point(431, 64);
             this.textBoxTimer0Max.MaxLength = 6;
             this.textBoxTimer0Max.Name = "textBoxTimer0Max";
             this.textBoxTimer0Max.Size = new System.Drawing.Size(40, 20);
@@ -133,7 +136,7 @@
             "DS Original\\Lite",
             "DSi\\DSi XL",
             "3DS"});
-            this.comboBoxDSType.Location = new System.Drawing.Point(366, 102);
+            this.comboBoxDSType.Location = new System.Drawing.Point(366, 135);
             this.comboBoxDSType.Name = "comboBoxDSType";
             this.comboBoxDSType.ShineColor = System.Drawing.SystemColors.Window;
             this.comboBoxDSType.Size = new System.Drawing.Size(124, 21);
@@ -142,7 +145,7 @@
             // label49
             // 
             this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(363, 44);
+            this.label49.Location = new System.Drawing.Point(363, 48);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(59, 13);
             this.label49.TabIndex = 138;
@@ -151,7 +154,7 @@
             // 
             // textBoxTimer0Min
             // 
-            this.textBoxTimer0Min.Location = new System.Drawing.Point(366, 60);
+            this.textBoxTimer0Min.Location = new System.Drawing.Point(366, 64);
             this.textBoxTimer0Min.MaxLength = 6;
             this.textBoxTimer0Min.Name = "textBoxTimer0Min";
             this.textBoxTimer0Min.Size = new System.Drawing.Size(38, 20);
@@ -160,7 +163,7 @@
             // label53
             // 
             this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(428, 44);
+            this.label53.Location = new System.Drawing.Point(428, 48);
             this.label53.Name = "label53";
             this.label53.Size = new System.Drawing.Size(62, 13);
             this.label53.TabIndex = 144;
@@ -180,7 +183,7 @@
             // label50
             // 
             this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(204, 87);
+            this.label50.Location = new System.Drawing.Point(204, 120);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(42, 13);
             this.label50.TabIndex = 142;
@@ -207,7 +210,7 @@
             "White",
             "Black 2",
             "White 2"});
-            this.comboBoxVersion.Location = new System.Drawing.Point(207, 102);
+            this.comboBoxVersion.Location = new System.Drawing.Point(207, 135);
             this.comboBoxVersion.Name = "comboBoxVersion";
             this.comboBoxVersion.ShineColor = System.Drawing.SystemColors.Window;
             this.comboBoxVersion.Size = new System.Drawing.Size(132, 21);
@@ -345,7 +348,7 @@
             // 
             this.btnOK.BackColor = System.Drawing.Color.AntiqueWhite;
             this.btnOK.ForeColor = System.Drawing.Color.Black;
-            this.btnOK.Location = new System.Drawing.Point(46, 129);
+            this.btnOK.Location = new System.Drawing.Point(23, 185);
             this.btnOK.Name = "btnOK";
             this.btnOK.OuterBorderColor = System.Drawing.Color.Transparent;
             this.btnOK.ShineColor = System.Drawing.SystemColors.Window;
@@ -358,7 +361,7 @@
             // 
             this.btnCancel.BackColor = System.Drawing.Color.AntiqueWhite;
             this.btnCancel.ForeColor = System.Drawing.Color.Black;
-            this.btnCancel.Location = new System.Drawing.Point(207, 129);
+            this.btnCancel.Location = new System.Drawing.Point(184, 185);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.OuterBorderColor = System.Drawing.Color.Transparent;
             this.btnCancel.ShineColor = System.Drawing.SystemColors.Window;
@@ -380,7 +383,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 87);
+            this.label1.Location = new System.Drawing.Point(43, 119);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 159;
@@ -400,7 +403,7 @@
             "French",
             "Italian",
             "Korean"});
-            this.comboBoxLanguage.Location = new System.Drawing.Point(46, 102);
+            this.comboBoxLanguage.Location = new System.Drawing.Point(46, 135);
             this.comboBoxLanguage.Name = "comboBoxLanguage";
             this.comboBoxLanguage.ShineColor = System.Drawing.SystemColors.Window;
             this.comboBoxLanguage.Size = new System.Drawing.Size(132, 21);
@@ -416,11 +419,53 @@
             this.checkBoxShinyCharm.Text = "Shiny Charm";
             this.checkBoxShinyCharm.UseVisualStyleBackColor = true;
             // 
+            // comboLuckyPower
+            // 
+            this.comboLuckyPower.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboLuckyPower.ForeColor = System.Drawing.Color.Black;
+            this.comboLuckyPower.FormattingEnabled = true;
+            this.comboLuckyPower.Items.AddRange(new object[] {
+            "-",
+            "↑",
+            "↑↑",
+            "↑↑↑"});
+            this.comboLuckyPower.Location = new System.Drawing.Point(534, 135);
+            this.comboLuckyPower.Name = "comboLuckyPower";
+            this.comboLuckyPower.ShineColor = System.Drawing.SystemColors.Window;
+            this.comboLuckyPower.Size = new System.Drawing.Size(108, 21);
+            this.comboLuckyPower.TabIndex = 161;
+            this.comboLuckyPower.SelectedIndexChanged += new System.EventHandler(this.comboLuckyPower_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(531, 119);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 13);
+            this.label2.TabIndex = 162;
+            this.label2.Text = "Lucky Power Level";
+            // 
+            // labelLuckyPower
+            // 
+            this.labelLuckyPower.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelLuckyPower.AutoSize = true;
+            this.labelLuckyPower.Location = new System.Drawing.Point(531, 169);
+            this.labelLuckyPower.Name = "labelLuckyPower";
+            this.labelLuckyPower.Size = new System.Drawing.Size(95, 13);
+            this.labelLuckyPower.TabIndex = 163;
+            this.labelLuckyPower.Text = "Lucky Power Note";
+            this.labelLuckyPower.Visible = false;
+            // 
             // ProfileEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(674, 169);
+            this.ClientSize = new System.Drawing.Size(694, 230);
+            this.Controls.Add(this.labelLuckyPower);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.comboLuckyPower);
             this.Controls.Add(this.checkBoxShinyCharm);
             this.Controls.Add(this.label27);
             this.Controls.Add(this.label1);
@@ -456,6 +501,7 @@
             this.Controls.Add(this.label48);
             this.Name = "ProfileEditor";
             this.Text = "ProfileEditor";
+            this.Load += new System.EventHandler(this.ProfileEditor_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -496,5 +542,8 @@
         private System.Windows.Forms.Label label1;
         private GlassComboBox comboBoxLanguage;
         private System.Windows.Forms.CheckBox checkBoxShinyCharm;
+        private GlassComboBox comboLuckyPower;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelLuckyPower;
     }
 }

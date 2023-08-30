@@ -153,6 +153,11 @@ namespace RNGReporter.Objects
             get { return Frame.Level; }
         }
 
+        public string LuckyPower
+        {
+            get { return Frame.LuckyPowerString; }
+        }
+
         public bool DreamAbility
         {
             get { return Frame.DreamAbility; }

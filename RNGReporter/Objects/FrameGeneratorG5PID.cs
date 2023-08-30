@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace RNGReporter.Objects
@@ -11,6 +11,8 @@ namespace RNGReporter.Objects
         public uint MinAdvances { get; set; }
         public bool SearchForTrigger { get; set; }
         public int RerollCount { get; set; }
+        public int CurrentLuckyPowerLVL { get; set; }   // The current Lucky Power level we are testing. Variable 
+        public int MaxLuckyPowerLVL { get; set; }       // The total number of levels unlocked. Constant
         public int MinLevel { get; set; }
         public int MaxLevel { get; set; }
         public bool isBW2 { get; set; }
@@ -80,6 +82,7 @@ namespace RNGReporter.Objects
             bool DoubleEncounter = false;
             ulong CurrentRatio = 65535;
             int encounterSlot = 0;
+            
             GenderCase = SynchNature;       // Use another variable to avoid confusion
             const uint item = 0;
             var mod = EncounterMod.None;
@@ -101,11 +104,10 @@ namespace RNGReporter.Objects
                 pointer = 1;
 
                 uint CurrentFrame = cnt + StartingFrame;
-                uint nature;
-                uint pid;
-                bool synchable;
+                uint nature = 0;
+                uint pid = 0;
+                bool synchable = false;
                 byte level = 0;
-
 
                 if (G5_WildEncounter)
                 {
@@ -117,33 +119,42 @@ namespace RNGReporter.Objects
 
                         if (TimeFinder5)
                         {
-                            if (CheckLead(true))      //Cute Charm Success
+                            for (CurrentLuckyPowerLVL = 0; CurrentLuckyPowerLVL <= MaxLuckyPowerLVL; CurrentLuckyPowerLVL++)
                             {
+                                // Each time we need to check another Lucky Power level, we need to restore the RNG state
+                                pointer = 1;
+                                if (CheckLead(true))      //Cute Charm Success
+                                {
+                                    if (SearchForTrigger)
+                                        CurrentRatio = getRatio(NextRand());
+                                    if (MemoryLinkUsed)
+                                        Advance(1);
+                                    encounterSlot = getSlot(CurrentLuckyPowerLVL);
+                                    level = getLevel(NextRand());
+                                    CuteCharmModify(frameCompare, id, sid, idLower, CurrentFrame, CurrentRatio, encounterSlot, level, pointer);
+                                }
+
+                                // Restore the RNG state in order to check for Sync / No Lead
+                                pointer = 1;
+                                synchable = CheckLead(false);
                                 if (SearchForTrigger)
                                     CurrentRatio = getRatio(NextRand());
                                 if (MemoryLinkUsed)
                                     Advance(1);
-                                encounterSlot = getSlot();
+                                encounterSlot = getSlot(CurrentLuckyPowerLVL);
                                 level = getLevel(NextRand());
-                                CuteCharmModify(frameCompare, id, sid, idLower, CurrentFrame, CurrentRatio, encounterSlot, level, pointer);
-                            }
+                                pid = FindPID(id, sid, idLower, false);
+                                nature = (uint)(((ulong)NextRand() * 25) >> 32);
+                                if (synchable && !frameCompare.CompareNature(nature))
+                                    mod = EncounterMod.Synchronize;
+                                else
+                                    mod = EncounterMod.None;
+                                //CurrentFrame--;
 
-                            // Restore the RNG state in order to check for Sync / No Lead
-                            pointer = 0;
-                            synchable = CheckLead(false);
-                            if (SearchForTrigger)
-                                CurrentRatio = getRatio(NextRand());
-                            if (MemoryLinkUsed)
-                                Advance(1);
-                            encounterSlot = getSlot();
-                            level = getLevel(NextRand());
-                            pid = FindPID(id, sid, idLower, false);
-                            nature = (uint)(((ulong)NextRand() * 25) >> 32);
-                            if (synchable && !frameCompare.CompareNature(nature))
-                                mod = EncounterMod.Synchronize;
-                            else
-                                mod = EncounterMod.None;
-                            CurrentFrame--;
+                                Finalize(frameCompare, CurrentFrame, pid, id, sid, nature, synchable, encounterSlot, level, 0, 
+                                    CurrentRatio, false, 0, mod);
+                            }
+                            
                         }
                         else
                         {
@@ -161,7 +172,7 @@ namespace RNGReporter.Objects
                             if (MemoryLinkUsed)
                                 Advance(1);
 
-                            encounterSlot = getSlot();
+                            encounterSlot = getSlot(CurrentLuckyPowerLVL);
 
                             level = getLevel(NextRand());
 
@@ -182,8 +193,29 @@ namespace RNGReporter.Objects
                     {
                         if (TimeFinder5)
                         {
-                            if (CheckLead(true))      //Cute Charm Success
+                            for (CurrentLuckyPowerLVL = 0; CurrentLuckyPowerLVL <= MaxLuckyPowerLVL; CurrentLuckyPowerLVL++)
                             {
+                                pointer = 1;
+                                if (CheckLead(true))      //Cute Charm Success
+                                {
+                                    if (SearchForTrigger)
+                                        CurrentRatio = getRatio(NextRand());
+                                    if (MemoryLinkUsed)
+                                        Advance(1);
+                                    if (DoubleEnc_Swarm())
+                                    {
+                                        encounterSlot = 12;
+                                        Advance(1);
+                                    }
+                                    else
+                                        encounterSlot = getSlot(CurrentLuckyPowerLVL);
+                                    level = getLevel(NextRand());
+                                    CuteCharmModify(frameCompare, id, sid, idLower, CurrentFrame, CurrentRatio, encounterSlot, level, pointer);
+                                }
+
+                                // Restore the RNG state in order to check for Sync / No Lead
+                                pointer = 1;
+                                synchable = CheckLead(false);
                                 if (SearchForTrigger)
                                     CurrentRatio = getRatio(NextRand());
                                 if (MemoryLinkUsed)
@@ -194,33 +226,18 @@ namespace RNGReporter.Objects
                                     Advance(1);
                                 }
                                 else
-                                    encounterSlot = getSlot();
+                                    encounterSlot = getSlot(CurrentLuckyPowerLVL);
                                 level = getLevel(NextRand());
-                                CuteCharmModify(frameCompare, id, sid, idLower, CurrentFrame, CurrentRatio, encounterSlot, level, pointer);
-                            }
+                                pid = FindPID(id, sid, idLower, false);
+                                nature = (uint)(((ulong)NextRand() * 25) >> 32);
+                                if (synchable && !frameCompare.CompareNature(nature))
+                                    mod = EncounterMod.Synchronize;
+                                else
+                                    mod = EncounterMod.None;
 
-                            // Restore the RNG state in order to check for Sync / No Lead
-                            pointer = 0;
-                            synchable = CheckLead(false);
-                            if (SearchForTrigger)
-                                CurrentRatio = getRatio(NextRand());
-                            if (MemoryLinkUsed)
-                                Advance(1);
-                            if (DoubleEnc_Swarm())
-                            {
-                                encounterSlot = 12;
-                                Advance(1);
-                            }
-                            else
-                                encounterSlot = getSlot();
-                            level = getLevel(NextRand());
-                            pid = FindPID(id, sid, idLower, false);
-                            nature = (uint)(((ulong)NextRand() * 25) >> 32);
-                            if (synchable && !frameCompare.CompareNature(nature))
-                                mod = EncounterMod.Synchronize;
-                            else
-                                mod = EncounterMod.None;
-                            CurrentFrame--;
+                                Finalize(frameCompare, CurrentFrame, pid, id, sid, nature, synchable, encounterSlot, level, 0,
+                                    CurrentRatio, false, 0, mod);
+                            }  
                         }
                         else
                         {
@@ -244,7 +261,7 @@ namespace RNGReporter.Objects
                                 Advance(1);
                             }
                             else
-                                encounterSlot = getSlot();
+                                encounterSlot = getSlot(CurrentLuckyPowerLVL);
 
                             level = getLevel(NextRand());
 
@@ -265,56 +282,55 @@ namespace RNGReporter.Objects
                     {
                         if (TimeFinder5)
                         {
-                            //Advance(1);
                             if (!CheckBattle(BattleParam))
                                 continue;
 
-                            // Let's do Suction Cups since it affects the hittable frames
-
-                            encounterSlot = getSlot();
-                            Advance(1);
-                            pid = FindPID(id, sid, idLower, false);
-                            nature = (uint)(((ulong)NextRand() * 25) >> 32);
-
-                            frame = Frame.GenerateFrame5(FrameType.Method5Natures, EncounterType, CurrentFrame, rngList[0], rngList[1],
-                                pid, id, sid, nature, false, encounterSlot, 0, item, 0, false);
-
-                            if (frameCompare.Compare(frame))
+                            for (CurrentLuckyPowerLVL = 0; CurrentLuckyPowerLVL <= MaxLuckyPowerLVL; CurrentLuckyPowerLVL++)
                             {
-                                frame.EncounterMod = EncounterMod.SuctionCups;
-                                frames.Add(frame);
-                            }
-
-
-                            // Now for regular\Synchronize\Cute Charm encounters
-
-                            // Restore the RNG state in order to check for Cute Charm
-                            pointer = 0;
-                            if (!CheckBattle(BattleParam))
-                                continue;
-
-                            if (CheckLead(true))      //Cute Charm Success
-                            {
-                                encounterSlot = getSlot();
+                                // Let's do Suction Cups since it affects the hittable frames
+                                pointer = 2;
+                                encounterSlot = getSlot(CurrentLuckyPowerLVL);
                                 Advance(1);
-                                CuteCharmModify(frameCompare, id, sid, idLower, CurrentFrame, CurrentRatio, encounterSlot, 0, pointer);
+                                pid = FindPID(id, sid, idLower, false);
+                                nature = (uint)(((ulong)NextRand() * 25) >> 32);
+
+                                frame = Frame.GenerateFrame5(FrameType.Method5Natures, EncounterType, CurrentFrame, rngList[0], rngList[1],
+                                    pid, id, sid, nature, false, encounterSlot, 0, item, 0, false, CurrentLuckyPowerLVL);
+
+                                if (frameCompare.Compare(frame))
+                                {
+                                    frame.EncounterMod = EncounterMod.SuctionCups;
+                                    frames.Add(frame);
+                                }
+
+                                // Now for regular\Synchronize\Cute Charm encounters
+
+                                // Restore the RNG state in order to check for Cute Charm
+                                pointer = 2;
+
+                                if (CheckLead(true))      //Cute Charm Success
+                                {
+                                    encounterSlot = getSlot(CurrentLuckyPowerLVL);
+                                    Advance(1);
+                                    CuteCharmModify(frameCompare, id, sid, idLower, CurrentFrame, CurrentRatio, encounterSlot, 0, pointer);
+                                }
+
+                                // Restore the RNG state in order to check for Sync / No Lead
+                                pointer = 2;
+
+                                synchable = CheckLead(false);
+                                encounterSlot = getSlot(CurrentLuckyPowerLVL);
+                                Advance(1);
+                                pid = FindPID(id, sid, idLower, false);
+                                nature = (uint)(((ulong)NextRand() * 25) >> 32);
+                                if (synchable && !frameCompare.CompareNature(nature))
+                                    mod = EncounterMod.Synchronize;
+                                else
+                                    mod = EncounterMod.None;
+
+                                Finalize(frameCompare, CurrentFrame, pid, id, sid, nature, synchable, encounterSlot, level, 0,
+                                    CurrentRatio, false, 0, mod);
                             }
-
-                            // Restore the RNG state in order to check for Sync / No Lead
-                            pointer = 0;
-                            if (!CheckBattle(BattleParam))
-                                continue;
-
-                            synchable = CheckLead(false);
-                            encounterSlot = getSlot();
-                            Advance(1);
-                            pid = FindPID(id, sid, idLower, false);
-                            nature = (uint)(((ulong)NextRand() * 25) >> 32);
-                            if (synchable && !frameCompare.CompareNature(nature))
-                                mod = EncounterMod.Synchronize;
-                            else
-                                mod = EncounterMod.None;
-                            CurrentFrame--;
                         }
                         else
                         {
@@ -328,7 +344,7 @@ namespace RNGReporter.Objects
                             if (IsCuteCharm && !synchable)
                                 Advance(1);
 
-                            encounterSlot = battle ? getSlot() : FindItem(G5_WildCaveSpot);
+                            encounterSlot = battle ? getSlot(CurrentLuckyPowerLVL) : FindItem(G5_WildCaveSpot);
 
                             Advance(1);     // Level is fixed for Cave spots slots
 
@@ -351,39 +367,45 @@ namespace RNGReporter.Objects
                     {
                         if (TimeFinder5)
                         {
-                            if (CheckLead(true))      //Cute Charm Success
+                            for (CurrentLuckyPowerLVL = 0; CurrentLuckyPowerLVL <= MaxLuckyPowerLVL; CurrentLuckyPowerLVL++)
                             {
+                                pointer = 1;
+                                if (CheckLead(true))      //Cute Charm Success
+                                {
+                                    DoubleEncounter = DoubleEnc_Swarm();
+                                    if (SearchForTrigger)
+                                        CurrentRatio = getRatio(NextRand());
+                                    if (MemoryLinkUsed)
+                                        Advance(1);
+                                    encounterSlot = getSlot(CurrentLuckyPowerLVL);
+                                    if (DoubleEncounter)
+                                        Advance(2);
+                                    Advance(1);
+                                    CuteCharmModify(frameCompare, id, sid, idLower, CurrentFrame, CurrentRatio, encounterSlot, 0, pointer);
+                                }
+
+                                // Restore the RNG state in order to check for Sync / No Lead
+                                pointer = 1;
+                                synchable = CheckLead(false);
                                 DoubleEncounter = DoubleEnc_Swarm();
                                 if (SearchForTrigger)
                                     CurrentRatio = getRatio(NextRand());
                                 if (MemoryLinkUsed)
                                     Advance(1);
-                                encounterSlot = getSlot();
+                                encounterSlot = getSlot(CurrentLuckyPowerLVL);
                                 if (DoubleEncounter)
                                     Advance(2);
                                 Advance(1);
-                                CuteCharmModify(frameCompare, id, sid, idLower, CurrentFrame, CurrentRatio, encounterSlot, 0, pointer);
-                            }
+                                pid = FindPID(id, sid, idLower, false);
+                                nature = (uint)(((ulong)NextRand() * 25) >> 32);
+                                if (synchable && !frameCompare.CompareNature(nature))
+                                    mod = EncounterMod.Synchronize;
+                                else
+                                    mod = EncounterMod.None;
 
-                            // Restore the RNG state in order to check for Sync / No Lead
-                            pointer = 0;
-                            synchable = CheckLead(false);
-                            DoubleEncounter = DoubleEnc_Swarm();
-                            if (SearchForTrigger)
-                                CurrentRatio = getRatio(NextRand());
-                            if (MemoryLinkUsed)
-                                Advance(1);
-                            encounterSlot = getSlot();
-                            if (DoubleEncounter)
-                                Advance(2);
-                            Advance(1);
-                            pid = FindPID(id, sid, idLower, false);
-                            nature = (uint)(((ulong)NextRand() * 25) >> 32);
-                            if (synchable && !frameCompare.CompareNature(nature))
-                                mod = EncounterMod.Synchronize;
-                            else
-                                mod = EncounterMod.None;
-                            CurrentFrame--;
+                                Finalize(frameCompare, CurrentFrame, pid, id, sid, nature, synchable, encounterSlot, level, item,
+                                    CurrentRatio, DoubleEncounter, entreeTimer.GetTime(rngList[0]), mod);
+                            }  
                         }
                         else
                         {
@@ -403,7 +425,7 @@ namespace RNGReporter.Objects
                             if (MemoryLinkUsed)
                                 Advance(1);
 
-                            encounterSlot = getSlot();
+                            encounterSlot = getSlot(CurrentLuckyPowerLVL);
 
                             if (DoubleEncounter)
                                 Advance(2);
@@ -429,80 +451,86 @@ namespace RNGReporter.Objects
 
                         if (TimeFinder5)
                         {
+
                             if (G5_WildSuperRod)
                             {
-                                synchable = CheckLead(false);
-
-                                if (getRatio(NextRand()) < 50)      //Successful Fishing encounter trigger
+                                for (CurrentLuckyPowerLVL = 0; CurrentLuckyPowerLVL <= MaxLuckyPowerLVL; CurrentLuckyPowerLVL++)
                                 {
-                                    encounterSlot = getSlot();
+                                    pointer = 1;
+                                    synchable = CheckLead(false);
+                                    if (getRatio(NextRand()) < 50)      //Successful Fishing encounter trigger - No lead required
+                                    {
+                                        encounterSlot = getSlot(CurrentLuckyPowerLVL);
+                                        level = getLevel(NextRand());
+                                        pid = FindPID(id, sid, idLower, false);
+                                        nature = (uint)(((ulong)NextRand() * 25) >> 32);
+                                        Finalize(frameCompare, CurrentFrame, pid, id, sid, nature, synchable, encounterSlot, level, 0,
+                                            CurrentRatio, false, 0, mod);
+
+                                        //Check Cute charm
+                                        pointer = 1;
+                                        if (CheckLead(true))      //Cute Charm Success
+                                        {
+                                            CurrentRatio = getRatio(NextRand());
+                                            encounterSlot = getSlot(CurrentLuckyPowerLVL);
+                                            level = getLevel(NextRand());
+                                            CuteCharmModify(frameCompare, id, sid, idLower, CurrentFrame, CurrentRatio, encounterSlot, level, pointer);
+                                        }
+                                    }
+
+                                    // Check Suction Cups even if the encounter can be triggered without it
+                                    pointer = 2;
+                                    encounterSlot = getSlot(CurrentLuckyPowerLVL);
                                     level = getLevel(NextRand());
                                     pid = FindPID(id, sid, idLower, false);
                                     nature = (uint)(((ulong)NextRand() * 25) >> 32);
 
                                     frame = Frame.GenerateFrame5(FrameType.Method5Natures, EncounterType, CurrentFrame, rngList[0], rngList[1],
-                                        pid, id, sid, nature, synchable, encounterSlot, level, item, 0, false);
+                                        pid, id, sid, nature, false, encounterSlot, level, item, 0, false, CurrentLuckyPowerLVL);
 
                                     if (frameCompare.Compare(frame))
-                                        frames.Add(frame);
-
-
-                                    //Check Cute charm as well
-                                    pointer = 1;
-                                    if (CheckLead(true))      //Cute Charm Success
                                     {
-                                        CurrentRatio = getRatio(NextRand());
-                                        encounterSlot = getSlot();
-                                        level = getLevel(NextRand());
-                                        CuteCharmModify(frameCompare, id, sid, idLower, CurrentFrame, CurrentRatio, encounterSlot, level, pointer);
+                                        frame.EncounterMod = EncounterMod.SuctionCups;
+                                        frames.Add(frame);
                                     }
-
-                                }
-
-
-                                // Check Suction Cups even if the encounter can be triggered without it
-                                pointer = 2;
-                                encounterSlot = getSlot();
-                                level = getLevel(NextRand());
-                                pid = FindPID(id, sid, idLower, false);
-                                nature = (uint)(((ulong)NextRand() * 25) >> 32);
-
-                                frame = Frame.GenerateFrame5(FrameType.Method5Natures, EncounterType, CurrentFrame, rngList[0], rngList[1],
-                                    pid, id, sid, nature, false, encounterSlot, level, item, 0, false);
-
-                                if (frameCompare.Compare(frame))
-                                {
-                                    frame.EncounterMod = EncounterMod.SuctionCups;
-                                    frames.Add(frame);
                                 }
 
                                 // The search for this frame MUST stop here
-                                continue;
+                                //continue;
 
                             }
+
                             // Searcher for Shaking Grass Spots
                             else
                             {
-                                Advance(1);
-                                if (CheckLead(true))      //Cute Charm Success
+                                //Advance(1);   // Not useful since pointer will be set to 2 anyway
+
+                                for (CurrentLuckyPowerLVL = 0; CurrentLuckyPowerLVL <= MaxLuckyPowerLVL; CurrentLuckyPowerLVL++)
                                 {
-                                    encounterSlot = getSlot();
+                                    pointer = 2;
+                                    if (CheckLead(true))      //Cute Charm Success
+                                    {
+                                        encounterSlot = getSlot(CurrentLuckyPowerLVL);
+                                        Advance(1);
+                                        CuteCharmModify(frameCompare, id, sid, idLower, CurrentFrame, CurrentRatio, encounterSlot, 0, pointer);
+                                    }
+
+                                    pointer = 2;
+                                    synchable = CheckLead(false);
+                                    encounterSlot = getSlot(CurrentLuckyPowerLVL);
                                     Advance(1);
-                                    CuteCharmModify(frameCompare, id, sid, idLower, CurrentFrame, CurrentRatio, encounterSlot, 0, pointer);
+                                    pid = FindPID(id, sid, idLower, false);
+                                    nature = (uint)(((ulong)NextRand() * 25) >> 32);
+
+                                    if (synchable && !frameCompare.CompareNature(nature))
+                                        mod = EncounterMod.Synchronize;
+                                    else
+                                        mod = EncounterMod.None;
+
+                                    Finalize(frameCompare, CurrentFrame, pid, id, sid, nature, synchable, encounterSlot, level, 0,
+                                        CurrentRatio, false, 0, mod);
                                 }
-
-                                pointer = 1;
-                                synchable = CheckLead(false);
-                                encounterSlot = getSlot();
-                                Advance(1);
-                                pid = FindPID(id, sid, idLower, false);
-                                nature = (uint)(((ulong)NextRand() * 25) >> 32);
-
-                                if (synchable && !frameCompare.CompareNature(nature))
-                                    mod = EncounterMod.Synchronize;
-                                else
-                                    mod = EncounterMod.None;
-                                CurrentFrame--;
+                                    
                             }
 
                         }
@@ -536,7 +564,7 @@ namespace RNGReporter.Objects
                                     Advance(1);
                             }
 
-                            encounterSlot = getSlot();
+                            encounterSlot = getSlot(CurrentLuckyPowerLVL);
 
                             level = getLevel(NextRand());
 
@@ -775,63 +803,51 @@ namespace RNGReporter.Objects
                     #endregion
                 }
 
-
-
                 // worthless calculation
                 //int ability = (int) (pid >> 16) & 1;
 
-                if (RNGIVs != null)
-                {
-                    frame =
-                        Frame.GenerateFrame(
-                            FrameType.Method5Natures,
-                            EncounterType,
-                            CurrentFrame,
-                            rngList[1],
-                            pid,
-                            id,
-                            sid,
-                            nature,
-                            synchable,
-                            encounterSlot,
-                            item,
-                            RNGIVs);
-                }
-                else
-                {
-                    frame =
-                        Frame.GenerateFrame5(
-                            FrameType.Method5Natures,
-                            EncounterType,
-                            CurrentFrame,
-                            rngList[1],
-                            rngList[2],
-                            pid,
-                            id,
-                            sid,
-                            nature,
-                            synchable,
-                            encounterSlot,
-                            level,
-                            item,
-                            CurrentRatio, 
-                            DoubleEncounter);
-                }
-
-
-                frame.EncounterMod = mod;
-                frame.CGearTime = entreeTimer.GetTime(rngList[0]);
-
-                if (frameCompare.Compare(frame))
-                {
-                    frames.Add(frame);
-                }
+                if (!TimeFinder5)
+                    Finalize(frameCompare, CurrentFrame, pid, id, sid, nature, synchable, encounterSlot, level, item,
+                                    CurrentRatio, DoubleEncounter, entreeTimer.GetTime(rngList[0]), mod);
 
             }
-            
+
             return frames;
 
         }
+
+        public void Finalize(FrameCompare frameCompare, uint CurrentFrame, uint pid, uint id, uint sid, uint nature, bool synchable,
+            int encounterSlot, byte level, uint item, ulong CurrentRatio, bool DoubleEncounter, uint entreeTimer, EncounterMod mod)
+        {
+            frame =
+                    Frame.GenerateFrame5(
+                        FrameType.Method5Natures,
+                        EncounterType,
+                        CurrentFrame,
+                        rngList[1],
+                        rngList[2],
+                        pid,
+                        id,
+                        sid,
+                        nature,
+                        synchable,
+                        encounterSlot,
+                        level,
+                        item,
+                        CurrentRatio,
+                        DoubleEncounter,
+                        CurrentLuckyPowerLVL);
+
+            frame.EncounterMod = mod;
+            frame.CGearTime = entreeTimer;
+
+            if (frameCompare.Compare(frame))
+            {
+                frames.Add(frame);
+            }
+        }
+
+
 
 
         // Hidden Grotto, HA Jellicent
@@ -895,7 +911,7 @@ namespace RNGReporter.Objects
         private uint FindPID(uint id, uint sid, uint idLower, bool CC_Success)
         {
             uint pid = 0;
-            for (int i = 0; i < RerollCount; i++)
+            for (int i = 0; i < RerollCount + (CurrentLuckyPowerLVL >= 3 ? 1 : 0); i++)
             {
                 pid = NextRand() ^ 0x10000;
 
@@ -929,7 +945,7 @@ namespace RNGReporter.Objects
         }
 
         private void CuteCharmModify(FrameCompare frameCompare, uint id, uint sid, uint idLower, 
-            uint CurrentFrame, ulong CurrentRatio, int encounterSlot, byte level, int p)
+            uint CurrentFrame, ulong CurrentRatio, int enctrSlot, byte level, int p)
         {
             // Add all the Cute Charm possibilities
             for (GenderCase = -4; GenderCase < 5; GenderCase++)
@@ -940,21 +956,22 @@ namespace RNGReporter.Objects
                 // Restore the RNG state
                 pointer = p;
 
-                frame = Frame.GenerateFrame5(FrameType.Method5Natures, 
-                    EncounterType,
-                    CurrentFrame,                                   //cnt + InitialFrame
-                    rngList[0],
-                    rngList[1],
-                    FindPID(id, sid, idLower, true),                //PID. CC_Success is always true at this point
-                    id,
-                    sid,
-                    (uint)(((ulong)NextRand() * 25) >> 32),         //Nature
-                    false,                                          //Synchable. False for Cute Charm obviously
-                    encounterSlot,
-                    level,
-                    0,                                              //Item
-                    CurrentRatio,
-                    false);
+                frame = Frame.GenerateFrame5(FrameType.Method5Natures,
+                EncounterType,
+                CurrentFrame,                                   //cnt + InitialFrame
+                rngList[0],
+                rngList[1],
+                FindPID(id, sid, idLower, true),                //PID. CC_Success is always true at this point
+                id,
+                sid,
+                (uint)(((ulong)NextRand() * 25) >> 32),         //Nature
+                false,                                          //Synchable. False for Cute Charm obviously
+                enctrSlot,
+                level,
+                0,                                              //Item
+                CurrentRatio,
+                false,
+                CurrentLuckyPowerLVL);                          //The current Level of Lucky Power Tested
 
                 switch (GenderCase)
                 {
@@ -972,7 +989,6 @@ namespace RNGReporter.Objects
                 {
                     frames.Add(frame);
                 }
-
             }
         }
 
@@ -984,9 +1000,14 @@ namespace RNGReporter.Objects
                 return (NextRand() >> 31) == 1;
         }
 
-        private int getSlot()
+
+        private int getSlot(int currentLuckyPowerLVL)
         {
-            return EncounterSlotCalc.encounterSlot(NextRand(), frameType, EncounterType, isBW2);
+            return EncounterSlotCalc.encounterSlotG5(NextRand(), EncounterType, isBW2, currentLuckyPowerLVL);
+        }
+        private int getSlot(int currentLuckyPowerLVL, uint currentRand)
+        {
+            return EncounterSlotCalc.encounterSlotG5(currentRand, EncounterType, isBW2, currentLuckyPowerLVL);
         }
 
         public byte getLevel(ulong seed) => (byte)((uint)(seed * 100 >> 32) % (MaxLevel - MinLevel + 1) + MinLevel);

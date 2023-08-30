@@ -247,6 +247,7 @@ namespace RNGReporter
 
 
             comboBoxMethod.SelectedIndex = 11;
+            LuckyPowerCombobox.SelectedIndex = 0;
 
 
             if (File.Exists(Settings.Default.ProfileLocation))
@@ -375,7 +376,7 @@ namespace RNGReporter
                 int RatioValue = Convert.ToInt32(dataGridViewValues.Rows[e.RowIndex].Cells["Ratio"].Value);
                 if (dataGridViewValues.Columns[e.ColumnIndex].Name == "Ratio")
                 {
-                    if ((RatioValue < 14 && comboBoxEncounterType.SelectedIndex <= 2) || 
+                    if ((RatioValue < 13 && comboBoxEncounterType.SelectedIndex <= 2) || 
                         (RatioValue < 6 && comboBoxEncounterType.SelectedIndex == 3) ||
                         (comboBoxEncounterType.SelectedIndex == 4 && RatioValue < 50))
                     {
@@ -488,6 +489,7 @@ namespace RNGReporter
             generator.EncounterType = EncounterTypeCalc.EncounterString(comboBoxEncounterType.Text);
             generator.DittoUsed = checkBoxDittoParent.Checked;
             generator.MaleOnlySpecies = cbNidoBeat.Checked;
+            generator.CurrentLuckyPowerLVL = LuckyPowerCombobox.SelectedIndex;
             generator.RerollCount = cbShinyCharm.Checked ? 3 : 1;
             generator.MemoryLinkUsed = checkBoxMemoryLink.Checked;
             generator.MinLevel = (int)numericLevelMin.Value;
@@ -2436,6 +2438,7 @@ namespace RNGReporter
             catch { }*/
         }
 
+
         private void ManageGen4SeedInfo()
         {
             label17.Visible = label18.Visible = label19.Visible = buttonRoamerMap.Visible = checkBoxRPresent.Visible =
@@ -3315,6 +3318,6 @@ namespace RNGReporter
             var ivsToFrame = new IVstoFrame();
             ivsToFrame.Show();
         }
-        
+
     }
 }

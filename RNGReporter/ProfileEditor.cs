@@ -22,6 +22,12 @@ namespace RNGReporter
             set { LoadProfile(value); }
         }
 
+        private void ProfileEditor_Load(object sender, EventArgs e)
+        {
+            //comboLuckyPower.SelectedIndex = 0;
+            labelLuckyPower.Text = "Note: Use this field only if you \nare willing to use Pass Powers \nthrough Entralink.";
+        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (GetProfile() == null)
@@ -74,7 +80,8 @@ namespace RNGReporter
                     SoftReset = checkBoxSoftReset.Checked,
                     SkipLR = checkBoxSkipLR.Checked,
                     ShinyCharm = checkBoxShinyCharm.Enabled && checkBoxShinyCharm.Checked,
-                    MemoryLink = checkBoxMemoryLink.Enabled && checkBoxMemoryLink.Checked
+                    MemoryLink = checkBoxMemoryLink.Enabled && checkBoxMemoryLink.Checked,
+                    LuckyPowerLVL = comboLuckyPower.SelectedIndex == -1 ? 0 : comboLuckyPower.SelectedIndex,
                 };
             if (Nazos.Nazo(profile) == null)
             {
@@ -105,6 +112,7 @@ namespace RNGReporter
             checkBoxSkipLR.Checked = profile.SkipLR;
             checkBoxShinyCharm.Checked = profile.ShinyCharm;
             checkBoxMemoryLink.Checked = profile.MemoryLink;
+            comboLuckyPower.SelectedIndex = profile.LuckyPowerLVL;
         }
 
 
@@ -161,8 +169,15 @@ namespace RNGReporter
 
         private void comboBoxVersion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            checkBoxShinyCharm.Enabled = checkBoxMemoryLink.Enabled = comboBoxVersion.Text.Contains("2");
+            if (!comboBoxVersion.Text.Contains("2"))
+                comboLuckyPower.SelectedIndex = 0;
+            checkBoxShinyCharm.Enabled = checkBoxMemoryLink.Enabled = label2.Enabled = comboLuckyPower.Enabled = comboBoxVersion.Text.Contains("2");
             CheckNazos();
+        }
+
+        private void comboLuckyPower_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            labelLuckyPower.Visible = comboLuckyPower.SelectedIndex > 0;
         }
 
         private void CheckNazos()
@@ -178,5 +193,6 @@ namespace RNGReporter
                 }
             }
         }
+
     }
 }

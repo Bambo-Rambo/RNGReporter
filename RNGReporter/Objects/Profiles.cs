@@ -170,6 +170,7 @@ namespace RNGReporter.Objects
         // note: BW2 only
         public bool ShinyCharm { get; set; }
         public bool MemoryLink { get; set; }
+        public int LuckyPowerLVL { get; set; }
 
         public override string ToString()
         {

@@ -17,6 +17,9 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
+using System;
+
 namespace RNGReporter.Objects
 {
     public class Frame
@@ -186,6 +189,13 @@ namespace RNGReporter.Objects
         { 
             get { return DoubleBattle ? "Double" : ""; }
             set { }
+        }
+
+        public int luckyPower { get; set; }
+
+        public string LuckyPowerString
+        {
+            get { return luckyPower == 0 ? "None" : string.Concat(Enumerable.Repeat("↑", luckyPower)); }
         }
 
         public FrameType FrameType { get; set; }
@@ -1103,7 +1113,8 @@ namespace RNGReporter.Objects
             byte CurrentLevel,
             uint itemCalc,
             ulong CurrentRatio,
-            bool DoubleEnctr)
+            bool DoubleEnctr,
+            int currentLuckyPower)
         {
             var frame = new Frame(frameType)
                 {
@@ -1122,6 +1133,7 @@ namespace RNGReporter.Objects
                     synchable = synch,
                     ratio = CurrentRatio,
                     DoubleBattle = DoubleEnctr,
+                    luckyPower = currentLuckyPower,
             };
 
 

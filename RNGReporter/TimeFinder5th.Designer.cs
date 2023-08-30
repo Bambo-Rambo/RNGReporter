@@ -182,6 +182,7 @@ namespace RNGReporter
             this.CapSeed = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CapOffset = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EncounterMod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LuckyLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NearestShiny = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EncounterRatio = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -1544,7 +1545,7 @@ namespace RNGReporter
             // maskedTextBoxMinShiny
             // 
             this.maskedTextBoxMinShiny.Hex = false;
-            this.maskedTextBoxMinShiny.Location = new System.Drawing.Point(251, 85);
+            this.maskedTextBoxMinShiny.Location = new System.Drawing.Point(251, 86);
             this.maskedTextBoxMinShiny.Mask = "0000";
             this.maskedTextBoxMinShiny.Name = "maskedTextBoxMinShiny";
             this.maskedTextBoxMinShiny.Size = new System.Drawing.Size(44, 21);
@@ -1565,7 +1566,7 @@ namespace RNGReporter
             // numericLevelMax
             // 
             this.numericLevelMax.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.numericLevelMax.Location = new System.Drawing.Point(301, 133);
+            this.numericLevelMax.Location = new System.Drawing.Point(301, 134);
             this.numericLevelMax.Minimum = new decimal(new int[] {
             1,
             0,
@@ -1592,7 +1593,7 @@ namespace RNGReporter
             // numericLevelMin
             // 
             this.numericLevelMin.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.numericLevelMin.Location = new System.Drawing.Point(251, 133);
+            this.numericLevelMin.Location = new System.Drawing.Point(251, 134);
             this.numericLevelMin.Minimum = new decimal(new int[] {
             1,
             0,
@@ -1610,7 +1611,7 @@ namespace RNGReporter
             // maskedTextBoxMaxShiny
             // 
             this.maskedTextBoxMaxShiny.Hex = false;
-            this.maskedTextBoxMaxShiny.Location = new System.Drawing.Point(301, 85);
+            this.maskedTextBoxMaxShiny.Location = new System.Drawing.Point(301, 86);
             this.maskedTextBoxMaxShiny.Mask = "0000000";
             this.maskedTextBoxMaxShiny.Name = "maskedTextBoxMaxShiny";
             this.maskedTextBoxMaxShiny.Size = new System.Drawing.Size(49, 21);
@@ -1641,7 +1642,7 @@ namespace RNGReporter
             // labelCapMinMaxLevel
             // 
             this.labelCapMinMaxLevel.AutoSize = true;
-            this.labelCapMinMaxLevel.Location = new System.Drawing.Point(249, 117);
+            this.labelCapMinMaxLevel.Location = new System.Drawing.Point(249, 118);
             this.labelCapMinMaxLevel.Name = "labelCapMinMaxLevel";
             this.labelCapMinMaxLevel.Size = new System.Drawing.Size(84, 13);
             this.labelCapMinMaxLevel.TabIndex = 332;
@@ -1800,6 +1801,7 @@ namespace RNGReporter
             this.CapSeed,
             this.CapOffset,
             this.EncounterMod,
+            this.LuckyLevel,
             this.NearestShiny,
             this.PID,
             this.EncounterRatio,
@@ -1876,6 +1878,14 @@ namespace RNGReporter
             this.EncounterMod.ReadOnly = true;
             this.EncounterMod.Width = 130;
             // 
+            // LuckyLevel
+            // 
+            this.LuckyLevel.DataPropertyName = "LuckyPower";
+            this.LuckyLevel.HeaderText = "Lucky Power";
+            this.LuckyLevel.Name = "LuckyLevel";
+            this.LuckyLevel.ReadOnly = true;
+            this.LuckyLevel.Width = 80;
+            // 
             // NearestShiny
             // 
             this.NearestShiny.DataPropertyName = "NearestShiny";
@@ -1933,6 +1943,7 @@ namespace RNGReporter
             this.Shiny.HeaderText = "!!!";
             this.Shiny.Name = "Shiny";
             this.Shiny.ReadOnly = true;
+            this.Shiny.Visible = false;
             this.Shiny.Width = 31;
             // 
             // Nature
@@ -3361,9 +3372,13 @@ namespace RNGReporter
         private System.Windows.Forms.NumericUpDown numericLevelMax;
         private System.Windows.Forms.NumericUpDown numericLevelMin;
         private System.Windows.Forms.CheckBox checkBoxTriggerBattle;
+        private System.Windows.Forms.GroupBox PrefGroupBox;
+        private System.Windows.Forms.GroupBox SettingsGroupBox;
+        private MaskedTextBox2 maskedTextBoxMinShiny;
         private System.Windows.Forms.DataGridViewTextBoxColumn CapSeed;
         private System.Windows.Forms.DataGridViewTextBoxColumn CapOffset;
         private System.Windows.Forms.DataGridViewTextBoxColumn EncounterMod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LuckyLevel;
         private System.Windows.Forms.DataGridViewTextBoxColumn NearestShiny;
         private System.Windows.Forms.DataGridViewTextBoxColumn PID;
         private System.Windows.Forms.DataGridViewTextBoxColumn EncounterRatio;
@@ -3389,8 +3404,5 @@ namespace RNGReporter
         private System.Windows.Forms.DataGridViewTextBoxColumn CapTimer0;
         private System.Windows.Forms.DataGridViewTextBoxColumn CapKeypress;
         private System.Windows.Forms.DataGridViewTextBoxColumn Synchable;
-        private System.Windows.Forms.GroupBox PrefGroupBox;
-        private System.Windows.Forms.GroupBox SettingsGroupBox;
-        private MaskedTextBox2 maskedTextBoxMinShiny;
     }
 }
