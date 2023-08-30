@@ -149,7 +149,6 @@ namespace RNGReporter.Objects
                                     mod = EncounterMod.Synchronize;
                                 else
                                     mod = EncounterMod.None;
-                                //CurrentFrame--;
 
                                 Finalize(frameCompare, CurrentFrame, pid, id, sid, nature, synchable, encounterSlot, level, 0, 
                                     CurrentRatio, false, 0, mod);
@@ -494,9 +493,6 @@ namespace RNGReporter.Objects
                                         frames.Add(frame);
                                     }
                                 }
-
-                                // The search for this frame MUST stop here
-                                //continue;
 
                             }
 
@@ -1004,10 +1000,6 @@ namespace RNGReporter.Objects
         private int getSlot(int currentLuckyPowerLVL)
         {
             return EncounterSlotCalc.encounterSlotG5(NextRand(), EncounterType, isBW2, currentLuckyPowerLVL);
-        }
-        private int getSlot(int currentLuckyPowerLVL, uint currentRand)
-        {
-            return EncounterSlotCalc.encounterSlotG5(currentRand, EncounterType, isBW2, currentLuckyPowerLVL);
         }
 
         public byte getLevel(ulong seed) => (byte)((uint)(seed * 100 >> 32) % (MaxLevel - MinLevel + 1) + MinLevel);

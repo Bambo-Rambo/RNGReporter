@@ -1239,6 +1239,13 @@ namespace RNGReporter
                                                             var iframe = new IFrameCapture
                                                                 {NearestShiny = shinyFrame.Number};
 
+                                                            iframe.Offset = testFrame.Number - start;
+
+                                                            // Since turning on the C-gear advance the IV frame by 2,
+                                                            // it's impossible to hit IV frame 0 or 1 when using Pass Powers
+                                                            if (shinyFrame.luckyPower != 0 && iframe.Offset < 2)
+                                                                continue;
+
                                                             testFrame.Pid = shinyFrame.Pid;
                                                             testFrame.Ability = shinyFrame.Ability;
                                                             testFrame.Nature = shinyFrame.Nature;
@@ -1250,7 +1257,6 @@ namespace RNGReporter
                                                             testFrame.Double = shinyFrame.Double;
                                                             testFrame.luckyPower = shinyFrame.luckyPower;
 
-                                                            iframe.Offset = testFrame.Number - start;
                                                             iframe.Seed = seed;
                                                             iframe.Frame = testFrame;
                                                             iframe.Advances = iframe.NearestShiny -
