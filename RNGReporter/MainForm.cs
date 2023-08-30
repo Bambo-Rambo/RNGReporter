@@ -376,7 +376,7 @@ namespace RNGReporter
                 int RatioValue = Convert.ToInt32(dataGridViewValues.Rows[e.RowIndex].Cells["Ratio"].Value);
                 if (dataGridViewValues.Columns[e.ColumnIndex].Name == "Ratio")
                 {
-                    if ((RatioValue < 13 && comboBoxEncounterType.SelectedIndex <= 2) || 
+                    if ((RatioValue < 14 && comboBoxEncounterType.SelectedIndex <= 2) || 
                         (RatioValue < 6 && comboBoxEncounterType.SelectedIndex == 3) ||
                         (comboBoxEncounterType.SelectedIndex == 4 && RatioValue < 50))
                     {
