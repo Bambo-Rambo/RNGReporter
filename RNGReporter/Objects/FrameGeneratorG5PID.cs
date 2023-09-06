@@ -802,7 +802,7 @@ namespace RNGReporter.Objects
                 // worthless calculation
                 //int ability = (int) (pid >> 16) & 1;
 
-                if (!TimeFinder5)
+                if (!(TimeFinder5 && G5_WildEncounter))
                     Finalize(frameCompare, CurrentFrame, pid, id, sid, nature, synchable, encounterSlot, level, item,
                                     CurrentRatio, DoubleEncounter, entreeTimer.GetTime(rngList[0]), mod);
 
