@@ -50,7 +50,7 @@ namespace RNGReporter.Objects
         private static readonly uint[] germanWhite2 = {0x48AE0902, 0x959D0302, 0x70FF1F02, 0xC4FF1F02, 0xC4FF1F02};
         private static readonly uint[] germanWhite2DSi = {0x48AE0902, 0x959D0302, 0x10607A02, 0x64607A02, 0x64607A02};
 
-        private static readonly uint[] spanishBlack = {0x50602102, 0x4C612102, 0x4C612102, 0x98612102, 0x98612102};
+        private static readonly uint[] spanishBlack = {0x70602102, 0x6C612102, 0x6C612102, 0xB8612102, 0xB8612102};
         private static readonly uint[] spanishBlackDSi = {0xF0017602, 0xEC027602, 0xEC027602, 0x38037602, 0x38037602};
         private static readonly uint[] spanishWhite = {0x70602102, 0x6C612102, 0x6C612102, 0xB8612102, 0xB8612102};
         private static readonly uint[] spanishWhiteDSi = {0xF0017602, 0xEC027602, 0xEC027602, 0x38037602, 0x38037602};
