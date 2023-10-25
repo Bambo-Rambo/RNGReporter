@@ -353,6 +353,7 @@ namespace RNGReporter
             comboBoxButton7.SelectedIndex = 0;
             comboBoxVersion.SelectedIndex = 0;
             comboBoxDSType.SelectedIndex = 0;
+            comboBoxLanguage.SelectedIndex = 0;
         }
 
         private void buttonGenerate_Click(object sender, EventArgs e)

@@ -293,47 +293,12 @@ namespace RNGReporter.Objects
 
         public bool Compare(Frame frame)
         {
-            //  Check the nature first
-            if (Natures != null)
+            if (shinyOnly)
             {
-                // If the frame can be synchronized, it doesn't need to pass the check
-                if (frame.EncounterMod != EncounterMod.Synchronize)
-                {
-                    bool test = Natures.Any(nature => nature == frame.Nature);
-                    if (!test)
-                        return false;
-                }
-            }
-
-            if (synchOnly)
-            {
-                if (!frame.Synchable)
+                if (!frame.Shiny)
                 {
                     return false;
                 }
-            }
-
-            if (desiredLevel != 0)
-            {
-                if (frame.Level != desiredLevel)
-                {
-                    return false;
-                }
-            }
-            
-
-            if (!GenderFilter.Filter(frame.GenderValue))
-                return false;
-
-            if (!GenderFilter.Filter(frame.EncounterMod))
-                return false;
-
-            // For 3rd Gen eggs - if an egg is not generated on that frame, ignore it
-            if (frame.FrameType == FrameType.RSBredLower || frame.FrameType == FrameType.FRLGBredLower)
-            {
-                // need to replace this now that we're using numbered natures
-                if (frame.Number == 0)
-                    return false;
             }
 
             //  Go through and check each IV against what the user has required.
@@ -437,12 +402,47 @@ namespace RNGReporter.Objects
                     }
                 }
             }
-            if (shinyOnly)
+
+            if (Natures != null)
             {
-                if (!frame.Shiny)
+                // If the frame can be synchronized, it doesn't need to pass the check
+                if (frame.EncounterMod != EncounterMod.Synchronize)
+                {
+                    bool test = Natures.Any(nature => nature == frame.Nature);
+                    if (!test)
+                        return false;
+                }
+            }
+
+            if (synchOnly)
+            {
+                if (!frame.Synchable)
                 {
                     return false;
                 }
+            }
+
+            if (desiredLevel != 0)
+            {
+                if (frame.Level != desiredLevel)
+                {
+                    return false;
+                }
+            }
+            
+
+            if (!GenderFilter.Filter(frame.GenderValue))
+                return false;
+
+            if (!GenderFilter.Filter(frame.EncounterMod))
+                return false;
+
+            // For 3rd Gen eggs - if an egg is not generated on that frame, ignore it
+            if (frame.FrameType == FrameType.RSBredLower || frame.FrameType == FrameType.FRLGBredLower)
+            {
+                // need to replace this now that we're using numbered natures
+                if (frame.Number == 0)
+                    return false;
             }
 
             if (dreamWorld)

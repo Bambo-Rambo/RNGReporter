@@ -1166,7 +1166,7 @@ namespace RNGReporter.Objects
         }
 
         // This generates a single frame, using IVs recalled from a stored hashtable
-        public List<Frame> Generate(FrameCompare frameCompare, uint seed, uint IVHash, uint frameNumber, int levelHere)
+        public List<Frame> Generate(FrameCompare frameCompare, uint seed, uint IVHash, uint frameNumber)
         {
             frames = new List<Frame>();
 
@@ -1180,8 +1180,6 @@ namespace RNGReporter.Objects
                 ((IVHash >> 16) & 0x3E0) >> 5,
                 ((IVHash >> 16) & 0x7C00) >> 10,
                 ((IVHash >> 16) & 0x1F));
-
-            frame.Level = (byte)levelHere;
 
             if (frameCompare.Compare(frame))
             {
@@ -1280,7 +1278,7 @@ namespace RNGReporter.Objects
                     mt.Nextuint();
 
                 rngList.Clear();
-                for (int i = 0; i < 7; i++)
+                for (int i = 0; i < 6; i++)
                     rngList.Add(mt.Nextuint() >> 27);
 
                 for (uint cnt = 0; cnt < maxResults; cnt++, rngList.RemoveAt(0), rngList.Add(mt.Nextuint() >> 27))
@@ -1916,128 +1914,6 @@ namespace RNGReporter.Objects
                                 nature,
                                 maxSkips);
                     }
-
-                    if (frameCompare.Compare(frame))
-                    {
-                        frames.Add(frame);
-                    }
-                }
-            }
-            else if (frameType == FrameType.Wondercard5thGen)
-            {
-                rng64.Seed = InitialSeed;
-                rngList = new List<uint>();
-
-                for (uint cnt = 0; cnt < InitialFrame - 1; cnt++)
-                    rng64.GetNext64BitNumber();
-
-                for (int cnt = 0; cnt < 33; cnt++)
-                    rngList.Add(rng64.GetNext32BitNumber());
-
-                for (uint cnt = 0; cnt < maxResults; cnt++, rngList.RemoveAt(0), rngList.Add(rng64.GetNext32BitNumber()))
-                {
-                    Frame frame = Frame.GenerateFrame(
-                        FrameType.Wondercard5thGen,
-                        id, sid,
-                        cnt + InitialFrame,
-                        rngList[0],
-                        rngList[22] >> 27,
-                        rngList[23] >> 27,
-                        rngList[24] >> 27,
-                        rngList[25] >> 27,
-                        rngList[26] >> 27,
-                        rngList[27] >> 27,
-                        rngList[32],
-                        rngList[30]);
-
-
-                    if (frameCompare.Compare(frame))
-                    {
-                        frames.Add(frame);
-                    }
-                }
-            }
-            else if (frameType == FrameType.Wondercard5thGenFixed)
-            {
-                rng64.Seed = InitialSeed;
-                rngList = new List<uint>();
-
-                for (uint cnt = 0; cnt < InitialFrame - 1; cnt++)
-                {
-                    rng64.GetNext64BitNumber();
-                }
-
-                for (int cnt = 0; cnt < 36; cnt++)
-                {
-                    rngList.Add(rng64.GetNext32BitNumber());
-                }
-
-                int gender;
-
-                if (frameCompare.GenderFilter.GenderCriteria == GenderCriteria.Male)
-                {
-                    switch (frameCompare.GenderFilter.GenderValue)
-                    {
-                        case 127:
-                            gender = 1;
-                            break;
-                        case 191:
-                            gender = 3;
-                            break;
-                        case 63:
-                            gender = 2;
-                            break;
-                        case 31:
-                            gender = 4;
-                            break;
-                        default:
-                            gender = 5;
-                            break;
-                    }
-                }
-                else if (frameCompare.GenderFilter.GenderCriteria == GenderCriteria.Female)
-                {
-                    switch (frameCompare.GenderFilter.GenderValue)
-                    {
-                        case 127:
-                            gender = -1;
-                            break;
-                        case 191:
-                            gender = -2;
-                            break;
-                        case 63:
-                            gender = -3;
-                            break;
-                        case 31:
-                            gender = -4;
-                            break;
-                        default:
-                            gender = -5;
-                            break;
-                    }
-                }
-                else
-                    gender = 0;
-
-                for (uint cnt = 0; cnt < maxResults; cnt++, rngList.RemoveAt(0), rngList.Add(rng64.GetNext32BitNumber()))
-                {
-                    //note: pid field is unused look into later
-                    uint pid = Functions.CuteCharmModPID(rngList[32], rngList[33], gender);
-                    Frame frame =
-                        Frame.GenerateFrame(
-                            FrameType.Wondercard5thGenFixed,
-                            id, sid,
-                            cnt + InitialFrame,
-                            rngList[0],
-                            rngList[24] >> 27,
-                            rngList[25] >> 27,
-                            rngList[26] >> 27,
-                            rngList[27] >> 27,
-                            rngList[28] >> 27,
-                            rngList[29] >> 27,
-                            rngList[35],
-                            pid);
-
 
                     if (frameCompare.Compare(frame))
                     {
@@ -3166,168 +3042,7 @@ namespace RNGReporter.Objects
                 rngList.Add(rng.GetNext16BitNumber());
         }
 
-        public List<Frame> GenerateWonderCard(
-            FrameCompare frameCompare,
-            uint id,
-            uint sid,
-            int shiny)
-        {
-            frames = new List<Frame>();
-            rngList = new List<uint>();
-
-            if (frameType == FrameType.Wondercard5thGen)
-            {
-                rng64.Seed = InitialSeed;
-
-                for (uint cnt = 0; cnt < InitialFrame - 1; cnt++)
-                    rng64.GetNext64BitNumber();
-
-                for (int cnt = 0; cnt < 33; cnt++)
-                    rngList.Add(rng64.GetNext32BitNumber());
-
-                for (uint cnt = InitialFrame; cnt < InitialFrame + maxResults; cnt++, rngList.RemoveAt(0), rngList.Add(rng64.GetNext32BitNumber()))
-                {
-                    uint pid = rngList[30];
-                    pid ^= 0x10000;
-                    switch (shiny)
-                    {
-                        case 0:
-                            pid = ForceNonShiny(pid, id, sid);
-                            break;
-                        case 2:
-                            pid = ForceShiny(pid, id, sid);
-                            break;
-                    }
-
-                    Frame frame = Frame.GenerateFrame(
-                        FrameType.Wondercard5thGen,
-                        id, sid,
-                        cnt,
-                        rngList[0],
-                        rngList[22] >> 27,
-                        rngList[23] >> 27,
-                        rngList[24] >> 27,
-                        rngList[25] >> 27,
-                        rngList[26] >> 27,
-                        rngList[27] >> 27,
-                        rngList[32],
-                        pid);
-
-
-                    if (frameCompare.Compare(frame))
-                        frames.Add(frame);
-                }
-            }
-            else if (frameType == FrameType.Wondercard5thGenFixed)
-            {
-                rng64.Seed = InitialSeed;
-
-                rngList = new List<uint>();
-
-                for (uint cnt = 0; cnt < InitialFrame - 1; cnt++)
-                    rng64.GetNext64BitNumber();
-
-                for (int cnt = 0; cnt < 36; cnt++)
-                    rngList.Add(rng64.GetNext32BitNumber());
-
-                int gender;
-
-                if (frameCompare.GenderFilter.GenderCriteria == GenderCriteria.Male)
-                {
-                    switch (frameCompare.GenderFilter.GenderValue)
-                    {
-                        case 127:
-                            gender = 1;
-                            break;
-                        case 191:
-                            gender = 3;
-                            break;
-                        case 63:
-                            gender = 2;
-                            break;
-                        case 31:
-                            gender = 4;
-                            break;
-                        default:
-                            gender = 5;
-                            break;
-                    }
-                }
-                else if (frameCompare.GenderFilter.GenderCriteria == GenderCriteria.Female)
-                {
-                    switch (frameCompare.GenderFilter.GenderValue)
-                    {
-                        case 127:
-                            gender = -1;
-                            break;
-                        case 191:
-                            gender = -2;
-                            break;
-                        case 63:
-                            gender = -3;
-                            break;
-                        case 31:
-                            gender = -4;
-                            break;
-                        default:
-                            gender = -5;
-                            break;
-                    }
-                }
-                else
-                    gender = 0;
-
-                for (uint cnt = InitialFrame; cnt < InitialFrame + maxResults; cnt++, rngList.RemoveAt(0), rngList.Add(rng64.GetNext32BitNumber()))
-                {
-                    uint pid = Functions.CuteCharmModPID(rngList[32], rngList[33], gender);
-                    switch (shiny)
-                    {
-                        case 0:
-                            pid = ForceNonShiny(pid, id, sid);
-                            break;
-                        case 2:
-                            pid = ForceShiny(pid, id, sid);
-                            break;
-                    }
-
-                    frame = Frame.GenerateFrame(
-                        FrameType.Wondercard5thGenFixed,
-                        id, sid,
-                        cnt,
-                        rngList[0],
-                        rngList[24] >> 27,
-                        rngList[25] >> 27,
-                        rngList[26] >> 27,
-                        rngList[27] >> 27,
-                        rngList[28] >> 27,
-                        rngList[29] >> 27,
-                        rngList[35],
-                        pid);
-
-                    if (frameCompare.Compare(frame))
-                        frames.Add(frame);
-                }
-            }
-            return frames;
-        }
-
-        private static uint ForceShiny(uint pid, uint tid, uint sid)
-        {
-            uint lowByte = pid & 0x000000ff;
-            return ((lowByte ^ tid ^ sid) << 16) | lowByte;
-        }
-
-        private static uint ForceNonShiny(uint pid, uint tid, uint sid)
-        {
-            if (((pid >> 16) ^ (pid & 0xffff) ^ sid ^ tid) < 8)
-                pid = pid ^ 0x10000000;
-
-            return pid;
-        }
-
         protected delegate bool Compare(uint x);
-
-
         
     }
 

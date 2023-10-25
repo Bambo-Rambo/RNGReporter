@@ -576,6 +576,53 @@ namespace RNGReporter.Objects
 
         //----------------------------------------------------------------------------------------------------------------------        
 
+        public static int GenderRatio(int species)
+        {
+            if (Pokemon.getMale25().Contains(species))              // 25% M / 75% F
+                return 1;
+            else if (Pokemon.getMale75().Contains(species))         // 75% M / 25% F
+                return 2;
+            else if (Pokemon.getMale87_5().Contains(species))       // 87.5% M / 12.5% F
+                return 3;
+            else if (Pokemon.getFixedGender().Contains(species))    // Genderless / Fixed Gender
+                return 4;
+            return 0;                                               // 50% 
+        }
+
+        public static int GenderLockedCase(int gender, int GenderRatio)
+        {
+            switch (GenderRatio)
+            {
+                case 0:     // 50%
+                    if (gender == 0)
+                        return 1;
+                    else
+                        return -1;
+                case 1:     // 25% M / 75% F
+                    if (gender == 0)
+                        return 3;
+                    else
+                        return -2;
+                case 2:     // 75% M / 25% F
+                    if (gender == 0)
+                        return 2;
+                    else
+                        return -3;
+                case 3:     // 87.5% M / 12.5% F
+                    if (gender == 0)
+                        return 4;
+                    else
+                        return -4;
+                case 4:     // Fixed Gender
+                    if (gender == 0)
+                        return 5;
+                    else
+                        return -5;
+                default:
+                    return 0;
+            }
+        }
+
         public static uint CuteCharmModPID(uint pid, uint rngResult, int genderRatio)
         {
             uint genderAdjustment;

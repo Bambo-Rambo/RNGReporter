@@ -99,7 +99,6 @@ namespace RNGReporter
                     new ComboBoxItem("PIDRNG", FrameType.Method5Natures),
                     new ComboBoxItem("Eggs", FrameType.BWBred),
                     new ComboBoxItem("Wondercard", FrameType.Wondercard5thGen),
-                    new ComboBoxItem("GLAN Wondercard", FrameType.Wondercard5thGenFixed)
                 });
 
             comboBoxEncounterType.Items.AddRange(new object[]
@@ -167,9 +166,6 @@ namespace RNGReporter
                         break;
                     case FrameType.Wondercard5thGen:
                         comboBoxMethod.SelectedIndex = 3;
-                        break;
-                    case FrameType.Wondercard5thGenFixed:
-                        comboBoxMethod.SelectedIndex = 4;
                         break;
                 }
 
@@ -419,7 +415,6 @@ namespace RNGReporter
                     f125.Visible = false;
                     break;
                 case FrameType.Wondercard5thGen:
-                case FrameType.Wondercard5thGenFixed:
                     CapSeed.DefaultCellStyle.Format = "X16";
                     EncounterSlot.Visible = false;
                     PID.Visible = false;
@@ -461,7 +456,6 @@ namespace RNGReporter
                             break;
                         case FrameType.Method5Natures:
                         case FrameType.Wondercard5thGen:
-                        case FrameType.Wondercard5thGenFixed:
                             generator.InitialSeed = seed;
                             generator.InitialFrame = Functions.initialPIDRNG(seed, profile) + minFrame;
                             break;
@@ -726,24 +720,6 @@ namespace RNGReporter
 
                     textBoxDescription.Text =
                         "Most Mystery Gifts use this method.  However, Mystery Gifts that can have any nature but are locked into a single gender " +
-                        "must use the GLAN (Gender Locked, Any Nature) Wondercard method.";
-                    break;
-                case FrameType.Wondercard5thGenFixed:
-                    comboBoxEncounterType.Enabled = false;
-                    comboBoxLead.Enabled = false;
-                    maskedTextBoxCapMaxOffset.Enabled = true;
-                    maskedTextBoxCapMinOffset.Enabled = true;
-                    labelMinFrame.Text = "Min Advances";
-                    labelMaxFrame.Text = "Max Advances";
-
-                    if (maskedTextBoxCapMinOffset.Text == "1")
-                        maskedTextBoxCapMinOffset.Text = "0";
-
-                    if (maskedTextBoxCapMaxOffset.Text == "1")
-                        maskedTextBoxCapMaxOffset.Text = "0";
-
-                    textBoxDescription.Text =
-                        "Mystery Gifts that can have any nature but are locked into a single gender " +
                         "must use the GLAN (Gender Locked, Any Nature) Wondercard method.";
                     break;
             }

@@ -46,7 +46,6 @@ namespace RNGReporter.Objects
         BWBredInternational,
         WondercardIVs,
         Wondercard5thGen,
-        Wondercard5thGenFixed,
         ColoXD,
         Channel,
         RSBredLower,

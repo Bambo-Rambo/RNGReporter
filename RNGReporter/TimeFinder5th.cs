@@ -24,7 +24,9 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Reflection;
+using System.Runtime.Remoting.Channels;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 using System.Windows.Forms;
@@ -58,6 +60,7 @@ namespace RNGReporter
         private Thread[] jobs;
         private Dictionary<uint, uint>[] list;
         private BindingSource listBindingCap;
+        private BindingSource listBindingEvent;
         private BindingSource listBindingEgg;
         private bool longSeed;
         private Point oldLocation;
@@ -103,11 +106,9 @@ namespace RNGReporter
 
             comboBoxMethod.Items.AddRange(new object[]
                 {
-                    new ComboBoxItem("PID RNG + IVs", FrameType.Method5Standard),
+                    new ComboBoxItem("PID + IVs (Standar)", FrameType.Method5Standard),
+                    new ComboBoxItem("PID + IVs (Standar + C-Gear)", FrameType.Method5Natures),
                     new ComboBoxItem("IVs (C-Gear)", FrameType.Method5CGear),
-                    //new ComboBoxItem("PIDRNG", FrameType.Method5Natures),
-                    new ComboBoxItem("Wondercard", FrameType.Wondercard5thGen),
-                    new ComboBoxItem("GLAN Wondercard", FrameType.Wondercard5thGenFixed)
                 });
 
             var ability = new[]
@@ -143,7 +144,8 @@ namespace RNGReporter
             var shinyEverstoneList = new BindingSource
                 {DataSource = Objects.Nature.NatureDropDownCollectionSynch()};
             comboBoxShinyEverstoneNature.DataSource = shinyEverstoneList;
-            comboBoxNature.Items.AddRange(Objects.Nature.NatureDropDownCollectionSearchNatures());
+            comboBoxCapNature.Items.AddRange(Objects.Nature.NatureDropDownCollectionSearchNatures());
+            glassComboEventNatures.Items.AddRange(Objects.Nature.NatureDropDownCollectionSearchNatures());
 
             profilesSource = new BindingSource {DataSource = Profiles.List};
             comboBoxProfiles.DataSource = profilesSource;
@@ -152,7 +154,7 @@ namespace RNGReporter
             SetLanguage();
 
 
-            comboBoxAbility.DataSource = ability;
+            comboCapAbility.DataSource = ability;
             comboBoxShinyAbility.DataSource = ability;
 
             comboBoxShinyGender.DataSource = GenderFilter.GenderFilterCollection();
@@ -170,22 +172,24 @@ namespace RNGReporter
             CapNatureIndex = Nature.Index;
 
             comboBoxMethod.SelectedIndex = 0;
-            comboBoxNature.SelectedIndex = 0;
-            comboBoxAbility.SelectedIndex = 0;
+            comboBoxCapNature.SelectedIndex = 0;
+            comboCapAbility.SelectedIndex = 0;
             comboBoxCapGender.SelectedIndex = 0;
             comboBoxCapGenderRatio.SelectedIndex = 0;
 
             comboBoxEncounterType.SelectedIndex = 0;
 
-            comboBoxShiny.SelectedIndex = 0;
             // This is a rather hackish way of making the custom control
             // display the desired text upon loading
 
-            comboBoxEncounterSlot.CheckBoxItems[0].Checked = true;
-            comboBoxEncounterSlot.CheckBoxItems[0].Checked = false;
+            comboCapEncounterSlot.CheckBoxItems[0].Checked = true;
+            comboCapEncounterSlot.CheckBoxItems[0].Checked = false;
 
-            comboBoxNature.CheckBoxItems[0].Checked = true;
-            comboBoxNature.CheckBoxItems[0].Checked = false;
+            comboBoxCapNature.CheckBoxItems[0].Checked = true;
+            comboBoxCapNature.CheckBoxItems[0].Checked = false;
+
+            glassComboEventNatures.CheckBoxItems[0].Checked = true;
+            glassComboEventNatures.CheckBoxItems[0].Checked = false;
 
             comboBoxShinyNature.SelectedIndex = 0;
             comboBoxShinyAbility.SelectedIndex = 0;
@@ -193,15 +197,8 @@ namespace RNGReporter
             comboBoxShinyEverstoneNature.SelectedIndex = 0;
 
             dataGridViewCapValues.AutoGenerateColumns = false;
-            CapSeed.DefaultCellStyle.Format = "X16";
-            PID.DefaultCellStyle.Format = "X8";
-            CapTimer0.DefaultCellStyle.Format = "X";
-            CapDateTime.DefaultCellStyle.Format = "MM/dd/yy HH:mm:ss";
-
             dataGridViewShinyResults.AutoGenerateColumns = false;
-            EggSeed.DefaultCellStyle.Format = "X16";
-            EggPID.DefaultCellStyle.Format = "X8";
-            ColumnEggDate.DefaultCellStyle.Format = "MM/dd/yy HH:mm:ss";
+            dataGridViewEventResults.AutoGenerateColumns = false;
 
             cbHHMonth.CheckBoxItems[0].Checked = true;
             cbHHMonth.CheckBoxItems[0].Checked = false;
@@ -239,9 +236,6 @@ namespace RNGReporter
                     comboBoxCapMonth.CheckBoxItems[DateTime.Now.Month].Checked = true;
                     maskedTextBoxCapMaxOffset.Text = Settings.Default.CapOffset;
 
-                    //if (maskedTextBoxCapMaxOffset.Text == "0")
-                        //maskedTextBoxCapMaxOffset.Text = "1";
-
                     maskedTextBoxCapMinDelay.Text = Settings.Default.CapDelayMin;
                     maskedTextBoxCapMaxDelay.Text = Settings.Default.CapDelayMax;
 
@@ -257,6 +251,9 @@ namespace RNGReporter
                     cpus = 1;
                 }
             }
+
+            maskedTextYear.Text = DateTime.Now.Year.ToString();
+            checkBoxComboMonths.CheckBoxItems[DateTime.Now.Month].Checked = true;
 
             // Hidden Grotto
             cbHHMonth.CheckBoxItems[DateTime.Now.Month].Checked = true;
@@ -322,22 +319,22 @@ namespace RNGReporter
             EncounterSlot.DefaultCellStyle = CellStyle;
             EncounterMod.DefaultCellStyle = CellStyle;
 
-            comboBoxNature.Font = CellStyle.Font;
+            comboBoxCapNature.Font = CellStyle.Font;
             comboBoxShinyNature.Font = CellStyle.Font;
             comboBoxShinyEverstoneNature.Font = CellStyle.Font;
 
-            comboBoxEncounterSlot.CheckBoxItems[13].Font = CellStyle.Font;
-            comboBoxEncounterSlot.CheckBoxItems[13].Text = Functions.encounterItems(12);
+            comboCapEncounterSlot.CheckBoxItems[13].Font = CellStyle.Font;
+            comboCapEncounterSlot.CheckBoxItems[13].Text = Functions.encounterItems(12);
 
-            for (int checkBoxIndex = 1; checkBoxIndex < comboBoxNature.Items.Count; checkBoxIndex++)
+            for (int checkBoxIndex = 1; checkBoxIndex < comboBoxCapNature.Items.Count; checkBoxIndex++)
             {
-                comboBoxNature.CheckBoxItems[checkBoxIndex].Text =
-                    (comboBoxNature.CheckBoxItems[checkBoxIndex].ComboBoxItem).ToString();
-                comboBoxNature.CheckBoxItems[checkBoxIndex].Font = CellStyle.Font;
+                comboBoxCapNature.CheckBoxItems[checkBoxIndex].Text =
+                    (comboBoxCapNature.CheckBoxItems[checkBoxIndex].ComboBoxItem).ToString();
+                comboBoxCapNature.CheckBoxItems[checkBoxIndex].Font = CellStyle.Font;
             }
 
-            comboBoxNature.CheckBoxItems[0].Checked = true;
-            comboBoxNature.CheckBoxItems[0].Checked = false;
+            comboBoxCapNature.CheckBoxItems[0].Checked = true;
+            comboBoxCapNature.CheckBoxItems[0].Checked = false;
 
             ((BindingSource) comboBoxShinyNature.DataSource).ResetBindings(false);
             ((BindingSource) comboBoxShinyEverstoneNature.DataSource).ResetBindings(false);
@@ -402,13 +399,8 @@ namespace RNGReporter
             Hide();
         }
 
-        private void contextMenuStripEggPid_Opening(object sender, CancelEventArgs e)
-        {
-            if (dataGridViewShinyResults.SelectedRows.Count == 0)
-            {
-                e.Cancel = true;
-            }
-        }
+
+        #region Capture
 
         private void contextMenuStripCap_Opening(object sender, CancelEventArgs e)
         {
@@ -418,29 +410,36 @@ namespace RNGReporter
             }
         }
 
-        // Can't proceed with a 5th gen search without knowing all DS parameters
-
-        private bool DSParametersInputCheck()
-        {
-            return true;
-        }
-
-        //  Capture code begins here -- This is all of the good stuff for 
-        //  captured Pokemon.
-
         private void buttonCapGenerate_Click(object sender, EventArgs e)
         {
-            var profile = (Profile) comboBoxProfiles.SelectedItem;
+            var profile = (Profile)comboBoxProfiles.SelectedItem;
             iframes = new List<IFrameCapture>();
-            listBindingCap = new BindingSource {DataSource = iframes};
+            listBindingCap = new BindingSource { DataSource = iframes };
             dataGridViewCapValues.DataSource = listBindingCap;
+
+            if (comboBoxMethod.SelectedItem.ToString().Equals("PID + IVs (Standar + C-Gear)"))
+            {
+                if (profile.IsBW2())
+                {
+                    MessageBox.Show("This method is not possible in BW2.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (uint.Parse(maskedTextBoxCapMinOffset.Text) < 2)
+                {
+                    maskedTextBoxCapMinOffset.Text = "2";
+                }
+                if (uint.Parse(maskedTextBoxCapMaxOffset.Text) < 2)
+                {
+                    maskedTextBoxCapMaxOffset.Text = "2";
+                }
+            }
 
             jobs = new Thread[cpus];
             generators = new FrameGenerator[cpus];
             shinygenerators = new FrameGenerator[cpus];
             waitHandle = new EventWaitHandle(true, EventResetMode.ManualReset);
 
-            var year = (uint) DateTime.Now.Year;
+            var year = (uint)DateTime.Now.Year;
             if (maskedTextBoxCapYear.Text != "")
             {
                 year = uint.Parse(maskedTextBoxCapYear.Text);
@@ -477,7 +476,7 @@ namespace RNGReporter
                 return;
             }
 
-            bool fastSearch = FastCapFilters() && FastCapFrames();
+            bool fastSearch = label9.Visible && FastCapFilters() && FastCapFrames();
             if (fastSearch)
             {
                 minOffset++;
@@ -487,16 +486,16 @@ namespace RNGReporter
 
             // !!! This is generator for IV Frames !!!
             generator = new FrameGenerator
-                {
-                    // Now that each combo box item is a custom object containing the FrameType reference
-                    // We can simply retrieve the FrameType from the selected item
-                    FrameType = (FrameType) ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference,
-                    EncounterType = (EncounterType) ((ComboBoxItem) comboBoxEncounterType.SelectedItem).Reference,
-                    EncounterMod = Objects.EncounterMod.Search,
-                    InitialFrame = minOffset,
-                    MaxResults = maxOffset - minOffset + 1
-                };
-            if (generator.FrameType == FrameType.BWBred && profile.IsBW2()) 
+            {
+                // Now that each combo box item is a custom object containing the FrameType reference
+                // We can simply retrieve the FrameType from the selected item
+                FrameType = (FrameType)((ComboBoxItem)comboBoxMethod.SelectedItem).Reference,
+                EncounterType = (EncounterType)((ComboBoxItem)comboBoxEncounterType.SelectedItem).Reference,
+                EncounterMod = Objects.EncounterMod.Search,
+                InitialFrame = minOffset,
+                MaxResults = maxOffset - minOffset + 1
+            };
+            if (generator.FrameType == FrameType.BWBred && profile.IsBW2())
                 generator.FrameType = FrameType.BW2Bred;
             if (generator.FrameType == FrameType.BWBredInternational && profile.IsBW2())
                 generator.FrameType = FrameType.BW2BredInternational;
@@ -509,7 +508,7 @@ namespace RNGReporter
             //list = new Hashtable[6];
             list = new Dictionary<uint, uint>[6];
 
-            
+
 
             //  Build up a FrameComparer
 
@@ -517,20 +516,20 @@ namespace RNGReporter
             //  that is blank is considered a zero.
 
             List<int> encounterSlots = null;
-            if (comboBoxEncounterSlot.Text != "Any" && comboBoxEncounterSlot.CheckBoxItems.Count > 0)
+            if (comboCapEncounterSlot.Text != "Any" && comboCapEncounterSlot.CheckBoxItems.Count > 0)
             {
                 encounterSlots = new List<int>();
-                for (int i = 0; i < comboBoxEncounterSlot.CheckBoxItems.Count; i++)
+                for (int i = 0; i < comboCapEncounterSlot.CheckBoxItems.Count; i++)
                 {
-                    if (comboBoxEncounterSlot.CheckBoxItems[i].Checked)
+                    if (comboCapEncounterSlot.CheckBoxItems[i].Checked)
                         // We have to subtract 1 because this custom control contains a hidden item for text display
                         encounterSlots.Add(i - 1);
                 }
             }
 
             List<uint> natures = null;
-            if (comboBoxNature.Text != "Any" && comboBoxNature.CheckBoxItems.Count > 0)
-                natures = (from t in comboBoxNature.CheckBoxItems where t.Checked select (uint)((Nature)t.ComboBoxItem).Number).ToList();
+            if (comboBoxCapNature.Text != "Any" && comboBoxCapNature.CheckBoxItems.Count > 0)
+                natures = (from t in comboBoxCapNature.CheckBoxItems where t.Checked select (uint)((Nature)t.ComboBoxItem).Number).ToList();
 
             uint shinyOffsetMin = 0;
             uint shinyOffsetMax = 0;
@@ -546,128 +545,109 @@ namespace RNGReporter
             LuckyLevel.Visible = profile.LuckyPowerLVL > 0;
 
             CapDateTime.Visible = CapKeypress.Visible = CapTimer0.Visible = generator.FrameType != FrameType.Method5CGear;
+            copyCgearToClipboard.Visible = generator.FrameType == FrameType.Method5Natures;
 
-            if (generator.FrameType == FrameType.Method5CGear || generator.FrameType == FrameType.Method5Standard)
-            {
-                EncounterSlot.Visible = false;
-                EncounterMod.Visible = false;
-                PID.Visible = false;
-                NearestShiny.Visible = false;
-                Nature.Visible = false;
-                Ability.Visible = false;
+            EncounterSlot.Visible = false;
+            EncounterMod.Visible = false;
+            PID.Visible = false;
+            NearestShiny.Visible = false;
+            Nature.Visible = false;
+            Ability.Visible = false;
+            CgearSeed.Visible = false;
+            Delay.Visible = false;
 
-                if (generator.FrameType == FrameType.Method5Standard)
-                {
-                    CapSeed.DefaultCellStyle.Format = "X16";
-                    CapSeed.Width = seedColumnLong(true);
-
-                    if (ShinyOnly() && shinyOffsetMax > 0)
-                    {
-                        shinygenerator = new FrameGenerator
-                            {
-                                FrameType = FrameType.Method5Natures,
-                                EncounterType =
-                                    (EncounterType)
-                                    ((ComboBoxItem) comboBoxEncounterType.SelectedItem).Reference,
-                                EncounterMod = Objects.EncounterMod.Search,
-                                InitialFrame = 1,
-                                MinAdvances = shinyOffsetMin,
-                                MaxResults = shinyOffsetMax,
-                                MinLevel = (int)numericLevelMin.Value,
-                                MaxLevel = (int)numericLevelMax.Value,
-                                SearchForTrigger = ConsiderTrigger,
-                                RerollCount = profile.ShinyCharm ? 3 : 1,
-                                MemoryLinkUsed = profile.MemoryLink,
-                                MaxLuckyPowerLVL = profile.LuckyPowerLVL,
-                            };
-
-                        subFrameCompare = new FrameCompare(
-                            ivFiltersCapture.IVFilter,
-                            natures,
-                            (int) ((ComboBoxItem) comboBoxAbility.SelectedItem).Reference,
-                            true,
-                            checkBoxSynchOnly.Checked,
-                            LevelConditions() ? (int)numericLevel.Value : 0,
-                            false,
-                            encounterSlots,
-                            constructGenderFilter());
-
-                        NearestShiny.Visible = true;
-                        PID.Visible = true;
-
-                        if (shinygenerator.EncounterType != EncounterType.Gift &&
-                            shinygenerator.EncounterType != EncounterType.Roamer &&
-                            shinygenerator.EncounterType != EncounterType.LarvestaHappiny)
-                            EncounterMod.Visible = true;
-                        else
-                            EncounterMod.Visible = false;
-                        if (shinygenerator.EncounterType != EncounterType.Stationary &&
-                            shinygenerator.EncounterType != EncounterType.Gift &&
-                            shinygenerator.EncounterType != EncounterType.Roamer &&
-                            shinygenerator.EncounterType != EncounterType.LarvestaHappiny &&
-                            shinygenerator.EncounterType != EncounterType.JellicentHA &&
-                            shinygenerator.EncounterType != EncounterType.Haxorus &&
-                                shinygenerator.EncounterType != EncounterType.GibleDratini)
-                            EncounterSlot.Visible = true;
-                        else
-                            EncounterSlot.Visible = false;
-
-                        Nature.Visible = true;
-                        Ability.Visible = shinygenerator.EncounterType != EncounterType.JellicentHA;
-                        DisplayGenderColumns();
-                    }
-                    if (profile.IsBW2())
-                        generator.InitialFrame += 2;
-                }
-                else
-                {
-                    CapSeed.DefaultCellStyle.Format = "X8";
-                    CapSeed.Width = seedColumnLong(false);
-                }
-
-
-
-
-
-
-                frameCompare = new FrameCompare(
-                    ivFiltersCapture.IVFilter,
-                    null,
-                    -1,
-                    false,
-                    false,
-                    LevelConditions() ? (int)numericLevel.Value : 0,
-                    false,
-                    null,
-                    new NoGenderFilter());
-            }
-
-            if (generator.FrameType == FrameType.Wondercard5thGen ||
-                generator.FrameType == FrameType.Wondercard5thGenFixed)
+            if (generator.FrameType == FrameType.Method5Standard || generator.FrameType == FrameType.Method5Natures)
             {
                 CapSeed.DefaultCellStyle.Format = "X16";
-                CapSeed.Width = seedColumnLong(true);
-                EncounterMod.Visible = false;
-                EncounterSlot.Visible = false;
-                PID.Visible = true;
-                NearestShiny.Visible = false;
-                Nature.Visible = true;
-                Ability.Visible = false;
+                CapSeed.Width = seedColumnLong(true, CapSeed);
 
-                // genders are unsupported for now, fix this later
+                CgearSeed.Visible = Delay.Visible = generator.FrameType == FrameType.Method5Natures;
+
+                if (ShinyOnly() && shinyOffsetMax > 0)
+                {
+                    shinygenerator = new FrameGenerator
+                    {
+                        FrameType = FrameType.Method5Natures,
+                        EncounterType =
+                                (EncounterType)
+                                ((ComboBoxItem)comboBoxEncounterType.SelectedItem).Reference,
+                        EncounterMod = Objects.EncounterMod.Search,
+                        InitialFrame = 1,
+                        MinAdvances = shinyOffsetMin,
+                        MaxResults = shinyOffsetMax,
+                        MinLevel = (int)numericLevelMin.Value,
+                        MaxLevel = (int)numericLevelMax.Value,
+                        SearchForTrigger = ConsiderTrigger,
+                        RerollCount = profile.ShinyCharm ? 3 : 1,
+                        MemoryLinkUsed = profile.MemoryLink,
+                        MaxLuckyPowerLVL = profile.LuckyPowerLVL,
+                    };
+
+                    subFrameCompare = new FrameCompare(
+                        ivFiltersCapture.IVFilter,
+                        natures,
+                        (int)((ComboBoxItem)comboCapAbility.SelectedItem).Reference,
+                        true,
+                        checkBoxSynchOnly.Checked,
+                        LevelConditions() ? (int)numericLevel.Value : 0,
+                        false,
+                        encounterSlots,
+                        constructGenderFilter());
+
+                    NearestShiny.Visible = true;
+                    PID.Visible = true;
+
+                    if (shinygenerator.EncounterType != EncounterType.Gift &&
+                        shinygenerator.EncounterType != EncounterType.Roamer &&
+                        shinygenerator.EncounterType != EncounterType.LarvestaHappiny)
+                        EncounterMod.Visible = true;
+                    else
+                        EncounterMod.Visible = false;
+                    if (shinygenerator.EncounterType != EncounterType.Stationary &&
+                        shinygenerator.EncounterType != EncounterType.Gift &&
+                        shinygenerator.EncounterType != EncounterType.Roamer &&
+                        shinygenerator.EncounterType != EncounterType.LarvestaHappiny &&
+                        shinygenerator.EncounterType != EncounterType.JellicentHA &&
+                        shinygenerator.EncounterType != EncounterType.Haxorus &&
+                            shinygenerator.EncounterType != EncounterType.GibleDratini)
+                        EncounterSlot.Visible = true;
+                    else
+                        EncounterSlot.Visible = false;
+
+                    Nature.Visible = true;
+                    Ability.Visible = shinygenerator.EncounterType != EncounterType.JellicentHA;
+                    DisplayGenderColumns();
+                }
+                if (profile.IsBW2())
+                    generator.InitialFrame += 2;
+            }
+            else
+            {
+                CapSeed.DefaultCellStyle.Format = "X8";
+                CapSeed.Width = seedColumnLong(false, CapSeed);
+            }
+
+            if (generator.FrameType == FrameType.Method5Standard)
+            {
+                frameCompare = new FrameCompare(
+                    ivFiltersCapture.IVFilter, 
+                    null, -1, false, false, 0, false, null, new NoGenderFilter());
+            }
+
+            if (generator.FrameType == FrameType.Method5Natures)
+            {
                 frameCompare = new FrameCompare(
                     ivFiltersCapture.IVFilter,
                     natures,
-                    -1,
-                    ShinyOnly(),
+                    (int)((ComboBoxItem)comboCapAbility.SelectedItem).Reference,
+                    checkBoxShinyOnly.Checked,
+                    checkBoxSynchOnly.Checked,
+                    LevelConditions() ? (int)numericLevel.Value : 0,
                     false,
-                    0,
-                    false,
-                    null,
+                    encounterSlots,
                     constructGenderFilter());
             }
-
-
+            
             if (generator.FrameType != FrameType.Method5CGear)
             {
                 if (fastSearch)
@@ -678,17 +658,17 @@ namespace RNGReporter
                     if (generator.EncounterType == EncounterType.Roamer)
                     {
                         file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame1D-Roamer.txt");
-                        list[0] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                        list[0] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                         file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame2D-Roamer.txt");
-                        list[1] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                        list[1] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                         file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame3D-Roamer.txt");
-                        list[2] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                        list[2] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                         file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame4D-Roamer.txt");
-                        list[3] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                        list[3] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                         file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame5D-Roamer.txt");
-                        list[4] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                        list[4] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                         file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame6D-Roamer.txt");
-                        list[5] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                        list[5] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
 
                         foreach (var partialList in list)
                         {
@@ -706,58 +686,58 @@ namespace RNGReporter
                                 file =
                                     thisExe.GetManifestResourceStream(
                                         "RNGReporter.Resources.MTRNG-Frame25-Entralink.txt");
-                                list[0] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                                list[0] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                                 file =
                                     thisExe.GetManifestResourceStream(
                                         "RNGReporter.Resources.MTRNG-Frame26-Entralink.txt");
-                                list[1] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                                list[1] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                                 file =
                                     thisExe.GetManifestResourceStream(
                                         "RNGReporter.Resources.MTRNG-Frame27-Entralink.txt");
-                                list[2] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                                list[2] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                                 file =
                                     thisExe.GetManifestResourceStream(
                                         "RNGReporter.Resources.MTRNG-Frame28-Entralink.txt");
-                                list[3] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                                list[3] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                                 file =
                                     thisExe.GetManifestResourceStream(
                                         "RNGReporter.Resources.MTRNG-Frame29-Entralink.txt");
-                                list[4] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                                list[4] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                                 file =
                                     thisExe.GetManifestResourceStream(
                                         "RNGReporter.Resources.MTRNG-Frame30-Entralink.txt");
-                                list[5] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                                list[5] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                             }
                             else
                             {
                                 file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame3D.txt");
-                                list[0] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                                list[0] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                                 file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame4D.txt");
-                                list[1] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                                list[1] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                                 file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame5D.txt");
-                                list[2] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                                list[2] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                                 file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame6D.txt");
-                                list[3] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                                list[3] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                                 file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame7D.txt");
-                                list[4] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                                list[4] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                                 file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame8D.txt");
-                                list[5] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                                list[5] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                             }
                         }
                         else
                         {
                             file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame1D.txt");
-                            list[0] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                            list[0] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                             file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame2D.txt");
-                            list[1] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                            list[1] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                             file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame3D.txt");
-                            list[2] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                            list[2] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                             file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame4D.txt");
-                            list[3] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                            list[3] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                             file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame5D.txt");
-                            list[4] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                            list[4] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                             file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame6D.txt");
-                            list[5] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                            list[5] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                         }
 
 
@@ -786,18 +766,15 @@ namespace RNGReporter
                     return;
                 }
 
-                if (!DSParametersInputCheck())
-                    return;
-
                 List<List<ButtonComboType>> keypresses = profile.GetKeypresses();
 
                 progressSearched = 0;
                 progressFound = 0;
 
-                int dayTotal = months.Sum(month => DateTime.DaysInMonth((int) year, month));
+                int dayTotal = months.Sum(month => DateTime.DaysInMonth((int)year, month));
                 progressTotal =
                     (ulong)
-                    (dayTotal*86400*(maxOffset - minOffset + 1)*keypresses.Count*
+                    (dayTotal * 86400 * (maxOffset - minOffset + 1) * keypresses.Count *
                      (profile.Timer0Max - profile.Timer0Min + 1));
 
                 for (int i = 0; i < jobs.Length; i++)
@@ -812,22 +789,8 @@ namespace RNGReporter
                     //copy to prevent issues with it being incremented before the actual thread really starts
                     int i1 = i;
                     //passing in a profile instead of the params would probably be more efficent
-                    if (generator.FrameType == FrameType.Wondercard5thGen || generator.FrameType == FrameType.Wondercard5thGenFixed)
-                    {
-                        int shiny = comboBoxShiny.SelectedIndex;
-                        jobs[i] =
-                            new Thread(
-                                () =>
-                                GenerateWonderCardJob(year, months, 0, 23, profile, shinyOffsetMax, fastSearch, i1,
-                                                      shiny));
-                    }
-                    else
-                    {
-                        jobs[i] =
-                            new Thread(
-                                () =>
+                    jobs[i] = new Thread(() =>
                                 GenerateJob(year, months, 0, 23, profile, shinyOffsetMin, shinyOffsetMax, fastSearch, i1));
-                    }
                     jobs[i].Start();
                     // for some reason not making the thread sleep causes issues with updating dayMin\Max
                     Thread.Sleep(200);
@@ -861,17 +824,17 @@ namespace RNGReporter
                     Assembly thisExe = Assembly.GetExecutingAssembly();
 
                     Stream file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame21-Entralink.txt");
-                    list[0] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                    list[0] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                     file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame22-Entralink.txt");
-                    list[1] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                    list[1] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                     file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame23-Entralink.txt");
-                    list[2] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                    list[2] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                     file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame24-Entralink.txt");
-                    list[3] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                    list[3] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                     file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame25-Entralink.txt");
-                    list[4] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                    list[4] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
                     file = thisExe.GetManifestResourceStream("RNGReporter.Resources.MTRNG-Frame26-Entralink.txt");
-                    list[5] = (Dictionary<uint, uint>) new BinaryFormatter().Deserialize(file);
+                    list[5] = (Dictionary<uint, uint>)new BinaryFormatter().Deserialize(file);
 
                     foreach (var partialList in list)
                     {
@@ -894,7 +857,7 @@ namespace RNGReporter
                         GenerateCGearCapJob(profile.MAC_Address, minEfgh, maxEfgh, fastSearch, profile.ID, profile.SID));
                 jobs[0].Start();
 
-                progressTotal = (255*24*(maxEfgh - minEfgh + 1)*generator.MaxResults);
+                progressTotal = (255 * 24 * (maxEfgh - minEfgh + 1) * generator.MaxResults);
                 var progressJob =
                     new Thread(() => ManageProgress(listBindingCap, dataGridViewCapValues, generator.FrameType, 0));
                 progressJob.Start();
@@ -906,156 +869,29 @@ namespace RNGReporter
             dataGridViewCapValues.Focus();
         }
 
-        private void btnHHGenerate_Click(object sender, EventArgs e)
-        {
-            var searchParams = new HiddenGrottoSearchParams
-                {
-                    GenerateButton = btnHHGenerate,
-                    DataGridView = dgvHiddenGrottos,
-                    MaxAdvances = txtHHAdvances,
-                    Year = txtHHYear,
-                    OpenHollows = txtHHOpenHollows,
-                    Months = cbHHMonth,
-                    Profile = (Profile) comboBoxProfiles.SelectedItem,
-                    Slots = cbHHSlot,
-                    SubSlots = cbHHSubSlot,
-                    Hollows = cbHHHollowNumber,
-                    Gender = cbHHGender,
-                    GenderRatio = cbHHGenderRatio
-                };
-            Searcher searcher = new HiddenGrottoSearcher(searchParams, threadLock, this);
-            if (!searcher.ParseInput()) return;
-            searcher.RunSearch();
-        }
-
-        public void GenerateShinyJob(uint year, List<int> months, int hourMin, int hourMax, Profile profile,
-                                     List<List<ButtonComboType>> keypressList, bool fastSearch,
-                                     int listIndex)
-        {
-            var rngIVs = new uint[6];
-
-            List<ButtonComboType>[] buttons = keypressList.ToArray();
-            var buttonMashValue = new uint[keypressList.Count];
-
-            for (int i = 0; i < buttons.Length; i++)
-            {
-                buttonMashValue[i] = Functions.buttonMashed(buttons[i]);
-            }
-
-            uint minAdvances = shinygenerators[listIndex].InitialFrame;
-
-            foreach (int month in months)
-            {
-                int dayMax = DateTime.DaysInMonth((int)year, month);
-                for (int buttonCount = 0; buttonCount < buttons.Length; buttonCount++)
-                {
-                    for (int day = 1; day <= dayMax; day++)
-                    {
-                        waitHandle.WaitOne();
-                        for (uint Timer0 = profile.Timer0Min; Timer0 <= profile.Timer0Max; Timer0++)
-                        {
-                            for (int hour = hourMin; hour <= hourMax; hour++)
-                            {
-                                for (int minute = 0; minute <= 59; minute++)
-                                {
-                                    for (int second = 0; second <= 59; second++)
-                                    {
-                                        var searchTime = new DateTime((int)year, month, day, hour, minute, second);
-
-                                        ulong seed = Functions.EncryptSeed(searchTime, profile.MAC_Address,
-                                                                           profile.Version, profile.Language,
-                                                                           profile.DSType,
-                                                                           profile.SoftReset,
-                                                                           profile.VCount, Timer0, profile.GxStat,
-                                                                           profile.VFrame,
-                                                                           buttonMashValue[buttonCount]);
-
-                                        generators[listIndex].InitialSeed = seed >> 32;
-
-                                        List<Frame> frames = generators[listIndex].Generate(frameCompare, profile.ID,
-                                                                                            profile.SID);
-                                        if (frames.Count > 0)
-                                        {
-                                            if (!frameCompare.CompareEggIVs(frames[0]))
-                                            {
-                                                continue;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            continue;
-                                        }
-
-                                        rngIVs[0] = frames[0].Hp;
-                                        rngIVs[1] = frames[0].Atk;
-                                        rngIVs[2] = frames[0].Def;
-                                        rngIVs[3] = frames[0].Spa;
-                                        rngIVs[4] = frames[0].Spd;
-                                        rngIVs[5] = frames[0].Spe;
-
-                                        shinygenerators[listIndex].RNGIVs = rngIVs;
-                                        shinygenerators[listIndex].InitialSeed = seed;
-                                        shinygenerators[listIndex].InitialFrame =
-                                            Functions.initialPIDRNG(seed, profile) +
-                                            minAdvances;
-
-                                        frames = shinygenerators[listIndex].Generate(subFrameCompare, profile.ID,
-                                                                                     profile.SID);
-
-                                        if (frames.Count > 0)
-                                        {
-                                            foreach (Frame frame in frames)
-                                            {
-                                                frame.DisplayPrep();
-                                                var iframeEgg = new IFrameCapture
-                                                {
-                                                    Frame = frame,
-                                                    Seed = seed,
-                                                    Offset = frame.Number,
-                                                    TimeDate = searchTime,
-                                                    KeyPresses = buttons[buttonCount],
-                                                    Timer0 = Timer0
-                                                };
-
-                                                lock (threadLock)
-                                                {
-                                                    iframesEgg.Add(iframeEgg);
-                                                }
-                                            }
-                                            refreshQueue = true;
-                                            progressFound = (ulong)iframesEgg.Count;
-                                        }
-                                        progressSearched += shinygenerators[listIndex].MaxResults;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
         public void GenerateJob(
             uint year, List<int> months, int hourMin, int hourMax, Profile profile, uint shinyOffsetMin, uint shinyOffset, bool fastSearch, int listIndex)
         {
             bool ConsiderTrigger = checkBoxTriggerBattle.Checked && checkBoxTriggerBattle.Visible;
 
             uint minAdvances;
-            if (generators[listIndex].FrameType == FrameType.Method5Standard && shinyOffset > 0)
+            if ((
+                generators[listIndex].FrameType == FrameType.Method5Standard || generators[listIndex].FrameType == FrameType.Method5Natures) 
+                && shinyOffset > 0)
                 minAdvances = shinygenerators[listIndex].InitialFrame;
             else
                 minAdvances = generators[listIndex].InitialFrame;
 
             var array = new uint[80];
-            array[6] = (uint) (profile.MAC_Address & 0xFFFF);
+            array[6] = (uint)(profile.MAC_Address & 0xFFFF);
 
             if (profile.SoftReset)
             {
                 array[6] = array[6] ^ 0x01000000;
             }
 
-            var upperMAC = (uint) (profile.MAC_Address >> 16);
-            array[7] = (upperMAC ^ (profile.VFrame*0x1000000) ^ profile.GxStat);
+            var upperMAC = (uint)(profile.MAC_Address >> 16);
+            array[7] = (upperMAC ^ (profile.VFrame * 0x1000000) ^ profile.GxStat);
 
             // Get the version-unique part of the message
             Array.Copy(Nazos.Nazo(profile.Version, profile.Language, profile.DSType), array, 5);
@@ -1097,14 +933,26 @@ namespace RNGReporter
                     included[i] = false;
             }
 
+            if (generators[listIndex].FrameType == FrameType.Method5Natures)
+            {
+                generators[listIndex].isBW2 = profile.IsBW2(); // this is for PIDRNG encounter slots. Was missing
+                generators[listIndex].MinAdvances = shinyOffsetMin;
+                generators[listIndex].MaxResults = shinyOffset;
+                generators[listIndex].MinLevel = (int)numericLevelMin.Value;
+                generators[listIndex].MaxLevel = (int)numericLevelMax.Value;
+                generators[listIndex].SearchForTrigger = ConsiderTrigger;
+                generators[listIndex].RerollCount = profile.ShinyCharm ? 3 : 1;
+                generators[listIndex].MemoryLinkUsed = profile.MemoryLink;
+            }
+
             foreach (int month in months)
             {
-                float interval = ((float) DateTime.DaysInMonth((int) year, month)/cpus + (float) 0.05);
+                float interval = ((float)DateTime.DaysInMonth((int)year, month) / cpus + (float)0.05);
 
-                var dayMin = (int) (interval*listIndex + 1);
-                var dayMax = (int) (interval*(listIndex + 1));
+                var dayMin = (int)(interval * listIndex + 1);
+                var dayMax = (int)(interval * (listIndex + 1));
 
-                string yearMonth = String.Format("{0:00}", year%2000) + String.Format("{0:00}", month);
+                string yearMonth = String.Format("{0:00}", year % 2000) + String.Format("{0:00}", month);
                 for (int buttonCount = 0; buttonCount < keypressList.Count; buttonCount++)
                 {
                     array[12] = buttonMashValue[buttonCount];
@@ -1115,9 +963,9 @@ namespace RNGReporter
 
                         for (int day = dayMin; day <= dayMax; day++)
                         {
-                            var searchTime = new DateTime((int) year, month, day);
+                            var searchTime = new DateTime((int)year, month, day);
 
-                            string dateString = String.Format("{0:00}", (int) searchTime.DayOfWeek);
+                            string dateString = String.Format("{0:00}", (int)searchTime.DayOfWeek);
                             dateString = String.Format("{0:00}", searchTime.Day) + dateString;
                             dateString = yearMonth + dateString;
                             array[8] = uint.Parse(dateString, NumberStyles.HexNumber);
@@ -1161,7 +1009,7 @@ namespace RNGReporter
 
                                             if (fastSearch)
                                             {
-                                                var testSeed = (uint) generators[listIndex].InitialSeed;
+                                                var testSeed = (uint)generators[listIndex].InitialSeed;
                                                 frames = new List<Frame>();
 
                                                 for (uint i = 0; i < 6; i++)
@@ -1173,7 +1021,7 @@ namespace RNGReporter
                                                             uint IVHash = list[i][testSeed];
                                                             frames.AddRange(generators[listIndex].Generate(
                                                                 frameCompare, testSeed, IVHash,
-                                                                i + start + entralink, LevelConditions() ? (int)numericLevel.Value : 0));
+                                                                i + start + entralink));
                                                         }
                                                     }
                                                 }
@@ -1218,17 +1066,6 @@ namespace RNGReporter
                                                     List<Frame> shinyFrames =
                                                         shinygenerators[listIndex].GenerateG5PID(subFrameCompare, profile.ID, profile.SID);
 
-                                                    // Tests here
-                                                    /*shinygenerators[listIndex].EncounterMod = Objects.EncounterMod.None;
-
-                                                    List <Frame> shinyFrames =
-                                                        shinygenerators[listIndex].GenerateG5PID(subFrameCompare, profile.ID, profile.SID);
-
-                                                    shinygenerators[listIndex].EncounterMod = Objects.EncounterMod.CuteCharm;
-                                                    shinyFrames.AddRange(shinygenerators[listIndex].GenerateG5PID(subFrameCompare, profile.ID, profile.SID));*/
-
-
-
                                                     foreach (Frame shinyFrame in shinyFrames)
                                                     {
                                                         if (shinyFrame != null)
@@ -1237,7 +1074,7 @@ namespace RNGReporter
                                                             Frame testFrame = Frame.Clone(frame);
 
                                                             var iframe = new IFrameCapture
-                                                                {NearestShiny = shinyFrame.Number};
+                                                            { NearestShiny = shinyFrame.Number };
 
                                                             iframe.Offset = testFrame.Number - start;
 
@@ -1296,7 +1133,7 @@ namespace RNGReporter
                                                 }
                                             }
 
-                                            progressFound = (ulong) iframes.Count;
+                                            progressFound = (ulong)iframes.Count;
                                             if (frames.Count > 0)
                                             {
                                                 refreshQueue = true;
@@ -1316,24 +1153,20 @@ namespace RNGReporter
                                             //  This is where we actually go ahead and call our 
                                             //  generator for a list of IVs based on parameters
                                             //  that have been passed in.
-                                            frames = generators[listIndex].Generate(frameCompare, profile.ID,
+                                            frames = generators[listIndex].GenerateG5PID(frameCompare, profile.ID,
                                                                                     profile.SID);
 
                                             progressSearched += searchRange;
-                                            progressFound += (ulong) frames.Count;
 
-                                            //  Now we need to iterate through each result here
-                                            //  and create a collection of the information that
-                                            //  we are going to place into our grid.
                                             foreach (Frame frame in frames)
                                             {
                                                 frame.DisplayPrep();
                                                 var iframe = new IFrameCapture
-                                                    {
-                                                        Offset = frame.Number,
-                                                        Seed = seed,
-                                                        Frame = frame
-                                                    };
+                                                {
+                                                    NearestShiny = frame.Number,
+                                                    Seed = seed,
+                                                    Frame = frame
+                                                };
                                                 iframe.Advances = iframe.Offset -
                                                                   (generators[listIndex].InitialFrame - minAdvances);
 
@@ -1342,12 +1175,85 @@ namespace RNGReporter
                                                 iframe.KeyPresses = buttons[buttonCount];
                                                 iframe.Timer0 = Timer0;
 
-                                                lock (threadLock)
+                                                List<Frame> CgearFrames = new List<Frame>();
+                                                FrameCompare compareIVs = new FrameCompare(
+                                                    ivFiltersCapture.IVFilter, null, -1, false, false, 0, false, null, new NoGenderFilter());
+
+                                                FrameGenerator Cgenerator = generators[listIndex].Clone();
+                                                Cgenerator.FrameType = FrameType.Method5Standard;
+
+                                                Cgenerator.InitialFrame = uint.Parse(maskedTextBoxCapMinOffset.Text);
+                                                Cgenerator.MaxResults = uint.Parse(maskedTextBoxCapMaxOffset.Text) - Cgenerator.InitialFrame + 1;
+                                                uint minDelay = uint.Parse(maskedTextBoxCapMinDelay.Text);
+                                                uint maxDelay = uint.Parse(maskedTextBoxCapMaxDelay.Text);
+
+                                                for (uint delay = minDelay; delay <= maxDelay; delay++)
                                                 {
-                                                    iframes.Add(iframe);
+                                                    int newMinutes = minute;
+                                                    int newHour = hour;
+                                                    int newDay = day;
+
+                                                  //int newSeconds = second + delay / 60;
+                                                    int newSeconds = second + (int)Math.Round(delay / 60.0);    // Assuming 60 fps for now
+
+                                                    if (newSeconds > 59)
+                                                    {
+                                                        newMinutes += newSeconds / 60;
+                                                        newSeconds = newSeconds % 60;
+
+                                                        if (newMinutes > 59)
+                                                        {
+                                                            newHour += newMinutes / 60;
+                                                            newMinutes = newMinutes % 60;
+
+                                                            if (newHour > 23)
+                                                            {
+                                                                //newDay += newHour / 24;
+                                                                // No delay will ever advance more than a single day though
+                                                                newDay++;
+                                                                newHour = newHour % 24;
+                                                            }
+                                                        }
+                                                    }
+
+                                                    if (newHour > 23 || newMinutes > 59 || newSeconds > 59)
+                                                    {
+                                                        MessageBox.Show("Error.");
+                                                        return;
+                                                    }
+
+                                                    ulong CSeed = (ulong)((((month * newDay + newMinutes + newSeconds) & 0xFF) * 0x1000000) +
+                                                            (newHour * 0x10000)) +
+                                                            (year - 2000 + delay) +
+                                                            (profile.MAC_Address & 0xFFFFFF);
+
+                                                    Cgenerator.InitialSeed = CSeed;
+                                                    CgearFrames = Cgenerator.Generate(compareIVs, profile.ID, profile.SID);
+
+                                                    foreach (Frame f in CgearFrames)
+                                                    {
+                                                        Frame testFrame = Frame.ClonePID(frame);
+
+                                                        testFrame.Hp = f.Hp;
+                                                        testFrame.Atk = f.Atk;
+                                                        testFrame.Def = f.Def;
+                                                        testFrame.Spa = f.Spa;
+                                                        testFrame.Spd = f.Spd;
+                                                        testFrame.Spe = f.Spe;
+
+                                                        iframe.Frame = testFrame;
+                                                        iframe.Delay = delay;
+                                                        iframe.CSeed = (uint)CSeed;
+                                                        iframe.Offset = f.Number;
+
+                                                        lock (threadLock)
+                                                        {
+                                                            iframes.Add(iframe);
+                                                        }
+                                                    }
                                                 }
                                             }
-
+                                            progressFound = (ulong)iframes.Count;
                                             if (frames.Count > 0)
                                             {
                                                 refreshQueue = true;
@@ -1362,8 +1268,752 @@ namespace RNGReporter
             }
         }
 
-        public void GenerateWonderCardJob(uint year, List<int> months, int hourMin, int hourMax,
-                                          Profile profile, uint shinyOffset, bool fastSearch, int listIndex, int shiny)
+        private void GenerateCGearCapJob(ulong mac_address, uint minEfgh, uint maxEfgh, bool fastSearch, ushort id, ushort sid)
+        {
+            uint seed;
+            uint searchRange = generator.MaxResults;
+            List<Frame> frames;
+
+            var included = new bool[6];
+
+            for (int i = 0; i < 6; i++)
+            {
+                if ((i + 20) >= (generator.InitialFrame - 1) &&
+                    (i + 20) < (generator.InitialFrame + generator.MaxResults - 1))
+                    included[i] = true;
+                else
+                    included[i] = false;
+            }
+
+            if (fastSearch)
+            {
+                //frames = new List<Frame>();
+                //todo: reverse order of ab/efgh loop for optimization
+                //  Iterate through delay range + year
+                for (uint efgh = minEfgh; efgh <= maxEfgh; efgh++)
+                {
+                    waitHandle.WaitOne();
+                    //  Iterate through all CD
+                    for (uint cd = 0; cd <= 23; cd++)
+                    {
+                        for (uint ab = 1; ab <= 255; ab++)
+                        {
+                            //  First we need to build a seed for this iteration
+                            //  based on all of our information.  This should be
+                            //  fairly easy since we are not using dates ;)
+                            seed = (ab << 24) + (cd << 16) + efgh;
+                            seed = (uint)(seed + (mac_address & 0xFFFFFF));
+
+                            progressSearched += searchRange;
+
+                            for (uint i = 0; i < 6; i++)
+                            {
+                                if (included[i])
+                                {
+                                    if (list[i].ContainsKey(seed))
+                                    {
+                                        uint ivHash = list[i][seed];
+                                        frames = generator.Generate(frameCompare, seed, ivHash, i + 21);
+
+                                        progressFound += (uint)frames.Count;
+
+                                        foreach (Frame frame in frames)
+                                        {
+                                            var iframe = new IFrameCapture();
+                                            frame.DisplayPrep();
+
+                                            iframe.Offset = frame.Number;
+                                            iframe.Seed = frame.Seed;
+                                            iframe.Frame = frame;
+                                            iframe.MACAddress = (uint)mac_address;
+
+                                            lock (threadLock)
+                                            {
+                                                iframes.Add(iframe);
+                                            }
+                                            refreshQueue = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                //  Iterate through all AB
+                for (uint ab = 1; ab <= 255; ab++)
+                {
+                    waitHandle.WaitOne();
+                    //  Iterate through all CD
+                    for (uint cd = 0; cd <= 23; cd++)
+                    {
+                        //  Iterate through delay range + year
+                        for (uint efgh = minEfgh; efgh <= maxEfgh; efgh++)
+                        {
+                            //  First we need to build a seed for this iteration
+                            //  based on all of our information.  This should be
+                            //  fairly easy since we are not using dates ;)
+                            seed = (ab << 24) + (cd << 16) + efgh;
+                            seed = (uint)(seed + (mac_address & 0xFFFFFF));
+
+                            //  Set this to our seed here
+                            generator.InitialSeed = seed;
+
+                            if (iframes.Count > 1000000)
+                                break;
+
+                            //  This is where we actually go ahead and call our 
+                            //  generator for a list of IVs based on parameters
+                            //  that have been passed in.
+                            frames = generator.Generate(frameCompare, id, sid);
+
+                            progressSearched += searchRange;
+                            progressFound += (uint)frames.Count;
+
+                            //  Now we need to iterate through each result here
+                            //  and create a collection of the information that
+                            //  we are going to place into our grid.
+                            foreach (Frame frame in frames)
+                            {
+                                var iframe = new IFrameCapture();
+                                frame.DisplayPrep();
+
+                                iframe.Offset = frame.Number;
+                                iframe.Seed = seed;
+                                iframe.Frame = frame;
+                                iframe.MACAddress = (uint)mac_address;
+
+                                lock (threadLock)
+                                {
+                                    iframes.Add(iframe);
+                                }
+                                refreshQueue = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void EnableCapGenerate()
+        {
+            buttonCapGenerate.Enabled = true;
+            buttonShinyGenerate.Enabled = true;
+            buttonEventGenerate.Enabled = true;
+        }
+
+        private void comboBoxMethod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Natures) ||
+                ((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Standard))
+            {
+                labelCapMonth.Visible = true;
+                checkBoxShinyOnly.Enabled = true;
+                comboBoxCapNature.Enabled = true;
+                comboCapAbility.Enabled = true;
+                comboBoxEncounterType.Enabled = true;
+                comboCapEncounterSlot.Enabled = true;
+                comboBoxCapGenderRatio.Enabled = true;
+
+                comboBoxCapMonth.Visible = true;
+
+                labelCapMinMaxFrame.Location = oldLocation;
+
+                if (((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Standard))
+                {
+                    label9.Visible = true;
+                    BW1Message.Visible = false;
+                    maskedTextBoxCapMinDelay.Visible = false;
+                    maskedTextBoxCapMaxDelay.Visible = false;
+                    labelDelay.Visible = false;
+                }
+                else
+                {
+                    BW1Message.Visible = true;
+                    BW1Message.Text = "This method is only possible in BW1.";
+                    BW1Message.Location = new Point(40, 158);
+                    label9.Visible = false;
+                    maskedTextBoxCapMinDelay.Visible = true;
+                    maskedTextBoxCapMaxDelay.Visible = true;
+                    labelDelay.Visible = true;
+                }
+            }
+            else if (((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5CGear))
+            {
+                labelCapMonth.Visible = false;
+                checkBoxShinyOnly.Enabled = false;
+                comboBoxCapNature.Enabled = false;
+                comboCapAbility.Enabled = false;
+                comboBoxEncounterType.Enabled = true;
+                comboCapEncounterSlot.Enabled = false;
+                comboBoxCapGenderRatio.Enabled = false;
+
+                comboBoxCapMonth.Visible = false;
+                maskedTextBoxCapMinDelay.Visible = true;
+                maskedTextBoxCapMaxDelay.Visible = true;
+                maskedTextBoxCapMinDelay.TabStop = true;
+                maskedTextBoxCapMaxDelay.TabStop = true;
+
+                labelCapMinMaxFrame.Text = "Min / Max Frame";
+                labelCapMinMaxFrame.Location = oldLocation;
+
+                label9.Visible = true;
+                labelDelay.Visible = true;
+                BW1Message.Visible = false;
+            }
+
+            checkBoxShinyOnly.Text = "Shiny Only";
+
+            IVFilters_Changed(sender, e);
+            labelCapMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible = LevelLabel.Visible = numericLevel.Visible = LevelConditions();
+
+            checkBoxTriggerBattle.Visible = RatioConditions();
+        }
+
+        private void buttonAnyNature_Click(object sender, EventArgs e)
+        {
+            comboBoxCapNature.ClearSelection();
+        }
+
+        private void dataGridViewCapValues_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            var profile = (Profile)comboBoxProfiles.SelectedItem;
+
+            DefaultFormatting(dataGridViewCapValues, profile.ID, profile.SID, e, "PID");
+
+            if (EncounterRatio.Visible)
+            {
+                int RatioValue = Convert.ToInt32(dataGridViewCapValues.Rows[e.RowIndex].Cells["EncounterRatio"].Value);
+                if (dataGridViewCapValues.Columns[e.ColumnIndex].Name == "EncounterRatio")
+                {
+                    if ((RatioValue < 14 && comboBoxEncounterType.SelectedIndex <= 2) || (RatioValue < 6 && comboBoxEncounterType.SelectedIndex == 3))
+                    {
+                        e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+                        e.CellStyle.ForeColor = Color.Green;
+                    }
+                    else
+                        e.CellStyle.ForeColor = Color.LightCoral;
+                }
+            }
+
+            //  Make all of the junk natures show up in a lighter color
+            if (e.ColumnIndex == CapNatureIndex)
+            {
+                var nature = (string)e.Value;
+
+                if ((bool)dataGridViewCapValues.Rows[e.RowIndex].Cells["Synchable"].Value)
+                {
+                    e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+
+                    if (((IFrameCapture)dataGridViewCapValues.Rows[e.RowIndex].DataBoundItem).Frame.EncounterMod ==
+                        Objects.EncounterMod.Synchronize)
+                    {
+                        e.Value = "Synch";
+                    }
+                }
+                else if (nature == Functions.NatureStrings(18) ||
+                         nature == Functions.NatureStrings(6) ||
+                         nature == Functions.NatureStrings(0) ||
+                         nature == Functions.NatureStrings(24) ||
+                         nature == Functions.NatureStrings(12) ||
+                         nature == Functions.NatureStrings(9) ||
+                         nature == Functions.NatureStrings(21))
+                {
+                    e.CellStyle.ForeColor = Color.Gray;
+                }
+            }
+
+            if (e.ColumnIndex >= CapHPIndex && e.ColumnIndex <= CapSpeedIndex)
+            {
+                var number = (uint)e.Value;
+
+                if (number >= 30)
+                {
+                    e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+                }
+
+                if (number == 0)
+                {
+                    e.CellStyle.ForeColor = Color.Red;
+                }
+            }
+        }
+
+        private void generateTimesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewCapValues.SelectedRows[0] != null)
+            {
+                var frame = (IFrameCapture)dataGridViewCapValues.SelectedRows[0].DataBoundItem;
+
+                // This is a bit of a strange hack, because this window
+                //  needs to be hidden before we load the seed to time
+                //  form or it wont be able to be focused. 
+                bool showMap = HgSsRoamerSW.Window.Map.Visible;
+                HgSsRoamerSW.Window.Hide();
+
+                var seedToTime = new SeedToTime();
+
+                //  Get the currently selected frame here so we can
+                //  pull out some of the values that we are going to
+                //  need to use.
+
+                seedToTime.setBW();
+
+                seedToTime.AutoGenerate = true;
+                seedToTime.ShowMap = showMap;
+                seedToTime.Seed = (uint)frame.Seed;
+                seedToTime.MAC_Address = ((Profile)comboBoxProfiles.SelectedItem).MAC_Address;
+
+                //  Grab this from what the user had searched on
+                seedToTime.Year = (uint)DateTime.Now.Year;
+                if (maskedTextBoxCapYear.Text != "")
+                    seedToTime.Year = uint.Parse(maskedTextBoxCapYear.Text);
+
+                seedToTime.Show();
+            }
+        }
+
+        private void outputCapResultsToTXTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //  Going to need to present the user with a File Dialog and 
+            //  then interate through the Grid, outputting columns that
+            //  are visible.
+
+            saveFileDialogTxt.AddExtension = true;
+            saveFileDialogTxt.Title = "Save Output to TXT";
+            saveFileDialogTxt.Filter = "TXT Files|*.txt";
+            saveFileDialogTxt.FileName = "rngreporter.txt";
+            if (saveFileDialogTxt.ShowDialog() == DialogResult.OK)
+            {
+                //  Get the name of the file and then go ahead 
+                //  and create and save the thing to the hard
+                //  drive.   
+                List<IFrameCapture> frames = iframes;
+
+                if (frames.Count > 0)
+                {
+                    var writer = new TXTWriter(dataGridViewCapValues);
+                    writer.Generate(saveFileDialogTxt.FileName, frames);
+                }
+            }
+        }
+
+        private void dataGridViewCapValues_MouseDown(object sender, MouseEventArgs e)
+        {
+            DGV_MouseDown(dataGridViewCapValues, e);
+        }
+
+        private void dataGridViewCapValues_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (Settings.Default.ShowToolTips)
+            {
+                Rectangle cellRect = dataGridViewCapValues.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
+
+                if (dataGridViewCapValues.Columns[e.ColumnIndex].Name == "EncounterMod")
+                {
+                    if (e.RowIndex >= 0)
+                    {
+                        switch (
+                            ((IFrameCapture)dataGridViewCapValues.Rows[e.RowIndex].DataBoundItem).Frame.EncounterMod)
+                        {
+                            case Objects.EncounterMod.Synchronize:
+                                toolTipDataGrid.ToolTipTitle = "Synchronize";
+
+                                toolTipDataGrid.Show(
+                                    "When encountering the desired Pokémon, the lead Pokémon in your party\r\n" +
+                                    "must have the ability Synchronize, and have a nature that matches your\r\n" +
+                                    "desired nature.  This will cause the target Pokémon to have your desired nature.",
+                                    this,
+                                    dataGridViewCapValues.Location.X + cellRect.X + cellRect.Size.Width,
+                                    dataGridViewCapValues.Location.Y + cellRect.Y + cellRect.Size.Height,
+                                    5000);
+                                break;
+                            case Objects.EncounterMod.CuteCharm50F:
+                            case Objects.EncounterMod.CuteCharm125F:
+                            case Objects.EncounterMod.CuteCharm25F:
+                            case Objects.EncounterMod.CuteCharm75F:
+                            case Objects.EncounterMod.CuteCharm50M:
+                            case Objects.EncounterMod.CuteCharm875M:
+                            case Objects.EncounterMod.CuteCharm75M:
+                            case Objects.EncounterMod.CuteCharm25M:
+                            case Objects.EncounterMod.CuteCharmFemale:
+                                toolTipDataGrid.ToolTipTitle = "Cute Charm";
+
+                                toolTipDataGrid.Show(
+                                    "When encountering the target Pokémon, the lead Pokémon in your party\r\n" +
+                                    "must have the ability Cute Charm, and be the opposite gender of the listed target.\r\n" +
+                                    "The listed gender ratio must also match that of the target Pokémon.\r\n\r\n" +
+                                    "For example: Cute Charm (75% M) indicates that the target Pokémon must be\r\n" +
+                                    "male (requiring a female Cute Charm lead), and must be of a species that has a\r\n" +
+                                    "75% male gender ratio, such as Alakazam.\r\n\r\n" +
+                                    "Cute Charm does not work for species with only one gender, such as Tauros.",
+                                    this,
+                                    dataGridViewCapValues.Location.X + cellRect.X + cellRect.Size.Width,
+                                    dataGridViewCapValues.Location.Y + cellRect.Y + cellRect.Size.Height,
+                                    15000);
+                                break;
+                            case Objects.EncounterMod.SuctionCups:
+                                toolTipDataGrid.ToolTipTitle = "Suction Cups";
+
+                                toolTipDataGrid.Show(
+                                    "When fishing for the target Pokémon, the lead Pokémon in your party\r\n" +
+                                    "must have the ability Suction Cups.  Otherwise, fishing will fail\r\n" +
+                                    "with \"Not even a nibble.\"\r\n\r\n" +
+                                    "Some non-fishing encounters may also require Suction Cups in order\r\n" +
+                                    "to make the frame appear.",
+                                    this,
+                                    dataGridViewCapValues.Location.X + cellRect.X + cellRect.Size.Width,
+                                    dataGridViewCapValues.Location.Y + cellRect.Y + cellRect.Size.Height,
+                                    5000);
+                                break;
+                            case Objects.EncounterMod.Compoundeyes:
+                                toolTipDataGrid.ToolTipTitle = "Compoundeyes";
+                                break;
+                            case Objects.EncounterMod.None:
+                                toolTipDataGrid.Hide(this);
+                                break;
+                        }
+                    }
+                }
+                else if (dataGridViewCapValues.Columns[e.ColumnIndex].Name == "Nature")
+                {
+                    toolTipDataGrid.ToolTipTitle = "Nature";
+
+                    toolTipDataGrid.Show("A bolded nature indicates that the nature can be changed by a lead\r\n" +
+                                         "Pokémon with Synchronize.\r\n\r\n" +
+                                         "Greyed-out natures are natures with no competitive value.",
+                                         this,
+                                         dataGridViewCapValues.Location.X + cellRect.X + cellRect.Size.Width,
+                                         dataGridViewCapValues.Location.Y + cellRect.Y + cellRect.Size.Height,
+                                         5000);
+                }
+                else if (dataGridViewCapValues.Columns[e.ColumnIndex].Name == "Shiny")
+                {
+                    toolTipDataGrid.ToolTipTitle = "!!!";
+
+                    toolTipDataGrid.Show("A !!! in this column indicates the frame will be shiny.",
+                                         this,
+                                         dataGridViewCapValues.Location.X + cellRect.X + cellRect.Size.Width,
+                                         dataGridViewCapValues.Location.Y + cellRect.Y + cellRect.Size.Height,
+                                         5000);
+                }
+                else if (dataGridViewCapValues.Columns[e.ColumnIndex].Name == "EncounterSlot")
+                {
+                    toolTipDataGrid.ToolTipTitle = "Encounter Slot";
+
+                    toolTipDataGrid.Show("Encounter slots are used to determine what Pokémon appears for\r\n" +
+                                         "a wild battle.  Use the encounter tables under the main menus to look up\r\n" +
+                                         "which Pokémon appears for each slot in each area.\r\n",
+                                         this,
+                                         dataGridViewCapValues.Location.X + cellRect.X + cellRect.Size.Width,
+                                         dataGridViewCapValues.Location.Y + cellRect.Y + cellRect.Size.Height,
+                                         5000);
+                }
+            }
+        }
+
+        private void dataGridViewCapValues_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            toolTipDataGrid.Hide(this);
+        }
+
+        private void generateAdjacentSeedsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewCapValues.SelectedRows[0] != null)
+            {
+                var iframe = (IFrameCapture)dataGridViewCapValues.SelectedRows[0].DataBoundItem;
+
+                uint advances = 0;
+
+                switch (iframe.Frame.FrameType)
+                {
+                    case FrameType.Method5Standard:
+                        advances = iframe.Offset;
+                        break;
+                    case FrameType.Method5Natures:
+                    case FrameType.Wondercard5thGen:
+                        advances = iframe.Advances;
+                        break;
+                }
+                int profile = comboBoxProfiles.SelectedIndex;
+                var adjacents = new Adjacents(iframe.TimeDate,
+                                              profile, iframe.KeyPresses,
+                                              iframe.Frame.FrameType, iframe.Frame.EncounterType,
+                                              advances);
+                adjacents.Show();
+            }
+        }
+
+        private bool FastCapFilters()
+        {
+            IVFilter filter = ivFiltersCapture.IVFilter;
+            return FastFilters(filter);
+        }
+
+        private bool FastFilters(IVFilter filter)
+        {
+            // HP, Def, SpD filters must search for >=30
+            // Either Attack or SpA must be >=30 as well
+            if (((filter.hpValue >= 30) &&
+                 (filter.hpCompare == CompareType.Equal || filter.hpCompare == CompareType.GtEqual)) &&
+                ((filter.defValue >= 30) &&
+                 (filter.defCompare == CompareType.Equal || filter.defCompare == CompareType.GtEqual)) &&
+                ((filter.spdValue >= 30) &&
+                 (filter.spdCompare == CompareType.Equal || filter.spdCompare == CompareType.GtEqual)))
+            {
+                // physical spreads must have Attack >=30 and flawless speed (either for standard or Trick Room)
+                if ((filter.atkValue >= 30) &&
+                    (filter.atkCompare == CompareType.Equal || filter.atkCompare == CompareType.GtEqual))
+                {
+                    if ((filter.speValue == 31) &&
+                        (filter.speCompare == CompareType.Equal || filter.speCompare == CompareType.GtEqual))
+                        return true;
+
+                    // no roamers have Trick Room spreads
+                    if (((filter.speValue <= 1) &&
+                         (filter.speCompare == CompareType.Equal || filter.speCompare == CompareType.LtEqual)) &&
+                        !((ComboBoxItem)comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.Roamer))
+                        return true;
+                }
+
+                // special spreads must have SpAttk >=30 and flawless speed (either for standard or Trick Room)
+                // or, if Speed = 30 or 2 and 3, Attack must be HP_O or HP_E to allow for 70-power Hidden Power
+                // spreads for roamers must have a speed of 30 or 31
+                if ((filter.spaValue >= 30) &&
+                    (filter.spaCompare == CompareType.Equal || filter.spaCompare == CompareType.GtEqual))
+                {
+                    if ((filter.speValue == 31) &&
+                        (filter.speCompare == CompareType.Equal || filter.speCompare == CompareType.GtEqual))
+                        return true;
+
+                    if (((filter.speValue == 30) &&
+                         (filter.speCompare == CompareType.Equal || filter.speCompare == CompareType.GtEqual)) ||
+                        (!((ComboBoxItem)comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.Roamer) &&
+                         (((filter.speValue == 2) && (filter.speCompare == CompareType.Equal)) ||
+                          ((filter.speValue == 3) && (filter.speCompare == CompareType.Equal)))))
+                    {
+                        if (((filter.atkValue >= 30) &&
+                            (filter.atkCompare == CompareType.Equal || filter.atkCompare == CompareType.GtEqual)) ||
+                            (filter.atkCompare == CompareType.Hidden || filter.atkCompare == CompareType.HiddenEven ||
+                            filter.atkCompare == CompareType.HiddenOdd))
+                        {
+                            return true;
+                        }
+                    }
+
+                    // no roamers have Trick Room spreads
+                    if ((filter.speValue <= 1) &&
+                        (filter.speCompare == CompareType.Equal || filter.speCompare == CompareType.LtEqual) &&
+                        !((ComboBoxItem)comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.Roamer))
+                        return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool FastCapFrames()
+        {
+            uint minFrame;
+            uint maxFrame;
+
+            uint.TryParse(maskedTextBoxCapMinOffset.Text, out minFrame);
+            uint.TryParse(maskedTextBoxCapMaxOffset.Text, out maxFrame);
+
+            if (((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5CGear))
+            {
+                // no roamers appear in the Entralink
+                if (((ComboBoxItem)comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.Roamer))
+                    return false;
+
+                return (minFrame >= 20 && minFrame < 26) && (maxFrame >= 20 && maxFrame <= 25);
+            }
+            // BW2 Entralink
+            if (((Profile)comboBoxProfiles.SelectedItem).IsBW2())
+            {
+                if (minFrame > 24 && minFrame < 31 && maxFrame > 24 && maxFrame < 31) return true;
+            }
+
+            return (minFrame >= 0 && minFrame < 6) && (maxFrame >= 0 && maxFrame < 6);
+        }
+
+        #endregion
+
+
+        #region Wondercard
+
+        private void buttonEventGenerate_Click(object sender, EventArgs e)
+        {
+            var profile = (Profile)comboBoxProfiles.SelectedItem;
+            iframes = new List<IFrameCapture>();
+            listBindingEvent = new BindingSource { DataSource = iframes };
+            dataGridViewEventResults.DataSource = listBindingEvent;
+
+            jobs = new Thread[cpus];
+            generators = new FrameGenerator[cpus];
+            shinygenerators = new FrameGenerator[cpus];
+            waitHandle = new EventWaitHandle(true, EventResetMode.ManualReset);
+
+            var year = (uint)DateTime.Now.Year;
+            if (maskedTextYear.Text != "")
+            {
+                year = uint.Parse(maskedTextYear.Text);
+                if (year < 2000)
+                {
+                    MessageBox.Show("You must enter a year greater than 1999.", "Please Enter a Valid Year", MessageBoxButtons.OK);
+                    return;
+                }
+            }
+
+            uint maxOffsetEvent;
+            if (maskedMaxAdv.Text != "")
+                maxOffsetEvent = uint.Parse(maskedMaxAdv.Text);
+            else
+            {
+                maskedMaxAdv.Text = "300";
+                maxOffsetEvent = 300;
+            }
+
+            uint minOffsetEvent;
+            if (maskedMinAdv.Text != "")
+                minOffsetEvent = uint.Parse(maskedMinAdv.Text);
+            else
+            {
+                maskedMinAdv.Text = "0";
+                minOffsetEvent = 0;
+            }
+
+
+            if (minOffsetEvent > maxOffsetEvent)
+            {
+                maskedMinAdv.Focus();
+                maskedMinAdv.SelectAll();
+                return;
+            }
+
+            Wondercard wondercard = new Wondercard()
+            {
+                eventTid = uint.Parse(maskedTextTID.Text),
+                eventSid = uint.Parse(maskedTextSID.Text),
+                eventShininess = glassComboShininess.SelectedIndex,
+                // -1 in the following lines means that the value for a given
+                // attribute is "random" and should be calculated
+                eventAbility = checkBoxAbility.Checked ? glassComboAbility.SelectedIndex : -1,
+                eventNature = checkBoxNatureLock.Checked ? glassComboBoxNatureList.SelectedIndex : -1,
+                eventGender = checkBoxGender.Checked ? glassComboGender.SelectedIndex : -1,
+                eventIVInfo = new int[6]
+                {
+                    checkBoxHP.Checked ? int.Parse(maskedTextBoxHP.Text) : -1,
+                    checkBoxAtk.Checked ? int.Parse(maskedTextBoxAtk.Text) : -1,
+                    checkBoxDef.Checked ? int.Parse(maskedTextBoxDef.Text) : -1,
+                    checkBoxSpA.Checked ? int.Parse(maskedTextBoxSpA.Text) : -1,
+                    checkBoxSpD.Checked ? int.Parse(maskedTextBoxSpD.Text) : -1,
+                    checkBoxSpe.Checked ? int.Parse(maskedTextBoxSpe.Text) : -1,
+                }
+            };
+
+            wondercard.genderCase = Functions.GenderLockedCase(glassComboGender.SelectedIndex, glassComboGenderRatio.SelectedIndex);
+
+            eventf50.Visible = glassComboGenderRatio.SelectedIndex == 0;
+            eventf75.Visible = glassComboGenderRatio.SelectedIndex == 1;
+            eventf25.Visible = glassComboGenderRatio.SelectedIndex == 2;
+            eventf125.Visible = glassComboGenderRatio.SelectedIndex == 3;
+
+            // !!! This is generator for IV Frames !!!
+            generator = new FrameGenerator
+            {
+                // Now that each combo box item is a custom object containing the FrameType reference
+                // We can simply retrieve the FrameType from the selected item
+                FrameType = FrameType.Wondercard5thGen,
+                //EncounterType = (EncounterType)((ComboBoxItem)comboBoxEncounterType.SelectedItem).Reference,
+                EncounterMod = Objects.EncounterMod.Search,
+                InitialFrame = minOffsetEvent,
+                MaxResults = maxOffsetEvent - minOffsetEvent + 1
+            };
+
+            generator.isBW2 = profile.IsBW2();
+
+
+            //  Build up a FrameComparer
+
+            List<uint> natures = null;
+            if (glassComboEventNatures.Text != "Any" && glassComboEventNatures.CheckBoxItems.Count > 0)
+                natures = (from t in glassComboEventNatures.CheckBoxItems where t.Checked select (uint)((Nature)t.ComboBoxItem).Number).ToList();
+
+            EventSeed.Width = seedColumnLong(true, EventSeed);
+
+            frameCompare = new FrameCompare(
+                ivFiltersEvent.IVFilter,
+                natures,
+                comboAbilityEvents.SelectedIndex == 0 ? - 1 : comboAbilityEvents.SelectedIndex - 1,
+                shinyOnlyEvent.Checked,
+                false,
+                0,
+                false,
+                null,
+                constructGenderFilter());
+
+
+            generateTimesToolStripMenuItem.Visible = false;
+            generateEntralinkNatureSeedsToolStripMenuItem.Visible = false;
+            generateAdjacentSeedsToolStripMenuItem.Visible = true;
+
+            var months = new List<int>();
+            for (int month = 1; month <= 12; month++)
+            {
+                if (checkBoxComboMonths.CheckBoxItems[month].Checked)
+                    months.Add(month);
+            }
+
+            if (months.Count == 0)
+            {
+                checkBoxComboMonths.Focus();
+                return;
+            }
+
+            List<List<ButtonComboType>> keypresses = profile.GetKeypresses();
+
+            progressSearched = 0;
+            progressFound = 0;
+
+            int dayTotal = months.Sum(month => DateTime.DaysInMonth((int)year, month));
+            progressTotal =
+                (ulong)
+                (dayTotal * 86400 * (maxOffsetEvent - minOffsetEvent + 1) * keypresses.Count *
+                 (profile.Timer0Max - profile.Timer0Min + 1));
+
+            for (int i = 0; i < jobs.Length; i++)
+            {
+                generators[i] = generator.Clone();
+
+                if (shinygenerator != null)
+                {
+                    shinygenerators[i] = shinygenerator.Clone();
+                }
+
+                //copy to prevent issues with it being incremented before the actual thread really starts
+                int i1 = i;
+                //passing in a profile instead of the params would probably be more efficent
+                //int shiny = comboBoxShiny.SelectedIndex;
+                jobs[i] = new Thread(() => GenerateWonderCardJob(year, months, 0, 23, profile, i1, wondercard));
+                jobs[i].Start();
+                // for some reason not making the thread sleep causes issues with updating dayMin\Max
+                Thread.Sleep(200);
+            }
+            var progressJob = new Thread(() => ManageProgress(listBindingEvent, dataGridViewEventResults, generator.FrameType, 2000));
+            progressJob.Start();
+            progressJob.Priority = ThreadPriority.Lowest;
+
+            buttonCapGenerate.Enabled = false;
+            buttonEventGenerate.Enabled = false;
+            buttonShinyGenerate.Enabled = false;
+
+            dataGridViewEventResults.Focus();
+        }
+
+        public void GenerateWonderCardJob(uint year, List<int> months, int hourMin, int hourMax, Profile profile, int listIndex, Wondercard wondercard)
         {
             uint minAdvances = generators[listIndex].InitialFrame;
 
@@ -1479,9 +2129,7 @@ namespace RNGReporter
                                         //  This is where we actually go ahead and call our 
                                         //  generator for a list of IVs based on parameters
                                         //  that have been passed in.
-                                        List<Frame> frames = generators[listIndex].GenerateWonderCard(frameCompare,
-                                                                                                      profile.ID,
-                                                                                                      profile.SID, shiny);
+                                        List<Frame> frames = generators[listIndex].GenerateWonderCard(frameCompare, wondercard);
 
                                         progressSearched += searchRange;
                                         progressFound += (ulong)frames.Count;
@@ -1524,431 +2172,23 @@ namespace RNGReporter
             }
         }
 
-        private void GenerateCGearCapJob(ulong mac_address, uint minEfgh, uint maxEfgh, bool fastSearch, ushort id,
-                                         ushort sid)
+        private void dataGridViewEventResults_MouseDown(object sender, MouseEventArgs e)
         {
-            uint seed;
-            uint searchRange = generator.MaxResults;
-            List<Frame> frames;
-
-            var included = new bool[6];
-
-            for (int i = 0; i < 6; i++)
-            {
-                if ((i + 20) >= (generator.InitialFrame - 1) &&
-                    (i + 20) < (generator.InitialFrame + generator.MaxResults - 1))
-                    included[i] = true;
-                else
-                    included[i] = false;
-            }
-
-            if (fastSearch)
-            {
-                //frames = new List<Frame>();
-                //todo: reverse order of ab/efgh loop for optimization
-                //  Iterate through delay range + year
-                for (uint efgh = minEfgh; efgh <= maxEfgh; efgh++)
-                {
-                    waitHandle.WaitOne();
-                    //  Iterate through all CD
-                    for (uint cd = 0; cd <= 23; cd++)
-                    {
-                        for (uint ab = 1; ab <= 255; ab++)
-                        {
-                            //  First we need to build a seed for this iteration
-                            //  based on all of our information.  This should be
-                            //  fairly easy since we are not using dates ;)
-                            seed = (ab << 24) + (cd << 16) + efgh;
-                            seed = (uint)(seed + (mac_address & 0xFFFFFF));
-
-                            progressSearched += searchRange;
-
-                            for (uint i = 0; i < 6; i++)
-                            {
-                                if (included[i])
-                                {
-                                    if (list[i].ContainsKey(seed))
-                                    {
-                                        uint ivHash = list[i][seed];
-                                        frames = generator.Generate(frameCompare, seed, ivHash, i + 21, 0);
-
-                                        progressFound += (uint)frames.Count;
-
-                                        foreach (Frame frame in frames)
-                                        {
-                                            var iframe = new IFrameCapture();
-                                            frame.DisplayPrep();
-
-                                            iframe.Offset = frame.Number;
-                                            iframe.Seed = frame.Seed;
-                                            iframe.Frame = frame;
-                                            iframe.MACAddress = (uint)mac_address;
-
-                                            lock (threadLock)
-                                            {
-                                                iframes.Add(iframe);
-                                            }
-                                            refreshQueue = true;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            else
-            {
-                //  Iterate through all AB
-                for (uint ab = 1; ab <= 255; ab++)
-                {
-                    waitHandle.WaitOne();
-                    //  Iterate through all CD
-                    for (uint cd = 0; cd <= 23; cd++)
-                    {
-                        //  Iterate through delay range + year
-                        for (uint efgh = minEfgh; efgh <= maxEfgh; efgh++)
-                        {
-                            //  First we need to build a seed for this iteration
-                            //  based on all of our information.  This should be
-                            //  fairly easy since we are not using dates ;)
-                            seed = (ab << 24) + (cd << 16) + efgh;
-                            seed = (uint)(seed + (mac_address & 0xFFFFFF));
-
-                            //  Set this to our seed here
-                            generator.InitialSeed = seed;
-
-                            if (iframes.Count > 1000000)
-                                break;
-
-                            //  This is where we actually go ahead and call our 
-                            //  generator for a list of IVs based on parameters
-                            //  that have been passed in.
-                            frames = generator.Generate(frameCompare, id, sid);
-
-                            progressSearched += searchRange;
-                            progressFound += (uint)frames.Count;
-
-                            //  Now we need to iterate through each result here
-                            //  and create a collection of the information that
-                            //  we are going to place into our grid.
-                            foreach (Frame frame in frames)
-                            {
-                                var iframe = new IFrameCapture();
-                                frame.DisplayPrep();
-
-                                iframe.Offset = frame.Number;
-                                iframe.Seed = seed;
-                                iframe.Frame = frame;
-                                iframe.MACAddress = (uint)mac_address;
-
-                                lock (threadLock)
-                                {
-                                    iframes.Add(iframe);
-                                }
-                                refreshQueue = true;
-                            }
-                        }
-                    }
-                }
-            }
+            DGV_MouseDown(dataGridViewEventResults, e);
         }
 
-        private void ManageProgress(BindingSource bindingSource, DoubleBufferedDataGridView grid, FrameType frameType,
-                                    int sleepTimer)
+        private void dataGridViewEventResults_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            var progress = new Progress();
-            progress.SetupAndShow(this, 0, 0, false, true, waitHandle);
+            DefaultFormatting(dataGridViewEventResults, ushort.Parse(maskedTextTID.Text), ushort.Parse(maskedTextSID.Text), e, "EventPID");
 
-            progressSearched = 0;
-            progressFound = 0;
-
-            UpdateGridDelegate gridUpdater = UpdateGrid;
-            var updateParams = new object[] {bindingSource};
-            ResortGridDelegate gridSorter = ResortGrid;
-            var sortParams = new object[] {bindingSource, grid, frameType};
-            ThreadDelegate enableGenerateButton = EnableCapGenerate;
-
-            try
+            if (dataGridViewEventResults.Columns[e.ColumnIndex].Name == "EventHP" ||
+                dataGridViewEventResults.Columns[e.ColumnIndex].Name == "EventAtk" ||
+                dataGridViewEventResults.Columns[e.ColumnIndex].Name == "EventDef" ||
+                dataGridViewEventResults.Columns[e.ColumnIndex].Name == "EventSpA" ||
+                dataGridViewEventResults.Columns[e.ColumnIndex].Name == "EventSpD" ||
+                dataGridViewEventResults.Columns[e.ColumnIndex].Name == "EventSpe")
             {
-                bool alive = true;
-                while (alive)
-                {
-                    progress.ShowProgress(progressSearched/(float) progressTotal, progressSearched, progressFound);
-                    if (refreshQueue)
-                    {
-                        Invoke(gridUpdater, updateParams);
-                        refreshQueue = false;
-                    }
-                    if (jobs != null)
-                    {
-                        foreach (Thread job in jobs)
-                        {
-                            if (job != null && job.IsAlive)
-                            {
-                                alive = true;
-                                break;
-                            }
-                            alive = false;
-                        }
-                    }
-                    if (sleepTimer > 0)
-                        Thread.Sleep(sleepTimer);
-                }
-            }
-            catch (ObjectDisposedException)
-            {
-                // This keeps the program from crashing when the Time Finder progress box
-                // is closed from the Windows taskbar.
-            }
-            catch (Exception exception)
-            {
-                if (exception.Message != "Operation Cancelled")
-                {
-                    throw;
-                }
-            }
-            finally
-            {
-                progress.Finish();
-
-                if (jobs != null)
-                {
-                    foreach (Thread t in jobs)
-                    {
-                        if (t != null)
-                        {
-                            t.Abort();
-                        }
-                    }
-                }
-
-                Invoke(enableGenerateButton);
-                Invoke(gridSorter, sortParams);
-            }
-        }
-
-        // Methods we'll use when we roll up the above functions
-
-        private void UpdateGrid(BindingSource bindingSource)
-        {
-            bindingSource.ResetBindings(false);
-        }
-
-        private void ResortGrid(BindingSource bindingSource, DoubleBufferedDataGridView dataGrid, FrameType frameType)
-        {
-            switch (frameType)
-            {
-                case FrameType.Method5Standard:
-                case FrameType.Method5Natures:
-                case FrameType.Wondercard5thGen:
-                case FrameType.Wondercard5thGenFixed:
-                    var iframeCaptureComparer = new IFrameCaptureComparer {CompareType = "TimeDate"};
-                    ((List<IFrameCapture>) bindingSource.DataSource).Sort(iframeCaptureComparer);
-                    CapDateTime.HeaderCell.SortGlyphDirection = SortOrder.Ascending;
-                    break;
-                case FrameType.BWBred:
-                case FrameType.BWBredInternational:
-                    iframeCaptureComparer = new IFrameCaptureComparer {CompareType = "TimeDate"};
-                    ((List<IFrameCapture>) bindingSource.DataSource).Sort(iframeCaptureComparer);
-                    ColumnEggDate.HeaderCell.SortGlyphDirection = SortOrder.Ascending;
-                    break;
-            }
-
-            dataGrid.DataSource = bindingSource;
-            bindingSource.ResetBindings(false);
-        }
-
-        private void EnableCapGenerate()
-        {
-            buttonCapGenerate.Enabled = true;
-            buttonShinyGenerate.Enabled = true;
-        }
-
-        private void comboBoxMethod_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Natures) ||
-                ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Standard))
-            {
-                checkBoxShinyOnly.Enabled = true;
-                comboBoxNature.Enabled = true;
-                comboBoxAbility.Enabled = true;
-                comboBoxEncounterType.Enabled = true;
-                comboBoxEncounterSlot.Enabled = true;
-                comboBoxCapGenderRatio.Enabled = true;
-
-                comboBoxCapMonth.Visible = true;
-                labelCapMonthDelay.Text = "Month";
-                maskedTextBoxCapMinDelay.Visible = false;
-                maskedTextBoxCapMaxDelay.Visible = false;
-
-                labelWCShiny.Visible = false;
-                comboBoxShiny.Visible = false;
-                //cbCapShinyCharm.Visible = ((Profile)comboBoxProfiles.SelectedItem).IsBW2();
-
-                if (((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Standard))
-                {
-                    labelCapMinMaxFrame.Text = "Min / Max IV Frame";
-                    labelCapMinMaxFrame.Location = oldLocation;
-
-                    /*if (maskedTextBoxCapMinOffset.Text == "0")
-                        maskedTextBoxCapMinOffset.Text = "1";
-
-                    if (maskedTextBoxCapMaxOffset.Text == "0")
-                        maskedTextBoxCapMaxOffset.Text = "1";*/
-
-                    label9.Visible = true;
-                }
-                else
-                {
-                    labelCapMinMaxFrame.Text = "Min / Max Advances";
-                    labelCapMinMaxFrame.Location = labelShinyMinMaxFrame.Location;
-
-                    /*if (maskedTextBoxCapMinOffset.Text == "1")
-                        maskedTextBoxCapMinOffset.Text = "0";
-
-                    if (maskedTextBoxCapMaxOffset.Text == "1")
-                        maskedTextBoxCapMaxOffset.Text = "0";*/
-
-                    label9.Visible = false;
-                }
-            }
-            else if (((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5CGear))
-            {
-                checkBoxShinyOnly.Enabled = false;
-                comboBoxNature.Enabled = false;
-                comboBoxAbility.Enabled = false;
-                comboBoxEncounterType.Enabled = true;
-                comboBoxEncounterSlot.Enabled = false;
-                comboBoxCapGenderRatio.Enabled = false;
-                //cbCapShinyCharm.Visible = false;
-
-                comboBoxCapMonth.Visible = false;
-                labelCapMonthDelay.Text = "Min \\ Max Delay";
-                maskedTextBoxCapMinDelay.Visible = true;
-                maskedTextBoxCapMaxDelay.Visible = true;
-                maskedTextBoxCapMinDelay.TabStop = true;
-                maskedTextBoxCapMaxDelay.TabStop = true;
-
-                labelCapMinMaxFrame.Text = "Min / Max Frame";
-                labelCapMinMaxFrame.Location = oldLocation;
-
-                /*if (maskedTextBoxCapMinOffset.Text == "0")
-                    maskedTextBoxCapMinOffset.Text = "1";
-
-                if (maskedTextBoxCapMaxOffset.Text == "0")
-                    maskedTextBoxCapMaxOffset.Text = "1";*/
-
-                label9.Visible = true;
-
-                labelWCShiny.Visible = false;
-                comboBoxShiny.Visible = false;
-            }
-            else if (((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Wondercard5thGen) ||
-                     ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Wondercard5thGenFixed))
-            {
-                checkBoxShinyOnly.Enabled = true;
-                comboBoxNature.Enabled = true;
-                comboBoxAbility.Enabled = false;
-                comboBoxEncounterType.Enabled = false;
-                comboBoxEncounterSlot.Enabled = false;
-                comboBoxCapGenderRatio.Enabled = ((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Wondercard5thGenFixed);
-                //cbCapShinyCharm.Visible = false;
-
-                comboBoxCapMonth.Visible = true;
-                labelCapMonthDelay.Text = "Month";
-                maskedTextBoxCapMinDelay.Visible = false;
-                maskedTextBoxCapMaxDelay.Visible = false;
-
-                labelCapMinMaxFrame.Text = "Min / Max Advances";
-                labelCapMinMaxFrame.Location = labelShinyMinMaxFrame.Location;
-
-                /*if (maskedTextBoxCapMinOffset.Text == "1")
-                    maskedTextBoxCapMinOffset.Text = "0";
-
-                if (maskedTextBoxCapMaxOffset.Text == "1")
-                    maskedTextBoxCapMaxOffset.Text = "0";*/
-
-                label9.Visible = false;
-                labelWCShiny.Visible = true;
-                comboBoxShiny.Visible = true;
-            }
-
-            checkBoxShinyOnly.Text = "Shiny Only";
-            /*((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Standard) ? "Search for Nearby Shiny Frames" : "Shiny Only";*/
-            //controlsShowHide();
-
-            IVFilters_Changed(sender, e);
-            labelCapMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible = LevelLabel.Visible = numericLevel.Visible = LevelConditions();
-            
-            checkBoxTriggerBattle.Visible = RatioConditions();
-        }
-
-        private void buttonAnyNature_Click(object sender, EventArgs e)
-        {
-            comboBoxNature.ClearSelection();
-        }
-
-        private void dataGridViewCapValues_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            var profile = (Profile)comboBoxProfiles.SelectedItem;
-            uint tid = (uint)((profile.ID & 0xffff) | ((profile.SID & 0xffff) << 16));
-            uint a = Convert.ToUInt32(dataGridViewCapValues.Rows[e.RowIndex].Cells["PID"].Value) ^ tid;
-            uint b = a & 0xffff;
-            uint c = (a >> 16);
-            uint d = b ^ c;
-            if (d == 0)
-                dataGridViewCapValues.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Aqua;
-            else if (d < 8)
-                dataGridViewCapValues.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightCyan;
-
-
-            if (EncounterRatio.Visible)
-            {
-                int RatioValue = Convert.ToInt32(dataGridViewCapValues.Rows[e.RowIndex].Cells["EncounterRatio"].Value);
-                if (dataGridViewCapValues.Columns[e.ColumnIndex].Name == "EncounterRatio")
-                {
-                    if ((RatioValue < 14 && comboBoxEncounterType.SelectedIndex <= 2) || (RatioValue < 6 && comboBoxEncounterType.SelectedIndex == 3))
-                    {
-                        e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
-                        e.CellStyle.ForeColor = Color.Green;
-                    }
-                    else
-                        e.CellStyle.ForeColor = Color.LightCoral;
-                }
-            }
-
-            //  Make all of the junk natures show up in a lighter color
-            if (e.ColumnIndex == CapNatureIndex)
-            {
-                var nature = (string) e.Value;
-
-                if ((bool) dataGridViewCapValues.Rows[e.RowIndex].Cells["Synchable"].Value)
-                {
-                    e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
-
-                    if (((IFrameCapture) dataGridViewCapValues.Rows[e.RowIndex].DataBoundItem).Frame.EncounterMod ==
-                        Objects.EncounterMod.Synchronize)
-                    {
-                        e.Value = "Synch";
-                    }
-                }
-                else if (nature == Functions.NatureStrings(18) ||
-                         nature == Functions.NatureStrings(6) ||
-                         nature == Functions.NatureStrings(0) ||
-                         nature == Functions.NatureStrings(24) ||
-                         nature == Functions.NatureStrings(12) ||
-                         nature == Functions.NatureStrings(9) ||
-                         nature == Functions.NatureStrings(21))
-                {
-                    e.CellStyle.ForeColor = Color.Gray;
-                }
-            }
-
-            if (e.ColumnIndex >= CapHPIndex && e.ColumnIndex <= CapSpeedIndex)
-            {
-                var number = (uint) e.Value;
-
+                var number = (uint)e.Value;
                 if (number >= 30)
                 {
                     e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
@@ -1959,103 +2199,172 @@ namespace RNGReporter
                     e.CellStyle.ForeColor = Color.Red;
                 }
             }
-        }
 
-        private void generateTimesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (dataGridViewCapValues.SelectedRows[0] != null)
+            //  Make all of the junk natures show up in a lighter color
+            if (dataGridViewEventResults.Columns[e.ColumnIndex].Name == "EventNature")
             {
-                var frame = (IFrameCapture) dataGridViewCapValues.SelectedRows[0].DataBoundItem;
+                var nature = (string)e.Value;
 
-                // This is a bit of a strange hack, because this window
-                //  needs to be hidden before we load the seed to time
-                //  form or it wont be able to be focused. 
-                bool showMap = HgSsRoamerSW.Window.Map.Visible;
-                HgSsRoamerSW.Window.Hide();
-
-                var seedToTime = new SeedToTime();
-
-                //  Get the currently selected frame here so we can
-                //  pull out some of the values that we are going to
-                //  need to use.
-
-                seedToTime.setBW();
-
-                seedToTime.AutoGenerate = true;
-                seedToTime.ShowMap = showMap;
-                seedToTime.Seed = (uint) frame.Seed;
-                seedToTime.MAC_Address = ((Profile) comboBoxProfiles.SelectedItem).MAC_Address;
-
-                //  Grab this from what the user had searched on
-                seedToTime.Year = (uint) DateTime.Now.Year;
-                if (maskedTextBoxCapYear.Text != "")
-                    seedToTime.Year = uint.Parse(maskedTextBoxCapYear.Text);
-
-                seedToTime.Show();
-            }
-        }
-
-        private void outputCapResultsToTXTToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //  Going to need to present the user with a File Dialog and 
-            //  then interate through the Grid, outputting columns that
-            //  are visible.
-
-            saveFileDialogTxt.AddExtension = true;
-            saveFileDialogTxt.Title = "Save Output to TXT";
-            saveFileDialogTxt.Filter = "TXT Files|*.txt";
-            saveFileDialogTxt.FileName = "rngreporter.txt";
-            if (saveFileDialogTxt.ShowDialog() == DialogResult.OK)
-            {
-                //  Get the name of the file and then go ahead 
-                //  and create and save the thing to the hard
-                //  drive.   
-                List<IFrameCapture> frames = iframes;
-
-                if (frames.Count > 0)
+                if (nature == Functions.NatureStrings(18) ||
+                    nature == Functions.NatureStrings(6) ||
+                    nature == Functions.NatureStrings(0) ||
+                    nature == Functions.NatureStrings(24) ||
+                    nature == Functions.NatureStrings(12) ||
+                    nature == Functions.NatureStrings(9) ||
+                    nature == Functions.NatureStrings(21))
                 {
-                    var writer = new TXTWriter(dataGridViewCapValues);
-                    writer.Generate(saveFileDialogTxt.FileName, frames);
+                    e.CellStyle.ForeColor = Color.Gray;
                 }
             }
         }
 
-        private void dataGridViewCapValues_MouseDown(object sender, MouseEventArgs e)
+        private void buttonImportWondercard_Click(object sender, EventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            OpenFileDialog openFileDialog = new OpenFileDialog()
             {
-                DataGridView.HitTestInfo Hti = dataGridViewCapValues.HitTest(e.X, e.Y);
-
-                if (Hti.Type == DataGridViewHitTestType.Cell)
-                {
-                    if (!((dataGridViewCapValues.Rows[Hti.RowIndex])).Selected)
-                    {
-                        dataGridViewCapValues.ClearSelection();
-
-                        (dataGridViewCapValues.Rows[Hti.RowIndex]).Selected = true;
-                    }
-                }
+                Filter = "5th Gen Wonder Card |*.pgf",
+                Title = "Select a Wonder Card File"
+            };
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                BinaryReader br = new BinaryReader(File.Open(openFileDialog.FileName, FileMode.Open));
+                ReadWondercardInfo(br.ReadBytes(204));
             }
         }
 
-        private void buttonShinyClearNature_Click(object sender, EventArgs e)
+        private void ReadWondercardInfo(byte[] data)
         {
-            comboBoxShinyNature.SelectedIndex = 0;
+            int species = (BitConverter.ToUInt16(data, 0x1A));
+            SpeciesDex.Text = species.ToString();
+            //SpeciesDex.Visible = true;
+
+            if (data[0x5C] == 1)    // If egg, it will have the user's TID/SID obviously
+            {
+                var profile = (Profile)comboBoxProfiles.SelectedItem;
+                maskedTextTID.Text = profile.ID.ToString();
+                maskedTextSID.Text = profile.SID.ToString();
+            }
+            else
+            {
+                maskedTextTID.Text = (BitConverter.ToUInt16(data, 0x0)).ToString();
+                maskedTextSID.Text = (BitConverter.ToUInt16(data, 0x2)).ToString();
+            }
+            
+            if (data[0x36] < 3)
+            {
+                checkBoxAbility.Checked = true;
+                glassComboAbility.SelectedIndex = data[0x36];
+            }
+            else
+            {
+                glassComboAbility.SelectedItem = null;
+                checkBoxAbility.Checked = false;
+            }
+
+            checkBoxNatureLock.Checked = data[0x34] != 0xFF;
+            if (data[0x34] == 0xFF)
+                glassComboBoxNatureList.SelectedItem = null;
+            else
+                glassComboBoxNatureList.SelectedIndex = data[0x34];
+
+            if (data[0x35] < 2)
+            {
+                checkBoxGender.Checked = true;
+                glassComboGender.SelectedIndex = data[0x35];
+            }
+            else
+            {
+                glassComboGender.SelectedItem = null;
+                checkBoxGender.Checked = false;
+            }
+
+            glassComboGenderRatio.SelectedIndex = Functions.GenderRatio(species);
+
+            glassComboShininess.SelectedIndex = data[0x37];
+
+            checkBoxHP.Checked = data[0x43] != 0xFF;
+            maskedTextBoxHP.Text = data[0x43] == 0xFF ? "" : data[0x43].ToString();
+
+            checkBoxAtk.Checked = data[0x44] != 0xFF;
+            maskedTextBoxAtk.Text = data[0x44] == 0xFF ? "" : data[0x44].ToString();
+
+            checkBoxDef.Checked = data[0x45] != 0xFF;
+            maskedTextBoxDef.Text = data[0x45] == 0xFF ? "" : data[0x45].ToString();
+
+            checkBoxSpe.Checked = data[0x46] != 0xFF;
+            maskedTextBoxSpe.Text = data[0x46] == 0xFF ? "" : data[0x46].ToString();
+
+            checkBoxSpA.Checked = data[0x47] != 0xFF;
+            maskedTextBoxSpA.Text = data[0x47] == 0xFF ? "" : data[0x47].ToString();
+
+            checkBoxSpD.Checked = data[0x48] != 0xFF;
+            maskedTextBoxSpD.Text = data[0x48] == 0xFF ? "" : data[0x48].ToString();
+
         }
 
-        //--------------------------------------------------------------------------------------------------
-
-        private void validateShinyInput()
-            //get rid of any junk characters in the shiny text boxes
-            //and restrict the inputs to their appropriate levels
-            //prevents the program confusing the user by throwing nasty exceptions
+        private void AnyNatureEvent_Click(object sender, EventArgs e)
         {
-            //check the date is valid
-            maskedTextBoxShinyYear.Text = Functions.NumericFilter(maskedTextBoxShinyYear.Text);
-            //int year = Convert.ToInt32(maskedTextBoxShinyYear.Text);
+            glassComboEventNatures.ClearSelection();
         }
 
-        //--------------------------------------------------------------------------------------------------
+        private void checkBoxAbility_CheckedChanged(object sender, EventArgs e)
+        {
+            glassComboAbility.Enabled = checkBoxAbility.Checked;
+        }
+
+        private void checkBoxNatureLock_CheckedChanged(object sender, EventArgs e)
+        {
+            glassComboBoxNatureList.Enabled = checkBoxNatureLock.Checked;
+        }
+
+        private void checkBoxGender_CheckedChanged(object sender, EventArgs e)
+        {
+            glassComboGender.Enabled = checkBoxGender.Checked;
+        }
+
+        private void checkBoxHP_CheckedChanged(object sender, EventArgs e)
+        {
+            maskedTextBoxHP.Enabled = checkBoxHP.Checked;
+        }
+
+        private void checkBoxAtk_CheckedChanged(object sender, EventArgs e)
+        {
+            maskedTextBoxAtk.Enabled = checkBoxAtk.Checked;
+        }
+
+        private void checkBoxDef_CheckedChanged(object sender, EventArgs e)
+        {
+            maskedTextBoxDef.Enabled = checkBoxDef.Checked;
+        }
+
+        private void checkBoxSpA_CheckedChanged(object sender, EventArgs e)
+        {
+            maskedTextBoxSpA.Enabled = checkBoxSpA.Checked;
+        }
+
+        private void checkBoxSpD_CheckedChanged(object sender, EventArgs e)
+        {
+            maskedTextBoxSpD.Enabled = checkBoxSpD.Checked;
+        }
+
+        private void checkBoxSpe_CheckedChanged(object sender, EventArgs e)
+        {
+            maskedTextBoxSpe.Enabled = checkBoxSpe.Checked;
+        }
+
+        #endregion
+
+
+        #region Eggs
+
+        private void contextMenuStripEggPid_Opening(object sender, CancelEventArgs e)
+        {
+            DataGridView DGV = tabControl.SelectedTab == tabPageShinyEgg ? dataGridViewShinyResults : dataGridViewEventResults;
+            if (DGV.SelectedRows.Count == 0)
+            {
+                e.Cancel = true;
+            }
+        }
 
         private void buttonShinyGenerate_Click(object sender, EventArgs e)
         {
@@ -2097,10 +2406,6 @@ namespace RNGReporter
             List<uint> nature = null;
             if (comboBoxShinyNature.SelectedIndex != 0)
                 nature = new List<uint> { (uint)((Nature)comboBoxShinyNature.SelectedItem).Number };
-
-            // Don't proceed without all DS Parameters
-            if (!DSParametersInputCheck())
-                return;
 
             if (maskedTextBoxShinyMinFrame.Text == "")
             {
@@ -2276,22 +2581,134 @@ namespace RNGReporter
             dataGridViewShinyResults.Focus();
         }
 
-        private void dataGridViewShinyResults_MouseDown(object sender, MouseEventArgs e)
+        public void GenerateShinyJob(uint year, List<int> months, int hourMin, int hourMax, Profile profile,
+                                     List<List<ButtonComboType>> keypressList, bool fastSearch, int listIndex)
         {
-            if (e.Button == MouseButtons.Right)
+            var rngIVs = new uint[6];
+
+            List<ButtonComboType>[] buttons = keypressList.ToArray();
+            var buttonMashValue = new uint[keypressList.Count];
+
+            for (int i = 0; i < buttons.Length; i++)
             {
-                DataGridView.HitTestInfo hti = dataGridViewShinyResults.HitTest(e.X, e.Y);
+                buttonMashValue[i] = Functions.buttonMashed(buttons[i]);
+            }
 
-                if (hti.Type == DataGridViewHitTestType.Cell)
+            uint minAdvances = shinygenerators[listIndex].InitialFrame;
+
+            foreach (int month in months)
+            {
+                int dayMax = DateTime.DaysInMonth((int)year, month);
+                for (int buttonCount = 0; buttonCount < buttons.Length; buttonCount++)
                 {
-                    if (!((dataGridViewShinyResults.Rows[hti.RowIndex])).Selected)
+                    for (int day = 1; day <= dayMax; day++)
                     {
-                        dataGridViewShinyResults.ClearSelection();
+                        waitHandle.WaitOne();
+                        for (uint Timer0 = profile.Timer0Min; Timer0 <= profile.Timer0Max; Timer0++)
+                        {
+                            for (int hour = hourMin; hour <= hourMax; hour++)
+                            {
+                                for (int minute = 0; minute <= 59; minute++)
+                                {
+                                    for (int second = 0; second <= 59; second++)
+                                    {
+                                        var searchTime = new DateTime((int)year, month, day, hour, minute, second);
 
-                        (dataGridViewShinyResults.Rows[hti.RowIndex]).Selected = true;
+                                        ulong seed = Functions.EncryptSeed(searchTime, profile.MAC_Address,
+                                                                           profile.Version, profile.Language,
+                                                                           profile.DSType,
+                                                                           profile.SoftReset,
+                                                                           profile.VCount, Timer0, profile.GxStat,
+                                                                           profile.VFrame,
+                                                                           buttonMashValue[buttonCount]);
+
+                                        generators[listIndex].InitialSeed = seed >> 32;
+
+                                        List<Frame> frames = generators[listIndex].Generate(frameCompare, profile.ID,
+                                                                                            profile.SID);
+                                        if (frames.Count > 0)
+                                        {
+                                            if (!frameCompare.CompareEggIVs(frames[0]))
+                                            {
+                                                continue;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            continue;
+                                        }
+
+                                        rngIVs[0] = frames[0].Hp;
+                                        rngIVs[1] = frames[0].Atk;
+                                        rngIVs[2] = frames[0].Def;
+                                        rngIVs[3] = frames[0].Spa;
+                                        rngIVs[4] = frames[0].Spd;
+                                        rngIVs[5] = frames[0].Spe;
+
+                                        shinygenerators[listIndex].RNGIVs = rngIVs;
+                                        shinygenerators[listIndex].InitialSeed = seed;
+                                        shinygenerators[listIndex].InitialFrame =
+                                            Functions.initialPIDRNG(seed, profile) +
+                                            minAdvances;
+
+                                        frames = shinygenerators[listIndex].Generate(subFrameCompare, profile.ID,
+                                                                                     profile.SID);
+
+                                        if (frames.Count > 0)
+                                        {
+                                            foreach (Frame frame in frames)
+                                            {
+                                                frame.DisplayPrep();
+                                                var iframeEgg = new IFrameCapture
+                                                {
+                                                    Frame = frame,
+                                                    Seed = seed,
+                                                    Offset = frame.Number,
+                                                    TimeDate = searchTime,
+                                                    KeyPresses = buttons[buttonCount],
+                                                    Timer0 = Timer0
+                                                };
+
+                                                lock (threadLock)
+                                                {
+                                                    iframesEgg.Add(iframeEgg);
+                                                }
+                                            }
+                                            refreshQueue = true;
+                                            progressFound = (ulong)iframesEgg.Count;
+                                        }
+                                        progressSearched += shinygenerators[listIndex].MaxResults;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
+        }
+
+        private void buttonShinyClearNature_Click(object sender, EventArgs e)
+        {
+            comboBoxShinyNature.SelectedIndex = 0;
+        }
+
+        //--------------------------------------------------------------------------------------------------
+
+        private void validateShinyInput()
+        //get rid of any junk characters in the shiny text boxes
+        //and restrict the inputs to their appropriate levels
+        //prevents the program confusing the user by throwing nasty exceptions
+        {
+            //check the date is valid
+            maskedTextBoxShinyYear.Text = Functions.NumericFilter(maskedTextBoxShinyYear.Text);
+            //int year = Convert.ToInt32(maskedTextBoxShinyYear.Text);
+        }
+
+        //--------------------------------------------------------------------------------------------------
+
+        private void dataGridViewShinyResults_MouseDown(object sender, MouseEventArgs e)
+        {
+            DGV_MouseDown(dataGridViewShinyResults, e);
         }
 
         private void outputResultsToTXTToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -2316,7 +2733,7 @@ namespace RNGReporter
                 var writer = new TXTWriter(dataGridViewShinyResults);
                 try
                 {
-                    var frames = (List<IFrameEggPID>) listBindingEgg.DataSource;
+                    var frames = (List<IFrameEggPID>)listBindingEgg.DataSource;
 
                     if (frames.Count > 0)
                     {
@@ -2329,7 +2746,7 @@ namespace RNGReporter
                 }
                 catch
                 {
-                    var frames = (List<IFrameCapture>) listBindingEgg.DataSource;
+                    var frames = (List<IFrameCapture>)listBindingEgg.DataSource;
 
                     if (frames.Count > 0)
                     {
@@ -2341,81 +2758,6 @@ namespace RNGReporter
                     }
                 }
             }
-        }
-
-        private void copySeedToClipboardToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            if (dataGridViewCapValues.SelectedRows[0] != null)
-            {
-                var frame = (IFrameCapture) dataGridViewCapValues.SelectedRows[0].DataBoundItem;
-
-                Clipboard.SetText(frame.Seed.ToString("X8"));
-            }
-        }
-
-        private void copySeedToClipboardToolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            if (dataGridViewShinyResults.SelectedRows[0] != null)
-            {
-                try
-                {
-                    var frame = (IFrameEggPID) dataGridViewShinyResults.SelectedRows[0].DataBoundItem;
-                    Clipboard.SetText(frame.Seed.ToString("X8"));
-                }
-                catch
-                {
-                    var frame = (IFrameCapture) dataGridViewShinyResults.SelectedRows[0].DataBoundItem;
-                    Clipboard.SetText(frame.Seed.ToString("X16"));
-                }
-            }
-        }
-
-        private void controlsShowHide()
-        {
-            if (ShinyOnly() &&
-                ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Standard))
-            {
-                labelMaxShiny.Visible = true;
-                maskedTextBoxMaxShiny.Visible = true;
-            }
-            else
-            {
-                labelMaxShiny.Visible = false;
-                maskedTextBoxMaxShiny.Visible = false;
-            }
-        }
-
-        private void comboBoxEncounterType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (((ComboBoxItem)comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.JellicentHA))
-            {
-                comboBoxCapGenderRatio.SelectedIndex = 1;   // 50% gender ratio
-                comboBoxCapGenderRatio.Enabled = false;
-                if (((Profile)comboBoxProfiles.SelectedItem).VersionStr.Equals("Black2"))
-                    comboBoxCapGender.SelectedIndex = 1;
-                else if (((Profile)comboBoxProfiles.SelectedItem).VersionStr.Equals("White2"))
-                    comboBoxCapGender.SelectedIndex = 2;
-            }
-            else
-            {
-                comboBoxCapGenderRatio.Enabled = true;
-            }
-
-            IVFilters_Changed(sender, e);
-
-            label54.Visible = comboBoxEncounterSlot.Visible = buttonAnySlot.Visible = comboBoxEncounterType.SelectedIndex <= 9;
-
-            labelCapMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible = LevelLabel.Visible = numericLevel.Visible = LevelConditions();
-            
-            checkBoxTriggerBattle.Visible = RatioConditions();
-
-            //maskedTextBoxMaxShiny.Visible = labelMaxShiny.Visible = checkBoxShinyOnly.Visible && checkBoxShinyOnly.Checked;
-
-        }
-
-        private void checkBoxShinyOnly_CheckedChanged(object sender, EventArgs e)
-        {
-            //controlsShowHide();
         }
 
         private void dataGridViewShinyResults_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -2423,7 +2765,7 @@ namespace RNGReporter
             //  Make all of the junk natures show up in a lighter color
             if (dataGridViewShinyResults.Columns[e.ColumnIndex].Name == "ShinyNature")
             {
-                var nature = (string) e.Value;
+                var nature = (string)e.Value;
 
                 if (nature == Functions.NatureStrings(18) ||
                     nature == Functions.NatureStrings(6) ||
@@ -2444,17 +2786,17 @@ namespace RNGReporter
                 dataGridViewShinyResults.Columns[e.ColumnIndex].Name == "ShinySpD" ||
                 dataGridViewShinyResults.Columns[e.ColumnIndex].Name == "ShinySpe")
             {
-                if ((string) e.Value == "30" || (string) e.Value == "31")
+                if ((string)e.Value == "30" || (string)e.Value == "31")
                 {
                     e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
                 }
 
-                if ((string) e.Value == "0")
+                if ((string)e.Value == "0")
                 {
                     e.CellStyle.ForeColor = Color.Red;
                 }
 
-                if ((string) e.Value == "Ma" || (string) e.Value == "Fe")
+                if ((string)e.Value == "Ma" || (string)e.Value == "Fe")
                 {
                     e.CellStyle.ForeColor = Color.Blue;
                 }
@@ -2483,6 +2825,265 @@ namespace RNGReporter
             }
         }
 
+        #endregion
+
+
+        #region Various (Misc)
+
+        private void DefaultFormatting(DataGridView DGV, ushort id, ushort sid, DataGridViewCellFormattingEventArgs e, string PIDColumn)
+        {
+            uint tid = (uint)((id & 0xffff) | ((sid & 0xffff) << 16));
+            uint a = Convert.ToUInt32(DGV.Rows[e.RowIndex].Cells[PIDColumn].Value) ^ tid;
+            uint b = a & 0xffff;
+            uint c = (a >> 16);
+            uint d = b ^ c;
+            if (d == 0)
+                DGV.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Aqua;
+            else if (d < 8)
+                DGV.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightCyan;
+        }
+
+        public void DGV_MouseDown(DataGridView DGV, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                DataGridView.HitTestInfo Hti = DGV.HitTest(e.X, e.Y);
+
+                if (Hti.Type == DataGridViewHitTestType.Cell)
+                {
+                    if (!((DGV.Rows[Hti.RowIndex])).Selected)
+                    {
+                        DGV.ClearSelection();
+
+                        (DGV.Rows[Hti.RowIndex]).Selected = true;
+                    }
+                }
+            }
+        }
+
+        private int seedColumnLong(bool isLong, DataGridViewTextBoxColumn column)
+        {
+            if (!longSeed && isLong)
+            {
+                longSeed = true;
+                return column.Width * 2;
+            }
+            if (longSeed && !isLong)
+            {
+                longSeed = false;
+                return column.Width / 2;
+            }
+            return column.Width;
+        }
+
+        #endregion
+
+
+        #region Various (UI events)
+
+
+        #endregion
+
+
+        #region Performance
+
+        private void ManageProgress(BindingSource bindingSource, DoubleBufferedDataGridView grid, FrameType frameType,
+                                    int sleepTimer)
+        {
+            var progress = new Progress();
+            progress.SetupAndShow(this, 0, 0, false, true, waitHandle);
+
+            progressSearched = 0;
+            progressFound = 0;
+
+            UpdateGridDelegate gridUpdater = UpdateGrid;
+            var updateParams = new object[] { bindingSource };
+            ResortGridDelegate gridSorter = ResortGrid;
+            var sortParams = new object[] { bindingSource, grid, frameType };
+            ThreadDelegate enableGenerateButton = EnableCapGenerate;
+
+            try
+            {
+                bool alive = true;
+                while (alive)
+                {
+                    progress.ShowProgress(progressSearched / (float)progressTotal, progressSearched, progressFound);
+                    if (refreshQueue)
+                    {
+                        Invoke(gridUpdater, updateParams);
+                        refreshQueue = false;
+                    }
+                    if (jobs != null)
+                    {
+                        foreach (Thread job in jobs)
+                        {
+                            if (job != null && job.IsAlive)
+                            {
+                                alive = true;
+                                break;
+                            }
+                            alive = false;
+                        }
+                    }
+                    if (sleepTimer > 0)
+                        Thread.Sleep(sleepTimer);
+                }
+            }
+            catch (ObjectDisposedException)
+            {
+                // This keeps the program from crashing when the Time Finder progress box
+                // is closed from the Windows taskbar.
+            }
+            catch (Exception exception)
+            {
+                if (exception.Message != "Operation Cancelled")
+                {
+                    throw;
+                }
+            }
+            finally
+            {
+                progress.Finish();
+
+                if (jobs != null)
+                {
+                    foreach (Thread t in jobs)
+                    {
+                        if (t != null)
+                        {
+                            t.Abort();
+                        }
+                    }
+                }
+
+                Invoke(enableGenerateButton);
+                Invoke(gridSorter, sortParams);
+            }
+        }
+
+        // Methods we'll use when we roll up the above functions
+
+        private void UpdateGrid(BindingSource bindingSource)
+        {
+            bindingSource.ResetBindings(false);
+        }
+
+        private void ResortGrid(BindingSource bindingSource, DoubleBufferedDataGridView dataGrid, FrameType frameType)
+        {
+            switch (frameType)
+            {
+                case FrameType.Method5Standard:
+                case FrameType.Method5Natures:
+                case FrameType.Wondercard5thGen:
+                    var iframeCaptureComparer = new IFrameCaptureComparer { CompareType = "TimeDate" };
+                    ((List<IFrameCapture>)bindingSource.DataSource).Sort(iframeCaptureComparer);
+                    CapDateTime.HeaderCell.SortGlyphDirection = SortOrder.Ascending;
+                    break;
+                case FrameType.BWBred:
+                case FrameType.BWBredInternational:
+                    iframeCaptureComparer = new IFrameCaptureComparer { CompareType = "TimeDate" };
+                    ((List<IFrameCapture>)bindingSource.DataSource).Sort(iframeCaptureComparer);
+                    ColumnEggDate.HeaderCell.SortGlyphDirection = SortOrder.Ascending;
+                    break;
+            }
+
+            dataGrid.DataSource = bindingSource;
+            bindingSource.ResetBindings(false);
+        }
+
+
+        #endregion
+
+
+        private void btnHHGenerate_Click(object sender, EventArgs e)
+        {
+            var searchParams = new HiddenGrottoSearchParams
+                {
+                    GenerateButton = btnHHGenerate,
+                    DataGridView = dgvHiddenGrottos,
+                    MaxAdvances = txtHHAdvances,
+                    Year = txtHHYear,
+                    OpenHollows = txtHHOpenHollows,
+                    Months = cbHHMonth,
+                    Profile = (Profile) comboBoxProfiles.SelectedItem,
+                    Slots = cbHHSlot,
+                    SubSlots = cbHHSubSlot,
+                    Hollows = cbHHHollowNumber,
+                    Gender = cbHHGender,
+                    GenderRatio = cbHHGenderRatio
+                };
+            Searcher searcher = new HiddenGrottoSearcher(searchParams, threadLock, this);
+            if (!searcher.ParseInput()) return;
+            searcher.RunSearch();
+        }
+
+
+        private void copySeedToClipboardToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewCapValues.SelectedRows[0] != null)
+            {
+                var frame = (IFrameCapture) dataGridViewCapValues.SelectedRows[0].DataBoundItem;
+                Clipboard.SetText(frame.Seed.ToString("X8"));
+            }
+        }
+
+        private void copyCgearToClipboard_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewCapValues.SelectedRows[0] != null)
+            {
+                var frame = (IFrameCapture)dataGridViewCapValues.SelectedRows[0].DataBoundItem;
+                Clipboard.SetText(frame.CSeed.ToString("X8"));
+            }
+        }
+
+        private void copySeedToClipboardToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            DataGridView DGV = tabControl.SelectedTab == tabPageShinyEgg ? dataGridViewShinyResults : dataGridViewEventResults;
+
+            if (DGV.SelectedRows[0] != null)
+            {
+                try
+                {
+                    var frame = (IFrameEggPID)DGV.SelectedRows[0].DataBoundItem;
+                    Clipboard.SetText(frame.Seed.ToString("X8"));
+                }
+                catch
+                {
+                    var frame = (IFrameCapture)DGV.SelectedRows[0].DataBoundItem;
+                    Clipboard.SetText(frame.Seed.ToString("X16"));
+                }
+            }
+        }
+
+
+        private void comboBoxEncounterType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (((ComboBoxItem)comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.JellicentHA))
+            {
+                comboBoxCapGenderRatio.SelectedIndex = 1;   // 50% gender ratio
+                comboBoxCapGenderRatio.Enabled = false;
+                if (((Profile)comboBoxProfiles.SelectedItem).VersionStr.Equals("Black2"))
+                    comboBoxCapGender.SelectedIndex = 1;
+                else if (((Profile)comboBoxProfiles.SelectedItem).VersionStr.Equals("White2"))
+                    comboBoxCapGender.SelectedIndex = 2;
+            }
+            else
+            {
+                comboBoxCapGenderRatio.Enabled = true;
+            }
+
+            IVFilters_Changed(sender, e);
+
+            label54.Visible = comboCapEncounterSlot.Visible = buttonAnySlot.Visible = comboBoxEncounterType.SelectedIndex <= 9;
+
+            labelCapMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible = LevelLabel.Visible = numericLevel.Visible = LevelConditions();
+            
+            checkBoxTriggerBattle.Visible = RatioConditions();
+
+        }
+
+
+
         // Sorts the grid 
         // Can't use SortCompare method because this grid is data-bound
         private void dataGridViewCapValues_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -2506,7 +3107,7 @@ namespace RNGReporter
 
         private void buttonAnySlot_Click(object sender, EventArgs e)
         {
-            comboBoxEncounterSlot.ClearSelection();
+            comboCapEncounterSlot.ClearSelection();
         }
 
         private void dataGridViewCapValues_KeyDown(object sender, KeyEventArgs e)
@@ -2523,113 +3124,9 @@ namespace RNGReporter
             }
         }
 
-        private int seedColumnLong(bool isLong)
-        {
-            if (!longSeed && isLong)
-            {
-                longSeed = true;
-                return CapSeed.Width*2;
-            }
-            if (longSeed && !isLong)
-            {
-                longSeed = false;
-                return CapSeed.Width/2;
-            }
-            return CapSeed.Width;
-        }
+        
 
-        private bool FastCapFilters()
-        {
-            IVFilter filter = ivFiltersCapture.IVFilter;
-            return FastFilters(filter);
-        }
-
-        private bool FastFilters(IVFilter filter)
-        {
-            // HP, Def, SpD filters must search for >=30
-            // Either Attack or SpA must be >=30 as well
-            if (((filter.hpValue >= 30) &&
-                 (filter.hpCompare == CompareType.Equal || filter.hpCompare == CompareType.GtEqual)) &&
-                ((filter.defValue >= 30) &&
-                 (filter.defCompare == CompareType.Equal || filter.defCompare == CompareType.GtEqual)) &&
-                ((filter.spdValue >= 30) &&
-                 (filter.spdCompare == CompareType.Equal || filter.spdCompare == CompareType.GtEqual)))
-            {
-                // physical spreads must have Attack >=30 and flawless speed (either for standard or Trick Room)
-                if ((filter.atkValue >= 30) &&
-                    (filter.atkCompare == CompareType.Equal || filter.atkCompare == CompareType.GtEqual))
-                {
-                    if ((filter.speValue == 31) &&
-                        (filter.speCompare == CompareType.Equal || filter.speCompare == CompareType.GtEqual))
-                        return true;
-
-                    // no roamers have Trick Room spreads
-                    if (((filter.speValue <= 1) &&
-                         (filter.speCompare == CompareType.Equal || filter.speCompare == CompareType.LtEqual)) &&
-                        !((ComboBoxItem) comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.Roamer))
-                        return true;
-                }
-
-                // special spreads must have SpAttk >=30 and flawless speed (either for standard or Trick Room)
-                // or, if Speed = 30 or 2 and 3, Attack must be HP_O or HP_E to allow for 70-power Hidden Power
-                // spreads for roamers must have a speed of 30 or 31
-                if ((filter.spaValue >= 30) &&
-                    (filter.spaCompare == CompareType.Equal || filter.spaCompare == CompareType.GtEqual))
-                {
-                    if ((filter.speValue == 31) &&
-                        (filter.speCompare == CompareType.Equal || filter.speCompare == CompareType.GtEqual))
-                        return true;
-
-                    if (((filter.speValue == 30) &&
-                         (filter.speCompare == CompareType.Equal || filter.speCompare == CompareType.GtEqual)) ||
-                        (!((ComboBoxItem) comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.Roamer) &&
-                         (((filter.speValue == 2) && (filter.speCompare == CompareType.Equal)) ||
-                          ((filter.speValue == 3) && (filter.speCompare == CompareType.Equal)))))
-                    {
-                        if (((filter.atkValue >= 30) &&
-                            (filter.atkCompare == CompareType.Equal || filter.atkCompare == CompareType.GtEqual)) ||
-                            (filter.atkCompare == CompareType.Hidden || filter.atkCompare == CompareType.HiddenEven ||
-                            filter.atkCompare == CompareType.HiddenOdd))
-                            {
-                                return true;
-                            }
-                    }
-
-                    // no roamers have Trick Room spreads
-                    if ((filter.speValue <= 1) &&
-                        (filter.speCompare == CompareType.Equal || filter.speCompare == CompareType.LtEqual) &&
-                        !((ComboBoxItem) comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.Roamer))
-                        return true;
-                }
-            }
-
-            return false;
-        }
-
-        private bool FastCapFrames()
-        {
-            uint minFrame;
-            uint maxFrame;
-
-            uint.TryParse(maskedTextBoxCapMinOffset.Text, out minFrame);
-            uint.TryParse(maskedTextBoxCapMaxOffset.Text, out maxFrame);
-
-            if (((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5CGear))
-            {
-                // no roamers appear in the Entralink
-                if (((ComboBoxItem) comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.Roamer))
-                    return false;
-
-                return (minFrame >= 20 && minFrame < 26) && (maxFrame >= 20 && maxFrame <= 25);
-            }
-            // BW2 Entralink
-            if (((Profile) comboBoxProfiles.SelectedItem).IsBW2())
-            {
-                if (minFrame > 24 && minFrame < 31 && maxFrame > 24 && maxFrame < 31) return true;
-            }
-
-            return (minFrame >= 0 && minFrame < 6) && (maxFrame >= 0 && maxFrame < 6);
-        }
+        
 
         private bool FastEggFilters()
         {
@@ -2785,147 +3282,7 @@ namespace RNGReporter
             }
         }
 
-        private void dataGridViewCapValues_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (Settings.Default.ShowToolTips)
-            {
-                Rectangle cellRect = dataGridViewCapValues.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
-
-                if (dataGridViewCapValues.Columns[e.ColumnIndex].Name == "EncounterMod")
-                {
-                    if (e.RowIndex >= 0)
-                    {
-                        switch (
-                            ((IFrameCapture) dataGridViewCapValues.Rows[e.RowIndex].DataBoundItem).Frame.EncounterMod)
-                        {
-                            case Objects.EncounterMod.Synchronize:
-                                toolTipDataGrid.ToolTipTitle = "Synchronize";
-
-                                toolTipDataGrid.Show(
-                                    "When encountering the desired Pokémon, the lead Pokémon in your party\r\n" +
-                                    "must have the ability Synchronize, and have a nature that matches your\r\n" +
-                                    "desired nature.  This will cause the target Pokémon to have your desired nature.",
-                                    this,
-                                    dataGridViewCapValues.Location.X + cellRect.X + cellRect.Size.Width,
-                                    dataGridViewCapValues.Location.Y + cellRect.Y + cellRect.Size.Height,
-                                    5000);
-                                break;
-                            case Objects.EncounterMod.CuteCharm50F:
-                            case Objects.EncounterMod.CuteCharm125F:
-                            case Objects.EncounterMod.CuteCharm25F:
-                            case Objects.EncounterMod.CuteCharm75F:
-                            case Objects.EncounterMod.CuteCharm50M:
-                            case Objects.EncounterMod.CuteCharm875M:
-                            case Objects.EncounterMod.CuteCharm75M:
-                            case Objects.EncounterMod.CuteCharm25M:
-                            case Objects.EncounterMod.CuteCharmFemale:
-                                toolTipDataGrid.ToolTipTitle = "Cute Charm";
-
-                                toolTipDataGrid.Show(
-                                    "When encountering the target Pokémon, the lead Pokémon in your party\r\n" +
-                                    "must have the ability Cute Charm, and be the opposite gender of the listed target.\r\n" +
-                                    "The listed gender ratio must also match that of the target Pokémon.\r\n\r\n" +
-                                    "For example: Cute Charm (75% M) indicates that the target Pokémon must be\r\n" +
-                                    "male (requiring a female Cute Charm lead), and must be of a species that has a\r\n" +
-                                    "75% male gender ratio, such as Alakazam.\r\n\r\n" +
-                                    "Cute Charm does not work for species with only one gender, such as Tauros.",
-                                    this,
-                                    dataGridViewCapValues.Location.X + cellRect.X + cellRect.Size.Width,
-                                    dataGridViewCapValues.Location.Y + cellRect.Y + cellRect.Size.Height,
-                                    15000);
-                                break;
-                            case Objects.EncounterMod.SuctionCups:
-                                toolTipDataGrid.ToolTipTitle = "Suction Cups";
-
-                                toolTipDataGrid.Show(
-                                    "When fishing for the target Pokémon, the lead Pokémon in your party\r\n" +
-                                    "must have the ability Suction Cups.  Otherwise, fishing will fail\r\n" +
-                                    "with \"Not even a nibble.\"\r\n\r\n" +
-                                    "Some non-fishing encounters may also require Suction Cups in order\r\n" +
-                                    "to make the frame appear.",
-                                    this,
-                                    dataGridViewCapValues.Location.X + cellRect.X + cellRect.Size.Width,
-                                    dataGridViewCapValues.Location.Y + cellRect.Y + cellRect.Size.Height,
-                                    5000);
-                                break;
-                            case Objects.EncounterMod.Compoundeyes:
-                                toolTipDataGrid.ToolTipTitle = "Compoundeyes";
-                                break;
-                            case Objects.EncounterMod.None:
-                                toolTipDataGrid.Hide(this);
-                                break;
-                        }
-                    }
-                }
-                else if (dataGridViewCapValues.Columns[e.ColumnIndex].Name == "Nature")
-                {
-                    toolTipDataGrid.ToolTipTitle = "Nature";
-
-                    toolTipDataGrid.Show("A bolded nature indicates that the nature can be changed by a lead\r\n" +
-                                         "Pokémon with Synchronize.\r\n\r\n" +
-                                         "Greyed-out natures are natures with no competitive value.",
-                                         this,
-                                         dataGridViewCapValues.Location.X + cellRect.X + cellRect.Size.Width,
-                                         dataGridViewCapValues.Location.Y + cellRect.Y + cellRect.Size.Height,
-                                         5000);
-                }
-                else if (dataGridViewCapValues.Columns[e.ColumnIndex].Name == "Shiny")
-                {
-                    toolTipDataGrid.ToolTipTitle = "!!!";
-
-                    toolTipDataGrid.Show("A !!! in this column indicates the frame will be shiny.",
-                                         this,
-                                         dataGridViewCapValues.Location.X + cellRect.X + cellRect.Size.Width,
-                                         dataGridViewCapValues.Location.Y + cellRect.Y + cellRect.Size.Height,
-                                         5000);
-                }
-                else if (dataGridViewCapValues.Columns[e.ColumnIndex].Name == "EncounterSlot")
-                {
-                    toolTipDataGrid.ToolTipTitle = "Encounter Slot";
-
-                    toolTipDataGrid.Show("Encounter slots are used to determine what Pokémon appears for\r\n" +
-                                         "a wild battle.  Use the encounter tables under the main menus to look up\r\n" +
-                                         "which Pokémon appears for each slot in each area.\r\n",
-                                         this,
-                                         dataGridViewCapValues.Location.X + cellRect.X + cellRect.Size.Width,
-                                         dataGridViewCapValues.Location.Y + cellRect.Y + cellRect.Size.Height,
-                                         5000);
-                }
-            }
-        }
-
-        private void dataGridViewCapValues_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
-        {
-            toolTipDataGrid.Hide(this);
-        }
-
-        private void generateAdjacentSeedsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (dataGridViewCapValues.SelectedRows[0] != null)
-            {
-                var iframe = (IFrameCapture) dataGridViewCapValues.SelectedRows[0].DataBoundItem;
-
-                uint advances = 0;
-
-                switch (iframe.Frame.FrameType)
-                {
-                    case FrameType.Method5Standard:
-                        advances = iframe.Offset;
-                        break;
-                    case FrameType.Method5Natures:
-                    case FrameType.Wondercard5thGen:
-                    case FrameType.Wondercard5thGenFixed:
-                        advances = iframe.Advances;
-                        break;
-                }
-                int profile = comboBoxProfiles.SelectedIndex;
-                var adjacents = new Adjacents(iframe.TimeDate,
-                                              profile, iframe.KeyPresses,
-                                              iframe.Frame.FrameType, iframe.Frame.EncounterType,
-                                              advances);
-                adjacents.Show();
-            }
-        }
+        
 
         private void generateAdjacentSeedsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -2992,7 +3349,6 @@ namespace RNGReporter
                 cbCallerShinyCharm.Checked = Settings.Default.ShinyCharm;
             }
 
-            //cbCapShinyCharm.Visible = ((Profile)comboBoxProfiles.SelectedItem).IsBW2();
         }
 
         private void buttonLoadEggSeeds_Click(object sender, EventArgs e)
@@ -3140,7 +3496,7 @@ namespace RNGReporter
         private bool LevelConditions()
         {
             Invoke(new Action(() => { 
-                cond = comboBoxMethod.SelectedIndex == 0 && 
+                cond = comboBoxMethod.SelectedIndex < 2 && 
                 comboBoxEncounterType.SelectedIndex >= 2 && comboBoxEncounterType.SelectedIndex <= 7 && 
                 comboBoxEncounterType.SelectedIndex != 5; }));
             return cond;
@@ -3148,13 +3504,14 @@ namespace RNGReporter
 
         private bool RatioConditions()
         {
-            Invoke(new Action(() => { cond = comboBoxMethod.SelectedIndex == 0 && comboBoxEncounterType.SelectedIndex <= 3; }));
+            Invoke(new Action(() => { cond = comboBoxMethod.SelectedIndex < 2 && comboBoxEncounterType.SelectedIndex <= 3; }));
             return cond;
         }
 
         private bool ShinyOnly() => checkBoxShinyOnly.Visible && checkBoxShinyOnly.Checked;
 
         public Profile getProfile() => (Profile)comboBoxProfiles.SelectedItem;
+
 
         #endregion
 

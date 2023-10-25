@@ -33,9 +33,9 @@ namespace RNGReporter
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            RNGReporter.Controls.CheckBoxProperties checkBoxProperties3 = new RNGReporter.Controls.CheckBoxProperties();
             RNGReporter.Controls.CheckBoxProperties checkBoxProperties1 = new RNGReporter.Controls.CheckBoxProperties();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties2 = new RNGReporter.Controls.CheckBoxProperties();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -61,7 +61,6 @@ namespace RNGReporter
             this.resetParentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.outputResultsToTXTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -165,6 +164,7 @@ namespace RNGReporter
             this.checkBoxMemoryLink = new System.Windows.Forms.CheckBox();
             this.checkBoxTrigger = new System.Windows.Forms.CheckBox();
             this.Gen5GroupBox = new System.Windows.Forms.GroupBox();
+            this.labelLuckyPower = new System.Windows.Forms.Label();
             this.LuckyPowerCombobox = new RNGReporter.GlassComboBox();
             this.numericLevelMax = new System.Windows.Forms.NumericUpDown();
             this.numericLevelMin = new System.Windows.Forms.NumericUpDown();
@@ -225,7 +225,8 @@ namespace RNGReporter
             this.maskedTextBoxStartingFrame = new RNGReporter.Controls.MaskedTextBox2();
             this.maskedTextBoxMaxFrames = new RNGReporter.Controls.MaskedTextBox2();
             this.comboBoxMethod = new RNGReporter.GlassComboBox();
-            this.labelLuckyPower = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.MainImportWC = new RNGReporter.GlassButton();
             this.contextMenuStripGrid.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripTimeFinder.SuspendLayout();
@@ -261,7 +262,7 @@ namespace RNGReporter
             // 
             this.label3.AutoSize = true;
             this.label3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label3.Location = new System.Drawing.Point(52, 53);
+            this.label3.Location = new System.Drawing.Point(54, 53);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 0;
@@ -439,31 +440,21 @@ namespace RNGReporter
             this.outputResultsToTXTToolStripMenuItem.Text = "Output Results to TXT ...";
             this.outputResultsToTXTToolStripMenuItem.Click += new System.EventHandler(this.outputResultsToTXTToolStripMenuItem_Click);
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label10.Location = new System.Drawing.Point(30, 152);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(65, 13);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "Max Results";
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label11.Location = new System.Drawing.Point(20, 178);
+            this.label11.Location = new System.Drawing.Point(37, 185);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(75, 13);
+            this.label11.Size = new System.Drawing.Size(56, 13);
             this.label11.TabIndex = 6;
-            this.label11.Text = "Starting Frame";
+            this.label11.Text = "Min Frame";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label12.Location = new System.Drawing.Point(35, 205);
+            this.label12.Location = new System.Drawing.Point(37, 160);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(60, 13);
             this.label12.TabIndex = 8;
@@ -1198,7 +1189,7 @@ namespace RNGReporter
             // 
             this.label52.AutoSize = true;
             this.label52.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label52.Location = new System.Drawing.Point(12, 78);
+            this.label52.Location = new System.Drawing.Point(14, 78);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(83, 13);
             this.label52.TabIndex = 105;
@@ -1309,7 +1300,7 @@ namespace RNGReporter
             this.buttonLead.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.buttonLead.ForeColor = System.Drawing.Color.Black;
             this.buttonLead.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttonLead.Location = new System.Drawing.Point(7, 100);
+            this.buttonLead.Location = new System.Drawing.Point(9, 100);
             this.buttonLead.Name = "buttonLead";
             this.buttonLead.Size = new System.Drawing.Size(87, 23);
             this.buttonLead.TabIndex = 3;
@@ -1322,9 +1313,9 @@ namespace RNGReporter
             this.checkBoxBW2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkBoxBW2.Location = new System.Drawing.Point(9, 25);
             this.checkBoxBW2.Name = "checkBoxBW2";
-            this.checkBoxBW2.Size = new System.Drawing.Size(99, 17);
+            this.checkBoxBW2.Size = new System.Drawing.Size(93, 17);
             this.checkBoxBW2.TabIndex = 319;
-            this.checkBoxBW2.Text = "Black White 2?";
+            this.checkBoxBW2.Text = "Black White 2";
             this.checkBoxBW2.UseVisualStyleBackColor = true;
             this.checkBoxBW2.Visible = false;
             // 
@@ -1398,6 +1389,15 @@ namespace RNGReporter
             this.Gen5GroupBox.TabStop = false;
             this.Gen5GroupBox.Text = "Gen 5 Settings";
             this.Gen5GroupBox.Visible = false;
+            // 
+            // labelLuckyPower
+            // 
+            this.labelLuckyPower.AutoSize = true;
+            this.labelLuckyPower.Location = new System.Drawing.Point(6, 170);
+            this.labelLuckyPower.Name = "labelLuckyPower";
+            this.labelLuckyPower.Size = new System.Drawing.Size(69, 13);
+            this.labelLuckyPower.TabIndex = 345;
+            this.labelLuckyPower.Text = "Lucky Power";
             // 
             // LuckyPowerCombobox
             // 
@@ -1616,7 +1616,7 @@ namespace RNGReporter
             "Gift Pokémon (Non-Mystery Gift)",
             "Safari Zone",
             "Bug-Catching Contest"});
-            this.comboBoxEncounterType.Location = new System.Drawing.Point(101, 74);
+            this.comboBoxEncounterType.Location = new System.Drawing.Point(103, 74);
             this.comboBoxEncounterType.Name = "comboBoxEncounterType";
             this.comboBoxEncounterType.ShineColor = System.Drawing.SystemColors.Window;
             this.comboBoxEncounterType.Size = new System.Drawing.Size(153, 21);
@@ -1630,7 +1630,7 @@ namespace RNGReporter
             this.comboBoxSynchNatures.Enabled = false;
             this.comboBoxSynchNatures.ForeColor = System.Drawing.Color.Black;
             this.comboBoxSynchNatures.FormattingEnabled = true;
-            this.comboBoxSynchNatures.Location = new System.Drawing.Point(101, 100);
+            this.comboBoxSynchNatures.Location = new System.Drawing.Point(103, 100);
             this.comboBoxSynchNatures.Name = "comboBoxSynchNatures";
             this.comboBoxSynchNatures.ShineColor = System.Drawing.SystemColors.Window;
             this.comboBoxSynchNatures.Size = new System.Drawing.Size(153, 21);
@@ -1639,8 +1639,8 @@ namespace RNGReporter
             // comboBoxEncounterSlot
             // 
             this.comboBoxEncounterSlot.BlankText = "Any";
-            checkBoxProperties3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.comboBoxEncounterSlot.CheckBoxProperties = checkBoxProperties3;
+            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.comboBoxEncounterSlot.CheckBoxProperties = checkBoxProperties1;
             this.comboBoxEncounterSlot.DisplayMemberSingleItem = "";
             this.comboBoxEncounterSlot.DropDownHeight = 330;
             this.comboBoxEncounterSlot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1684,7 +1684,7 @@ namespace RNGReporter
             // textBoxSeed
             // 
             this.textBoxSeed.Hex = true;
-            this.textBoxSeed.Location = new System.Drawing.Point(101, 201);
+            this.textBoxSeed.Location = new System.Drawing.Point(103, 156);
             this.textBoxSeed.Mask = "AAAAAAAAAAAAAAAA";
             this.textBoxSeed.Name = "textBoxSeed";
             this.textBoxSeed.Size = new System.Drawing.Size(153, 20);
@@ -1695,7 +1695,7 @@ namespace RNGReporter
             this.buttonFindTime.BackColor = System.Drawing.Color.AntiqueWhite;
             this.buttonFindTime.ForeColor = System.Drawing.Color.Black;
             this.buttonFindTime.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttonFindTime.Location = new System.Drawing.Point(101, 249);
+            this.buttonFindTime.Location = new System.Drawing.Point(103, 249);
             this.buttonFindTime.Name = "buttonFindTime";
             this.buttonFindTime.OuterBorderColor = System.Drawing.Color.Transparent;
             this.buttonFindTime.ShineColor = System.Drawing.SystemColors.Window;
@@ -1707,8 +1707,8 @@ namespace RNGReporter
             // comboBoxNature
             // 
             this.comboBoxNature.BlankText = "Any";
-            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.comboBoxNature.CheckBoxProperties = checkBoxProperties1;
+            checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.comboBoxNature.CheckBoxProperties = checkBoxProperties2;
             this.comboBoxNature.DisplayMemberSingleItem = "";
             this.comboBoxNature.DropDownHeight = 300;
             this.comboBoxNature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1741,7 +1741,7 @@ namespace RNGReporter
             this.buttonGenerate.BackColor = System.Drawing.Color.AntiqueWhite;
             this.buttonGenerate.ForeColor = System.Drawing.Color.Black;
             this.buttonGenerate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttonGenerate.Location = new System.Drawing.Point(101, 293);
+            this.buttonGenerate.Location = new System.Drawing.Point(103, 293);
             this.buttonGenerate.Name = "buttonGenerate";
             this.buttonGenerate.OuterBorderColor = System.Drawing.Color.Transparent;
             this.buttonGenerate.ShineColor = System.Drawing.SystemColors.Window;
@@ -1911,8 +1911,8 @@ namespace RNGReporter
             // PID
             // 
             this.PID.DataPropertyName = "Pid";
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Consolas", 8.75F);
-            this.PID.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Consolas", 8.75F);
+            this.PID.DefaultCellStyle = dataGridViewCellStyle1;
             this.PID.HeaderText = "PID";
             this.PID.Name = "PID";
             this.PID.ReadOnly = true;
@@ -2094,10 +2094,10 @@ namespace RNGReporter
             // maskedTextBoxStartingFrame
             // 
             this.maskedTextBoxStartingFrame.Hex = false;
-            this.maskedTextBoxStartingFrame.Location = new System.Drawing.Point(101, 175);
+            this.maskedTextBoxStartingFrame.Location = new System.Drawing.Point(104, 182);
             this.maskedTextBoxStartingFrame.Mask = "0000000000";
             this.maskedTextBoxStartingFrame.Name = "maskedTextBoxStartingFrame";
-            this.maskedTextBoxStartingFrame.Size = new System.Drawing.Size(153, 20);
+            this.maskedTextBoxStartingFrame.Size = new System.Drawing.Size(152, 20);
             this.maskedTextBoxStartingFrame.TabIndex = 6;
             this.maskedTextBoxStartingFrame.Text = "0";
             this.maskedTextBoxStartingFrame.ValidatingType = typeof(int);
@@ -2105,10 +2105,10 @@ namespace RNGReporter
             // maskedTextBoxMaxFrames
             // 
             this.maskedTextBoxMaxFrames.Hex = false;
-            this.maskedTextBoxMaxFrames.Location = new System.Drawing.Point(101, 149);
+            this.maskedTextBoxMaxFrames.Location = new System.Drawing.Point(104, 208);
             this.maskedTextBoxMaxFrames.Mask = "0000000000";
             this.maskedTextBoxMaxFrames.Name = "maskedTextBoxMaxFrames";
-            this.maskedTextBoxMaxFrames.Size = new System.Drawing.Size(153, 20);
+            this.maskedTextBoxMaxFrames.Size = new System.Drawing.Size(152, 20);
             this.maskedTextBoxMaxFrames.TabIndex = 5;
             this.maskedTextBoxMaxFrames.Text = "100000";
             // 
@@ -2118,21 +2118,37 @@ namespace RNGReporter
             this.comboBoxMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMethod.ForeColor = System.Drawing.Color.Black;
             this.comboBoxMethod.FormattingEnabled = true;
-            this.comboBoxMethod.Location = new System.Drawing.Point(101, 48);
+            this.comboBoxMethod.Location = new System.Drawing.Point(103, 48);
             this.comboBoxMethod.Name = "comboBoxMethod";
             this.comboBoxMethod.ShineColor = System.Drawing.SystemColors.Window;
             this.comboBoxMethod.Size = new System.Drawing.Size(153, 21);
             this.comboBoxMethod.TabIndex = 1;
             this.comboBoxMethod.SelectedIndexChanged += new System.EventHandler(this.comboBoxMethod_SelectedIndexChanged);
             // 
-            // labelLuckyPower
+            // label4
             // 
-            this.labelLuckyPower.AutoSize = true;
-            this.labelLuckyPower.Location = new System.Drawing.Point(6, 170);
-            this.labelLuckyPower.Name = "labelLuckyPower";
-            this.labelLuckyPower.Size = new System.Drawing.Size(69, 13);
-            this.labelLuckyPower.TabIndex = 345;
-            this.labelLuckyPower.Text = "Lucky Power";
+            this.label4.AutoSize = true;
+            this.label4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label4.Location = new System.Drawing.Point(15, 211);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(78, 13);
+            this.label4.TabIndex = 335;
+            this.label4.Text = "Max Advances";
+            // 
+            // MainImportWC
+            // 
+            this.MainImportWC.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.MainImportWC.ForeColor = System.Drawing.Color.Black;
+            this.MainImportWC.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.MainImportWC.Location = new System.Drawing.Point(103, 127);
+            this.MainImportWC.Name = "MainImportWC";
+            this.MainImportWC.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.MainImportWC.ShineColor = System.Drawing.SystemColors.Window;
+            this.MainImportWC.Size = new System.Drawing.Size(153, 23);
+            this.MainImportWC.TabIndex = 336;
+            this.MainImportWC.Text = "Import Wonder Card";
+            this.MainImportWC.Visible = false;
+            this.MainImportWC.Click += new System.EventHandler(this.MainImportWC_Click);
             // 
             // MainForm
             // 
@@ -2140,6 +2156,8 @@ namespace RNGReporter
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(980, 597);
+            this.Controls.Add(this.MainImportWC);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.Gen5GroupBox);
             this.Controls.Add(this.buttonRoamerMap);
             this.Controls.Add(this.labelRoamerRoutes);
@@ -2183,7 +2201,6 @@ namespace RNGReporter
             this.Controls.Add(this.label12);
             this.Controls.Add(this.dataGridViewValues);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.label10);
             this.Controls.Add(this.maskedTextBoxStartingFrame);
             this.Controls.Add(this.maskedTextBoxMaxFrames);
             this.Controls.Add(this.label3);
@@ -2219,7 +2236,6 @@ namespace RNGReporter
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox checkBoxShinyOnly;
         private RNGReporter.DoubleBufferedDataGridView dataGridViewValues;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private RNGReporter.GlassButton buttonGenerate;
@@ -2403,5 +2419,7 @@ namespace RNGReporter
         private System.Windows.Forms.DataGridViewTextBoxColumn Synchable;
         private GlassComboBox LuckyPowerCombobox;
         private System.Windows.Forms.Label labelLuckyPower;
+        private System.Windows.Forms.Label label4;
+        private GlassButton MainImportWC;
     }
 }

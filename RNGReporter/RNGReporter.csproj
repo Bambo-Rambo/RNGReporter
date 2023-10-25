@@ -261,6 +261,7 @@
     <Compile Include="Objects\IVFilter.cs" />
     <Compile Include="Objects\NatureLock.cs" />
     <Compile Include="Objects\Nazos.cs" />
+    <Compile Include="Objects\Wondercard.cs" />
     <Compile Include="PokeSpot.cs">
       <SubType>Form</SubType>
     </Compile>

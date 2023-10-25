@@ -36,6 +36,8 @@ using RNGReporter.Properties;
 using Version = RNGReporter.Objects.Version;
 using System.Threading;
 using System.Security.Cryptography;
+using RNGReporter.Controls;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace RNGReporter
 {
@@ -58,6 +60,7 @@ namespace RNGReporter
         private TimeFinder5th timeFinder5th;
         private GameCube timeFinderGameCube;
         private PIDToIVs pidToIVs;
+        private byte[] WCdata;
 
         public MainForm()
         {
@@ -100,8 +103,6 @@ namespace RNGReporter
                                      FrameType.BWBredInternational),
                     new ComboBoxItem("Wondercard IVs (4th Gen)", FrameType.WondercardIVs),
                     new ComboBoxItem("Wondercard (5th Gen)", FrameType.Wondercard5thGen),
-                    new ComboBoxItem("GLAN Wondercard (5th Gen)",
-                                     FrameType.Wondercard5thGenFixed),
                     new ComboBoxItem("Colosseum\\XD", FrameType.ColoXD),
                     new ComboBoxItem("Channel", FrameType.Channel)
                 });
@@ -471,8 +472,11 @@ namespace RNGReporter
                 EncounterMod = currentMod
             };
 
-            var offset = (uint)(checkBoxBW2.Visible && checkBoxBW2.Checked && generator.FrameType != FrameType.Method5Natures &&
-                 generator.FrameType != FrameType.BWBred && generator.FrameType != FrameType.BWBredInternational ? 2 : 0);
+            var offset = (uint)(checkBoxBW2.Visible && checkBoxBW2.Checked &&
+                generator.FrameType != FrameType.Method5Natures &&
+                generator.FrameType != FrameType.BWBred && 
+                generator.FrameType != FrameType.BWBredInternational &&
+                generator.FrameType != FrameType.Wondercard5thGen ? 2 : 0);
 
             if (generator.FrameType == FrameType.BWBred && checkBoxBW2.Checked)
                 generator.FrameType = FrameType.BW2Bred;
@@ -607,7 +611,7 @@ namespace RNGReporter
                     null,
                     (GenderFilter) (comboBoxGender.SelectedItem));
             }
-            else if (generator.FrameType == FrameType.Wondercard5thGen || generator.FrameType == FrameType.Wondercard5thGenFixed)
+            else if (generator.FrameType == FrameType.Wondercard5thGen)
             {
                 frameCompare = new FrameCompare(
                     ivFilters.IVFilter,
@@ -803,6 +807,24 @@ namespace RNGReporter
 
             if (generator.FrameType == FrameType.Method5Natures)
                 frames = generator.GenerateG5PID(frameCompare, id, sid);
+            else if (generator.FrameType == FrameType.Wondercard5thGen)
+            {
+                if (WCdata == null)
+                {
+                    if (MessageBox.Show("You need to import a Wonder Card (.pgf file) first. Import one now?", 
+                        "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        MainImportWC_Click(null, null);
+                        if (WCdata == null)
+                            return;
+                        frames = generator.GenerateWonderCard(frameCompare, setWC(WCdata));
+                    }
+                    else
+                        return;
+                }
+                else
+                    frames = generator.GenerateWonderCard(frameCompare, setWC(WCdata));
+            }
             else
                 frames = generator.Generate(frameCompare, id, sid);
 
@@ -1064,8 +1086,7 @@ namespace RNGReporter
 
             //  Hide some columns based on output type
 
-            if (generator.FrameType == FrameType.Method5Standard ||
-                generator.FrameType == FrameType.Method5CGear)
+            if (generator.FrameType == FrameType.Method5Standard || generator.FrameType == FrameType.Method5CGear)
             {
                 Frame.Visible = true;
                 Offset.Visible = false;
@@ -1550,8 +1571,7 @@ namespace RNGReporter
                 MaleOnlySpecies.Visible = false;
             }
 
-            if (generator.FrameType == FrameType.Wondercard5thGen ||
-                generator.FrameType == FrameType.Wondercard5thGenFixed)
+            if (generator.FrameType == FrameType.Wondercard5thGen)
             {
                 Frame.Visible = true;
                 Offset.Visible = false;
@@ -1561,7 +1581,7 @@ namespace RNGReporter
                 Time.Visible = false;
                 Shiny.Visible = true;
                 Nature.Visible = true;
-                Ability.Visible = false;
+                Ability.Visible = true;
                 Dream.Visible = false;
                 Coin.Visible = false;
                 Elm.Visible = false;
@@ -2338,7 +2358,6 @@ namespace RNGReporter
 
             if (((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Standard) ||
                 ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Wondercard5thGen) ||
-                ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Wondercard5thGenFixed) ||
                 ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Natures) ||
                 ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.BWBred) ||
                 ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.BWBredInternational))
@@ -2359,7 +2378,6 @@ namespace RNGReporter
             }
 
             if (((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Wondercard5thGen) ||
-                ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Wondercard5thGenFixed) ||
                 ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Natures) ||
                 ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.BWBred) ||
                 ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.BWBredInternational))
@@ -2395,6 +2413,7 @@ namespace RNGReporter
             CheckTriggerBox();
             int method = comboBoxMethod.SelectedIndex;
             Gen5GroupBox.Visible = (method >= 9 && method <= 11) || (method >= 21 && method <= 25 && method != 23);
+            MainImportWC.Visible = ((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Wondercard5thGen);
             /*labelMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible =
                 comboBoxMethod.SelectedIndex == 11 &&
                 comboBoxEncounterType.SelectedIndex != 5 &&
@@ -2449,8 +2468,7 @@ namespace RNGReporter
                     !((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.BW2BredInternational) &&
                     !((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Standard) &&
                     !((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5CGear) &&
-                    !((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Wondercard5thGen) &&
-                    !((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Wondercard5thGenFixed);
+                    !((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Wondercard5thGen);
         }
 
         private bool CheckEncType(string method)
@@ -3319,5 +3337,63 @@ namespace RNGReporter
             ivsToFrame.Show();
         }
 
+        private void MainImportWC_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog()
+            {
+                Filter = "5th Gen Wonder Card |*.pgf",
+                Title = "Select a Wonder Card File"
+            };
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                BinaryReader br = new BinaryReader(File.Open(openFileDialog.FileName, FileMode.Open));
+                WCdata = br.ReadBytes(204);
+                Wondercard wc = setWC(WCdata);
+                MessageBox.Show(
+                    "Wonder Card loaded successfully:" + "\n\n" + 
+                    "TID: " + wc.eventTid + "\n" +
+                    "SID: " + wc.eventSid + "\n\n" +
+                    "Nature: " + (wc.eventNature == -1 ? "Random" : Functions.NatureStrings(wc.eventNature)) + "\n" +
+                    "Ability: " + (wc.eventAbility == -1 ? "Random" : wc.eventAbility.ToString()) + "\n" +
+                    "Gender: " + (wc.eventGender == -1 ? "Random" : wc.eventGender == 0 ? "Male" : "Female") + "\n" +
+                    "Shininess: " + 
+                    (wc.eventShininess == 1 ? "May be Shiny" : wc.eventShininess == 0 ? "Never Shiny" : "Always Shiny") + "\n\n" +
+                    "HP: " + (wc.eventIVInfo[0] == -1 ? "x" : wc.eventIVInfo[0].ToString()) + "\n" +
+                    "Atk: " + (wc.eventIVInfo[1] == -1 ? "x" : wc.eventIVInfo[1].ToString()) + "\n" +
+                    "Def: " + (wc.eventIVInfo[2] == -1 ? "x" : wc.eventIVInfo[2].ToString()) + "\n" +
+                    "SpA: " + (wc.eventIVInfo[3] == -1 ? "x" : wc.eventIVInfo[3].ToString()) + "\n" +
+                    "SpD: " + (wc.eventIVInfo[4] == -1 ? "x" : wc.eventIVInfo[4].ToString()) + "\n" +
+                    "Spe: " + (wc.eventIVInfo[5] == -1 ? "x" : wc.eventIVInfo[5].ToString()) + "\n",
+                    "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private Wondercard setWC(byte[] data)
+        {
+            Wondercard wondercard = new Wondercard()
+            {
+                eventSpecies = BitConverter.ToUInt16(data, 0x1A),
+                eventTid = data[0x5C] == 1 ? uint.Parse(maskedTextBoxID.Text) : BitConverter.ToUInt16(data, 0x0),
+                eventSid = data[0x5C] == 1 ? uint.Parse(maskedTextBoxSID.Text) : BitConverter.ToUInt16(data, 0x2),
+                eventAbility = data[0x36] < 3 ? data[0x36] : -1,
+                eventNature = data[0x34] != 0xFF ? data[0x34] : -1,
+                eventGender = data[0x35] < 2 ? data[0x35] : -1,
+                eventShininess = data[0x37],
+                eventIVInfo = new int[6]
+                {
+                    data[0x43] != 0xFF ? data[0x43] : -1,
+                    data[0x44] != 0xFF ? data[0x44] : -1,
+                    data[0x45] != 0xFF ? data[0x45] : -1,
+                    data[0x47] != 0xFF ? data[0x47] : -1,
+                    data[0x48] != 0xFF ? data[0x48] : -1,
+                    data[0x46] != 0xFF ? data[0x46] : -1,
+                }
+            };
+
+            wondercard.genderCase =
+                Functions.GenderLockedCase(wondercard.eventGender, Functions.GenderRatio(wondercard.eventSpecies));
+
+            return wondercard;
+        }
     }
 }

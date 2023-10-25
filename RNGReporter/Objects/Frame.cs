@@ -47,7 +47,7 @@ namespace RNGReporter.Objects
         private uint par1;
         private uint par2;
         private uint par3;
-        private uint pid;
+        public uint pid;
         private uint seed;
         private uint sid;
         private bool synchable;
@@ -209,7 +209,7 @@ namespace RNGReporter.Objects
         //  ID's used for checking if we have a shiny.  If these are
         //  zero'd we will not actually do the check.
 
-        public bool Shiny { get; private set; }
+        public bool Shiny { get; set; }
 
         /// <summary>
         ///     Display member called by the grid control. Saves us from having to actually do anything but return string and not actually store it.
@@ -243,6 +243,8 @@ namespace RNGReporter.Objects
                 pid = value;
             }
         }
+
+        public uint eventPID { get; set; }
 
         public uint Advances { get; set; }
 
@@ -510,6 +512,8 @@ namespace RNGReporter.Objects
         {
             get { return pid & 0xFF; }
         }
+
+        public uint eventGender { get; set; }
 
         public string Female50
         {
@@ -1356,7 +1360,7 @@ namespace RNGReporter.Objects
 
 
         // 5th Gen Wondercards
-        public static Frame GenerateFrame(
+        public static Frame GenerateFrame5thWonder(
             FrameType frameType,
             uint id,
             uint sid,
@@ -1368,8 +1372,8 @@ namespace RNGReporter.Objects
             uint spa,
             uint spd,
             uint spe,
-            uint natureValue,
-            uint pid)
+            uint pid,
+            uint natureValue)
         {
             var frame = new Frame(frameType)
                 {
@@ -1496,6 +1500,26 @@ namespace RNGReporter.Objects
                     Pid = source.Pid
                 };
 
+            return clone;
+        }
+
+        public static Frame ClonePID(Frame source)
+        {
+            var clone = new Frame
+            {
+                FrameType = source.FrameType,
+                number = source.number,
+                seed = source.seed,
+                EncounterMod = source.EncounterMod,
+                EncounterSlot = source.EncounterSlot,
+                id = source.id,
+                sid = source.sid,
+                Pid = source.Pid,
+                // Nature and ability must be cloned AFTER Pid
+                Nature = source.Nature,
+                Ability = source.Ability,
+                Synchable = source.Synchable,
+            };
 
             return clone;
         }

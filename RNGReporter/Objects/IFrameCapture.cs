@@ -82,6 +82,7 @@ namespace RNGReporter.Objects
 
         public uint Advances { get; set; }
 
+        public ulong CSeed { get; set; }
         public uint Delay { get; set; }
 
         public DateTime CSeedTime
@@ -92,6 +93,11 @@ namespace RNGReporter.Objects
         public uint Pid
         {
             get { return Frame.Pid; }
+        }
+
+        public uint eventPID
+        {
+            get { return Frame.eventPID; }
         }
 
         public string Nature
@@ -107,6 +113,11 @@ namespace RNGReporter.Objects
         public uint Ability
         {
             get { return Frame.Ability; }
+        }
+
+        public string eventAbility
+        {
+            get { return Frame.Ability == 2? "HA" : Frame.Ability.ToString(); }
         }
 
         public string Female125

@@ -371,10 +371,10 @@ namespace RNGReporter
 
             MAC_address = ulong.Parse(textBoxMACAddress.Text, NumberStyles.HexNumber);
 
-            if (textBoxMACAddress.Text.Length < 12)
+            /*if (textBoxMACAddress.Text.Length < 12)
             {
                 MessageBox.Show("Your MAC address is missing some digits.  Double-check your MAC address.");
-            }
+            }*/
 
             if (textBoxDirectSeed.Text != "")
             {

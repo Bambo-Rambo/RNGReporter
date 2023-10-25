@@ -33,6 +33,7 @@ namespace RNGReporter.Objects
             pointer += n;
         }
 
+        #region Gen 5 PID
         public List<Frame> GenerateG5PID(FrameCompare frameCompare, uint id, uint sid)
         {
             bool G5_Wild = EncounterType == EncounterType.Wild;
@@ -1039,6 +1040,115 @@ namespace RNGReporter.Objects
             }
             
         }
+        #endregion
+
+
+        public List<Frame> GenerateWonderCard(FrameCompare frameCompare, Wondercard wondercard)
+        {
+            int baseAdvances = 8;
+            if (wondercard.eventNature == -1)
+                baseAdvances += 2;
+            if (wondercard.eventGender != -1)
+                baseAdvances += 2;
+            for (int i = 0; i < 6; i++)
+                if (wondercard.eventIVInfo[i] == -1)
+                    baseAdvances += 2;
+
+            frames = new List<Frame>();
+            rngList = new List<uint>();
+
+            rng64.Seed = InitialSeed;
+
+            // Fix later
+            if (InitialFrame <= 1)
+                InitialFrame = 2;
+
+            for (uint cnt = 0; cnt < InitialFrame - 1; cnt++)
+                rng64.GetNext64BitNumber();
+
+            for (int cnt = 0; cnt < 34; cnt++)
+                rngList.Add(rng64.GetNext32BitNumber());
+
+            for (uint cnt = InitialFrame; cnt < InitialFrame + maxResults; cnt++, rngList.RemoveAt(0), rngList.Add(rng64.GetNext32BitNumber()))
+            {
+                pointer = baseAdvances;
+
+                // From now on, -1 means that a value is not locked / forced so it needs to be calculated
+
+                Frame frame = new Frame(FrameType.Wondercard5thGen)
+                {
+                    Number = cnt,
+                    RngResult = rngList[0],
+                    Hp = wondercard.eventIVInfo[0] == -1 ? NextRand() >> 27 : Convert.ToUInt32(wondercard.eventIVInfo[0]),
+                    Atk = wondercard.eventIVInfo[1] == -1 ? NextRand() >> 27 : Convert.ToUInt32(wondercard.eventIVInfo[1]),
+                    Def = wondercard.eventIVInfo[2] == -1 ? NextRand() >> 27 : Convert.ToUInt32(wondercard.eventIVInfo[2]),
+                    Spa = wondercard.eventIVInfo[3] == -1 ? NextRand() >> 27 : Convert.ToUInt32(wondercard.eventIVInfo[3]),
+                    Spd = wondercard.eventIVInfo[4] == -1 ? NextRand() >> 27 : Convert.ToUInt32(wondercard.eventIVInfo[4]),
+                    Spe = wondercard.eventIVInfo[5] == -1 ? NextRand() >> 27 : Convert.ToUInt32(wondercard.eventIVInfo[5]),
+                };
+
+                Advance(2);
+
+                uint pid;
+
+                if (wondercard.eventGender == -1)
+                {
+                    pid = NextRand() ^ 0x10000;
+                }
+                else
+                {
+                    pid = Functions.CuteCharmModPID(NextRand(), NextRand(), wondercard.genderCase);
+                }
+
+                switch (wondercard.eventShininess)
+                {
+                    case 0:
+                        pid = ForceNonShiny(pid, wondercard.eventTid, wondercard.eventSid);
+                        break;
+                    case 2:
+                        pid = ForceShiny(pid, wondercard.eventTid, wondercard.eventSid);
+                        break;
+                }
+
+                Advance(1);
+
+                frame.Nature = (uint)(wondercard.eventNature == -1 ? ((ulong)NextRand() * 25 >> 32) : (uint)wondercard.eventNature);
+
+                if (wondercard.eventAbility == -1)
+                {
+                    pid ^= 0x10000;
+                    frame.Ability = (pid >> 16) & 1; 
+                }
+                else
+                {
+                    pid = (uint)(wondercard.eventAbility == 1 ? pid | 0x10000 : pid & ~0x10000);
+                    frame.Ability = (uint)wondercard.eventAbility;
+                }
+
+                frame.eventPID = frame.pid = pid;
+                frame.Shiny = CheckShiny(wondercard.eventTid, wondercard.eventSid, pid);
+
+                if (frameCompare.Compare(frame))
+                    frames.Add(frame);
+            }
+
+            return frames;
+        }
+
+        private static uint ForceShiny(uint pid, uint tid, uint sid)
+        {
+            uint lowByte = pid & 0x000000ff;
+            return ((lowByte ^ tid ^ sid) << 16) | lowByte;
+        }
+
+        private static uint ForceNonShiny(uint pid, uint tid, uint sid)
+        {
+            if (((pid >> 16) ^ (pid & 0xffff) ^ sid ^ tid) < 8)
+                pid = pid ^ 0x10000000;
+
+            return pid;
+        }
+
 
     }
 
