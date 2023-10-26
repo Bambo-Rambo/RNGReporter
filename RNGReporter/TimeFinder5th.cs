@@ -72,6 +72,7 @@ namespace RNGReporter
         private FrameGenerator shinygenerator;
         private FrameGenerator[] shinygenerators;
         private FrameCompare subFrameCompare;
+        private CgearCalibrator calibrator;
         private EventWaitHandle waitHandle;
 
         public TimeFinder5th()
@@ -425,13 +426,13 @@ namespace RNGReporter
                     return;
                 }
                 if (uint.Parse(maskedTextBoxCapMinOffset.Text) < 2)
-                {
                     maskedTextBoxCapMinOffset.Text = "2";
-                }
                 if (uint.Parse(maskedTextBoxCapMaxOffset.Text) < 2)
-                {
                     maskedTextBoxCapMaxOffset.Text = "2";
-                }
+                if (uint.Parse(maskedTextBoxCapMinDelay.Text) < 1000)
+                    maskedTextBoxCapMinDelay.Text = "1000";
+                if (uint.Parse(maskedTextBoxCapMaxDelay.Text) < 1000)
+                    maskedTextBoxCapMaxDelay.Text = "2000";
             }
 
             jobs = new Thread[cpus];
@@ -545,7 +546,7 @@ namespace RNGReporter
             LuckyLevel.Visible = profile.LuckyPowerLVL > 0;
 
             CapDateTime.Visible = CapKeypress.Visible = CapTimer0.Visible = generator.FrameType != FrameType.Method5CGear;
-            copyCgearToClipboard.Visible = generator.FrameType == FrameType.Method5Natures;
+            copyCgearToClipboard.Visible = calibrateDelayIVs.Visible = generator.FrameType == FrameType.Method5Natures;
 
             EncounterSlot.Visible = false;
             EncounterMod.Visible = false;
@@ -3022,7 +3023,7 @@ namespace RNGReporter
         {
             if (dataGridViewCapValues.SelectedRows[0] != null)
             {
-                var frame = (IFrameCapture) dataGridViewCapValues.SelectedRows[0].DataBoundItem;
+                var frame = (IFrameCapture)dataGridViewCapValues.SelectedRows[0].DataBoundItem;
                 Clipboard.SetText(frame.Seed.ToString("X8"));
             }
         }
@@ -3055,6 +3056,18 @@ namespace RNGReporter
             }
         }
 
+        private void calibrateDelayIVs_Click(object sender, EventArgs e)
+        {
+            if (calibrator == null)
+                calibrator = new CgearCalibrator();
+            calibrator.Show();
+            calibrator.Focus();
+            if (dataGridViewCapValues.SelectedRows[0] != null)
+            {
+                var frame = (IFrameCapture)dataGridViewCapValues.SelectedRows[0].DataBoundItem;
+                calibrator.SetValues(frame.CSeed.ToString("X8"), frame.Delay, (int)frame.Offset);
+            }
+        }
 
         private void comboBoxEncounterType_SelectedIndexChanged(object sender, EventArgs e)
         {
