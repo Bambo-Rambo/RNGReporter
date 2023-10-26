@@ -1,4 +1,4 @@
-﻿using RNGReporter.Objects;
+using RNGReporter.Objects;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -41,7 +41,7 @@ namespace RNGReporter
 
             for (uint i = MinSeed; i < MaxSeed; i++)
             {
-                for (int j = -2; j < 3; j++)
+                for (int j = -8; j < 8; j++)
                 {
                     uint currentSeed = (uint)(i + j * 0x1000000);
 
