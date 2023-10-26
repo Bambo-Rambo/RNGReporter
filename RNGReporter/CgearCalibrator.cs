@@ -1,4 +1,4 @@
-using RNGReporter.Objects;
+﻿using RNGReporter.Objects;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

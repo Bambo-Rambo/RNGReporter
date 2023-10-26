@@ -635,6 +635,7 @@ namespace RNGReporter
                     null, -1, false, false, 0, false, null, new NoGenderFilter());
             }
 
+            CgearSettings settings = new CgearSettings();
             if (generator.FrameType == FrameType.Method5Natures)
             {
                 frameCompare = new FrameCompare(
@@ -647,6 +648,16 @@ namespace RNGReporter
                     false,
                     encounterSlots,
                     constructGenderFilter());
+
+                settings = new CgearSettings()
+                {
+                    calibDelay = (uint)(numCalibrateDelay.Enabled ? numCalibrateDelay.Value : 0),
+                    minIVFrame = uint.Parse(maskedTextBoxCapMinOffset.Text),
+                    maxIVFrame = uint.Parse(maskedTextBoxCapMaxOffset.Text) - uint.Parse(maskedTextBoxCapMinOffset.Text) + 1,
+                    fixedRTC = checkBoxRAD.Checked,
+                };
+                settings.delayMin = uint.Parse(maskedTextBoxCapMinDelay.Text) + settings.calibDelay;
+                settings.delayMax = uint.Parse(maskedTextBoxCapMaxDelay.Text) + settings.calibDelay;
             }
             
             if (generator.FrameType != FrameType.Method5CGear)
@@ -791,7 +802,7 @@ namespace RNGReporter
                     int i1 = i;
                     //passing in a profile instead of the params would probably be more efficent
                     jobs[i] = new Thread(() =>
-                                GenerateJob(year, months, 0, 23, profile, shinyOffsetMin, shinyOffsetMax, fastSearch, i1));
+                                GenerateJob(year, months, 0, 23, profile, shinyOffsetMin, shinyOffsetMax, fastSearch, i1, settings));
                     jobs[i].Start();
                     // for some reason not making the thread sleep causes issues with updating dayMin\Max
                     Thread.Sleep(200);
@@ -870,8 +881,8 @@ namespace RNGReporter
             dataGridViewCapValues.Focus();
         }
 
-        public void GenerateJob(
-            uint year, List<int> months, int hourMin, int hourMax, Profile profile, uint shinyOffsetMin, uint shinyOffset, bool fastSearch, int listIndex)
+        public void GenerateJob(uint year, List<int> months, int hourMin, int hourMax, Profile profile, 
+            uint shinyOffsetMin, uint shinyOffset, bool fastSearch, int listIndex, CgearSettings settings)
         {
             bool ConsiderTrigger = checkBoxTriggerBattle.Checked && checkBoxTriggerBattle.Visible;
 
@@ -1183,50 +1194,55 @@ namespace RNGReporter
                                                 FrameGenerator Cgenerator = generators[listIndex].Clone();
                                                 Cgenerator.FrameType = FrameType.Method5Standard;
 
-                                                Cgenerator.InitialFrame = uint.Parse(maskedTextBoxCapMinOffset.Text);
-                                                Cgenerator.MaxResults = uint.Parse(maskedTextBoxCapMaxOffset.Text) - Cgenerator.InitialFrame + 1;
-                                                uint minDelay = uint.Parse(maskedTextBoxCapMinDelay.Text);
-                                                uint maxDelay = uint.Parse(maskedTextBoxCapMaxDelay.Text);
+                                                Cgenerator.InitialFrame = settings.minIVFrame;
+                                                Cgenerator.MaxResults = settings.maxIVFrame;
+                                                uint minDelay = settings.delayMin;
+                                                uint maxDelay = settings.delayMax;
 
                                                 for (uint delay = minDelay; delay <= maxDelay; delay++)
                                                 {
-                                                    int newMinutes = minute;
-                                                    int newHour = hour;
-                                                    int newDay = day;
-
-                                                  //int newSeconds = second + delay / 60;
-                                                    int newSeconds = second + (int)Math.Round(delay / 60.0);    // Assuming 60 fps for now
-
-                                                    if (newSeconds > 59)
+                                                    ulong CSeed;
+                                                    if (settings.fixedRTC)
                                                     {
-                                                        newMinutes += newSeconds / 60;
-                                                        newSeconds = newSeconds % 60;
+                                                        CSeed = (ulong)((((month * day + minute + second) & 0xFF) * 0x1000000) +
+                                                                (hour * 0x10000)) +
+                                                                (year - 2000 + delay) +
+                                                                (profile.MAC_Address & 0xFFFFFF);
+                                                    }
+                                                    else
+                                                    {
+                                                        int newMinutes = minute;
+                                                        int newHour = hour;
+                                                        int newDay = day;
 
-                                                        if (newMinutes > 59)
+                                                      //int newSeconds = second + delay / 60;
+                                                        int newSeconds = second + (int)Math.Round(delay / 60.0);    // Assuming 60 fps for now
+
+                                                        if (newSeconds > 59)
                                                         {
-                                                            newHour += newMinutes / 60;
-                                                            newMinutes = newMinutes % 60;
+                                                            newMinutes += newSeconds / 60;
+                                                            newSeconds = newSeconds % 60;
 
-                                                            if (newHour > 23)
+                                                            if (newMinutes > 59)
                                                             {
-                                                                //newDay += newHour / 24;
-                                                                // No delay will ever advance more than a single day though
-                                                                newDay++;
-                                                                newHour = newHour % 24;
+                                                                newHour += newMinutes / 60;
+                                                                newMinutes = newMinutes % 60;
+
+                                                                if (newHour > 23)
+                                                                {
+                                                                    //newDay += newHour / 24;
+                                                                    // No delay will ever advance more than a single day though
+                                                                    newDay++;
+                                                                    newHour = newHour % 24;
+                                                                }
                                                             }
                                                         }
-                                                    }
 
-                                                    if (newHour > 23 || newMinutes > 59 || newSeconds > 59)
-                                                    {
-                                                        MessageBox.Show("Error.");
-                                                        return;
+                                                        CSeed = (ulong)((((month * newDay + newMinutes + newSeconds) & 0xFF) * 0x1000000) +
+                                                                (newHour * 0x10000)) +
+                                                                (year - 2000 + delay) +
+                                                                (profile.MAC_Address & 0xFFFFFF);
                                                     }
-
-                                                    ulong CSeed = (ulong)((((month * newDay + newMinutes + newSeconds) & 0xFF) * 0x1000000) +
-                                                            (newHour * 0x10000)) +
-                                                            (year - 2000 + delay) +
-                                                            (profile.MAC_Address & 0xFFFFFF);
 
                                                     Cgenerator.InitialSeed = CSeed;
                                                     CgearFrames = Cgenerator.Generate(compareIVs, profile.ID, profile.SID);
@@ -1243,7 +1259,7 @@ namespace RNGReporter
                                                         testFrame.Spe = f.Spe;
 
                                                         iframe.Frame = testFrame;
-                                                        iframe.Delay = delay;
+                                                        iframe.Delay = delay - settings.calibDelay;
                                                         iframe.CSeed = (uint)CSeed;
                                                         iframe.Offset = f.Number;
 
@@ -1425,20 +1441,20 @@ namespace RNGReporter
                 if (((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Standard))
                 {
                     label9.Visible = true;
-                    BW1Message.Visible = false;
                     maskedTextBoxCapMinDelay.Visible = false;
                     maskedTextBoxCapMaxDelay.Visible = false;
                     labelDelay.Visible = false;
+                    checkBoxRAD.Visible = false;
+                    checkBoxDelay.Visible = numCalibrateDelay.Visible = false;
                 }
                 else
                 {
-                    BW1Message.Visible = true;
-                    BW1Message.Text = "This method is only possible in BW1.";
-                    BW1Message.Location = new Point(40, 158);
                     label9.Visible = false;
                     maskedTextBoxCapMinDelay.Visible = true;
                     maskedTextBoxCapMaxDelay.Visible = true;
                     labelDelay.Visible = true;
+                    checkBoxRAD.Visible = true;
+                    checkBoxDelay.Visible = numCalibrateDelay.Visible = true;
                 }
             }
             else if (((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5CGear))
@@ -1462,7 +1478,6 @@ namespace RNGReporter
 
                 label9.Visible = true;
                 labelDelay.Visible = true;
-                BW1Message.Visible = false;
             }
 
             checkBoxShinyOnly.Text = "Shiny Only";
@@ -3528,5 +3543,19 @@ namespace RNGReporter
 
         #endregion
 
+        private void checkBoxDelay_CheckedChanged(object sender, EventArgs e)
+        {
+            numCalibrateDelay.Enabled = checkBoxDelay.Checked;
+        }
+
+        public struct CgearSettings
+        {
+            public uint calibDelay;
+            public uint delayMin;
+            public uint delayMax;
+            public uint minIVFrame;
+            public uint maxIVFrame;
+            public bool fixedRTC;
+        }
     }
 }
