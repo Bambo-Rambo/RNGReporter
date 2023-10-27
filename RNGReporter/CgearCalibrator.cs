@@ -33,7 +33,7 @@ namespace RNGReporter
             uint Seed = uint.Parse(TargetSeed.Text, NumberStyles.HexNumber);
             uint IVAdvances = (uint)IVFrame.Value;
 
-            uint DelayRange = 1000;
+            uint DelayRange = 600;
 
             uint MinSeed = Seed - DelayRange;
             uint MaxSeed = Seed + DelayRange;
@@ -41,7 +41,7 @@ namespace RNGReporter
 
             for (uint i = MinSeed; i < MaxSeed; i++)
             {
-                for (int j = -8; j < 8; j++)
+                for (int j = -10; j <= 10; j++)
                 {
                     uint currentSeed = (uint)(i + j * 0x1000000);
 

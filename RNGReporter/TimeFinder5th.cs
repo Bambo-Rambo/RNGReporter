@@ -107,8 +107,8 @@ namespace RNGReporter
 
             comboBoxMethod.Items.AddRange(new object[]
                 {
-                    new ComboBoxItem("PID + IVs (Standar)", FrameType.Method5Standard),
-                    new ComboBoxItem("PID + IVs (Standar + C-Gear)", FrameType.Method5Natures),
+                    new ComboBoxItem("PID + IVs (Standard)", FrameType.Method5Standard),
+                    new ComboBoxItem("PID + IVs (Standard + C-Gear)", FrameType.Method5Natures),
                     new ComboBoxItem("IVs (C-Gear)", FrameType.Method5CGear),
                 });
 
@@ -418,7 +418,7 @@ namespace RNGReporter
             listBindingCap = new BindingSource { DataSource = iframes };
             dataGridViewCapValues.DataSource = listBindingCap;
 
-            if (comboBoxMethod.SelectedItem.ToString().Equals("PID + IVs (Standar + C-Gear)"))
+            if (comboBoxMethod.SelectedItem.ToString().Equals("PID + IVs (Standard + C-Gear)"))
             {
                 if (profile.IsBW2())
                 {
@@ -1478,6 +1478,8 @@ namespace RNGReporter
 
                 label9.Visible = true;
                 labelDelay.Visible = true;
+                checkBoxRAD.Visible = false;
+                checkBoxDelay.Visible = numCalibrateDelay.Visible = false;
             }
 
             checkBoxShinyOnly.Text = "Shiny Only";
