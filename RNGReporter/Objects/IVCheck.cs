@@ -41,6 +41,8 @@ namespace RNGReporter.Objects
         //    get { return valid; }
         //    set { valid = value; }
         //}
+        public uint[,] IVRange;
+        public uint[,] getIVRange => IVRange;
 
         public IVCheck(
             Pokemon pokemon, uint level, Nature nature,
@@ -181,6 +183,24 @@ namespace RNGReporter.Objects
                                 Possibilities[(int) statCnt].Add(charCnt);
                             }
                         }
+                    }
+                }
+            }
+
+            IVRange = new uint[2,6];
+            for (int i = 0; i < 2; i++)
+            {
+                for (int j = 0; j < 6; j++)
+                {
+                    if (i == 0)
+                        IVRange[0, j] = minIvs[j];
+                    else
+                        IVRange[1, j] = maxIvs[j];
+
+                    if (minIvs[j] > maxIvs[j])  // Invalid value
+                    {
+                        IVRange[0, j] = 0;
+                        IVRange[1, j] = 31;
                     }
                 }
             }

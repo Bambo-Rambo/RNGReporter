@@ -72,7 +72,7 @@ namespace RNGReporter
         private FrameGenerator shinygenerator;
         private FrameGenerator[] shinygenerators;
         private FrameCompare subFrameCompare;
-        private CgearCalibrator calibrator;
+        private DexIVCheck checker;
         private EventWaitHandle waitHandle;
 
         public TimeFinder5th()
@@ -3075,14 +3075,14 @@ namespace RNGReporter
 
         private void calibrateDelayIVs_Click(object sender, EventArgs e)
         {
-            if (calibrator == null)
-                calibrator = new CgearCalibrator();
-            calibrator.Show();
-            calibrator.Focus();
+            if (checker == null)
+                checker = new DexIVCheck();
+            checker.Show();
+            checker.Focus();
             if (dataGridViewCapValues.SelectedRows[0] != null)
             {
                 var frame = (IFrameCapture)dataGridViewCapValues.SelectedRows[0].DataBoundItem;
-                calibrator.SetValues(frame.CSeed.ToString("X8"), frame.Delay, (int)frame.Offset);
+                checker.SetValues(frame.CSeed.ToString("X8"), frame.Delay, (int)frame.Offset);
             }
         }
 

@@ -19,8 +19,10 @@
 
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 using RNGReporter.Objects;
 using RNGReporter.Properties;
@@ -32,10 +34,16 @@ namespace RNGReporter
         private BindingSource characteristicList;
         private BindingSource natureList;
         private BindingSource pokemonList;
-
         public DexIVCheck()
         {
             InitializeComponent();
+        }
+
+        private void DexIVCheck_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Hide();
+            this.Parent = null;
+            e.Cancel = true;
         }
 
         private void DexIVCheck_Load(object sender, EventArgs e)
@@ -180,11 +188,72 @@ namespace RNGReporter
 
             //  Get the results back and display them to the user
             textBoxResults.Text = ivCheck.ToString();
+            setIVs(ivCheck.getIVRange);
         }
 
-        private void buttonOk_Click(object sender, EventArgs e)
+
+        // C-Gear part
+        public void SetValues(string seed, uint delay, int IV)
         {
-            Close();
+            TargetSeed.Text = seed;
+            TargetDelay.Value = delay;
+            IVFrame.Value = IV;
+        }
+
+        public void setIVs(uint[,] IVRange)
+        {
+            minHP.Value = IVRange[0, 0]; maxHP.Value = IVRange[1, 0];
+            minAtk.Value = IVRange[0, 1]; maxAtk.Value = IVRange[1, 1];
+            minDef.Value = IVRange[0, 2]; maxDef.Value = IVRange[1, 2];
+            minSpA.Value = IVRange[0, 3]; maxSpA.Value = IVRange[1, 3];
+            minSpD.Value = IVRange[0, 4]; maxSpD.Value = IVRange[1, 4];
+            minSpe.Value = IVRange[0, 5]; maxSpe.Value = IVRange[1, 5];
+        }
+        private void btnCgearIVs_Click(object sender, EventArgs e)
+        {
+            DGV.Rows.Clear();
+            IRNG mt = new MersenneTwister(0);
+            uint Seed = uint.Parse(TargetSeed.Text, NumberStyles.HexNumber);
+            uint IVAdvances = (uint)IVFrame.Value;
+            uint DelayRange = 600;
+            uint MinSeed = Seed - DelayRange;
+            uint MaxSeed = Seed + DelayRange;
+            List<uint> rngList = new List<uint>();
+
+            for (uint i = MinSeed; i < MaxSeed; i++)
+            {
+                for (int j = -10; j <= 10; j++)
+                {
+                    uint currentSeed = (uint)(i + j * 0x1000000);
+
+                    mt.Reseed(currentSeed);
+
+                    for (uint cnt = 0; cnt < IVAdvances; cnt++)
+                        mt.Nextuint();
+
+                    rngList.Clear();
+                    for (int iv = 0; iv < 6; iv++)
+                        rngList.Add(mt.Nextuint() >> 27);
+
+                    if (rngList[0] >= minHP.Value && rngList[0] <= maxHP.Value)
+                        if (rngList[1] >= minAtk.Value && rngList[1] <= maxAtk.Value)
+                            if (rngList[2] >= minDef.Value && rngList[2] <= maxDef.Value)
+                                if (rngList[3] >= minSpA.Value && rngList[3] <= maxSpA.Value)
+                                    if (rngList[4] >= minSpD.Value && rngList[4] <= maxSpD.Value)
+                                        if (rngList[5] >= minSpe.Value && rngList[5] <= maxSpe.Value)
+                                        {
+                                            int difference = (ushort)currentSeed - (ushort)Seed;
+                                            DGV.Rows.Add(currentSeed.ToString("X"), difference,
+                                                TargetDelay.Value - difference,
+                                                rngList[0],
+                                                rngList[1],
+                                                rngList[2],
+                                                rngList[3],
+                                                rngList[4],
+                                                rngList[5]);
+                                        }
+                }
+            }
         }
     }
 }
