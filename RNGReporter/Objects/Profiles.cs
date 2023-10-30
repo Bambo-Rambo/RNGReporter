@@ -147,7 +147,7 @@ namespace RNGReporter.Objects
                 if (Keypresses == 0) return "None";
                 string keyString = "";
                 byte b = 0x1;
-                for (int i = 0; i < 4; ++i)
+                for (int i = 0; i < 9; ++i)
                 {
                     if ((Keypresses & b) != 0)
                     {
@@ -202,7 +202,7 @@ namespace RNGReporter.Objects
             var keypresses = new List<List<ButtonComboType>>();
             byte b = 0x1;
             //have to start at 1 because a phantom element is added, not sure why
-            for (int i = 0; i < 4; ++i)
+            for (int i = 0; i < 9; ++i)
             {
                 if ((Keypresses & b) != 0)
                     keypresses.AddRange(Functions.KeypressCombos(i, SkipLR));

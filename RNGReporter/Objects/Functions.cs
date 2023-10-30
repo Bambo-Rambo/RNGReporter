@@ -687,6 +687,7 @@ namespace RNGReporter.Objects
             int keypress5 = 0;
             int keypress6 = 0;
             int keypress7 = 0;
+            int keypress8 = 0;
 
             if (maxButtons > 0)
                 keypress1 = 13;
@@ -702,8 +703,10 @@ namespace RNGReporter.Objects
                 keypress6 = 13;
             if (maxButtons > 6)
                 keypress7 = 13;
+            if (maxButtons > 6)
+                keypress8 = 13;
 
-            var buttons = new int[7];
+            var buttons = new int[8];
             var keyPresses = new List<List<ButtonComboType>>();
             for (buttons[0] = 1; buttons[0] < keypress1; buttons[0]++)
             {
@@ -892,6 +895,41 @@ namespace RNGReporter.Objects
                                                     (ButtonComboType) buttons[6]
                                                 };
                                             keyPresses.Add(keyCombo);
+                                        }
+
+                                        for (buttons[7] = buttons[6] + 1; buttons[7] < keypress8; buttons[7]++)
+                                        {
+                                            if (skipLR && (buttons[7] == 9 || buttons[7] == 10))
+                                                continue;
+
+                                            // Can't press Left and Right at the same time
+                                            if (buttons[7] == 6 && buttons[6] == 5)
+                                                continue;
+
+                                            // Can't press Up and Down at the same time
+                                            if (buttons[7] == 8 && buttons[6] == 7)
+                                                continue;
+
+                                            // Can't press Start+Select+R+L
+                                            if (buttons[0] == 1 && buttons[1] == 2 &&
+                                                (buttons[6] == 9 && buttons[7] == 10))
+                                                continue;
+
+                                            if (maxButtons == 8)
+                                            {
+                                                var keyCombo = new List<ButtonComboType>
+                                                {
+                                                    (ButtonComboType) buttons[0],
+                                                    (ButtonComboType) buttons[1],
+                                                    (ButtonComboType) buttons[2],
+                                                    (ButtonComboType) buttons[3],
+                                                    (ButtonComboType) buttons[4],
+                                                    (ButtonComboType) buttons[5],
+                                                    (ButtonComboType) buttons[6],
+                                                    (ButtonComboType) buttons[7]
+                                                };
+                                                keyPresses.Add(keyCombo);
+                                            }
                                         }
                                     }
                                 }

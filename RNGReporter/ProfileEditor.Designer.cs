@@ -103,7 +103,11 @@
             "None",
             "1",
             "2",
-            "3"});
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"});
             this.comboBoxKeypresses.Location = new System.Drawing.Point(207, 63);
             this.comboBoxKeypresses.Name = "comboBoxKeypresses";
             this.comboBoxKeypresses.Size = new System.Drawing.Size(132, 21);

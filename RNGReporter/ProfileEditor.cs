@@ -127,7 +127,7 @@ namespace RNGReporter
                 return;
             }
             byte b = 0x1;
-            for (int i = 1; i < 5; ++i)
+            for (int i = 1; i < 9; ++i)
             {
                 comboBoxKeypresses.CheckBoxItems[i].Checked = (keypresses & b) != 0;
                 b <<= 1;
@@ -139,7 +139,7 @@ namespace RNGReporter
             int keypresses = 0;
             byte b = 0x1;
             //have to start at 1 because a phantom element is added, not sure why
-            for (int i = 1; i < 5; ++i)
+            for (int i = 1; i < 9; ++i)
             {
                 keypresses += comboBoxKeypresses.CheckBoxItems[i].Checked ? b : 0;
                 b <<= 1;
