@@ -2410,6 +2410,8 @@ namespace RNGReporter
                 comboBoxEncounterType.Enabled = false;
             }
 
+            gen5FrameFinderToolStripMenuItem.Enabled = ((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Natures);
+
             CheckTriggerBox();
             int method = comboBoxMethod.SelectedIndex;
             Gen5GroupBox.Visible = (method >= 9 && method <= 11) || (method >= 21 && method <= 25 && method != 23);
@@ -3394,6 +3396,11 @@ namespace RNGReporter
                 Functions.GenderLockedCase(wondercard.eventGender, Functions.GenderRatio(wondercard.eventSpecies));
 
             return wondercard;
+        }
+
+        private void gen5FrameFinderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new Gen5FrameFinder(dataGridViewValues).Show();
         }
     }
 }
