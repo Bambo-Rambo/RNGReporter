@@ -198,6 +198,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\_MaskedTextBox.Designer.cs" />
+    <Compile Include="Gen5FrameFinder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gen5FrameFinder.designer.cs">
+      <DependentUpon>Gen5FrameFinder.cs</DependentUpon>
+    </Compile>
     <Compile Include="IVstoFrame.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -537,6 +543,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GameCube.resx">
       <DependentUpon>GameCube.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gen5FrameFinder.resx">
+      <DependentUpon>Gen5FrameFinder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GenderRatioLookup.resx">
       <DependentUpon>GenderRatioLookup.cs</DependentUpon>

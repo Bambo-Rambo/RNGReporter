@@ -33,9 +33,9 @@ namespace RNGReporter
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties3 = new RNGReporter.Controls.CheckBoxProperties();
             RNGReporter.Controls.CheckBoxProperties checkBoxProperties1 = new RNGReporter.Controls.CheckBoxProperties();
-            RNGReporter.Controls.CheckBoxProperties checkBoxProperties2 = new RNGReporter.Controls.CheckBoxProperties();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -227,6 +227,7 @@ namespace RNGReporter
             this.comboBoxMethod = new RNGReporter.GlassComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.MainImportWC = new RNGReporter.GlassButton();
+            this.gen5FrameFinderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripGrid.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripTimeFinder.SuspendLayout();
@@ -299,12 +300,13 @@ namespace RNGReporter
             this.searchCoinFlipsToolStripMenuItem,
             this.searchNaturesToolStripMenuItem,
             this.searchElmToolStripMenuItem,
+            this.gen5FrameFinderToolStripMenuItem,
             this.displayParentsInSearchToolStripMenuItem,
             this.resetParentsToolStripMenuItem,
             this.toolStripMenuItem3,
             this.outputResultsToTXTToolStripMenuItem});
             this.contextMenuStripGrid.Name = "contextMenuStripGrid";
-            this.contextMenuStripGrid.Size = new System.Drawing.Size(334, 380);
+            this.contextMenuStripGrid.Size = new System.Drawing.Size(334, 424);
             this.contextMenuStripGrid.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripGrid_Opening);
             // 
             // lockFrameToolStripMenuItem
@@ -1639,8 +1641,8 @@ namespace RNGReporter
             // comboBoxEncounterSlot
             // 
             this.comboBoxEncounterSlot.BlankText = "Any";
-            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.comboBoxEncounterSlot.CheckBoxProperties = checkBoxProperties1;
+            checkBoxProperties3.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.comboBoxEncounterSlot.CheckBoxProperties = checkBoxProperties3;
             this.comboBoxEncounterSlot.DisplayMemberSingleItem = "";
             this.comboBoxEncounterSlot.DropDownHeight = 330;
             this.comboBoxEncounterSlot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1707,8 +1709,8 @@ namespace RNGReporter
             // comboBoxNature
             // 
             this.comboBoxNature.BlankText = "Any";
-            checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.comboBoxNature.CheckBoxProperties = checkBoxProperties2;
+            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.comboBoxNature.CheckBoxProperties = checkBoxProperties1;
             this.comboBoxNature.DisplayMemberSingleItem = "";
             this.comboBoxNature.DropDownHeight = 300;
             this.comboBoxNature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1911,8 +1913,8 @@ namespace RNGReporter
             // PID
             // 
             this.PID.DataPropertyName = "Pid";
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Consolas", 8.75F);
-            this.PID.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Consolas", 8.75F);
+            this.PID.DefaultCellStyle = dataGridViewCellStyle2;
             this.PID.HeaderText = "PID";
             this.PID.Name = "PID";
             this.PID.ReadOnly = true;
@@ -2149,6 +2151,13 @@ namespace RNGReporter
             this.MainImportWC.Text = "Import Wonder Card";
             this.MainImportWC.Visible = false;
             this.MainImportWC.Click += new System.EventHandler(this.MainImportWC_Click);
+            // 
+            // gen5FrameFinderToolStripMenuItem
+            // 
+            this.gen5FrameFinderToolStripMenuItem.Name = "gen5FrameFinderToolStripMenuItem";
+            this.gen5FrameFinderToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
+            this.gen5FrameFinderToolStripMenuItem.Text = "Gen 5 FrameFinder";
+            this.gen5FrameFinderToolStripMenuItem.Click += new System.EventHandler(this.gen5FrameFinderToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -2421,5 +2430,6 @@ namespace RNGReporter
         private System.Windows.Forms.Label labelLuckyPower;
         private System.Windows.Forms.Label label4;
         private GlassButton MainImportWC;
+        private System.Windows.Forms.ToolStripMenuItem gen5FrameFinderToolStripMenuItem;
     }
 }
