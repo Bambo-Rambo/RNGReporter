@@ -2,8 +2,6 @@
 
 **Download Link [here](https://ci.appveyor.com/project/Bambo-Rambo/rngreporter/build/artifacts)**
 
-**Report Issues [here](https://github.com/Bambo-Rambo/RNG-Guides/issues)**
-
 ### Credits
 mingot, Slashmolder, and OmegaDonut for creating [RNGReporter](https://github.com/Slashmolder/RNGReporter)
 
