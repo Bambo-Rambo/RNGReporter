@@ -628,7 +628,7 @@ namespace RNGReporter
                 CapSeed.Width = seedColumnLong(false, CapSeed);
             }
 
-            if (generator.FrameType == FrameType.Method5Standard)
+            if (generator.FrameType == FrameType.Method5Standard || generator.FrameType == FrameType.Method5CGear)
             {
                 frameCompare = new FrameCompare(
                     ivFiltersCapture.IVFilter, 

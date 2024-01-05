@@ -77,10 +77,14 @@ namespace RNGReporter.Objects
         private static readonly uint[] italianWhite2 = {0x28AE0902, 0x959D0302, 0x50FF1F02, 0xA4FF1F02, 0xA4FF1F02};
         private static readonly uint[] italianWhite2DSi = {0x28AE0902, 0x959D0302, 0xD05E7A02, 0x245F7A02, 0x245F7A02};
 
-        private static readonly uint[] koreanBlack = {0xB0672102, 0xAC682102, 0xAC682102, 0xF8682102, 0xF8682102};
-        private static readonly uint[] koreanWhite = {0xB0672102, 0xAC682102, 0xAC682102, 0xF8682102, 0xF8682102};
-        private static readonly uint[] koreanWhite2 = {0x2CB60902, 0x01A50302, 0x70072002, 0xC4072002, 0xC4072002};
-        private static readonly uint[] koreanWhite2DSi = {0x2CB60902, 0x01A50302, 0xB0577A02, 0x04587A02, 0x04587A02};
+        private static readonly uint[] koreanBlack = { 0xB0672102, 0xAC682102, 0xAC682102, 0xF8682102, 0xF8682102 };
+        private static readonly uint[] koreanBlackDSi = { 0x50117602, 0x4C127602, 0x4C127602, 0x98127602, 0x98127602 };
+        private static readonly uint[] koreanWhite = { 0xB0672102, 0xAC682102, 0xAC682102, 0xF8682102, 0xF8682102 };
+        private static readonly uint[] koreanWhiteDSi = { 0x50117602, 0x4C127602, 0x4C127602, 0x98127602, 0x98127602 };
+        private static readonly uint[] koreanBlack2 = { 0xCB60902, 0xD5A40302, 0x50072002, 0xA4072002, 0xA4072002 };
+        private static readonly uint[] koreanBlack2DSi = { 0xCB60902, 0xD5A40302, 0x70072002, 0xC4072002, 0xC4072002 };
+        private static readonly uint[] koreanWhite2 = { 0x2CB60902, 0x1A50302, 0x70072002, 0xC4072002, 0xC4072002 };
+        private static readonly uint[] koreanWhite2DSi = { 0x2CB60902, 0x1A50302, 0xB0577A02, 0x4587A02, 0x4587A02 };
 
         #endregion
 
@@ -174,11 +178,11 @@ namespace RNGReporter.Objects
                     switch (version)
                     {
                         case Version.Black:
-                            return dsType == DSType.DS_Lite ? koreanBlack : null;
+                            return dsType == DSType.DS_Lite ? koreanBlack : koreanBlackDSi;
                         case Version.White:
-                            return dsType == DSType.DS_Lite ? koreanWhite : null;
+                            return dsType == DSType.DS_Lite ? koreanWhite : koreanWhiteDSi;
                         case Version.Black2:
-                            return null;
+                            return dsType == DSType.DS_Lite ? koreanBlack2 : koreanBlack2DSi;
                         case Version.White2:
                             return dsType == DSType.DS_Lite ? koreanWhite2 : koreanWhite2DSi;
                     }
