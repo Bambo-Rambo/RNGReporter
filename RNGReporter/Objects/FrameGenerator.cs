@@ -1278,7 +1278,7 @@ namespace RNGReporter.Objects
                     mt.Nextuint();
 
                 rngList.Clear();
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 7; i++)
                     rngList.Add(mt.Nextuint() >> 27);
 
                 for (uint cnt = 0; cnt < maxResults; cnt++, rngList.RemoveAt(0), rngList.Add(mt.Nextuint() >> 27))
