@@ -3999,74 +3999,7 @@ namespace RNGReporter
         } 
 
 
-
-        private void checkAllBoxes(CheckBoxComboBox item, bool ToCheck)
-        {
-            for (int i = 1; i < item.Items.Count; i++)
-                item.CheckBoxItems[i].Checked = ToCheck;
-        }
-
-
         #endregion
 
-        private void CheckAll1_Click(object sender, EventArgs e)
-        {
-            if (TargetItem1.Enabled)
-            {
-                bool ToCheck = CheckAll1.Text.Equals("Check All");
-                checkAllBoxes(TargetItem1, ToCheck);
-                CheckAll1.Text = ToCheck ? "Uncheck All" : "Check All";
-            }
-        }
-
-        private void CheckAll2_Click(object sender, EventArgs e)
-        {
-            if (TargetItem2.Enabled)
-            {
-                bool ToCheck = CheckAll2.Text.Equals("Check All");
-                checkAllBoxes(TargetItem2, ToCheck);
-                CheckAll2.Text = ToCheck ? "Uncheck All" : "Check All";
-            }
-        }
-
-        private void CheckAll3_Click(object sender, EventArgs e)
-        {
-            if (TargetItem3.Enabled)
-            {
-                bool ToCheck = CheckAll3.Text.Equals("Check All");
-                checkAllBoxes(TargetItem3, ToCheck);
-                CheckAll3.Text = ToCheck ? "Uncheck All" : "Check All";
-            }
-        }
-
-        private void CheckAll4_Click(object sender, EventArgs e)
-        {
-            if (TargetItem4.Enabled)
-            {
-                bool ToCheck = CheckAll4.Text.Equals("Check All");
-                checkAllBoxes(TargetItem4, ToCheck);
-                CheckAll4.Text = ToCheck ? "Uncheck All" : "Check All";
-            }
-        }
-
-        private void CheckAll5_Click(object sender, EventArgs e)
-        {
-            if (TargetItem5.Enabled)
-            {
-                bool ToCheck = CheckAll5.Text.Equals("Check All");
-                checkAllBoxes(TargetItem5, ToCheck);
-                CheckAll5.Text = ToCheck ? "Uncheck All" : "Check All";
-            }
-        }
-
-        private void CheckAll6_Click(object sender, EventArgs e)
-        {
-            if (TargetItem6.Enabled)
-            {
-                bool ToCheck = CheckAll6.Text.Equals("Check All");
-                checkAllBoxes(TargetItem6, ToCheck);
-                CheckAll6.Text = ToCheck ? "Uncheck All" : "Check All";
-            }
-        }
     }
 }
