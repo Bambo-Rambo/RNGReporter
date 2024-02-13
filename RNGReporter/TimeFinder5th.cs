@@ -179,8 +179,10 @@ namespace RNGReporter
             comboCapAbility.SelectedIndex = 0;
             comboBoxCapGender.SelectedIndex = 0;
             comboBoxCapGenderRatio.SelectedIndex = 0;
-
             comboBoxEncounterType.SelectedIndex = 0;
+
+            SlotLevel1.SelectedIndex = SlotLevel2.SelectedIndex = SlotLevel3.SelectedIndex =
+                SlotLevel4.SelectedIndex = SlotLevel5.SelectedIndex = SlotLevel6.SelectedIndex = 0;
 
             // This is a rather hackish way of making the custom control
             // display the desired text upon loading
@@ -3579,39 +3581,69 @@ namespace RNGReporter
         private void checkBoxParty1_CheckedChanged(object sender, EventArgs e)
         {
             SlotLevel1.Enabled = TargetItem1.Enabled = checkBoxParty1.Checked;
-            SlotLevel1.SelectedIndex = 0;
         }
 
         private void checkBoxParty2_CheckedChanged(object sender, EventArgs e)
         {
             SlotLevel2.Enabled = TargetItem2.Enabled = checkBoxParty2.Checked;
-            SlotLevel2.SelectedIndex = 0;
         }
 
         private void checkBoxParty3_CheckedChanged(object sender, EventArgs e)
         {
             SlotLevel3.Enabled = TargetItem3.Enabled = checkBoxParty3.Checked;
-            SlotLevel3.SelectedIndex = 0;
         }
 
         private void checkBoxParty4_CheckedChanged(object sender, EventArgs e)
         {
             SlotLevel4.Enabled = TargetItem4.Enabled = checkBoxParty4.Checked;
-            SlotLevel4.SelectedIndex = 0;
         }
 
         private void checkBoxParty5_CheckedChanged(object sender, EventArgs e)
         {
             SlotLevel5.Enabled = TargetItem5.Enabled = checkBoxParty5.Checked;
-            SlotLevel5.SelectedIndex = 0;
         }
 
         private void checkBoxParty6_CheckedChanged(object sender, EventArgs e)
         {
             SlotLevel6.Enabled = TargetItem6.Enabled = checkBoxParty6.Checked;
-            SlotLevel6.SelectedIndex = 0;
         }
 
+
+        private void ClearList1_Click(object sender, EventArgs e)
+        {
+            ClearItems(TargetItem1);
+        }
+
+        private void ClearList2_Click(object sender, EventArgs e)
+        {
+            ClearItems(TargetItem2);
+        }
+
+        private void ClearList3_Click(object sender, EventArgs e)
+        {
+            ClearItems(TargetItem3);
+        }
+
+        private void ClearList4_Click(object sender, EventArgs e)
+        {
+            ClearItems(TargetItem4);
+        }
+
+        private void ClearList5_Click(object sender, EventArgs e)
+        {
+            ClearItems(TargetItem5);
+        }
+
+        private void ClearList6_Click(object sender, EventArgs e)
+        {
+            ClearItems(TargetItem6);
+        }
+
+        private void ClearItems(CheckBoxComboBox comboBox)
+        {
+            for (int i = 1; i < comboBox.Items.Count; i++)
+                comboBox.CheckBoxItems[i].Checked = false;
+        }
 
 
         private void SlotLevel1_SelectedIndexChanged(object sender, EventArgs e)
@@ -3646,31 +3678,31 @@ namespace RNGReporter
 
         private void setItems(int LevelRange, CheckBoxComboBox Checked)
         {
-            if (Checked.Enabled)
+            string[] CommonItems = Functions.CommonPickup;
+            string[] RareItems = Functions.RarePickup;
+
+            Checked.Items.Clear();
+            for (int i = LevelRange; i < LevelRange + 9; i++)
+                Checked.Items.Add(CommonItems[i]);
+            for (int i = 2; i > 0; i--)
+                Checked.Items.Add(RareItems[LevelRange + i]);
+
+            if (Checked.Items.Count != 0)
             {
-                string[] CommonItems = Functions.CommonPickup;
-                string[] RareItems = Functions.RarePickup;
-
-                Checked.Items.Clear();
-                for (int i = LevelRange; i < LevelRange + 9; i++)
-                    Checked.Items.Add(CommonItems[i]);
-                for (int i = 2; i > 0; i--)
-                    Checked.Items.Add(RareItems[LevelRange + i]);
-
-                if (Checked.Items.Count != 0)
-                {
-                    Checked.CheckBoxItems[0].Checked = true;
-                    Checked.CheckBoxItems[0].Checked = false;
-                }
+                Checked.CheckBoxItems[0].Checked = true;
+                Checked.CheckBoxItems[0].Checked = false;
             }
         }
 
         private List<int> GetCandidateItems(CheckBoxComboBox checkedItems)
         {
             List<int> Candidates = new List<int>();
-            for (int i = 1; i < checkedItems.Items.Count; i++)
-                if (checkedItems.CheckBoxItems[i].Checked)
-                    Candidates.Add(i - 1);
+            if (checkedItems.Enabled)   // Ignore selected items if party slot doesn't have Pickup
+            {
+                for (int i = 1; i < checkedItems.Items.Count; i++)
+                    if (checkedItems.CheckBoxItems[i].Checked)
+                        Candidates.Add(i - 1);
+            }
             return Candidates;
         }
 
@@ -3737,8 +3769,6 @@ namespace RNGReporter
             colItem5.Visible = checkBoxParty5.Checked;
             colItem6.Visible = checkBoxParty6.Checked;
 
-            //List<List<string>> ItemCaseList = GetItemList();
-
             int consumed = 5;
             if (profile.MemoryLink)
                 consumed++;
@@ -3755,7 +3785,6 @@ namespace RNGReporter
                 //EncounterMod = Objects.EncounterMod.Search,
                 InitialFrame = minOffsetPickup,
                 MaxResults = maxOffsetPickup - minOffsetPickup + 1,
-                //PossibleItems = GetItemList(),
             };
 
             //  Build up a FrameComparer
@@ -3996,7 +4025,7 @@ namespace RNGReporter
                 checkBoxParty6.Checked ? CreateList(TargetItem6) : null,
             };
             return List;
-        } 
+        }
 
 
         #endregion
