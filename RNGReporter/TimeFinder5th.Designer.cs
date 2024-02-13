@@ -32,35 +32,45 @@ namespace RNGReporter
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            RNGReporter.Controls.CheckBoxProperties checkBoxProperties1 = new RNGReporter.Controls.CheckBoxProperties();
-            RNGReporter.Controls.CheckBoxProperties checkBoxProperties2 = new RNGReporter.Controls.CheckBoxProperties();
-            RNGReporter.Controls.CheckBoxProperties checkBoxProperties3 = new RNGReporter.Controls.CheckBoxProperties();
-            RNGReporter.Controls.CheckBoxProperties checkBoxProperties4 = new RNGReporter.Controls.CheckBoxProperties();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            RNGReporter.Controls.CheckBoxProperties checkBoxProperties5 = new RNGReporter.Controls.CheckBoxProperties();
-            RNGReporter.Controls.CheckBoxProperties checkBoxProperties6 = new RNGReporter.Controls.CheckBoxProperties();
-            RNGReporter.Controls.CheckBoxProperties checkBoxProperties7 = new RNGReporter.Controls.CheckBoxProperties();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle241 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle242 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle243 = new System.Windows.Forms.DataGridViewCellStyle();
             RNGReporter.Controls.CheckBoxProperties checkBoxProperties8 = new RNGReporter.Controls.CheckBoxProperties();
             RNGReporter.Controls.CheckBoxProperties checkBoxProperties9 = new RNGReporter.Controls.CheckBoxProperties();
             RNGReporter.Controls.CheckBoxProperties checkBoxProperties10 = new RNGReporter.Controls.CheckBoxProperties();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             RNGReporter.Controls.CheckBoxProperties checkBoxProperties11 = new RNGReporter.Controls.CheckBoxProperties();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle244 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle245 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle246 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle247 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle248 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle252 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle253 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle254 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle255 = new System.Windows.Forms.DataGridViewCellStyle();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties13 = new RNGReporter.Controls.CheckBoxProperties();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties14 = new RNGReporter.Controls.CheckBoxProperties();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties15 = new RNGReporter.Controls.CheckBoxProperties();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties16 = new RNGReporter.Controls.CheckBoxProperties();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties17 = new RNGReporter.Controls.CheckBoxProperties();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties19 = new RNGReporter.Controls.CheckBoxProperties();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle256 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle257 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle258 = new System.Windows.Forms.DataGridViewCellStyle();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties20 = new RNGReporter.Controls.CheckBoxProperties();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties1 = new RNGReporter.Controls.CheckBoxProperties();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle259 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle260 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle249 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle250 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle251 = new System.Windows.Forms.DataGridViewCellStyle();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties2 = new RNGReporter.Controls.CheckBoxProperties();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties3 = new RNGReporter.Controls.CheckBoxProperties();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties18 = new RNGReporter.Controls.CheckBoxProperties();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties4 = new RNGReporter.Controls.CheckBoxProperties();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties5 = new RNGReporter.Controls.CheckBoxProperties();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties6 = new RNGReporter.Controls.CheckBoxProperties();
             RNGReporter.Controls.CheckBoxProperties checkBoxProperties12 = new RNGReporter.Controls.CheckBoxProperties();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStripCap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copySeedToClipboardToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.copyCgearToClipboard = new System.Windows.Forms.ToolStripMenuItem();
@@ -370,12 +380,66 @@ namespace RNGReporter
             this.dataGridViewTextBoxColumn30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPagePickup = new System.Windows.Forms.TabPage();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.cbActiveRoamer = new System.Windows.Forms.CheckBox();
+            this.dataGridViewPickup = new RNGReporter.DoubleBufferedDataGridView();
+            this.dataGridViewTextBoxColumn31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colItem1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colItem2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colItem3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colItem4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colItem5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colItem6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn69 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn70 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn71 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonPickupSearch = new RNGReporter.GlassButton();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.CheckAll6 = new RNGReporter.GlassButton();
+            this.CheckAll5 = new RNGReporter.GlassButton();
+            this.CheckAll4 = new RNGReporter.GlassButton();
+            this.CheckAll3 = new RNGReporter.GlassButton();
+            this.CheckAll2 = new RNGReporter.GlassButton();
+            this.CheckAll1 = new RNGReporter.GlassButton();
+            this.TargetItem2 = new RNGReporter.Controls.CheckBoxComboBox();
+            this.TargetItem6 = new RNGReporter.Controls.CheckBoxComboBox();
+            this.TargetItem5 = new RNGReporter.Controls.CheckBoxComboBox();
+            this.TargetItem3 = new RNGReporter.Controls.CheckBoxComboBox();
+            this.TargetItem4 = new RNGReporter.Controls.CheckBoxComboBox();
+            this.TargetItem1 = new RNGReporter.Controls.CheckBoxComboBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.SlotLevel1 = new RNGReporter._ComboBox(this.components);
+            this.SlotLevel2 = new RNGReporter._ComboBox(this.components);
+            this.SlotLevel6 = new RNGReporter._ComboBox(this.components);
+            this.SlotLevel3 = new RNGReporter._ComboBox(this.components);
+            this.SlotLevel4 = new RNGReporter._ComboBox(this.components);
+            this.SlotLevel5 = new RNGReporter._ComboBox(this.components);
+            this.checkBoxParty6 = new System.Windows.Forms.CheckBox();
+            this.checkBoxParty5 = new System.Windows.Forms.CheckBox();
+            this.checkBoxParty4 = new System.Windows.Forms.CheckBox();
+            this.checkBoxParty3 = new System.Windows.Forms.CheckBox();
+            this.checkBoxParty2 = new System.Windows.Forms.CheckBox();
+            this.checkBoxParty1 = new System.Windows.Forms.CheckBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.minPickupAdv = new RNGReporter.Controls.MaskedTextBox2();
+            this.maxPickupAdv = new RNGReporter.Controls.MaskedTextBox2();
+            this.label47 = new System.Windows.Forms.Label();
+            this.label48 = new System.Windows.Forms.Label();
+            this.comboBoxPickupMonth = new RNGReporter.Controls.CheckBoxComboBox();
+            this.maskedTextBoxPickupYear = new RNGReporter.Controls.MaskedTextBox2();
             this.toolTipGenderRatio = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipDataGrid = new System.Windows.Forms.ToolTip(this.components);
             this.groupBoxConfiguration = new System.Windows.Forms.GroupBox();
             this.labelProfileInformation = new System.Windows.Forms.Label();
             this.comboBoxProfiles = new RNGReporter.GlassComboBox();
             this.buttonEditProfile = new RNGReporter.GlassButton();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
             this.contextMenuStripCap.SuspendLayout();
             this.contextMenuStripEggPid.SuspendLayout();
             this.tabPageShinyEgg.SuspendLayout();
@@ -398,6 +462,10 @@ namespace RNGReporter
             this.cmsHiddenGrotto.SuspendLayout();
             this.tabPageDreamRadar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvDreamRadar)).BeginInit();
+            this.tabPagePickup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPickup)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.groupBoxConfiguration.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -854,9 +922,9 @@ namespace RNGReporter
             // EggSeed
             // 
             this.EggSeed.DataPropertyName = "Seed";
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Consolas", 8.75F);
-            dataGridViewCellStyle1.Format = "X16";
-            this.EggSeed.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle241.Font = new System.Drawing.Font("Consolas", 8.75F);
+            dataGridViewCellStyle241.Format = "X16";
+            this.EggSeed.DefaultCellStyle = dataGridViewCellStyle241;
             this.EggSeed.HeaderText = "Seed";
             this.EggSeed.Name = "EggSeed";
             this.EggSeed.ReadOnly = true;
@@ -873,9 +941,9 @@ namespace RNGReporter
             // EggPID
             // 
             this.EggPID.DataPropertyName = "Pid";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Consolas", 8.75F);
-            dataGridViewCellStyle2.Format = "X8";
-            this.EggPID.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle242.Font = new System.Drawing.Font("Consolas", 8.75F);
+            dataGridViewCellStyle242.Format = "X8";
+            this.EggPID.DefaultCellStyle = dataGridViewCellStyle242;
             this.EggPID.HeaderText = "PID";
             this.EggPID.Name = "EggPID";
             this.EggPID.ReadOnly = true;
@@ -1013,8 +1081,8 @@ namespace RNGReporter
             // ColumnEggDate
             // 
             this.ColumnEggDate.DataPropertyName = "TimeDate";
-            dataGridViewCellStyle3.Format = "MM/dd/yy HH:mm:ss";
-            this.ColumnEggDate.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle243.Format = "MM/dd/yy HH:mm:ss";
+            this.ColumnEggDate.DefaultCellStyle = dataGridViewCellStyle243;
             this.ColumnEggDate.HeaderText = "Date\\Time";
             this.ColumnEggDate.Name = "ColumnEggDate";
             this.ColumnEggDate.ReadOnly = true;
@@ -1120,8 +1188,8 @@ namespace RNGReporter
             // comboBoxShinyMonth
             // 
             this.comboBoxShinyMonth.BlankText = null;
-            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.comboBoxShinyMonth.CheckBoxProperties = checkBoxProperties1;
+            checkBoxProperties8.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.comboBoxShinyMonth.CheckBoxProperties = checkBoxProperties8;
             this.comboBoxShinyMonth.DisplayMemberSingleItem = "";
             this.comboBoxShinyMonth.DropDownHeight = 300;
             this.comboBoxShinyMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1373,8 +1441,8 @@ namespace RNGReporter
             // comboBoxCapNature
             // 
             this.comboBoxCapNature.BlankText = "Any";
-            checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.comboBoxCapNature.CheckBoxProperties = checkBoxProperties2;
+            checkBoxProperties9.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.comboBoxCapNature.CheckBoxProperties = checkBoxProperties9;
             this.comboBoxCapNature.DisplayMemberSingleItem = "";
             this.comboBoxCapNature.DropDownHeight = 300;
             this.comboBoxCapNature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1482,8 +1550,8 @@ namespace RNGReporter
             // comboCapEncounterSlot
             // 
             this.comboCapEncounterSlot.BlankText = "Any";
-            checkBoxProperties3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.comboCapEncounterSlot.CheckBoxProperties = checkBoxProperties3;
+            checkBoxProperties10.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.comboCapEncounterSlot.CheckBoxProperties = checkBoxProperties10;
             this.comboCapEncounterSlot.DisplayMemberSingleItem = "";
             this.comboCapEncounterSlot.DropDownHeight = 330;
             this.comboCapEncounterSlot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1653,8 +1721,8 @@ namespace RNGReporter
             // comboBoxCapMonth
             // 
             this.comboBoxCapMonth.BlankText = null;
-            checkBoxProperties4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.comboBoxCapMonth.CheckBoxProperties = checkBoxProperties4;
+            checkBoxProperties11.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.comboBoxCapMonth.CheckBoxProperties = checkBoxProperties11;
             this.comboBoxCapMonth.DisplayMemberSingleItem = "";
             this.comboBoxCapMonth.DropDownHeight = 310;
             this.comboBoxCapMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1987,9 +2055,9 @@ namespace RNGReporter
             // CapSeed
             // 
             this.CapSeed.DataPropertyName = "Seed";
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Consolas", 8.75F);
-            dataGridViewCellStyle4.Format = "X16";
-            this.CapSeed.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle244.Font = new System.Drawing.Font("Consolas", 8.75F);
+            dataGridViewCellStyle244.Format = "X16";
+            this.CapSeed.DefaultCellStyle = dataGridViewCellStyle244;
             this.CapSeed.FillWeight = 90F;
             this.CapSeed.HeaderText = "Seed";
             this.CapSeed.Name = "CapSeed";
@@ -2035,9 +2103,9 @@ namespace RNGReporter
             // PID
             // 
             this.PID.DataPropertyName = "Pid";
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Consolas", 8.75F);
-            dataGridViewCellStyle5.Format = "X8";
-            this.PID.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle245.Font = new System.Drawing.Font("Consolas", 8.75F);
+            dataGridViewCellStyle245.Format = "X8";
+            this.PID.DefaultCellStyle = dataGridViewCellStyle245;
             this.PID.HeaderText = "PID";
             this.PID.Name = "PID";
             this.PID.ReadOnly = true;
@@ -2214,8 +2282,8 @@ namespace RNGReporter
             // CapDateTime
             // 
             this.CapDateTime.DataPropertyName = "TimeDate";
-            dataGridViewCellStyle6.Format = "MM/dd/yy HH:mm:ss";
-            this.CapDateTime.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle246.Format = "MM/dd/yy HH:mm:ss";
+            this.CapDateTime.DefaultCellStyle = dataGridViewCellStyle246;
             this.CapDateTime.HeaderText = "Date\\Time";
             this.CapDateTime.Name = "CapDateTime";
             this.CapDateTime.ReadOnly = true;
@@ -2223,8 +2291,8 @@ namespace RNGReporter
             // CapTimer0
             // 
             this.CapTimer0.DataPropertyName = "Timer0";
-            dataGridViewCellStyle7.Format = "X";
-            this.CapTimer0.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle247.Format = "X";
+            this.CapTimer0.DefaultCellStyle = dataGridViewCellStyle247;
             this.CapTimer0.FillWeight = 60F;
             this.CapTimer0.HeaderText = "Timer0";
             this.CapTimer0.Name = "CapTimer0";
@@ -2251,9 +2319,9 @@ namespace RNGReporter
             // CgearSeed
             // 
             this.CgearSeed.DataPropertyName = "CSeed";
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            dataGridViewCellStyle8.Format = "X8";
-            this.CgearSeed.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle248.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            dataGridViewCellStyle248.Format = "X8";
+            this.CgearSeed.DefaultCellStyle = dataGridViewCellStyle248;
             this.CgearSeed.HeaderText = "C-Gear Seed";
             this.CgearSeed.Name = "CgearSeed";
             this.CgearSeed.ReadOnly = true;
@@ -2277,6 +2345,7 @@ namespace RNGReporter
             this.tabControl.Controls.Add(this.tabPageShinyEgg);
             this.tabControl.Controls.Add(this.tabPageHiddenGrotto);
             this.tabControl.Controls.Add(this.tabPageDreamRadar);
+            this.tabControl.Controls.Add(this.tabPagePickup);
             this.tabControl.Location = new System.Drawing.Point(13, 66);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -2347,9 +2416,9 @@ namespace RNGReporter
             // EventSeed
             // 
             this.EventSeed.DataPropertyName = "Seed";
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Consolas", 8.75F);
-            dataGridViewCellStyle9.Format = "X16";
-            this.EventSeed.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle252.Font = new System.Drawing.Font("Consolas", 8.75F);
+            dataGridViewCellStyle252.Format = "X16";
+            this.EventSeed.DefaultCellStyle = dataGridViewCellStyle252;
             this.EventSeed.FillWeight = 90F;
             this.EventSeed.HeaderText = "Seed";
             this.EventSeed.Name = "EventSeed";
@@ -2368,9 +2437,9 @@ namespace RNGReporter
             // EventPID
             // 
             this.EventPID.DataPropertyName = "eventPID";
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Consolas", 8.75F);
-            dataGridViewCellStyle10.Format = "X8";
-            this.EventPID.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle253.Font = new System.Drawing.Font("Consolas", 8.75F);
+            dataGridViewCellStyle253.Format = "X8";
+            this.EventPID.DefaultCellStyle = dataGridViewCellStyle253;
             this.EventPID.HeaderText = "PID";
             this.EventPID.Name = "EventPID";
             this.EventPID.ReadOnly = true;
@@ -2518,8 +2587,8 @@ namespace RNGReporter
             // EventDateTime
             // 
             this.EventDateTime.DataPropertyName = "TimeDate";
-            dataGridViewCellStyle11.Format = "MM/dd/yy HH:mm:ss";
-            this.EventDateTime.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle254.Format = "MM/dd/yy HH:mm:ss";
+            this.EventDateTime.DefaultCellStyle = dataGridViewCellStyle254;
             this.EventDateTime.HeaderText = "Date\\Time";
             this.EventDateTime.Name = "EventDateTime";
             this.EventDateTime.ReadOnly = true;
@@ -2527,8 +2596,8 @@ namespace RNGReporter
             // dataGridViewTextBoxColumn57
             // 
             this.dataGridViewTextBoxColumn57.DataPropertyName = "Timer0";
-            dataGridViewCellStyle12.Format = "X";
-            this.dataGridViewTextBoxColumn57.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle255.Format = "X";
+            this.dataGridViewTextBoxColumn57.DefaultCellStyle = dataGridViewCellStyle255;
             this.dataGridViewTextBoxColumn57.FillWeight = 60F;
             this.dataGridViewTextBoxColumn57.HeaderText = "Timer0";
             this.dataGridViewTextBoxColumn57.Name = "dataGridViewTextBoxColumn57";
@@ -2586,8 +2655,8 @@ namespace RNGReporter
             // glassComboEventNatures
             // 
             this.glassComboEventNatures.BlankText = "Any";
-            checkBoxProperties5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.glassComboEventNatures.CheckBoxProperties = checkBoxProperties5;
+            checkBoxProperties13.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.glassComboEventNatures.CheckBoxProperties = checkBoxProperties13;
             this.glassComboEventNatures.DisplayMemberSingleItem = "";
             this.glassComboEventNatures.DropDownHeight = 300;
             this.glassComboEventNatures.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -3020,8 +3089,8 @@ namespace RNGReporter
             // checkBoxComboMonths
             // 
             this.checkBoxComboMonths.BlankText = null;
-            checkBoxProperties6.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.checkBoxComboMonths.CheckBoxProperties = checkBoxProperties6;
+            checkBoxProperties14.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.checkBoxComboMonths.CheckBoxProperties = checkBoxProperties14;
             this.checkBoxComboMonths.DisplayMemberSingleItem = "";
             this.checkBoxComboMonths.DropDownHeight = 310;
             this.checkBoxComboMonths.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -3308,8 +3377,8 @@ namespace RNGReporter
             // cbHHSubSlot
             // 
             this.cbHHSubSlot.BlankText = null;
-            checkBoxProperties7.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cbHHSubSlot.CheckBoxProperties = checkBoxProperties7;
+            checkBoxProperties15.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cbHHSubSlot.CheckBoxProperties = checkBoxProperties15;
             this.cbHHSubSlot.DisplayMemberSingleItem = "";
             this.cbHHSubSlot.DropDownHeight = 300;
             this.cbHHSubSlot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -3327,8 +3396,8 @@ namespace RNGReporter
             // cbHHSlot
             // 
             this.cbHHSlot.BlankText = null;
-            checkBoxProperties8.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cbHHSlot.CheckBoxProperties = checkBoxProperties8;
+            checkBoxProperties16.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cbHHSlot.CheckBoxProperties = checkBoxProperties16;
             this.cbHHSlot.DisplayMemberSingleItem = "";
             this.cbHHSlot.DropDownHeight = 300;
             this.cbHHSlot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -3353,8 +3422,8 @@ namespace RNGReporter
             // cbHHHollowNumber
             // 
             this.cbHHHollowNumber.BlankText = null;
-            checkBoxProperties9.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cbHHHollowNumber.CheckBoxProperties = checkBoxProperties9;
+            checkBoxProperties17.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cbHHHollowNumber.CheckBoxProperties = checkBoxProperties17;
             this.cbHHHollowNumber.DisplayMemberSingleItem = "";
             this.cbHHHollowNumber.DropDownHeight = 300;
             this.cbHHHollowNumber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -3389,8 +3458,8 @@ namespace RNGReporter
             // cbHHMonth
             // 
             this.cbHHMonth.BlankText = null;
-            checkBoxProperties10.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cbHHMonth.CheckBoxProperties = checkBoxProperties10;
+            checkBoxProperties19.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cbHHMonth.CheckBoxProperties = checkBoxProperties19;
             this.cbHHMonth.DisplayMemberSingleItem = "";
             this.cbHHMonth.DropDownHeight = 300;
             this.cbHHMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -3501,9 +3570,9 @@ namespace RNGReporter
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "Seed";
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Consolas", 8.75F);
-            dataGridViewCellStyle13.Format = "X16";
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle256.Font = new System.Drawing.Font("Consolas", 8.75F);
+            dataGridViewCellStyle256.Format = "X16";
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle256;
             this.dataGridViewTextBoxColumn1.FillWeight = 90F;
             this.dataGridViewTextBoxColumn1.HeaderText = "Seed";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
@@ -3608,8 +3677,8 @@ namespace RNGReporter
             // dataGridViewTextBoxColumn23
             // 
             this.dataGridViewTextBoxColumn23.DataPropertyName = "DateTime";
-            dataGridViewCellStyle14.Format = "MM/dd/yy HH:mm:ss";
-            this.dataGridViewTextBoxColumn23.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle257.Format = "MM/dd/yy HH:mm:ss";
+            this.dataGridViewTextBoxColumn23.DefaultCellStyle = dataGridViewCellStyle257;
             this.dataGridViewTextBoxColumn23.HeaderText = "Date\\Time";
             this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
             this.dataGridViewTextBoxColumn23.ReadOnly = true;
@@ -3617,8 +3686,8 @@ namespace RNGReporter
             // dataGridViewTextBoxColumn24
             // 
             this.dataGridViewTextBoxColumn24.DataPropertyName = "Timer0";
-            dataGridViewCellStyle15.Format = "X";
-            this.dataGridViewTextBoxColumn24.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle258.Format = "X";
+            this.dataGridViewTextBoxColumn24.DefaultCellStyle = dataGridViewCellStyle258;
             this.dataGridViewTextBoxColumn24.FillWeight = 60F;
             this.dataGridViewTextBoxColumn24.HeaderText = "Timer0";
             this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
@@ -3836,8 +3905,8 @@ namespace RNGReporter
             // cbDRMonth
             // 
             this.cbDRMonth.BlankText = null;
-            checkBoxProperties11.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cbDRMonth.CheckBoxProperties = checkBoxProperties11;
+            checkBoxProperties20.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cbDRMonth.CheckBoxProperties = checkBoxProperties20;
             this.cbDRMonth.DisplayMemberSingleItem = "";
             this.cbDRMonth.DropDownHeight = 300;
             this.cbDRMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -3922,8 +3991,8 @@ namespace RNGReporter
             // cbDRNature
             // 
             this.cbDRNature.BlankText = "Any";
-            checkBoxProperties12.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cbDRNature.CheckBoxProperties = checkBoxProperties12;
+            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cbDRNature.CheckBoxProperties = checkBoxProperties1;
             this.cbDRNature.DisplayMemberSingleItem = "";
             this.cbDRNature.DropDownHeight = 300;
             this.cbDRNature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -3977,8 +4046,8 @@ namespace RNGReporter
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.DataPropertyName = "Seed";
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Consolas", 8.75F);
-            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle259.Font = new System.Drawing.Font("Consolas", 8.75F);
+            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle259;
             this.dataGridViewTextBoxColumn6.HeaderText = "Seed";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
@@ -3995,8 +4064,8 @@ namespace RNGReporter
             // dataGridViewTextBoxColumn11
             // 
             this.dataGridViewTextBoxColumn11.DataPropertyName = "Pid";
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Consolas", 8.75F);
-            this.dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle260.Font = new System.Drawing.Font("Consolas", 8.75F);
+            this.dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle260;
             this.dataGridViewTextBoxColumn11.HeaderText = "PID";
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
@@ -4097,6 +4166,699 @@ namespace RNGReporter
             this.dataGridViewTextBoxColumn36.Name = "dataGridViewTextBoxColumn36";
             this.dataGridViewTextBoxColumn36.Width = 120;
             // 
+            // tabPagePickup
+            // 
+            this.tabPagePickup.Controls.Add(this.label45);
+            this.tabPagePickup.Controls.Add(this.label44);
+            this.tabPagePickup.Controls.Add(this.label43);
+            this.tabPagePickup.Controls.Add(this.label42);
+            this.tabPagePickup.Controls.Add(this.label41);
+            this.tabPagePickup.Controls.Add(this.label37);
+            this.tabPagePickup.Controls.Add(this.cbActiveRoamer);
+            this.tabPagePickup.Controls.Add(this.dataGridViewPickup);
+            this.tabPagePickup.Controls.Add(this.buttonPickupSearch);
+            this.tabPagePickup.Controls.Add(this.groupBox2);
+            this.tabPagePickup.Controls.Add(this.groupBox1);
+            this.tabPagePickup.Controls.Add(this.checkBoxParty6);
+            this.tabPagePickup.Controls.Add(this.checkBoxParty5);
+            this.tabPagePickup.Controls.Add(this.checkBoxParty4);
+            this.tabPagePickup.Controls.Add(this.checkBoxParty3);
+            this.tabPagePickup.Controls.Add(this.checkBoxParty2);
+            this.tabPagePickup.Controls.Add(this.checkBoxParty1);
+            this.tabPagePickup.Controls.Add(this.label49);
+            this.tabPagePickup.Controls.Add(this.minPickupAdv);
+            this.tabPagePickup.Controls.Add(this.maxPickupAdv);
+            this.tabPagePickup.Controls.Add(this.label47);
+            this.tabPagePickup.Controls.Add(this.label48);
+            this.tabPagePickup.Controls.Add(this.comboBoxPickupMonth);
+            this.tabPagePickup.Controls.Add(this.maskedTextBoxPickupYear);
+            this.tabPagePickup.Location = new System.Drawing.Point(4, 22);
+            this.tabPagePickup.Name = "tabPagePickup";
+            this.tabPagePickup.Size = new System.Drawing.Size(1067, 522);
+            this.tabPagePickup.TabIndex = 6;
+            this.tabPagePickup.Text = "Pickup";
+            this.tabPagePickup.UseVisualStyleBackColor = true;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(613, 125);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(437, 13);
+            this.label41.TabIndex = 373;
+            this.label41.Text = "3. Shiny Charm / Memory Link (BW2 only) affect the frame hit and should be accoun" +
+    "ted for.";
+            this.label41.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(626, 45);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(38, 13);
+            this.label37.TabIndex = 372;
+            this.label37.Text = "Notes:";
+            this.label37.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // cbActiveRoamer
+            // 
+            this.cbActiveRoamer.AutoSize = true;
+            this.cbActiveRoamer.Location = new System.Drawing.Point(310, 34);
+            this.cbActiveRoamer.Name = "cbActiveRoamer";
+            this.cbActiveRoamer.Size = new System.Drawing.Size(96, 17);
+            this.cbActiveRoamer.TabIndex = 371;
+            this.cbActiveRoamer.Text = "Active Roamer";
+            this.cbActiveRoamer.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewPickup
+            // 
+            this.dataGridViewPickup.AllowUserToAddRows = false;
+            this.dataGridViewPickup.AllowUserToDeleteRows = false;
+            this.dataGridViewPickup.AllowUserToResizeRows = false;
+            this.dataGridViewPickup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewPickup.ColumnHeadersHeight = 20;
+            this.dataGridViewPickup.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridViewPickup.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn31,
+            this.dataGridViewTextBoxColumn32,
+            this.colItem1,
+            this.colItem2,
+            this.colItem3,
+            this.colItem4,
+            this.colItem5,
+            this.colItem6,
+            this.dataGridViewTextBoxColumn69,
+            this.dataGridViewTextBoxColumn70,
+            this.dataGridViewTextBoxColumn71});
+            this.dataGridViewPickup.ContextMenuStrip = this.contextMenuStripEggPid;
+            this.dataGridViewPickup.Location = new System.Drawing.Point(3, 264);
+            this.dataGridViewPickup.Name = "dataGridViewPickup";
+            this.dataGridViewPickup.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dataGridViewPickup.RowHeadersVisible = false;
+            this.dataGridViewPickup.RowTemplate.Height = 20;
+            this.dataGridViewPickup.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewPickup.ShowCellErrors = false;
+            this.dataGridViewPickup.ShowCellToolTips = false;
+            this.dataGridViewPickup.ShowEditingIcon = false;
+            this.dataGridViewPickup.ShowRowErrors = false;
+            this.dataGridViewPickup.Size = new System.Drawing.Size(1061, 255);
+            this.dataGridViewPickup.TabIndex = 361;
+            this.dataGridViewPickup.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewPickup_ColumnHeaderMouseClick);
+            // 
+            // dataGridViewTextBoxColumn31
+            // 
+            this.dataGridViewTextBoxColumn31.DataPropertyName = "Seed";
+            dataGridViewCellStyle249.Font = new System.Drawing.Font("Consolas", 8.75F);
+            dataGridViewCellStyle249.Format = "X16";
+            this.dataGridViewTextBoxColumn31.DefaultCellStyle = dataGridViewCellStyle249;
+            this.dataGridViewTextBoxColumn31.FillWeight = 90F;
+            this.dataGridViewTextBoxColumn31.HeaderText = "Seed";
+            this.dataGridViewTextBoxColumn31.Name = "dataGridViewTextBoxColumn31";
+            this.dataGridViewTextBoxColumn31.ReadOnly = true;
+            this.dataGridViewTextBoxColumn31.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dataGridViewTextBoxColumn31.Width = 140;
+            // 
+            // dataGridViewTextBoxColumn32
+            // 
+            this.dataGridViewTextBoxColumn32.DataPropertyName = "Offset";
+            this.dataGridViewTextBoxColumn32.FillWeight = 80F;
+            this.dataGridViewTextBoxColumn32.HeaderText = "Frame";
+            this.dataGridViewTextBoxColumn32.Name = "dataGridViewTextBoxColumn32";
+            this.dataGridViewTextBoxColumn32.ReadOnly = true;
+            this.dataGridViewTextBoxColumn32.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dataGridViewTextBoxColumn32.Width = 55;
+            // 
+            // colItem1
+            // 
+            this.colItem1.DataPropertyName = "DisplayItem1";
+            this.colItem1.HeaderText = "Item 1";
+            this.colItem1.Name = "colItem1";
+            this.colItem1.ReadOnly = true;
+            // 
+            // colItem2
+            // 
+            this.colItem2.DataPropertyName = "DisplayItem2";
+            this.colItem2.HeaderText = "Item 2";
+            this.colItem2.Name = "colItem2";
+            this.colItem2.ReadOnly = true;
+            // 
+            // colItem3
+            // 
+            this.colItem3.DataPropertyName = "DisplayItem3";
+            this.colItem3.HeaderText = "Item 3";
+            this.colItem3.Name = "colItem3";
+            this.colItem3.ReadOnly = true;
+            // 
+            // colItem4
+            // 
+            this.colItem4.DataPropertyName = "DisplayItem4";
+            this.colItem4.HeaderText = "Item 4";
+            this.colItem4.Name = "colItem4";
+            this.colItem4.ReadOnly = true;
+            // 
+            // colItem5
+            // 
+            this.colItem5.DataPropertyName = "DisplayItem5";
+            this.colItem5.HeaderText = "Item 5";
+            this.colItem5.Name = "colItem5";
+            this.colItem5.ReadOnly = true;
+            // 
+            // colItem6
+            // 
+            this.colItem6.DataPropertyName = "DisplayItem6";
+            this.colItem6.HeaderText = "Item 6";
+            this.colItem6.Name = "colItem6";
+            this.colItem6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn69
+            // 
+            this.dataGridViewTextBoxColumn69.DataPropertyName = "TimeDate";
+            dataGridViewCellStyle250.Format = "MM/dd/yy HH:mm:ss";
+            this.dataGridViewTextBoxColumn69.DefaultCellStyle = dataGridViewCellStyle250;
+            this.dataGridViewTextBoxColumn69.HeaderText = "Date\\Time";
+            this.dataGridViewTextBoxColumn69.Name = "dataGridViewTextBoxColumn69";
+            this.dataGridViewTextBoxColumn69.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn70
+            // 
+            this.dataGridViewTextBoxColumn70.DataPropertyName = "Timer0";
+            dataGridViewCellStyle251.Format = "X";
+            this.dataGridViewTextBoxColumn70.DefaultCellStyle = dataGridViewCellStyle251;
+            this.dataGridViewTextBoxColumn70.FillWeight = 60F;
+            this.dataGridViewTextBoxColumn70.HeaderText = "Timer0";
+            this.dataGridViewTextBoxColumn70.Name = "dataGridViewTextBoxColumn70";
+            this.dataGridViewTextBoxColumn70.Visible = false;
+            this.dataGridViewTextBoxColumn70.Width = 45;
+            // 
+            // dataGridViewTextBoxColumn71
+            // 
+            this.dataGridViewTextBoxColumn71.DataPropertyName = "Keypress";
+            this.dataGridViewTextBoxColumn71.HeaderText = "Keypresses";
+            this.dataGridViewTextBoxColumn71.Name = "dataGridViewTextBoxColumn71";
+            this.dataGridViewTextBoxColumn71.Width = 120;
+            // 
+            // buttonPickupSearch
+            // 
+            this.buttonPickupSearch.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.buttonPickupSearch.ForeColor = System.Drawing.Color.Black;
+            this.buttonPickupSearch.Location = new System.Drawing.Point(451, 24);
+            this.buttonPickupSearch.Name = "buttonPickupSearch";
+            this.buttonPickupSearch.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.buttonPickupSearch.ShineColor = System.Drawing.SystemColors.Window;
+            this.buttonPickupSearch.Size = new System.Drawing.Size(124, 32);
+            this.buttonPickupSearch.TabIndex = 360;
+            this.buttonPickupSearch.Text = "Search";
+            this.buttonPickupSearch.Click += new System.EventHandler(this.buttonPickupSearch_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.CheckAll6);
+            this.groupBox2.Controls.Add(this.CheckAll5);
+            this.groupBox2.Controls.Add(this.CheckAll4);
+            this.groupBox2.Controls.Add(this.CheckAll3);
+            this.groupBox2.Controls.Add(this.CheckAll2);
+            this.groupBox2.Controls.Add(this.CheckAll1);
+            this.groupBox2.Controls.Add(this.TargetItem2);
+            this.groupBox2.Controls.Add(this.TargetItem6);
+            this.groupBox2.Controls.Add(this.TargetItem5);
+            this.groupBox2.Controls.Add(this.TargetItem3);
+            this.groupBox2.Controls.Add(this.TargetItem4);
+            this.groupBox2.Controls.Add(this.TargetItem1);
+            this.groupBox2.Location = new System.Drawing.Point(261, 73);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(335, 185);
+            this.groupBox2.TabIndex = 358;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Target Item";
+            // 
+            // CheckAll6
+            // 
+            this.CheckAll6.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.CheckAll6.ForeColor = System.Drawing.Color.Black;
+            this.CheckAll6.Location = new System.Drawing.Point(190, 154);
+            this.CheckAll6.Name = "CheckAll6";
+            this.CheckAll6.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.CheckAll6.ShineColor = System.Drawing.SystemColors.Window;
+            this.CheckAll6.Size = new System.Drawing.Size(124, 21);
+            this.CheckAll6.TabIndex = 377;
+            this.CheckAll6.Text = "Check All";
+            this.CheckAll6.Click += new System.EventHandler(this.CheckAll6_Click);
+            // 
+            // CheckAll5
+            // 
+            this.CheckAll5.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.CheckAll5.ForeColor = System.Drawing.Color.Black;
+            this.CheckAll5.Location = new System.Drawing.Point(190, 127);
+            this.CheckAll5.Name = "CheckAll5";
+            this.CheckAll5.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.CheckAll5.ShineColor = System.Drawing.SystemColors.Window;
+            this.CheckAll5.Size = new System.Drawing.Size(124, 21);
+            this.CheckAll5.TabIndex = 376;
+            this.CheckAll5.Text = "Check All";
+            this.CheckAll5.Click += new System.EventHandler(this.CheckAll5_Click);
+            // 
+            // CheckAll4
+            // 
+            this.CheckAll4.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.CheckAll4.ForeColor = System.Drawing.Color.Black;
+            this.CheckAll4.Location = new System.Drawing.Point(190, 100);
+            this.CheckAll4.Name = "CheckAll4";
+            this.CheckAll4.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.CheckAll4.ShineColor = System.Drawing.SystemColors.Window;
+            this.CheckAll4.Size = new System.Drawing.Size(124, 21);
+            this.CheckAll4.TabIndex = 375;
+            this.CheckAll4.Text = "Check All";
+            this.CheckAll4.Click += new System.EventHandler(this.CheckAll4_Click);
+            // 
+            // CheckAll3
+            // 
+            this.CheckAll3.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.CheckAll3.ForeColor = System.Drawing.Color.Black;
+            this.CheckAll3.Location = new System.Drawing.Point(190, 73);
+            this.CheckAll3.Name = "CheckAll3";
+            this.CheckAll3.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.CheckAll3.ShineColor = System.Drawing.SystemColors.Window;
+            this.CheckAll3.Size = new System.Drawing.Size(124, 21);
+            this.CheckAll3.TabIndex = 374;
+            this.CheckAll3.Text = "Check All";
+            this.CheckAll3.Click += new System.EventHandler(this.CheckAll3_Click);
+            // 
+            // CheckAll2
+            // 
+            this.CheckAll2.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.CheckAll2.ForeColor = System.Drawing.Color.Black;
+            this.CheckAll2.Location = new System.Drawing.Point(190, 46);
+            this.CheckAll2.Name = "CheckAll2";
+            this.CheckAll2.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.CheckAll2.ShineColor = System.Drawing.SystemColors.Window;
+            this.CheckAll2.Size = new System.Drawing.Size(124, 21);
+            this.CheckAll2.TabIndex = 373;
+            this.CheckAll2.Text = "Check All";
+            this.CheckAll2.Click += new System.EventHandler(this.CheckAll2_Click);
+            // 
+            // CheckAll1
+            // 
+            this.CheckAll1.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.CheckAll1.ForeColor = System.Drawing.Color.Black;
+            this.CheckAll1.Location = new System.Drawing.Point(190, 19);
+            this.CheckAll1.Name = "CheckAll1";
+            this.CheckAll1.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.CheckAll1.ShineColor = System.Drawing.SystemColors.Window;
+            this.CheckAll1.Size = new System.Drawing.Size(124, 21);
+            this.CheckAll1.TabIndex = 372;
+            this.CheckAll1.Text = "Check All";
+            this.CheckAll1.Click += new System.EventHandler(this.CheckAll1_Click);
+            // 
+            // TargetItem2
+            // 
+            this.TargetItem2.BlankText = "Don\'t Care";
+            checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.TargetItem2.CheckBoxProperties = checkBoxProperties2;
+            this.TargetItem2.DisplayMemberSingleItem = "";
+            this.TargetItem2.DropDownHeight = 290;
+            this.TargetItem2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.TargetItem2.Enabled = false;
+            this.TargetItem2.FormattingEnabled = true;
+            this.TargetItem2.Location = new System.Drawing.Point(28, 46);
+            this.TargetItem2.Name = "TargetItem2";
+            this.TargetItem2.Size = new System.Drawing.Size(139, 21);
+            this.TargetItem2.TabIndex = 362;
+            // 
+            // TargetItem6
+            // 
+            this.TargetItem6.BlankText = "Don\'t Care";
+            checkBoxProperties3.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.TargetItem6.CheckBoxProperties = checkBoxProperties3;
+            this.TargetItem6.DisplayMemberSingleItem = "";
+            this.TargetItem6.DropDownHeight = 290;
+            this.TargetItem6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.TargetItem6.Enabled = false;
+            this.TargetItem6.FormattingEnabled = true;
+            this.TargetItem6.Location = new System.Drawing.Point(28, 154);
+            this.TargetItem6.Name = "TargetItem6";
+            this.TargetItem6.Size = new System.Drawing.Size(139, 21);
+            this.TargetItem6.TabIndex = 366;
+            // 
+            // TargetItem5
+            // 
+            this.TargetItem5.BlankText = "Don\'t Care";
+            checkBoxProperties18.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.TargetItem5.CheckBoxProperties = checkBoxProperties18;
+            this.TargetItem5.DisplayMemberSingleItem = "";
+            this.TargetItem5.DropDownHeight = 290;
+            this.TargetItem5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.TargetItem5.Enabled = false;
+            this.TargetItem5.FormattingEnabled = true;
+            this.TargetItem5.Location = new System.Drawing.Point(28, 127);
+            this.TargetItem5.Name = "TargetItem5";
+            this.TargetItem5.Size = new System.Drawing.Size(139, 21);
+            this.TargetItem5.TabIndex = 365;
+            // 
+            // TargetItem3
+            // 
+            this.TargetItem3.BlankText = "Don\'t Care";
+            checkBoxProperties4.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.TargetItem3.CheckBoxProperties = checkBoxProperties4;
+            this.TargetItem3.DisplayMemberSingleItem = "";
+            this.TargetItem3.DropDownHeight = 290;
+            this.TargetItem3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.TargetItem3.Enabled = false;
+            this.TargetItem3.FormattingEnabled = true;
+            this.TargetItem3.Location = new System.Drawing.Point(28, 73);
+            this.TargetItem3.Name = "TargetItem3";
+            this.TargetItem3.Size = new System.Drawing.Size(139, 21);
+            this.TargetItem3.TabIndex = 363;
+            // 
+            // TargetItem4
+            // 
+            this.TargetItem4.BlankText = "Don\'t Care";
+            checkBoxProperties5.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.TargetItem4.CheckBoxProperties = checkBoxProperties5;
+            this.TargetItem4.DisplayMemberSingleItem = "";
+            this.TargetItem4.DropDownHeight = 290;
+            this.TargetItem4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.TargetItem4.Enabled = false;
+            this.TargetItem4.FormattingEnabled = true;
+            this.TargetItem4.Location = new System.Drawing.Point(28, 100);
+            this.TargetItem4.Name = "TargetItem4";
+            this.TargetItem4.Size = new System.Drawing.Size(139, 21);
+            this.TargetItem4.TabIndex = 364;
+            // 
+            // TargetItem1
+            // 
+            this.TargetItem1.BlankText = "Don\'t Care";
+            checkBoxProperties6.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.TargetItem1.CheckBoxProperties = checkBoxProperties6;
+            this.TargetItem1.DisplayMemberSingleItem = "";
+            this.TargetItem1.DropDownHeight = 290;
+            this.TargetItem1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.TargetItem1.Enabled = false;
+            this.TargetItem1.FormattingEnabled = true;
+            this.TargetItem1.Location = new System.Drawing.Point(28, 19);
+            this.TargetItem1.Name = "TargetItem1";
+            this.TargetItem1.Size = new System.Drawing.Size(139, 21);
+            this.TargetItem1.TabIndex = 361;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.SlotLevel1);
+            this.groupBox1.Controls.Add(this.SlotLevel2);
+            this.groupBox1.Controls.Add(this.SlotLevel6);
+            this.groupBox1.Controls.Add(this.SlotLevel3);
+            this.groupBox1.Controls.Add(this.SlotLevel4);
+            this.groupBox1.Controls.Add(this.SlotLevel5);
+            this.groupBox1.Location = new System.Drawing.Point(77, 73);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(178, 185);
+            this.groupBox1.TabIndex = 357;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Level";
+            // 
+            // SlotLevel1
+            // 
+            this.SlotLevel1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SlotLevel1.Enabled = false;
+            this.SlotLevel1.FormattingEnabled = true;
+            this.SlotLevel1.Items.AddRange(new object[] {
+            "1-10",
+            "11-20",
+            "21-30",
+            "31-40",
+            "41-50",
+            "51-60",
+            "61-70",
+            "71-80",
+            "81-90",
+            "91-100"});
+            this.SlotLevel1.Location = new System.Drawing.Point(28, 19);
+            this.SlotLevel1.Name = "SlotLevel1";
+            this.SlotLevel1.Size = new System.Drawing.Size(126, 21);
+            this.SlotLevel1.TabIndex = 361;
+            this.SlotLevel1.SelectedIndexChanged += new System.EventHandler(this.SlotLevel1_SelectedIndexChanged);
+            // 
+            // SlotLevel2
+            // 
+            this.SlotLevel2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SlotLevel2.Enabled = false;
+            this.SlotLevel2.FormattingEnabled = true;
+            this.SlotLevel2.Items.AddRange(new object[] {
+            "1-10",
+            "11-20",
+            "21-30",
+            "31-40",
+            "41-50",
+            "51-60",
+            "61-70",
+            "71-80",
+            "81-90",
+            "91-100"});
+            this.SlotLevel2.Location = new System.Drawing.Point(28, 46);
+            this.SlotLevel2.Name = "SlotLevel2";
+            this.SlotLevel2.Size = new System.Drawing.Size(126, 21);
+            this.SlotLevel2.TabIndex = 362;
+            this.SlotLevel2.SelectedIndexChanged += new System.EventHandler(this.SlotLevel2_SelectedIndexChanged);
+            // 
+            // SlotLevel6
+            // 
+            this.SlotLevel6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SlotLevel6.Enabled = false;
+            this.SlotLevel6.FormattingEnabled = true;
+            this.SlotLevel6.Items.AddRange(new object[] {
+            "1-10",
+            "11-20",
+            "21-30",
+            "31-40",
+            "41-50",
+            "51-60",
+            "61-70",
+            "71-80",
+            "81-90",
+            "91-100"});
+            this.SlotLevel6.Location = new System.Drawing.Point(28, 154);
+            this.SlotLevel6.Name = "SlotLevel6";
+            this.SlotLevel6.Size = new System.Drawing.Size(126, 21);
+            this.SlotLevel6.TabIndex = 366;
+            this.SlotLevel6.SelectedIndexChanged += new System.EventHandler(this.SlotLevel6_SelectedIndexChanged);
+            // 
+            // SlotLevel3
+            // 
+            this.SlotLevel3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SlotLevel3.Enabled = false;
+            this.SlotLevel3.FormattingEnabled = true;
+            this.SlotLevel3.Items.AddRange(new object[] {
+            "1-10",
+            "11-20",
+            "21-30",
+            "31-40",
+            "41-50",
+            "51-60",
+            "61-70",
+            "71-80",
+            "81-90",
+            "91-100"});
+            this.SlotLevel3.Location = new System.Drawing.Point(28, 73);
+            this.SlotLevel3.Name = "SlotLevel3";
+            this.SlotLevel3.Size = new System.Drawing.Size(126, 21);
+            this.SlotLevel3.TabIndex = 363;
+            this.SlotLevel3.SelectedIndexChanged += new System.EventHandler(this.SlotLevel3_SelectedIndexChanged);
+            // 
+            // SlotLevel4
+            // 
+            this.SlotLevel4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SlotLevel4.Enabled = false;
+            this.SlotLevel4.FormattingEnabled = true;
+            this.SlotLevel4.Items.AddRange(new object[] {
+            "1-10",
+            "11-20",
+            "21-30",
+            "31-40",
+            "41-50",
+            "51-60",
+            "61-70",
+            "71-80",
+            "81-90",
+            "91-100"});
+            this.SlotLevel4.Location = new System.Drawing.Point(28, 100);
+            this.SlotLevel4.Name = "SlotLevel4";
+            this.SlotLevel4.Size = new System.Drawing.Size(126, 21);
+            this.SlotLevel4.TabIndex = 364;
+            this.SlotLevel4.SelectedIndexChanged += new System.EventHandler(this.SlotLevel4_SelectedIndexChanged);
+            // 
+            // SlotLevel5
+            // 
+            this.SlotLevel5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SlotLevel5.Enabled = false;
+            this.SlotLevel5.FormattingEnabled = true;
+            this.SlotLevel5.Items.AddRange(new object[] {
+            "1-10",
+            "11-20",
+            "21-30",
+            "31-40",
+            "41-50",
+            "51-60",
+            "61-70",
+            "71-80",
+            "81-90",
+            "91-100"});
+            this.SlotLevel5.Location = new System.Drawing.Point(28, 127);
+            this.SlotLevel5.Name = "SlotLevel5";
+            this.SlotLevel5.Size = new System.Drawing.Size(126, 21);
+            this.SlotLevel5.TabIndex = 365;
+            this.SlotLevel5.SelectedIndexChanged += new System.EventHandler(this.SlotLevel5_SelectedIndexChanged);
+            // 
+            // checkBoxParty6
+            // 
+            this.checkBoxParty6.AutoSize = true;
+            this.checkBoxParty6.Location = new System.Drawing.Point(11, 229);
+            this.checkBoxParty6.Name = "checkBoxParty6";
+            this.checkBoxParty6.Size = new System.Drawing.Size(59, 17);
+            this.checkBoxParty6.TabIndex = 356;
+            this.checkBoxParty6.Text = "Party 6";
+            this.checkBoxParty6.UseVisualStyleBackColor = true;
+            this.checkBoxParty6.CheckedChanged += new System.EventHandler(this.checkBoxParty6_CheckedChanged);
+            // 
+            // checkBoxParty5
+            // 
+            this.checkBoxParty5.AutoSize = true;
+            this.checkBoxParty5.Location = new System.Drawing.Point(11, 202);
+            this.checkBoxParty5.Name = "checkBoxParty5";
+            this.checkBoxParty5.Size = new System.Drawing.Size(59, 17);
+            this.checkBoxParty5.TabIndex = 354;
+            this.checkBoxParty5.Text = "Party 5";
+            this.checkBoxParty5.UseVisualStyleBackColor = true;
+            this.checkBoxParty5.CheckedChanged += new System.EventHandler(this.checkBoxParty5_CheckedChanged);
+            // 
+            // checkBoxParty4
+            // 
+            this.checkBoxParty4.AutoSize = true;
+            this.checkBoxParty4.Location = new System.Drawing.Point(11, 175);
+            this.checkBoxParty4.Name = "checkBoxParty4";
+            this.checkBoxParty4.Size = new System.Drawing.Size(59, 17);
+            this.checkBoxParty4.TabIndex = 352;
+            this.checkBoxParty4.Text = "Party 4";
+            this.checkBoxParty4.UseVisualStyleBackColor = true;
+            this.checkBoxParty4.CheckedChanged += new System.EventHandler(this.checkBoxParty4_CheckedChanged);
+            // 
+            // checkBoxParty3
+            // 
+            this.checkBoxParty3.AutoSize = true;
+            this.checkBoxParty3.Location = new System.Drawing.Point(11, 148);
+            this.checkBoxParty3.Name = "checkBoxParty3";
+            this.checkBoxParty3.Size = new System.Drawing.Size(59, 17);
+            this.checkBoxParty3.TabIndex = 350;
+            this.checkBoxParty3.Text = "Party 3";
+            this.checkBoxParty3.UseVisualStyleBackColor = true;
+            this.checkBoxParty3.CheckedChanged += new System.EventHandler(this.checkBoxParty3_CheckedChanged);
+            // 
+            // checkBoxParty2
+            // 
+            this.checkBoxParty2.AutoSize = true;
+            this.checkBoxParty2.Location = new System.Drawing.Point(11, 121);
+            this.checkBoxParty2.Name = "checkBoxParty2";
+            this.checkBoxParty2.Size = new System.Drawing.Size(59, 17);
+            this.checkBoxParty2.TabIndex = 348;
+            this.checkBoxParty2.Text = "Party 2";
+            this.checkBoxParty2.UseVisualStyleBackColor = true;
+            this.checkBoxParty2.CheckedChanged += new System.EventHandler(this.checkBoxParty2_CheckedChanged);
+            // 
+            // checkBoxParty1
+            // 
+            this.checkBoxParty1.AutoSize = true;
+            this.checkBoxParty1.Location = new System.Drawing.Point(11, 94);
+            this.checkBoxParty1.Name = "checkBoxParty1";
+            this.checkBoxParty1.Size = new System.Drawing.Size(59, 17);
+            this.checkBoxParty1.TabIndex = 345;
+            this.checkBoxParty1.Text = "Party 1";
+            this.checkBoxParty1.UseVisualStyleBackColor = true;
+            this.checkBoxParty1.CheckedChanged += new System.EventHandler(this.checkBoxParty1_CheckedChanged);
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(172, 18);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(106, 13);
+            this.label49.TabIndex = 343;
+            this.label49.Text = "Min / Max Advances";
+            // 
+            // minPickupAdv
+            // 
+            this.minPickupAdv.Hex = false;
+            this.minPickupAdv.Location = new System.Drawing.Point(169, 33);
+            this.minPickupAdv.Mask = "00000";
+            this.minPickupAdv.Name = "minPickupAdv";
+            this.minPickupAdv.Size = new System.Drawing.Size(44, 21);
+            this.minPickupAdv.TabIndex = 341;
+            this.minPickupAdv.Text = "0";
+            // 
+            // maxPickupAdv
+            // 
+            this.maxPickupAdv.Hex = false;
+            this.maxPickupAdv.Location = new System.Drawing.Point(219, 33);
+            this.maxPickupAdv.Mask = "00000";
+            this.maxPickupAdv.Name = "maxPickupAdv";
+            this.maxPickupAdv.Size = new System.Drawing.Size(44, 21);
+            this.maxPickupAdv.TabIndex = 342;
+            this.maxPickupAdv.Text = "10";
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(32, 18);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(29, 13);
+            this.label47.TabIndex = 327;
+            this.label47.Text = "Year";
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(76, 18);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(37, 13);
+            this.label48.TabIndex = 329;
+            this.label48.Text = "Month";
+            this.label48.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // comboBoxPickupMonth
+            // 
+            this.comboBoxPickupMonth.BlankText = null;
+            checkBoxProperties12.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.comboBoxPickupMonth.CheckBoxProperties = checkBoxProperties12;
+            this.comboBoxPickupMonth.DisplayMemberSingleItem = "";
+            this.comboBoxPickupMonth.DropDownHeight = 310;
+            this.comboBoxPickupMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxPickupMonth.FormattingEnabled = true;
+            this.comboBoxPickupMonth.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12"});
+            this.comboBoxPickupMonth.Location = new System.Drawing.Point(76, 33);
+            this.comboBoxPickupMonth.Name = "comboBoxPickupMonth";
+            this.comboBoxPickupMonth.Size = new System.Drawing.Size(87, 21);
+            this.comboBoxPickupMonth.TabIndex = 324;
+            // 
+            // maskedTextBoxPickupYear
+            // 
+            this.maskedTextBoxPickupYear.Hex = false;
+            this.maskedTextBoxPickupYear.Location = new System.Drawing.Point(35, 33);
+            this.maskedTextBoxPickupYear.Mask = "0000";
+            this.maskedTextBoxPickupYear.Name = "maskedTextBoxPickupYear";
+            this.maskedTextBoxPickupYear.Size = new System.Drawing.Size(35, 21);
+            this.maskedTextBoxPickupYear.TabIndex = 323;
+            this.maskedTextBoxPickupYear.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            // 
             // toolTipGenderRatio
             // 
             this.toolTipGenderRatio.AutoPopDelay = 6000;
@@ -4128,7 +4890,7 @@ namespace RNGReporter
             // labelProfileInformation
             // 
             this.labelProfileInformation.AutoSize = true;
-            this.labelProfileInformation.Location = new System.Drawing.Point(131, 22);
+            this.labelProfileInformation.Location = new System.Drawing.Point(131, 17);
             this.labelProfileInformation.Name = "labelProfileInformation";
             this.labelProfileInformation.Size = new System.Drawing.Size(0, 13);
             this.labelProfileInformation.TabIndex = 320;
@@ -4159,6 +4921,46 @@ namespace RNGReporter
             this.buttonEditProfile.TabIndex = 11;
             this.buttonEditProfile.Text = "Edit";
             this.buttonEditProfile.Click += new System.EventHandler(this.buttonEditProfile_Click);
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(613, 99);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(275, 13);
+            this.label42.TabIndex = 374;
+            this.label42.Text = "2. An \"Active Roamer\" (BW only) affects the initial frame.";
+            this.label42.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(613, 151);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(367, 13);
+            this.label43.TabIndex = 375;
+            this.label43.Text = "4. Wild Pokémon that have a chance of holding an item, affect the frame hit.";
+            this.label43.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(626, 165);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(321, 13);
+            this.label44.TabIndex = 376;
+            this.label44.Text = "Celestial Tower rooftop is recommended since it also has no NPCs.";
+            this.label44.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(613, 73);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(399, 13);
+            this.label45.TabIndex = 377;
+            this.label45.Text = "1. Use Honey / Sweet Scent at the frame indicated, then defeat the wild Pokémon.";
+            this.label45.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // TimeFinder5th
             // 
@@ -4200,6 +5002,11 @@ namespace RNGReporter
             this.tabPageDreamRadar.ResumeLayout(false);
             this.tabPageDreamRadar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvDreamRadar)).EndInit();
+            this.tabPagePickup.ResumeLayout(false);
+            this.tabPagePickup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPickup)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.groupBoxConfiguration.ResumeLayout(false);
             this.groupBoxConfiguration.PerformLayout();
             this.ResumeLayout(false);
@@ -4523,5 +5330,59 @@ namespace RNGReporter
         private System.Windows.Forms.CheckBox checkBoxRAD;
         private System.Windows.Forms.NumericUpDown numCalibrateDelay;
         private System.Windows.Forms.CheckBox checkBoxDelay;
+        private System.Windows.Forms.TabPage tabPagePickup;
+        private System.Windows.Forms.Label label49;
+        private MaskedTextBox2 minPickupAdv;
+        private MaskedTextBox2 maxPickupAdv;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label label48;
+        private CheckBoxComboBox comboBoxPickupMonth;
+        private MaskedTextBox2 maskedTextBoxPickupYear;
+        public System.Windows.Forms.CheckBox checkBoxParty6;
+        public System.Windows.Forms.CheckBox checkBoxParty5;
+        public System.Windows.Forms.CheckBox checkBoxParty4;
+        public System.Windows.Forms.CheckBox checkBoxParty3;
+        public System.Windows.Forms.CheckBox checkBoxParty2;
+        public System.Windows.Forms.CheckBox checkBoxParty1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private GlassButton buttonPickupSearch;
+        private CheckBoxComboBox TargetItem1;
+        private _ComboBox SlotLevel1;
+        private _ComboBox SlotLevel6;
+        private _ComboBox SlotLevel5;
+        private _ComboBox SlotLevel4;
+        private _ComboBox SlotLevel3;
+        private _ComboBox SlotLevel2;
+        private CheckBoxComboBox TargetItem6;
+        private CheckBoxComboBox TargetItem5;
+        private CheckBoxComboBox TargetItem4;
+        private CheckBoxComboBox TargetItem3;
+        private CheckBoxComboBox TargetItem2;
+        private DoubleBufferedDataGridView dataGridViewPickup;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn31;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn32;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colItem1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colItem2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colItem3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colItem4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colItem5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colItem6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn69;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn70;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn71;
+        public System.Windows.Forms.CheckBox cbActiveRoamer;
+        private GlassButton CheckAll6;
+        private GlassButton CheckAll5;
+        private GlassButton CheckAll4;
+        private GlassButton CheckAll3;
+        private GlassButton CheckAll2;
+        private GlassButton CheckAll1;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Label label45;
     }
 }

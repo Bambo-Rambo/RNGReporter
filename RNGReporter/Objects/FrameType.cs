@@ -54,6 +54,7 @@ namespace RNGReporter.Objects
         FRLGBredUpper,
         EBredPID,
         BW2Bred,
-        BW2BredInternational
+        BW2BredInternational,
+        Gen5Pickup
     };
 }

@@ -19,6 +19,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace RNGReporter.Objects
 {
@@ -274,6 +275,8 @@ namespace RNGReporter.Objects
         public GenderFilter GenderFilter { get; private set; }
 
         public List<uint> Natures { get; private set; }
+
+        public List<int>[] comparePickupList { get; set; }
 
         public void Add(FrameCompare comparer)
         {
@@ -669,6 +672,14 @@ namespace RNGReporter.Objects
             }
 
             return passed;
+        }
+
+        public bool CompareItem(int[] ItemRand)
+        {
+            for (byte i = 0; i < 6; i++)
+                if (!(comparePickupList[i].Contains(ItemRand[i]) || comparePickupList[i].Count == 0))
+                    return false;
+            return true;
         }
     }
 }

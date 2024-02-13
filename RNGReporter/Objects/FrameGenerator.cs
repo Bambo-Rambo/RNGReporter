@@ -20,7 +20,9 @@
 
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.IO.Ports;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Security.Cryptography;
@@ -66,6 +68,8 @@ namespace RNGReporter.Objects
 
         public EncounterMod EncounterMod { get; set; }
 
+        public bool TimeFinder { get; set; }
+
         public bool Everstone { get; set; }
 
         public int SynchNature { get; set; }
@@ -83,6 +87,9 @@ namespace RNGReporter.Objects
                 SelectRNG();
             }
         }
+
+        public List<List<string>> PossibleItems { get; set; }
+        public int ConsumedAdvPickup { get; set; }
 
         public bool HalfPID;
         public uint halfPIDvalue;
@@ -1921,8 +1928,84 @@ namespace RNGReporter.Objects
                     }
                 }
             }
-            else if (frameType == FrameType.MethodH1 || frameType == FrameType.MethodH2 ||
-                     frameType == FrameType.MethodH4)
+            else if (frameType == FrameType.Gen5Pickup)
+            {
+                rng64.Seed = InitialSeed;
+                rngList = new List<uint>();
+
+                for (uint cnt = 0; cnt < InitialFrame - 1; cnt++)
+                    rng64.GetNext64BitNumber();
+
+                for (uint cnt = 0; cnt < InitialFrame + ConsumedAdvPickup; cnt++)
+                    rngList.Add(rng64.GetNext32BitNumber());
+
+                for (uint cnt = 0; cnt < maxResults; cnt++, rngList.RemoveAt(0), rngList.Add(rng64.GetNext32BitNumber()))
+                {
+                    frame = new Frame();
+                    pointer = ConsumedAdvPickup;
+                    int[] ItemRand = new int[6];
+
+                    for (int party = 0; party < 6; party++)
+                    {
+                        if (PossibleItems[party] != null)   // Has Pickup
+                        {
+                            if ((ulong)NextRand() * 100 >> 32 < 10)
+                            {
+                                ItemRand[party] = GetPickupItem((int)((ulong)NextRand() * 100 >> 32));
+                            }
+                            else
+                            {
+                                ItemRand[party] = -1;
+                            }
+                        }
+                    }
+
+                    // FFS
+                    if (TimeFinder)
+                    {
+                        if (!frameCompare.CompareItem(ItemRand))
+                            continue;
+                        frame.Number = InitialFrame + cnt;
+                    }
+                    else
+                    {
+                        frame.Offset = InitialFrame + cnt;
+                        frame.RngResult = rngList[0];   // Chatot Pitch
+                    }
+
+                    frame.PickupItems = new string[6];
+                    for (int party = 0; party < 6; party++)
+                    {
+                        if (PossibleItems[party] != null)
+                        {
+                            if (ItemRand[party] == -1)
+                            {
+                                frame.PickupItems[party] = "-";
+                            }
+                            else
+                            {
+                                // If checkcomboboxes are not inspected at all, it counts 10 items instead of 11
+                                // This causes an exception here and also shows item - 1 instead
+                                frame.PickupItems[party] = PossibleItems[party][ItemRand[party]];
+                            }
+                                
+                        }
+                    }
+
+                    if (!TimeFinder)
+                    {
+                        frame.DisplayItem1 = frame.PickupItems[0];
+                        frame.DisplayItem2 = frame.PickupItems[1];
+                        frame.DisplayItem3 = frame.PickupItems[2];
+                        frame.DisplayItem4 = frame.PickupItems[3];
+                        frame.DisplayItem5 = frame.PickupItems[4];
+                        frame.DisplayItem6 = frame.PickupItems[5];
+                    }
+
+                    frames.Add(frame);
+                }
+            }
+            else if (frameType == FrameType.MethodH1 || frameType == FrameType.MethodH2 || frameType == FrameType.MethodH4)
             {
                 //  Instantiate our hunt RNG and fail RNG
                 var huntRng = new PokeRng(0);
@@ -3030,6 +3113,18 @@ namespace RNGReporter.Objects
             } while (pid % 0x19 != SynchNature);
 
             return pid;
+        }
+
+        public int[] ItemSlots = { 30, 10, 10, 10, 10, 10, 10, 4, 4, 1, 1 };
+        public int GetPickupItem(int rand)
+        {
+            for (byte i = 0; i < ItemSlots.Length; i++)
+            {
+                rand -= ItemSlots[i];
+                if (rand < 0)
+                    return i;
+            }
+            return (byte)(ItemSlots.Length - 1);
         }
 
         private void AddToRngList()

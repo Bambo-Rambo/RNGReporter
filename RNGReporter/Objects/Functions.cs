@@ -212,6 +212,44 @@ namespace RNGReporter.Objects
             }
         }
 
+        public static readonly string[] CommonPickup =
+        {
+            "Potion",
+            "Antidote",
+            "Super Potion",
+            "Great Ball",
+            "Repel",
+            "Escape Rope",
+            "Full Heal",
+            "Hyper Potion",
+            "Ultra Ball",
+            "Revive",
+            "Rare Candy",
+            "Sun Stone",
+            "Moon Stone",
+            "Heart Scale",
+            "Full Restore",
+            "Max Revive",
+            "PP Up",
+            "Max Elixir",
+        };
+
+        public static readonly string[] RarePickup =
+        {
+            "Rare Candy ",
+            "Hyper Potion ",
+            "Nugget ",
+            "King's Rock ",
+            "Full Restore ",
+            "Ether ",
+            "Iron Ball ",
+            "Prism Scale ",
+            "Elixir ",
+            "Prism Scale ",
+            "Leftovers ",
+            "Prism Scale ",
+        };
+
         public static string characteristicStrings(uint index)
         {
             switch ((Language) Settings.Default.Language)

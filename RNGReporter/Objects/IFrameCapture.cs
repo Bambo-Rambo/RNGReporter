@@ -264,7 +264,6 @@ namespace RNGReporter.Objects
             get { return Frame.DisplaySpeAlt; }
         }
 
-
         public string EncounterMod
         {
             get { return EncounterTypeCalc.StringMod(Frame.EncounterMod); }
@@ -273,6 +272,36 @@ namespace RNGReporter.Objects
         public string EncounterSlot
         {
             get { return Frame.EncounterString; }
+        }
+
+        public string DisplayItem1
+        {
+            get { return Frame.PickupItems[0]; }
+        }
+
+        public string DisplayItem2
+        {
+            get { return Frame.PickupItems[1]; }
+        }
+
+        public string DisplayItem3
+        {
+            get { return Frame.PickupItems[2]; }
+        }
+
+        public string DisplayItem4
+        {
+            get { return Frame.PickupItems[3]; }
+        }
+
+        public string DisplayItem5
+        {
+            get { return Frame.PickupItems[4]; }
+        }
+
+        public string DisplayItem6
+        {
+            get { return Frame.PickupItems[5]; }
         }
     }
 
@@ -341,6 +370,18 @@ namespace RNGReporter.Objects
                     return direction * x.Level.CompareTo(y.Level);
                 case "EncounterSlot":
                     return direction*x.Frame.EncounterSlot.CompareTo(y.Frame.EncounterSlot);
+                case "DisplayItem1":
+                    return direction * x.DisplayItem1.CompareTo(y.DisplayItem1);
+                case "DisplayItem2":
+                    return direction * x.DisplayItem2.CompareTo(y.DisplayItem2);
+                case "DisplayItem3":
+                    return direction * x.DisplayItem3.CompareTo(y.DisplayItem3);
+                case "DisplayItem4":
+                    return direction * x.DisplayItem4.CompareTo(y.DisplayItem4);
+                case "DisplayItem5":
+                    return direction * x.DisplayItem5.CompareTo(y.DisplayItem5);
+                case "DisplayItem6":
+                    return direction * x.DisplayItem6.CompareTo(y.DisplayItem6);
                 case "Hp":
                     result = direction*x.Hp.CompareTo(y.Hp);
                     if (result == 0)

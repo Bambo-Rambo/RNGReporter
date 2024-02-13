@@ -33,9 +33,9 @@ namespace RNGReporter
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            RNGReporter.Controls.CheckBoxProperties checkBoxProperties3 = new RNGReporter.Controls.CheckBoxProperties();
             RNGReporter.Controls.CheckBoxProperties checkBoxProperties1 = new RNGReporter.Controls.CheckBoxProperties();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            RNGReporter.Controls.CheckBoxProperties checkBoxProperties2 = new RNGReporter.Controls.CheckBoxProperties();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -57,6 +57,7 @@ namespace RNGReporter
             this.searchCoinFlipsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchNaturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchElmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gen5FrameFinderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.displayParentsInSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetParentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
@@ -171,6 +172,8 @@ namespace RNGReporter
             this.labelMinMaxLevel = new System.Windows.Forms.Label();
             this.buttonCalcInitialFrame = new RNGReporter.GlassButton();
             this.buttonDSParameters = new RNGReporter.GlassButton();
+            this.label4 = new System.Windows.Forms.Label();
+            this.MainImportWC = new RNGReporter.GlassButton();
             this.buttonRoamerMap = new RNGReporter.GlassButton();
             this.maskedTextBoxERoute = new RNGReporter.Controls.MaskedTextBox2();
             this.maskedTextBoxRRoute = new RNGReporter.Controls.MaskedTextBox2();
@@ -213,6 +216,12 @@ namespace RNGReporter
             this.SpA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SpD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Spe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnItem1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnItem2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnItem3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnItem4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnItem5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnItem6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HiddenPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HiddenPowerPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Characteristic = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -225,9 +234,6 @@ namespace RNGReporter
             this.maskedTextBoxStartingFrame = new RNGReporter.Controls.MaskedTextBox2();
             this.maskedTextBoxMaxFrames = new RNGReporter.Controls.MaskedTextBox2();
             this.comboBoxMethod = new RNGReporter.GlassComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.MainImportWC = new RNGReporter.GlassButton();
-            this.gen5FrameFinderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripGrid.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripTimeFinder.SuspendLayout();
@@ -306,7 +312,7 @@ namespace RNGReporter
             this.toolStripMenuItem3,
             this.outputResultsToTXTToolStripMenuItem});
             this.contextMenuStripGrid.Name = "contextMenuStripGrid";
-            this.contextMenuStripGrid.Size = new System.Drawing.Size(334, 424);
+            this.contextMenuStripGrid.Size = new System.Drawing.Size(334, 402);
             this.contextMenuStripGrid.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripGrid_Opening);
             // 
             // lockFrameToolStripMenuItem
@@ -414,6 +420,13 @@ namespace RNGReporter
             this.searchElmToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
             this.searchElmToolStripMenuItem.Text = "Search Elm Responses ...";
             this.searchElmToolStripMenuItem.Click += new System.EventHandler(this.searchElmToolStripMenuItem_Click);
+            // 
+            // gen5FrameFinderToolStripMenuItem
+            // 
+            this.gen5FrameFinderToolStripMenuItem.Name = "gen5FrameFinderToolStripMenuItem";
+            this.gen5FrameFinderToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
+            this.gen5FrameFinderToolStripMenuItem.Text = "Gen 5 FrameFinder";
+            this.gen5FrameFinderToolStripMenuItem.Click += new System.EventHandler(this.gen5FrameFinderToolStripMenuItem_Click);
             // 
             // displayParentsInSearchToolStripMenuItem
             // 
@@ -1228,9 +1241,9 @@ namespace RNGReporter
             this.checkBoxRoamerReleased.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkBoxRoamerReleased.Location = new System.Drawing.Point(9, 94);
             this.checkBoxRoamerReleased.Name = "checkBoxRoamerReleased";
-            this.checkBoxRoamerReleased.Size = new System.Drawing.Size(111, 17);
+            this.checkBoxRoamerReleased.Size = new System.Drawing.Size(96, 17);
             this.checkBoxRoamerReleased.TabIndex = 35;
-            this.checkBoxRoamerReleased.Text = "Roamer Released";
+            this.checkBoxRoamerReleased.Text = "Active Roamer";
             this.checkBoxRoamerReleased.UseVisualStyleBackColor = true;
             this.checkBoxRoamerReleased.Visible = false;
             // 
@@ -1348,9 +1361,9 @@ namespace RNGReporter
             this.checkBoxMemoryLink.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkBoxMemoryLink.Location = new System.Drawing.Point(9, 117);
             this.checkBoxMemoryLink.Name = "checkBoxMemoryLink";
-            this.checkBoxMemoryLink.Size = new System.Drawing.Size(92, 17);
+            this.checkBoxMemoryLink.Size = new System.Drawing.Size(134, 17);
             this.checkBoxMemoryLink.TabIndex = 332;
-            this.checkBoxMemoryLink.Text = "Memory Link?";
+            this.checkBoxMemoryLink.Text = "Memory Link Activated";
             this.checkBoxMemoryLink.UseVisualStyleBackColor = true;
             this.checkBoxMemoryLink.Visible = false;
             // 
@@ -1491,6 +1504,31 @@ namespace RNGReporter
             this.buttonDSParameters.TabIndex = 36;
             this.buttonDSParameters.Text = "DS Parameters Search";
             this.buttonDSParameters.Click += new System.EventHandler(this.findDSParametersToolStripMenuItem_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label4.Location = new System.Drawing.Point(15, 211);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(78, 13);
+            this.label4.TabIndex = 335;
+            this.label4.Text = "Max Advances";
+            // 
+            // MainImportWC
+            // 
+            this.MainImportWC.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.MainImportWC.ForeColor = System.Drawing.Color.Black;
+            this.MainImportWC.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.MainImportWC.Location = new System.Drawing.Point(103, 127);
+            this.MainImportWC.Name = "MainImportWC";
+            this.MainImportWC.OuterBorderColor = System.Drawing.Color.Transparent;
+            this.MainImportWC.ShineColor = System.Drawing.SystemColors.Window;
+            this.MainImportWC.Size = new System.Drawing.Size(153, 23);
+            this.MainImportWC.TabIndex = 336;
+            this.MainImportWC.Text = "Import Wonder Card";
+            this.MainImportWC.Visible = false;
+            this.MainImportWC.Click += new System.EventHandler(this.MainImportWC_Click);
             // 
             // buttonRoamerMap
             // 
@@ -1641,8 +1679,8 @@ namespace RNGReporter
             // comboBoxEncounterSlot
             // 
             this.comboBoxEncounterSlot.BlankText = "Any";
-            checkBoxProperties3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.comboBoxEncounterSlot.CheckBoxProperties = checkBoxProperties3;
+            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.comboBoxEncounterSlot.CheckBoxProperties = checkBoxProperties1;
             this.comboBoxEncounterSlot.DisplayMemberSingleItem = "";
             this.comboBoxEncounterSlot.DropDownHeight = 330;
             this.comboBoxEncounterSlot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1709,8 +1747,8 @@ namespace RNGReporter
             // comboBoxNature
             // 
             this.comboBoxNature.BlankText = "Any";
-            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.comboBoxNature.CheckBoxProperties = checkBoxProperties1;
+            checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.comboBoxNature.CheckBoxProperties = checkBoxProperties2;
             this.comboBoxNature.DisplayMemberSingleItem = "";
             this.comboBoxNature.DropDownHeight = 300;
             this.comboBoxNature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1786,6 +1824,12 @@ namespace RNGReporter
             this.SpA,
             this.SpD,
             this.Spe,
+            this.ColumnItem1,
+            this.ColumnItem2,
+            this.ColumnItem3,
+            this.ColumnItem4,
+            this.ColumnItem5,
+            this.ColumnItem6,
             this.HiddenPower,
             this.HiddenPowerPower,
             this.Characteristic,
@@ -1913,8 +1957,8 @@ namespace RNGReporter
             // PID
             // 
             this.PID.DataPropertyName = "Pid";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Consolas", 8.75F);
-            this.PID.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Consolas", 8.75F);
+            this.PID.DefaultCellStyle = dataGridViewCellStyle1;
             this.PID.HeaderText = "PID";
             this.PID.Name = "PID";
             this.PID.ReadOnly = true;
@@ -2016,6 +2060,54 @@ namespace RNGReporter
             this.Spe.Visible = false;
             this.Spe.Width = 35;
             // 
+            // ColumnItem1
+            // 
+            this.ColumnItem1.DataPropertyName = "DisplayItem1";
+            this.ColumnItem1.HeaderText = "Item 1";
+            this.ColumnItem1.Name = "ColumnItem1";
+            this.ColumnItem1.ReadOnly = true;
+            this.ColumnItem1.Visible = false;
+            // 
+            // ColumnItem2
+            // 
+            this.ColumnItem2.DataPropertyName = "DisplayItem2";
+            this.ColumnItem2.HeaderText = "Item 2";
+            this.ColumnItem2.Name = "ColumnItem2";
+            this.ColumnItem2.ReadOnly = true;
+            this.ColumnItem2.Visible = false;
+            // 
+            // ColumnItem3
+            // 
+            this.ColumnItem3.DataPropertyName = "DisplayItem3";
+            this.ColumnItem3.HeaderText = "Item 3";
+            this.ColumnItem3.Name = "ColumnItem3";
+            this.ColumnItem3.ReadOnly = true;
+            this.ColumnItem3.Visible = false;
+            // 
+            // ColumnItem4
+            // 
+            this.ColumnItem4.DataPropertyName = "DisplayItem4";
+            this.ColumnItem4.HeaderText = "Item 4";
+            this.ColumnItem4.Name = "ColumnItem4";
+            this.ColumnItem4.ReadOnly = true;
+            this.ColumnItem4.Visible = false;
+            // 
+            // ColumnItem5
+            // 
+            this.ColumnItem5.DataPropertyName = "DisplayItem5";
+            this.ColumnItem5.HeaderText = "Item 5";
+            this.ColumnItem5.Name = "ColumnItem5";
+            this.ColumnItem5.ReadOnly = true;
+            this.ColumnItem5.Visible = false;
+            // 
+            // ColumnItem6
+            // 
+            this.ColumnItem6.DataPropertyName = "DisplayItem6";
+            this.ColumnItem6.HeaderText = "Item 6";
+            this.ColumnItem6.Name = "ColumnItem6";
+            this.ColumnItem6.ReadOnly = true;
+            this.ColumnItem6.Visible = false;
+            // 
             // HiddenPower
             // 
             this.HiddenPower.DataPropertyName = "HiddenPowerType";
@@ -2097,7 +2189,7 @@ namespace RNGReporter
             // 
             this.maskedTextBoxStartingFrame.Hex = false;
             this.maskedTextBoxStartingFrame.Location = new System.Drawing.Point(104, 182);
-            this.maskedTextBoxStartingFrame.Mask = "0000000000";
+            this.maskedTextBoxStartingFrame.Mask = "0000000";
             this.maskedTextBoxStartingFrame.Name = "maskedTextBoxStartingFrame";
             this.maskedTextBoxStartingFrame.Size = new System.Drawing.Size(152, 20);
             this.maskedTextBoxStartingFrame.TabIndex = 6;
@@ -2126,38 +2218,6 @@ namespace RNGReporter
             this.comboBoxMethod.Size = new System.Drawing.Size(153, 21);
             this.comboBoxMethod.TabIndex = 1;
             this.comboBoxMethod.SelectedIndexChanged += new System.EventHandler(this.comboBoxMethod_SelectedIndexChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label4.Location = new System.Drawing.Point(15, 211);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 13);
-            this.label4.TabIndex = 335;
-            this.label4.Text = "Max Advances";
-            // 
-            // MainImportWC
-            // 
-            this.MainImportWC.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.MainImportWC.ForeColor = System.Drawing.Color.Black;
-            this.MainImportWC.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.MainImportWC.Location = new System.Drawing.Point(103, 127);
-            this.MainImportWC.Name = "MainImportWC";
-            this.MainImportWC.OuterBorderColor = System.Drawing.Color.Transparent;
-            this.MainImportWC.ShineColor = System.Drawing.SystemColors.Window;
-            this.MainImportWC.Size = new System.Drawing.Size(153, 23);
-            this.MainImportWC.TabIndex = 336;
-            this.MainImportWC.Text = "Import Wonder Card";
-            this.MainImportWC.Visible = false;
-            this.MainImportWC.Click += new System.EventHandler(this.MainImportWC_Click);
-            // 
-            // gen5FrameFinderToolStripMenuItem
-            // 
-            this.gen5FrameFinderToolStripMenuItem.Name = "gen5FrameFinderToolStripMenuItem";
-            this.gen5FrameFinderToolStripMenuItem.Size = new System.Drawing.Size(333, 22);
-            this.gen5FrameFinderToolStripMenuItem.Text = "Gen 5 FrameFinder";
-            this.gen5FrameFinderToolStripMenuItem.Click += new System.EventHandler(this.gen5FrameFinderToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -2394,6 +2454,11 @@ namespace RNGReporter
         private System.Windows.Forms.NumericUpDown numericLevelMax;
         private System.Windows.Forms.NumericUpDown numericLevelMin;
         private System.Windows.Forms.Label labelMinMaxLevel;
+        private GlassComboBox LuckyPowerCombobox;
+        private System.Windows.Forms.Label labelLuckyPower;
+        private System.Windows.Forms.Label label4;
+        private GlassButton MainImportWC;
+        private System.Windows.Forms.ToolStripMenuItem gen5FrameFinderToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn Frame;
         private System.Windows.Forms.DataGridViewTextBoxColumn Offset;
         private System.Windows.Forms.DataGridViewTextBoxColumn Time;
@@ -2417,6 +2482,12 @@ namespace RNGReporter
         private System.Windows.Forms.DataGridViewTextBoxColumn SpA;
         private System.Windows.Forms.DataGridViewTextBoxColumn SpD;
         private System.Windows.Forms.DataGridViewTextBoxColumn Spe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnItem1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnItem2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnItem3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnItem4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnItem5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnItem6;
         private System.Windows.Forms.DataGridViewTextBoxColumn HiddenPower;
         private System.Windows.Forms.DataGridViewTextBoxColumn HiddenPowerPower;
         private System.Windows.Forms.DataGridViewTextBoxColumn Characteristic;
@@ -2426,10 +2497,5 @@ namespace RNGReporter
         private System.Windows.Forms.DataGridViewTextBoxColumn f25;
         private System.Windows.Forms.DataGridViewTextBoxColumn f75;
         private System.Windows.Forms.DataGridViewTextBoxColumn Synchable;
-        private GlassComboBox LuckyPowerCombobox;
-        private System.Windows.Forms.Label labelLuckyPower;
-        private System.Windows.Forms.Label label4;
-        private GlassButton MainImportWC;
-        private System.Windows.Forms.ToolStripMenuItem gen5FrameFinderToolStripMenuItem;
     }
 }

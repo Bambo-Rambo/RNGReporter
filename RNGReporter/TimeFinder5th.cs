@@ -36,6 +36,8 @@ using RNGReporter.Objects;
 using RNGReporter.Objects.Generators;
 using RNGReporter.Objects.Searchers;
 using RNGReporter.Properties;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace RNGReporter
 {
@@ -62,6 +64,7 @@ namespace RNGReporter
         private BindingSource listBindingCap;
         private BindingSource listBindingEvent;
         private BindingSource listBindingEgg;
+        private BindingSource listBindingPickup;
         private bool longSeed;
         private Point oldLocation;
         private BindingSource profilesSource;
@@ -100,7 +103,7 @@ namespace RNGReporter
 
         private void PlatinumTime_Load(object sender, EventArgs e)
         {
-
+            tabControl.TabPages.Remove(tabPageDreamRadar);
             // Add smart comboBox items
             // Would be nice if we left these in the Designer file
             // But Visual Studio seems to like deleting them without warning
@@ -118,7 +121,6 @@ namespace RNGReporter
                     new ComboBoxItem("Ability 0", 0),
                     new ComboBoxItem("Ability 1", 1)
                 };
-
 
             comboBoxEncounterType.Items.AddRange(new object[]
                 {
@@ -200,10 +202,10 @@ namespace RNGReporter
             dataGridViewCapValues.AutoGenerateColumns = false;
             dataGridViewShinyResults.AutoGenerateColumns = false;
             dataGridViewEventResults.AutoGenerateColumns = false;
+            dataGridViewPickup.AutoGenerateColumns = false;
 
             cbHHMonth.CheckBoxItems[0].Checked = true;
             cbHHMonth.CheckBoxItems[0].Checked = false;
-
             tabControl.SelectTab(TabPage);
 
             //  Load all of our items from the registry
@@ -214,9 +216,9 @@ namespace RNGReporter
 
                 if (Settings.Default.LastVersion < MainForm.VersionNumber && registryRngReporter != null)
                 {
-                    maskedTextBoxCapYear.Text =
+                    maskedTextBoxCapYear.Text = maskedTextBoxPickupYear.Text =
                         (string) registryRngReporter.GetValue("pt_cap_year", DateTime.Now.Year.ToString());
-                    comboBoxCapMonth.CheckBoxItems[DateTime.Now.Month].Checked = true;
+                    comboBoxCapMonth.CheckBoxItems[DateTime.Now.Month].Checked = comboBoxPickupMonth.CheckBoxItems[DateTime.Now.Month].Checked = true;
                     maskedTextBoxCapMaxOffset.Text = (string) registryRngReporter.GetValue("pt_cap_offset", "1000");
 
                     if (maskedTextBoxCapMaxOffset.Text == "0")
@@ -233,8 +235,8 @@ namespace RNGReporter
                 else
                 {
                     if (Settings.Default.CapYear < 2000) Settings.Default.CapYear = DateTime.Now.Year;
-                    maskedTextBoxCapYear.Text = Settings.Default.CapYear.ToString();
-                    comboBoxCapMonth.CheckBoxItems[DateTime.Now.Month].Checked = true;
+                    maskedTextBoxCapYear.Text = maskedTextBoxPickupYear.Text = Settings.Default.CapYear.ToString();
+                    comboBoxCapMonth.CheckBoxItems[DateTime.Now.Month].Checked = comboBoxPickupMonth.CheckBoxItems[DateTime.Now.Month].Checked = true;
                     maskedTextBoxCapMaxOffset.Text = Settings.Default.CapOffset;
 
                     maskedTextBoxCapMinDelay.Text = Settings.Default.CapDelayMin;
@@ -1419,6 +1421,7 @@ namespace RNGReporter
             buttonCapGenerate.Enabled = true;
             buttonShinyGenerate.Enabled = true;
             buttonEventGenerate.Enabled = true;
+            buttonPickupSearch.Enabled = true;
         }
 
         private void comboBoxMethod_SelectedIndexChanged(object sender, EventArgs e)
@@ -2377,7 +2380,8 @@ namespace RNGReporter
 
         private void contextMenuStripEggPid_Opening(object sender, CancelEventArgs e)
         {
-            DataGridView DGV = tabControl.SelectedTab == tabPageShinyEgg ? dataGridViewShinyResults : dataGridViewEventResults;
+            DataGridView DGV = tabControl.SelectedTab == tabPageShinyEgg ? dataGridViewShinyResults :
+                tabControl.SelectedTab == tabEvent ? dataGridViewEventResults : dataGridViewPickup;
             if (DGV.SelectedRows.Count == 0)
             {
                 e.Cancel = true;
@@ -2993,6 +2997,7 @@ namespace RNGReporter
                 case FrameType.Method5Standard:
                 case FrameType.Method5Natures:
                 case FrameType.Wondercard5thGen:
+                case FrameType.Gen5Pickup:
                     var iframeCaptureComparer = new IFrameCaptureComparer { CompareType = "TimeDate" };
                     ((List<IFrameCapture>)bindingSource.DataSource).Sort(iframeCaptureComparer);
                     CapDateTime.HeaderCell.SortGlyphDirection = SortOrder.Ascending;
@@ -3056,7 +3061,8 @@ namespace RNGReporter
 
         private void copySeedToClipboardToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            DataGridView DGV = tabControl.SelectedTab == tabPageShinyEgg ? dataGridViewShinyResults : dataGridViewEventResults;
+            DataGridView DGV = tabControl.SelectedTab == tabPageShinyEgg ? dataGridViewShinyResults :
+                tabControl.SelectedTab == tabEvent ? dataGridViewEventResults : dataGridViewPickup;
 
             if (DGV.SelectedRows[0] != null)
             {
@@ -3153,8 +3159,6 @@ namespace RNGReporter
                 }
             }
         }
-
-        
 
         
 
@@ -3316,17 +3320,24 @@ namespace RNGReporter
 
         private void generateAdjacentSeedsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (dataGridViewShinyResults.SelectedRows[0] != null)
+            try
             {
-                var iframe = (IFrameCapture) dataGridViewShinyResults.SelectedRows[0].DataBoundItem;
+                if (dataGridViewShinyResults.SelectedRows[0] != null)
+                {
+                    var iframe = (IFrameCapture)dataGridViewShinyResults.SelectedRows[0].DataBoundItem;
 
-                const uint advances = 0;
-                int profile = comboBoxProfiles.SelectedIndex;
-                var adjacents = new Adjacents(iframe.TimeDate,
-                                              profile, iframe.KeyPresses,
-                                              FrameType.BWBred, iframe.Frame.EncounterType,
-                                              advances);
-                adjacents.Show();
+                    const uint advances = 0;
+                    int profile = comboBoxProfiles.SelectedIndex;
+                    var adjacents = new Adjacents(iframe.TimeDate,
+                                                  profile, iframe.KeyPresses,
+                                                  FrameType.BWBred, iframe.Frame.EncounterType,
+                                                  advances);
+                    adjacents.Show();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Currently not supported for this method.");
             }
         }
 
@@ -3379,6 +3390,7 @@ namespace RNGReporter
                 cbCallerShinyCharm.Checked = Settings.Default.ShinyCharm;
             }
 
+            cbActiveRoamer.Enabled = !((Profile)comboBoxProfiles.SelectedItem).IsBW2();
         }
 
         private void buttonLoadEggSeeds_Click(object sender, EventArgs e)
@@ -3558,6 +3570,503 @@ namespace RNGReporter
             public uint minIVFrame;
             public uint maxIVFrame;
             public bool fixedRTC;
+        }
+
+
+        #region Pickup
+
+
+        private void checkBoxParty1_CheckedChanged(object sender, EventArgs e)
+        {
+            SlotLevel1.Enabled = TargetItem1.Enabled = checkBoxParty1.Checked;
+            SlotLevel1.SelectedIndex = 0;
+        }
+
+        private void checkBoxParty2_CheckedChanged(object sender, EventArgs e)
+        {
+            SlotLevel2.Enabled = TargetItem2.Enabled = checkBoxParty2.Checked;
+            SlotLevel2.SelectedIndex = 0;
+        }
+
+        private void checkBoxParty3_CheckedChanged(object sender, EventArgs e)
+        {
+            SlotLevel3.Enabled = TargetItem3.Enabled = checkBoxParty3.Checked;
+            SlotLevel3.SelectedIndex = 0;
+        }
+
+        private void checkBoxParty4_CheckedChanged(object sender, EventArgs e)
+        {
+            SlotLevel4.Enabled = TargetItem4.Enabled = checkBoxParty4.Checked;
+            SlotLevel4.SelectedIndex = 0;
+        }
+
+        private void checkBoxParty5_CheckedChanged(object sender, EventArgs e)
+        {
+            SlotLevel5.Enabled = TargetItem5.Enabled = checkBoxParty5.Checked;
+            SlotLevel5.SelectedIndex = 0;
+        }
+
+        private void checkBoxParty6_CheckedChanged(object sender, EventArgs e)
+        {
+            SlotLevel6.Enabled = TargetItem6.Enabled = checkBoxParty6.Checked;
+            SlotLevel6.SelectedIndex = 0;
+        }
+
+
+
+        private void SlotLevel1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            setItems(SlotLevel1.SelectedIndex, TargetItem1);
+        }
+
+        private void SlotLevel2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            setItems(SlotLevel2.SelectedIndex, TargetItem2);
+        }
+
+        private void SlotLevel3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            setItems(SlotLevel3.SelectedIndex, TargetItem3);
+        }
+
+        private void SlotLevel4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            setItems(SlotLevel4.SelectedIndex, TargetItem4);
+        }
+
+        private void SlotLevel5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            setItems(SlotLevel5.SelectedIndex, TargetItem5);
+        }
+
+        private void SlotLevel6_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            setItems(SlotLevel6.SelectedIndex, TargetItem6);
+        }
+
+        private void setItems(int LevelRange, CheckBoxComboBox Checked)
+        {
+            if (Checked.Enabled)
+            {
+                string[] CommonItems = Functions.CommonPickup;
+                string[] RareItems = Functions.RarePickup;
+
+                Checked.Items.Clear();
+                for (int i = LevelRange; i < LevelRange + 9; i++)
+                    Checked.Items.Add(CommonItems[i]);
+                for (int i = 2; i > 0; i--)
+                    Checked.Items.Add(RareItems[LevelRange + i]);
+
+                if (Checked.Items.Count != 0)
+                {
+                    Checked.CheckBoxItems[0].Checked = true;
+                    Checked.CheckBoxItems[0].Checked = false;
+                }
+            }
+        }
+
+        private List<int> GetCandidateItems(CheckBoxComboBox checkedItems)
+        {
+            List<int> Candidates = new List<int>();
+            for (int i = 1; i < checkedItems.Items.Count; i++)
+                if (checkedItems.CheckBoxItems[i].Checked)
+                    Candidates.Add(i - 1);
+            return Candidates;
+        }
+
+        private List<string> CreateList(CheckBoxComboBox item)
+        {
+            List<string> list = new List<string>();
+            for (int i = 1; i < item.Items.Count; i++)
+                list.Add(item.Items[i].ToString());
+            return list;
+        }
+
+        private void buttonPickupSearch_Click(object sender, EventArgs e)
+        {
+            var profile = (Profile)comboBoxProfiles.SelectedItem;
+            iframes = new List<IFrameCapture>();
+            listBindingPickup = new BindingSource { DataSource = iframes };
+            dataGridViewPickup.DataSource = listBindingPickup;
+
+            jobs = new Thread[cpus];
+            generators = new FrameGenerator[cpus];
+            waitHandle = new EventWaitHandle(true, EventResetMode.ManualReset);
+
+            var year = (uint)DateTime.Now.Year;
+            if (maskedTextBoxPickupYear.Text != "")
+            {
+                year = uint.Parse(maskedTextBoxPickupYear.Text);
+                if (year < 2000)
+                {
+                    MessageBox.Show("You must enter a year greater than 1999.", "Please Enter a Valid Year", MessageBoxButtons.OK);
+                    return;
+                }
+            }
+
+            uint maxOffsetPickup;
+            if (maxPickupAdv.Text != "")
+                maxOffsetPickup = uint.Parse(maxPickupAdv.Text);
+            else
+            {
+                maxPickupAdv.Text = "300";
+                maxOffsetPickup = 300;
+            }
+
+            uint minOffsetPickup;
+            if (minPickupAdv.Text != "")
+                minOffsetPickup = uint.Parse(minPickupAdv.Text);
+            else
+            {
+                minPickupAdv.Text = "0";
+                minOffsetPickup = 0;
+            }
+
+
+            if (minOffsetPickup > maxOffsetPickup)
+            {
+                minPickupAdv.Focus();
+                minPickupAdv.SelectAll();
+                return;
+            }
+
+            colItem1.Visible = checkBoxParty1.Checked;
+            colItem2.Visible = checkBoxParty2.Checked;
+            colItem3.Visible = checkBoxParty3.Checked;
+            colItem4.Visible = checkBoxParty4.Checked;
+            colItem5.Visible = checkBoxParty5.Checked;
+            colItem6.Visible = checkBoxParty6.Checked;
+
+            //List<List<string>> ItemCaseList = GetItemList();
+
+            int consumed = 5;
+            if (profile.MemoryLink)
+                consumed++;
+            if (profile.ShinyCharm)
+                consumed += 2;
+            //if (WildHeldItem)
+                //consumed++;
+
+            generator = new FrameGenerator
+            {
+                // Now that each combo box item is a custom object containing the FrameType reference
+                // We can simply retrieve the FrameType from the selected item
+                FrameType = FrameType.Gen5Pickup,
+                //EncounterMod = Objects.EncounterMod.Search,
+                InitialFrame = minOffsetPickup,
+                MaxResults = maxOffsetPickup - minOffsetPickup + 1,
+                //PossibleItems = GetItemList(),
+            };
+
+            //  Build up a FrameComparer
+            frameCompare = new FrameCompare();
+            frameCompare.comparePickupList = new List<int>[6];
+            frameCompare.comparePickupList[0] = GetCandidateItems(TargetItem1);
+            frameCompare.comparePickupList[1] = GetCandidateItems(TargetItem2);
+            frameCompare.comparePickupList[2] = GetCandidateItems(TargetItem3);
+            frameCompare.comparePickupList[3] = GetCandidateItems(TargetItem4);
+            frameCompare.comparePickupList[4] = GetCandidateItems(TargetItem5);
+            frameCompare.comparePickupList[5] = GetCandidateItems(TargetItem6);
+
+
+            var months = new List<int>();
+            for (int month = 1; month <= 12; month++)
+            {
+                if (comboBoxPickupMonth.CheckBoxItems[month].Checked)
+                    months.Add(month);
+            }
+
+            if (months.Count == 0)
+            {
+                comboBoxPickupMonth.Focus();
+                return;
+            }
+            List<List<ButtonComboType>> keypresses = profile.GetKeypresses();
+
+            progressSearched = 0;
+            progressFound = 0;
+
+            int dayTotal = months.Sum(month => DateTime.DaysInMonth((int)year, month));
+            progressTotal =
+                (ulong)
+                (dayTotal * 86400 * (maxOffsetPickup - minOffsetPickup + 1) * keypresses.Count *
+                 (profile.Timer0Max - profile.Timer0Min + 1));
+
+            for (int i = 0; i < jobs.Length; i++)
+            {
+                generators[i] = generator.Clone();
+                generators[i].PossibleItems = GetItemList();
+                generators[i].ConsumedAdvPickup = consumed;
+                generators[i].TimeFinder = true;
+
+                //copy to prevent issues with it being incremented before the actual thread really starts
+                int i1 = i;
+                //passing in a profile instead of the params would probably be more efficent
+                jobs[i] = new Thread(() => GeneratePickupJob(year, months, 0, 23, profile, i1));
+                jobs[i].Start();
+                // for some reason not making the thread sleep causes issues with updating dayMin\Max
+                Thread.Sleep(200);
+            }
+            var progressJob = new Thread(() => ManageProgress(listBindingPickup, dataGridViewPickup, generator.FrameType, 2000));
+            progressJob.Start();
+            progressJob.Priority = ThreadPriority.Lowest;
+
+            buttonCapGenerate.Enabled = false;
+            buttonEventGenerate.Enabled = false;
+            buttonShinyGenerate.Enabled = false;
+            buttonPickupSearch.Enabled = false;
+
+            dataGridViewPickup.Focus();
+        }
+
+
+        public void GeneratePickupJob(uint year, List<int> months, int hourMin, int hourMax, Profile profile, int listIndex)
+        {
+            uint minAdvances = generators[listIndex].InitialFrame;
+            uint RoamerAdvances = (uint)(!profile.IsBW2() && cbActiveRoamer.Checked ? 1 : 0);
+
+            var array = new uint[80];
+            array[6] = (uint)(profile.MAC_Address & 0xFFFF);
+
+            if (profile.SoftReset)
+            {
+                array[6] = array[6] ^ 0x01000000;
+            }
+
+            var upperMAC = (uint)(profile.MAC_Address >> 16);
+            array[7] = (upperMAC ^ (profile.VFrame * 0x1000000) ^ profile.GxStat);
+
+            // Get the version-unique part of the message
+            Array.Copy(Nazos.Nazo(profile.Version, profile.Language, profile.DSType), array, 5);
+
+            array[10] = 0x00000000;
+            array[11] = 0x00000000;
+            array[13] = 0x80000000;
+            array[14] = 0x00000000;
+            array[15] = 0x000001A0;
+
+            List<List<ButtonComboType>> keypressList = profile.GetKeypresses();
+            List<ButtonComboType>[] buttons = keypressList.ToArray();
+            var buttonMashValue = new uint[keypressList.Count];
+
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                buttonMashValue[i] = Functions.buttonMashed(buttons[i]);
+            }
+
+            uint searchRange = generator.MaxResults;
+
+            foreach (int month in months)
+            {
+                float interval = ((float)DateTime.DaysInMonth((int)year, month) / cpus + (float)0.05);
+
+                var dayMin = (int)(interval * listIndex + 1);
+                var dayMax = (int)(interval * (listIndex + 1));
+
+                string yearMonth = String.Format("{0:00}", year % 2000) + String.Format("{0:00}", month);
+                for (int buttonCount = 0; buttonCount < keypressList.Count; buttonCount++)
+                {
+                    array[12] = buttonMashValue[buttonCount];
+                    for (uint timer0 = profile.Timer0Min; timer0 <= profile.Timer0Max; timer0++)
+                    {
+                        array[5] = (profile.VCount << 16) + timer0;
+                        array[5] = Functions.Reorder(array[5]);
+
+                        for (int day = dayMin; day <= dayMax; day++)
+                        {
+                            var searchTime = new DateTime((int)year, month, day);
+
+                            string dateString = String.Format("{0:00}", (int)searchTime.DayOfWeek);
+                            dateString = String.Format("{0:00}", searchTime.Day) + dateString;
+                            dateString = yearMonth + dateString;
+                            array[8] = uint.Parse(dateString, NumberStyles.HexNumber);
+                            array[9] = 0x0;
+
+                            // For seeds with the same date, the contents of the SHA-1 array will be the same for the first 8 steps
+                            // We are precomputing those 8 steps to save time
+                            // Trying to precompute beyond 8 steps is complicated and does not save much time, also runs the risk of errors
+
+                            uint[] alpha = Functions.AlphaEncrypt(array);
+
+                            // We are also precomputing select portions of the SHA-1 array during the expansion process
+                            // As they are also the same
+
+                            array[16] = Functions.RotateLeft(array[13] ^ array[8] ^ array[2] ^ array[0], 1);
+                            array[18] = Functions.RotateLeft(array[15] ^ array[10] ^ array[4] ^ array[2], 1);
+                            array[19] = Functions.RotateLeft(array[16] ^ array[11] ^ array[5] ^ array[3], 1);
+                            array[21] = Functions.RotateLeft(array[18] ^ array[13] ^ array[7] ^ array[5], 1);
+                            array[22] = Functions.RotateLeft(array[19] ^ array[14] ^ array[8] ^ array[6], 1);
+                            array[24] = Functions.RotateLeft(array[21] ^ array[16] ^ array[10] ^ array[8], 1);
+                            array[27] = Functions.RotateLeft(array[24] ^ array[19] ^ array[13] ^ array[11], 1);
+
+                            for (int hour = hourMin; hour <= hourMax; hour++)
+                            {
+                                //int seedHour = hour;
+                                for (int minute = 0; minute <= 59; minute++)
+                                {
+                                    waitHandle.WaitOne();
+                                    for (int second = 0; second <= 59; second++)
+                                    {
+                                        array[9] = Functions.seedSecond(second) | Functions.seedMinute(minute) |
+                                                   Functions.seedHour(hour, profile.DSType);
+
+                                        ulong seed = Functions.EncryptSeed(array, alpha);
+
+                                        // Set this to our seed here
+                                        generators[listIndex].InitialSeed = seed;
+                                        generators[listIndex].InitialFrame = 
+                                            Functions.initialPIDRNG(seed, profile) + minAdvances + RoamerAdvances - 1;
+
+                                        if (iframes.Count > 100000)
+                                            break;
+
+                                        //  This is where we actually go ahead and call our 
+                                        //  generator for a list of IVs based on parameters
+                                        //  that have been passed in.
+                                        List<Frame> frames = generators[listIndex].Generate(frameCompare, 0, 0);
+
+                                        progressSearched += searchRange;
+                                        progressFound += (ulong)frames.Count;
+
+                                        //  Now we need to iterate through each result here
+                                        //  and create a collection of the information that
+                                        //  we are going to place into our grid.
+                                        foreach (Frame frame in frames)
+                                        {
+                                            var iframe = new IFrameCapture();
+
+                                            frame.DisplayPrep();
+                                            iframe.Offset = frame.Number;
+                                            iframe.Seed = seed;
+                                            iframe.Frame = frame;
+                                            iframe.Advances = iframe.Offset - (generators[listIndex].InitialFrame - minAdvances);
+
+                                            iframe.TimeDate =
+                                                searchTime.AddHours(hour).AddMinutes(minute).AddSeconds(second);
+                                            iframe.KeyPresses = buttons[buttonCount];
+                                            iframe.Timer0 = timer0;
+
+                                            lock (threadLock)
+                                            {
+                                                iframes.Add(iframe);
+                                            }
+                                        }
+
+                                        if (frames.Count > 0)
+                                        {
+                                            refreshQueue = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void dataGridViewPickup_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (dataGridViewPickup.DataSource != null && iframes != null && listBindingPickup != null)
+            {
+                DataGridViewColumn selectedColumn = dataGridViewPickup.Columns[e.ColumnIndex];
+
+                var iframeCaptureComparer = new IFrameCaptureComparer
+                { CompareType = selectedColumn.DataPropertyName };
+
+                if (selectedColumn.HeaderCell.SortGlyphDirection == SortOrder.Ascending)
+                    iframeCaptureComparer.sortOrder = SortOrder.Descending;
+
+                iframes.Sort(iframeCaptureComparer);
+
+                listBindingPickup.ResetBindings(false);
+                selectedColumn.HeaderCell.SortGlyphDirection = iframeCaptureComparer.sortOrder;
+            }
+        }
+
+        public List<List<string>> GetItemList()
+        {
+            List<List<string>> List = new List<List<string>>
+            {
+                checkBoxParty1.Checked ? CreateList(TargetItem1) : null,
+                checkBoxParty2.Checked ? CreateList(TargetItem2) : null,
+                checkBoxParty3.Checked ? CreateList(TargetItem3) : null,
+                checkBoxParty4.Checked ? CreateList(TargetItem4) : null,
+                checkBoxParty5.Checked ? CreateList(TargetItem5) : null,
+                checkBoxParty6.Checked ? CreateList(TargetItem6) : null,
+            };
+            return List;
+        } 
+
+
+
+        private void checkAllBoxes(CheckBoxComboBox item, bool ToCheck)
+        {
+            for (int i = 1; i < item.Items.Count; i++)
+                item.CheckBoxItems[i].Checked = ToCheck;
+        }
+
+
+        #endregion
+
+        private void CheckAll1_Click(object sender, EventArgs e)
+        {
+            if (TargetItem1.Enabled)
+            {
+                bool ToCheck = CheckAll1.Text.Equals("Check All");
+                checkAllBoxes(TargetItem1, ToCheck);
+                CheckAll1.Text = ToCheck ? "Uncheck All" : "Check All";
+            }
+        }
+
+        private void CheckAll2_Click(object sender, EventArgs e)
+        {
+            if (TargetItem2.Enabled)
+            {
+                bool ToCheck = CheckAll2.Text.Equals("Check All");
+                checkAllBoxes(TargetItem2, ToCheck);
+                CheckAll2.Text = ToCheck ? "Uncheck All" : "Check All";
+            }
+        }
+
+        private void CheckAll3_Click(object sender, EventArgs e)
+        {
+            if (TargetItem3.Enabled)
+            {
+                bool ToCheck = CheckAll3.Text.Equals("Check All");
+                checkAllBoxes(TargetItem3, ToCheck);
+                CheckAll3.Text = ToCheck ? "Uncheck All" : "Check All";
+            }
+        }
+
+        private void CheckAll4_Click(object sender, EventArgs e)
+        {
+            if (TargetItem4.Enabled)
+            {
+                bool ToCheck = CheckAll4.Text.Equals("Check All");
+                checkAllBoxes(TargetItem4, ToCheck);
+                CheckAll4.Text = ToCheck ? "Uncheck All" : "Check All";
+            }
+        }
+
+        private void CheckAll5_Click(object sender, EventArgs e)
+        {
+            if (TargetItem5.Enabled)
+            {
+                bool ToCheck = CheckAll5.Text.Equals("Check All");
+                checkAllBoxes(TargetItem5, ToCheck);
+                CheckAll5.Text = ToCheck ? "Uncheck All" : "Check All";
+            }
+        }
+
+        private void CheckAll6_Click(object sender, EventArgs e)
+        {
+            if (TargetItem6.Enabled)
+            {
+                bool ToCheck = CheckAll6.Text.Equals("Check All");
+                checkAllBoxes(TargetItem6, ToCheck);
+                CheckAll6.Text = ToCheck ? "Uncheck All" : "Check All";
+            }
         }
     }
 }

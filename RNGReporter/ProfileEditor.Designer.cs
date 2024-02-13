@@ -379,9 +379,9 @@
             this.checkBoxMemoryLink.AutoSize = true;
             this.checkBoxMemoryLink.Location = new System.Drawing.Point(534, 88);
             this.checkBoxMemoryLink.Name = "checkBoxMemoryLink";
-            this.checkBoxMemoryLink.Size = new System.Drawing.Size(86, 17);
+            this.checkBoxMemoryLink.Size = new System.Drawing.Size(134, 17);
             this.checkBoxMemoryLink.TabIndex = 157;
-            this.checkBoxMemoryLink.Text = "Memory Link";
+            this.checkBoxMemoryLink.Text = "Memory Link Activated";
             this.checkBoxMemoryLink.UseVisualStyleBackColor = true;
             // 
             // label1

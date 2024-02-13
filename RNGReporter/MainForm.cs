@@ -83,28 +83,25 @@ namespace RNGReporter
                     new ComboBoxItem("Method H-4 (Gen 3)", FrameType.MethodH4),
                     new ComboBoxItem("Method J (DPPt)", FrameType.MethodJ),
                     new ComboBoxItem("Method K (HGSS)", FrameType.MethodK),
-                    new ComboBoxItem("Gen 5 IVs (Standard Seed)",
-                                     FrameType.Method5Standard),
+                    new ComboBoxItem("Gen 5 IVs (Standard Seed)", FrameType.Method5Standard),
                     new ComboBoxItem("Gen 5 IVs (C-Gear Seed)", FrameType.Method5CGear),
                     new ComboBoxItem("Gen 5 PIDRNG", FrameType.Method5Natures),
                     new ComboBoxItem("Chained Shiny", FrameType.ChainedShiny),
                     new ComboBoxItem("Gen 4 Egg PID (Normal)", FrameType.Gen4Normal),
-                    new ComboBoxItem("Gen 4 Egg PID (International)",
-                                     FrameType.Gen4International),
+                    new ComboBoxItem("Gen 4 Egg PID (International)", FrameType.Gen4International),
                     new ComboBoxItem("Breeding (Emerald No Splits)", FrameType.Bred),
                     new ComboBoxItem("Breeding (Emerald Splits)", FrameType.BredSplit),
-                    new ComboBoxItem("Breeding (Emerald Alternate)",
-                                     FrameType.BredAlternate),
+                    new ComboBoxItem("Breeding (Emerald Alternate)", FrameType.BredAlternate),
                     new ComboBoxItem("Breeding (RSUpper)", FrameType.RSBredUpper),
                     new ComboBoxItem("Breeding (DPPt)", FrameType.DPPtBred),
                     new ComboBoxItem("Breeding (HGSS)", FrameType.HGSSBred),
                     new ComboBoxItem("Breeding (BW)", FrameType.BWBred),
-                    new ComboBoxItem("Breeding (BW, International)",
-                                     FrameType.BWBredInternational),
+                    new ComboBoxItem("Breeding (BW, International)", FrameType.BWBredInternational),
                     new ComboBoxItem("Wondercard IVs (4th Gen)", FrameType.WondercardIVs),
                     new ComboBoxItem("Wondercard (5th Gen)", FrameType.Wondercard5thGen),
                     new ComboBoxItem("Colosseum\\XD", FrameType.ColoXD),
-                    new ComboBoxItem("Channel", FrameType.Channel)
+                    new ComboBoxItem("Channel", FrameType.Channel),
+                    new ComboBoxItem("Pickup (Gen 5)", FrameType.Gen5Pickup),
                 });
 
             
@@ -472,6 +469,13 @@ namespace RNGReporter
                 EncounterMod = currentMod
             };
 
+            if (generator.FrameType == FrameType.Gen5Pickup && timeFinder5th == null)
+            {
+                MessageBox.Show("You need to adjust settings in Time Finder first.");
+                return;
+            }
+            Offset.HeaderText = generator.FrameType == FrameType.Gen5Pickup ? "Frame" : "Occidentary";
+
             var offset = (uint)(checkBoxBW2.Visible && checkBoxBW2.Checked &&
                 generator.FrameType != FrameType.Method5Natures &&
                 generator.FrameType != FrameType.BWBred && 
@@ -775,6 +779,10 @@ namespace RNGReporter
             {
                 ulong startingFrame;
                 ulong.TryParse(maskedTextBoxStartingFrame.Text, out startingFrame);
+
+                if (generator.FrameType == FrameType.Gen5Pickup && startingFrame < 12)
+                    startingFrame = 12;
+
                 if (startingFrame > uint.MaxValue) startingFrame = uint.MaxValue - offset;
                 generator.InitialFrame = (uint) startingFrame;
                 generator.InitialFrame += offset;
@@ -804,6 +812,23 @@ namespace RNGReporter
             if(generator.FrameType == FrameType.Channel)
                 id = 40122;
 
+            if (generator.FrameType == FrameType.Gen5Pickup)
+            {
+                if (checkBoxBW2.Checked)
+                    generator.InitialFrame -= 2;
+
+                int consumed = 5;
+                if (checkBoxMemoryLink.Checked)
+                    consumed++;
+                if (cbShinyCharm.Checked)
+                    consumed += 2;
+                if (LuckyPowerCombobox.SelectedIndex == 3)
+                    consumed++;
+
+                generator.ConsumedAdvPickup = consumed;
+                generator.PossibleItems = timeFinder5th.GetItemList();
+
+            }
 
             if (generator.FrameType == FrameType.Method5Natures)
                 frames = generator.GenerateG5PID(frameCompare, id, sid);
@@ -811,7 +836,7 @@ namespace RNGReporter
             {
                 if (WCdata == null)
                 {
-                    if (MessageBox.Show("You need to import a Wonder Card (.pgf file) first. Import one now?", 
+                    if (MessageBox.Show("You need to import a Wonder Card (.pgf file) first. Import one now?",
                         "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         MainImportWC_Click(null, null);
@@ -1327,8 +1352,7 @@ namespace RNGReporter
                 MaleOnlySpecies.Visible = false;
             }
 
-            if (generator.FrameType == FrameType.Gen4Normal ||
-                generator.FrameType == FrameType.Gen4International)
+            if (generator.FrameType == FrameType.Gen4Normal || generator.FrameType == FrameType.Gen4International)
             {
                 //  Hide IV columns
                 Frame.Visible = true;
@@ -1571,39 +1595,34 @@ namespace RNGReporter
                 MaleOnlySpecies.Visible = false;
             }
 
-            if (generator.FrameType == FrameType.Wondercard5thGen)
+            ColumnItem1.Visible = generator.FrameType == FrameType.Gen5Pickup && timeFinder5th.checkBoxParty1.Checked;
+            ColumnItem2.Visible = generator.FrameType == FrameType.Gen5Pickup && timeFinder5th.checkBoxParty2.Checked;
+            ColumnItem3.Visible = generator.FrameType == FrameType.Gen5Pickup && timeFinder5th.checkBoxParty3.Checked;
+            ColumnItem4.Visible = generator.FrameType == FrameType.Gen5Pickup && timeFinder5th.checkBoxParty4.Checked;
+            ColumnItem5.Visible = generator.FrameType == FrameType.Gen5Pickup && timeFinder5th.checkBoxParty5.Checked;
+            ColumnItem6.Visible = generator.FrameType == FrameType.Gen5Pickup && timeFinder5th.checkBoxParty6.Checked;
+
+            if (generator.FrameType == FrameType.Wondercard5thGen || generator.FrameType == FrameType.Gen5Pickup)
             {
-                Frame.Visible = true;
-                Offset.Visible = false;
+                Chatot.DataPropertyName = "Chatot64";
+                Chatot.Visible = true;
                 EncounterSlot.Visible = false;
                 ItemCalc.Visible = false;
-                PID.Visible = true;
                 Time.Visible = false;
-                Shiny.Visible = true;
-                Nature.Visible = true;
-                Ability.Visible = true;
                 Dream.Visible = false;
                 Coin.Visible = false;
                 Elm.Visible = false;
-                Chatot.Visible = true;
-                Chatot.DataPropertyName = "Chatot64";
                 CaveSpot.Visible = false;
-
-                HP.Visible = true;
-                Atk.Visible = true;
-                Def.Visible = true;
-                SpA.Visible = true;
-                SpD.Visible = true;
-                Spe.Visible = true;
-                HiddenPower.Visible = true;
-                HiddenPowerPower.Visible = true;
-
-                f50.Visible = true;
-                f125.Visible = true;
-                f25.Visible = true;
-                f75.Visible = true;
-
                 MaleOnlySpecies.Visible = false;
+
+                Frame.Visible = generator.FrameType == FrameType.Wondercard5thGen;
+                Offset.Visible = generator.FrameType == FrameType.Gen5Pickup;
+
+                PID.Visible = Shiny.Visible = Nature.Visible = Ability.Visible = 
+                    HP.Visible = Atk.Visible = Def.Visible = SpA.Visible = SpD.Visible = Spe.Visible = 
+                    HiddenPower.Visible = HiddenPowerPower.Visible = 
+                    f50.Visible = f125.Visible = f25.Visible = f75.Visible = 
+                    generator.FrameType == FrameType.Wondercard5thGen; 
             }
 
             if (generator.FrameType == FrameType.BWBred ||
@@ -2347,7 +2366,7 @@ namespace RNGReporter
                 checkBoxDreamWorld.Enabled = false;
                 checkBoxDittoParent.Enabled = false;
                 cbNidoBeat.Enabled = false;
-                cbShinyCharm.Enabled = false;
+                cbShinyCharm.Enabled = ((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Gen5Pickup);
                 checkBoxDreamWorld.Checked = false;
                 checkBoxDittoParent.Checked = false;
                 cbNidoBeat.Checked = false;
@@ -2360,7 +2379,8 @@ namespace RNGReporter
                 ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Wondercard5thGen) ||
                 ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Natures) ||
                 ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.BWBred) ||
-                ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.BWBredInternational))
+                ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.BWBredInternational) ||
+                ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Gen5Pickup))
             {
                 textBoxSeed.Mask = "AAAAAAAAAAAAAAAA";
                 checkBoxBW2.Visible = true;
@@ -2380,7 +2400,8 @@ namespace RNGReporter
             if (((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Wondercard5thGen) ||
                 ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Natures) ||
                 ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.BWBred) ||
-                ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.BWBredInternational))
+                ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.BWBredInternational) ||
+                ((ComboBoxItem) comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Gen5Pickup))
             {
                 buttonCalcInitialFrame.Visible = true;
                 checkBoxRoamerReleased.Visible = true;
@@ -2413,9 +2434,18 @@ namespace RNGReporter
             gen5FrameFinderToolStripMenuItem.Enabled = ((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Natures);
 
             CheckTriggerBox();
-            int method = comboBoxMethod.SelectedIndex;
-            Gen5GroupBox.Visible = (method >= 9 && method <= 11) || (method >= 21 && method <= 25 && method != 23);
+
+            Gen5GroupBox.Visible =
+                ((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Standard) ||
+                ((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5CGear) ||
+                ((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Method5Natures) ||
+                ((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.BWBred) ||
+                ((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.BWBredInternational) ||
+                ((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Wondercard5thGen) ||
+                ((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Gen5Pickup);
+
             MainImportWC.Visible = ((ComboBoxItem)comboBoxMethod.SelectedItem).Reference.Equals(FrameType.Wondercard5thGen);
+
             /*labelMinMaxLevel.Visible = numericLevelMin.Visible = numericLevelMax.Visible =
                 comboBoxMethod.SelectedIndex == 11 &&
                 comboBoxEncounterType.SelectedIndex != 5 &&
@@ -3397,7 +3427,6 @@ namespace RNGReporter
 
             return wondercard;
         }
-
         private void gen5FrameFinderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new Gen5FrameFinder(dataGridViewValues).Show();

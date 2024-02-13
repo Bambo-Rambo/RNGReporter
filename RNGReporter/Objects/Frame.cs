@@ -19,6 +19,9 @@
 
 using System.Linq;
 using System;
+using System.Security.Cryptography;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace RNGReporter.Objects
 {
@@ -565,6 +568,15 @@ namespace RNGReporter.Objects
             get { return characteristicIVs; }
             set { characteristicIVs = value; }
         }
+
+        public string[] PickupItems { get; set; }
+
+        public string DisplayItem1 { get; set; }
+        public string DisplayItem2 { get; set; }
+        public string DisplayItem3 { get; set; }
+        public string DisplayItem4 { get; set; }
+        public string DisplayItem5 { get; set; }
+        public string DisplayItem6 { get; set; }
 
         /// <summary>
         ///     Generic Frame creation where the values that are to be used for each part are passed in explicitly. There will be other methods to support splitting a list and then passing them to this for creation.
@@ -1359,45 +1371,6 @@ namespace RNGReporter.Objects
         }
 
 
-        // 5th Gen Wondercards
-        public static Frame GenerateFrame5thWonder(
-            FrameType frameType,
-            uint id,
-            uint sid,
-            uint number,
-            uint rngResult,
-            uint hp,
-            uint atk,
-            uint def,
-            uint spa,
-            uint spd,
-            uint spe,
-            uint pid,
-            uint natureValue)
-        {
-            var frame = new Frame(frameType)
-                {
-                    Number = number,
-                    RngResult = rngResult,
-                    id = id,
-                    sid = sid,
-                    Hp = hp,
-                    Atk = atk,
-                    Def = def,
-                    Spa = spa,
-                    Spd = spd,
-                    Spe = spe,
-                    Pid = pid ^ 0x10000
-                };
-
-
-            var nature = (uint) ((ulong) natureValue*25 >> 32);
-            frame.Nature = nature;
-            frame.Ability = (pid >> 16) & 1;
-
-            return frame;
-        }
-
         // This method is only called when a frame is going to be displayed
         // Avoids unnecessary costly functions
         public void DisplayPrep()
@@ -1410,7 +1383,8 @@ namespace RNGReporter.Objects
                 FrameType != FrameType.HGSSBred &&
                 FrameType != FrameType.BWBred &&
                 FrameType != FrameType.BWBredInternational &&
-                FrameType != FrameType.RSBredUpper)
+                FrameType != FrameType.RSBredUpper &&
+                FrameType != FrameType.Gen5Pickup)
             {
                 DisplayHp = Hp.ToString();
                 DisplayAtk = Atk.ToString();
