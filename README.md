@@ -13,6 +13,8 @@ Lincoln-LM for the correct [shaking spot](https://github.com/Bambo-Rambo/RNGRepo
 
 John-0902 for [Gen 5 FrameFinder](https://github.com/Bambo-Rambo/RNGReporter/commit/f9060096e140ce5c4d161576c9faeabd4aa885a3) (Chatot pitches tracking) window
 
+NickPlayeZ for donating to this project, giving me extra motivation
+
 ### Additional Features (Admiral-Fish)
 GameCube RTC Calculator
 
