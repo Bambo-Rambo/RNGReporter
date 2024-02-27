@@ -145,6 +145,7 @@ namespace RNGReporter
             // 
             this.dgvFramePreview.AllowUserToAddRows = false;
             this.dgvFramePreview.AllowUserToDeleteRows = false;
+            this.dgvFramePreview.AllowUserToResizeRows = false;
             this.dgvFramePreview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));

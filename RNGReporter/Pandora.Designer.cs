@@ -1807,7 +1807,7 @@ namespace RNGReporter
             // 
             this.textVMaxAdvances.Hex = false;
             this.textVMaxAdvances.Location = new System.Drawing.Point(100, 68);
-            this.textVMaxAdvances.Mask = "00";
+            this.textVMaxAdvances.Mask = "000";
             this.textVMaxAdvances.Name = "textVMaxAdvances";
             this.textVMaxAdvances.Size = new System.Drawing.Size(81, 20);
             this.textVMaxAdvances.TabIndex = 7;

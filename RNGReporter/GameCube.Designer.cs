@@ -645,8 +645,8 @@
             this.dataGridViewResult.AllowUserToAddRows = false;
             this.dataGridViewResult.AllowUserToDeleteRows = false;
             this.dataGridViewResult.AllowUserToResizeRows = false;
-            this.dataGridViewResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGridViewResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewResult.ColumnHeadersHeight = 20;
             this.dataGridViewResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
@@ -1307,8 +1307,8 @@
             this.dataGridShadow.AllowUserToAddRows = false;
             this.dataGridShadow.AllowUserToDeleteRows = false;
             this.dataGridShadow.AllowUserToResizeRows = false;
-            this.dataGridShadow.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGridShadow.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridShadow.ColumnHeadersHeight = 20;
             this.dataGridShadow.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
@@ -2611,4 +2611,3 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Reason;
     }
 }
-

@@ -325,8 +325,15 @@ namespace RNGReporter
                     EncounterMod = (EncounterMod) ((ComboBoxItem) comboBoxLead.SelectedItem).Reference,
                     SynchNature = -2,
                     InitialFrame = minFrame + (profile.IsBW2() ? 2u : 0),
-                    MaxResults = maxFrame - minFrame + 1
+                    MaxResults = maxFrame - minFrame + 1,
+                    RerollCount = 1,
                 };
+
+            if (generator.FrameType == FrameType.Wondercard5thGen)
+            {
+                MessageBox.Show("Unsupported for now.");
+                return;
+            }
 
             // Now that each combo box item is a custom object containing the FrameType reference
             // We can simply retrieve the FrameType from the selected item
@@ -461,7 +468,13 @@ namespace RNGReporter
                             break;
                     }
 
-                    List<Frame> frames = generator.Generate(frameCompare, profile.ID, profile.SID);
+                    List<Frame> frames;
+                    if (generator.FrameType == FrameType.Method5Natures)
+                        frames = generator.GenerateG5PID(frameCompare, profile.ID, profile.SID);
+                    else
+                        frames = generator.Generate(frameCompare, profile.ID, profile.SID);
+
+
 
                     foreach (Frame frame in frames)
                     {

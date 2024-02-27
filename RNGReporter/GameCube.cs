@@ -719,7 +719,7 @@ namespace RNGReporter
                             for (uint e = ivsLower[4]; e <= ivsUpper[4]; e++)
                                 for (uint f = ivsLower[5]; f <= ivsUpper[5]; f++)
                                     checkSeed(a, b, c, d, e, f);
-            
+
             isSearching = false;
             Invoke(new Action(() => { binding.ResetBindings(false); }));
             status.Invoke((MethodInvoker)(() => status.Text = "Done. - Awaiting Command"));
@@ -914,7 +914,7 @@ namespace RNGReporter
                             for (uint e = ivsLower[4]; e <= ivsUpper[4]; e++)
                                 for (uint f = ivsLower[5]; f <= ivsUpper[5]; f++)
                                     checkSeedChannel(a, b, c, d, e, f);
-            
+
             isSearching = false;
             Invoke(new Action(() => { binding.ResetBindings(false); }));
             status.Invoke((MethodInvoker)(() => status.Text = "Done. - Awaiting Command"));
@@ -1007,7 +1007,7 @@ namespace RNGReporter
 
                         if (natureList == null || natureList.Contains(nature))
                         {
-                            
+
                             ivs = createIVsChannel(new uint[] { seedShort[j >= 6 ? j - 6 : j + 7] >> 11,
                                                             seedShort[j >= 5 ? j - 5 : j + 8] >> 11,
                                                             seedShort[j >= 4 ? j - 4 : j + 9] >> 11,
@@ -1133,7 +1133,7 @@ namespace RNGReporter
                             for (uint e = ivsLower[4]; e <= ivsUpper[4]; e++)
                                 for (uint f = ivsLower[5]; f <= ivsUpper[5]; f++)
                                     checkSeedR(a, b, c, d, e, f);
-            
+
             isSearching = false;
             Invoke(new Action(() => { binding.ResetBindings(false); }));
             status.Invoke((MethodInvoker)(() => status.Text = "Done. - Awaiting Command"));
@@ -1300,7 +1300,7 @@ namespace RNGReporter
             uint pid, iv1, iv2, nature;
             uint[] ivs;
 
-            switch(shadow)
+            switch (shadow)
             {
                 case ShadowType.NoLock:
 
@@ -1349,7 +1349,7 @@ namespace RNGReporter
                     break;
                 case ShadowType.Salamence:
                 case ShadowType.SecondShadow:
-                    switch(secondMethod)
+                    switch (secondMethod)
                     {
                         //Set
                         case 0:

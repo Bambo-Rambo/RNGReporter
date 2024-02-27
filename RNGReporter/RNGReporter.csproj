@@ -297,9 +297,6 @@
     <Compile Include="GameCubeRTC.Designer.cs">
       <DependentUpon>GameCubeRTC.cs</DependentUpon>
     </Compile>
-    <Compile Include="TimeFinder5thPickup.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="UnovaLinkCalibration.cs">
       <SubType>Form</SubType>
     </Compile>
