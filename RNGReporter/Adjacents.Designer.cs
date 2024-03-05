@@ -91,8 +91,8 @@ namespace RNGReporter
             this.comboBoxEncounterType = new RNGReporter.GlassComboBox();
             this.buttonSeedGenerate = new RNGReporter.GlassButton();
             this.comboBoxMethod = new RNGReporter.GlassComboBox();
-            this.maskedTextBoxCapMaxOffset = new MaskedTextBox2();
-            this.maskedTextBoxCapMinOffset = new MaskedTextBox2();
+            this.maskedTextBoxCapMaxOffset = new RNGReporter.Controls.MaskedTextBox2();
+            this.maskedTextBoxCapMinOffset = new RNGReporter.Controls.MaskedTextBox2();
             this.contextMenuStripCap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSeconds)).BeginInit();
             this.groupBoxConfiguration.SuspendLayout();
@@ -230,8 +230,8 @@ namespace RNGReporter
             // 
             // textBoxChatot
             // 
-            this.textBoxChatot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxChatot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxChatot.Location = new System.Drawing.Point(96, 405);
             this.textBoxChatot.Name = "textBoxChatot";
             this.textBoxChatot.ReadOnly = true;
@@ -241,8 +241,8 @@ namespace RNGReporter
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 408);
             this.label3.Name = "label3";
@@ -263,8 +263,8 @@ namespace RNGReporter
             // 
             // textBoxDescription
             // 
-            this.textBoxDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxDescription.Location = new System.Drawing.Point(12, 137);
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
@@ -298,8 +298,8 @@ namespace RNGReporter
             // 
             // groupBoxConfiguration
             // 
-            this.groupBoxConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxConfiguration.Controls.Add(this.labelProfileInformation);
             this.groupBoxConfiguration.Controls.Add(this.comboBoxProfiles);
             this.groupBoxConfiguration.Controls.Add(this.buttonEditProfile);
@@ -361,9 +361,9 @@ namespace RNGReporter
             this.dataGridViewCapValues.AllowUserToAddRows = false;
             this.dataGridViewCapValues.AllowUserToDeleteRows = false;
             this.dataGridViewCapValues.AllowUserToResizeRows = false;
-            this.dataGridViewCapValues.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewCapValues.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewCapValues.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -663,7 +663,7 @@ namespace RNGReporter
             this.maskedTextBoxCapMaxOffset.Name = "maskedTextBoxCapMaxOffset";
             this.maskedTextBoxCapMaxOffset.Size = new System.Drawing.Size(51, 21);
             this.maskedTextBoxCapMaxOffset.TabIndex = 111;
-            this.maskedTextBoxCapMaxOffset.Text = "1";
+            this.maskedTextBoxCapMaxOffset.Text = "0";
             // 
             // maskedTextBoxCapMinOffset
             // 
@@ -673,7 +673,7 @@ namespace RNGReporter
             this.maskedTextBoxCapMinOffset.Name = "maskedTextBoxCapMinOffset";
             this.maskedTextBoxCapMinOffset.Size = new System.Drawing.Size(51, 21);
             this.maskedTextBoxCapMinOffset.TabIndex = 124;
-            this.maskedTextBoxCapMinOffset.Text = "1";
+            this.maskedTextBoxCapMinOffset.Text = "0";
             // 
             // Adjacents
             // 

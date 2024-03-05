@@ -329,6 +329,11 @@ namespace RNGReporter
                     RerollCount = 1,
                 };
 
+            if (generator.EncounterType == EncounterType.Roamer)
+            {
+                generator.InitialFrame++;
+            }
+
             if (generator.FrameType == FrameType.Wondercard5thGen)
             {
                 MessageBox.Show("Unsupported for now.");
@@ -682,11 +687,11 @@ namespace RNGReporter
                     labelMinFrame.Text = "Min Frame";
                     labelMaxFrame.Text = "Max Frame";
 
-                    if (maskedTextBoxCapMinOffset.Text == "0")
+                    /*if (maskedTextBoxCapMinOffset.Text == "0")
                         maskedTextBoxCapMinOffset.Text = "1";
 
                     if (maskedTextBoxCapMaxOffset.Text == "0")
-                        maskedTextBoxCapMaxOffset.Text = "1";
+                        maskedTextBoxCapMaxOffset.Text = "1";*/
 
                     textBoxDescription.Text = "This RNG handles IVs only.";
                     break;

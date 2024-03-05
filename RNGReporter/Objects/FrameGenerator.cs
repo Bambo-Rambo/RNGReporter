@@ -1292,30 +1292,30 @@ namespace RNGReporter.Objects
                 {
                     if (EncounterType == EncounterType.Roamer)
                     {
-                        if (!frameCompare.CompareIV(0, rngList[1]))
+                        if (!frameCompare.CompareIV(0, rngList[0]))
                             continue;
-                        if (!frameCompare.CompareIV(1, rngList[2]))
+                        if (!frameCompare.CompareIV(1, rngList[1]))
                             continue;
-                        if (!frameCompare.CompareIV(2, rngList[3]))
+                        if (!frameCompare.CompareIV(2, rngList[2]))
                             continue;
-                        if (!frameCompare.CompareIV(3, rngList[6]))
+                        if (!frameCompare.CompareIV(3, rngList[5]))
                             continue;
-                        if (!frameCompare.CompareIV(4, rngList[4]))
+                        if (!frameCompare.CompareIV(4, rngList[3]))
                             continue;
-                        if (!frameCompare.CompareIV(5, rngList[5]))
+                        if (!frameCompare.CompareIV(5, rngList[4]))
                             continue;
 
                         frame =
                             Frame.GenerateFrame(
                                 FrameType.Method5Standard,
-                                cnt + InitialFrame,
+                                cnt + InitialFrame - 1,
                                 (uint) InitialSeed,
+                                rngList[0],
                                 rngList[1],
                                 rngList[2],
+                                rngList[5],
                                 rngList[3],
-                                rngList[6],
-                                rngList[4],
-                                rngList[5]);
+                                rngList[4]);
                     }
                     else
                     {

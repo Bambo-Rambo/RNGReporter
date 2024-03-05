@@ -506,6 +506,10 @@ namespace RNGReporter
                 generator.FrameType = FrameType.BW2BredInternational;
             generator.isBW2 = profile.IsBW2();
 
+            if (generator.EncounterType == EncounterType.Roamer && !fastSearch)
+            {
+                generator.InitialFrame++;
+            }
 
             // set up the hashtables containing precomputed MTRNG values
             // this saves time by reducing the search to a hashtable lookup
@@ -560,6 +564,10 @@ namespace RNGReporter
             Ability.Visible = false;
             CgearSeed.Visible = false;
             Delay.Visible = false;
+            f25.Visible = false;
+            f50.Visible = false;
+            f75.Visible = false;
+            f125.Visible = false;
 
             if (generator.FrameType == FrameType.Method5Standard || generator.FrameType == FrameType.Method5Natures)
             {
@@ -3108,6 +3116,11 @@ namespace RNGReporter
             else
             {
                 comboBoxCapGenderRatio.Enabled = true;
+            }
+
+            if (((ComboBoxItem)comboBoxEncounterType.SelectedItem).Reference.Equals(EncounterType.Roamer))
+            {
+                comboBoxCapGenderRatio.SelectedIndex = 5;
             }
 
             IVFilters_Changed(sender, e);

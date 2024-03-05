@@ -782,6 +782,8 @@ namespace RNGReporter
 
                 if (generator.FrameType == FrameType.Gen5Pickup && startingFrame < 12)
                     startingFrame = 12;
+                else if (generator.FrameType == FrameType.Method5Standard && generator.EncounterType == EncounterType.Roamer)
+                    startingFrame++;
 
                 if (startingFrame > uint.MaxValue) startingFrame = uint.MaxValue - offset;
                 generator.InitialFrame = (uint) startingFrame;
