@@ -525,7 +525,7 @@ namespace RNGReporter
             //  that is blank is considered a zero.
 
             List<int> encounterSlots = null;
-            if (comboCapEncounterSlot.Text != "Any" && comboCapEncounterSlot.CheckBoxItems.Count > 0)
+            if (comboCapEncounterSlot.Visible && comboCapEncounterSlot.Text != "Any" && comboCapEncounterSlot.CheckBoxItems.Count > 0)
             {
                 encounterSlots = new List<int>();
                 for (int i = 0; i < comboCapEncounterSlot.CheckBoxItems.Count; i++)

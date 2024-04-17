@@ -517,16 +517,24 @@ namespace RNGReporter
 
             //  Build up a FrameComparer
             List<int> encounterSlots = null;
-            if (comboBoxEncounterSlot.Text != "Any" && comboBoxEncounterSlot.CheckBoxItems.Count > 0)
+            if (generator.EncounterType != EncounterType.Roamer && generator.EncounterType != EncounterType.Stationary &&
+                generator.EncounterType != EncounterType.Gift && generator.EncounterType != EncounterType.JellicentHA &&
+                generator.EncounterType != EncounterType.LarvestaHappiny && generator.EncounterType != EncounterType.Haxorus &&
+                generator.EncounterType != EncounterType.GibleDratini && generator.EncounterType != EncounterType.Entralink &&
+                generator.EncounterType != EncounterType.HiddenGrotto)
             {
-                encounterSlots = new List<int>();
-                for (int i = 0; i < comboBoxEncounterSlot.CheckBoxItems.Count; i++)
+                if (comboBoxEncounterSlot.Text != "Any" && comboBoxEncounterSlot.CheckBoxItems.Count > 0)
                 {
-                    if (comboBoxEncounterSlot.CheckBoxItems[i].Checked)
-                        // We have to subtract 1 because this custom control contains a hidden item for text display
-                        encounterSlots.Add(i - 1);
+                    encounterSlots = new List<int>();
+                    for (int i = 0; i < comboBoxEncounterSlot.CheckBoxItems.Count; i++)
+                    {
+                        if (comboBoxEncounterSlot.CheckBoxItems[i].Checked)
+                            // We have to subtract 1 because this custom control contains a hidden item for text display
+                            encounterSlots.Add(i - 1);
+                    }
                 }
             }
+            
 
             List<uint> natures = null;
             if (comboBoxNature.Text != "Any" && comboBoxNature.CheckBoxItems.Count > 0)
