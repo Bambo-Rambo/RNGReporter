@@ -971,10 +971,7 @@ namespace RNGReporter
 
             foreach (int month in months)
             {
-                float interval = ((float)DateTime.DaysInMonth((int)year, month) / cpus + (float)0.05);
-
-                var dayMin = (int)(interval * listIndex + 1);
-                var dayMax = (int)(interval * (listIndex + 1));
+                GetDayIntervalForCpu((int)year, month, listIndex, out var dayMin, out var dayMax);
 
                 string yearMonth = String.Format("{0:00}", year % 2000) + String.Format("{0:00}", month);
                 for (int buttonCount = 0; buttonCount < keypressList.Count; buttonCount++)
@@ -2095,10 +2092,7 @@ namespace RNGReporter
 
             foreach (int month in months)
             {
-                float interval = ((float)DateTime.DaysInMonth((int)year, month) / cpus + (float)0.05);
-
-                var dayMin = (int)(interval * listIndex + 1);
-                var dayMax = (int)(interval * (listIndex + 1));
+                GetDayIntervalForCpu((int)year, month, listIndex, out var dayMin, out var dayMax);
 
                 string yearMonth = String.Format("{0:00}", year % 2000) + String.Format("{0:00}", month);
                 for (int buttonCount = 0; buttonCount < keypressList.Count; buttonCount++)
@@ -3900,10 +3894,7 @@ namespace RNGReporter
 
             foreach (int month in months)
             {
-                float interval = ((float)DateTime.DaysInMonth((int)year, month) / cpus + (float)0.05);
-
-                var dayMin = (int)(interval * listIndex + 1);
-                var dayMax = (int)(interval * (listIndex + 1));
+                GetDayIntervalForCpu((int)year, month, listIndex, out var dayMin, out var dayMax);
 
                 string yearMonth = String.Format("{0:00}", year % 2000) + String.Format("{0:00}", month);
                 for (int buttonCount = 0; buttonCount < keypressList.Count; buttonCount++)
@@ -4005,6 +3996,24 @@ namespace RNGReporter
                     }
                 }
             }
+        }
+
+        private void GetDayIntervalForCpu(int year, int month, int cpuIndex, out int dayMin, out int dayMax)
+        {
+            int totalDays = DateTime.DaysInMonth(year, month);
+            // Divide the days evenly between CPUs
+            int daysPerCpu = totalDays / cpus;
+            // Extra days to distribute among first CPUs, if any.
+            // This also is the last index in the cpu array that would get an extra day
+            int extraDays = totalDays % cpus;
+
+            // Calculate min/max days of the month this cpu will process
+            dayMin = cpuIndex < extraDays
+                ? (cpuIndex * (daysPerCpu + 1)) + 1
+                : (extraDays * (daysPerCpu + 1)) + 1 + ((cpuIndex - extraDays) * daysPerCpu);
+            dayMax = cpuIndex < extraDays
+                ? dayMin + daysPerCpu
+                : dayMin + daysPerCpu - 1;
         }
 
         private void dataGridViewPickup_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
