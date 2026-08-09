@@ -1,6 +1,6 @@
 # RNGReporter - Bambo_Rambo's Fork
 
-**Download Link [here](https://ci.appveyor.com/project/Bambo-Rambo/rngreporter/build/artifacts)**
+**Download the .exe file from the [releases page](https://github.com/Bambo-Rambo/RNGReporter/releases) (click `Assets` if the executable is not visible).**
 
 ### Credits
 mingot, Slashmolder, and OmegaDonut for creating [RNGReporter](https://github.com/Slashmolder/RNGReporter)
